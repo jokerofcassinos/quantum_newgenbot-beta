@@ -1,6 +1,6 @@
 {
   "ticket": 1343,
-  "timestamp": "2026-04-11T13:32:29.788543+00:00",
+  "timestamp": "2026-04-11T13:55:52.955902+00:00",
   "symbol": "BTCUSD",
   "direction": "SELL",
   "entry_price": 70848.86,
@@ -122,7 +122,7 @@
     "risk_percent": 0.5,
     "min_rr_ratio": 1.5,
     "confidence_threshold": 0.65,
-    "last_mutation_time": "2026-04-11T13:32:29.788526+00:00",
+    "last_mutation_time": "2026-04-11T13:55:52.955884+00:00",
     "mutation_count": 0,
     "dna_memory_regimes": 0
   },
@@ -140,7 +140,7 @@
     }
   },
   "exit_price": 71281.94,
-  "exit_timestamp": "2026-04-11T13:32:29.797565+00:00",
+  "exit_timestamp": "2026-04-11T13:55:52.965817+00:00",
   "exit_reason": "SL hit",
   "gross_pnl": -4330.8000000000175,
   "net_pnl": -4349.8000000000175,

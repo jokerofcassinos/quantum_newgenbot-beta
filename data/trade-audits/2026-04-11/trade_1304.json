@@ -1,6 +1,6 @@
 {
   "ticket": 1304,
-  "timestamp": "2026-04-11T13:32:17.405022+00:00",
+  "timestamp": "2026-04-11T13:55:40.436795+00:00",
   "symbol": "BTCUSD",
   "direction": "BUY",
   "entry_price": 61768.58,
@@ -122,7 +122,7 @@
     "risk_percent": 0.5,
     "min_rr_ratio": 1.5,
     "confidence_threshold": 0.65,
-    "last_mutation_time": "2026-04-11T13:32:17.405004+00:00",
+    "last_mutation_time": "2026-04-11T13:55:40.436778+00:00",
     "mutation_count": 0,
     "dna_memory_regimes": 0
   },
@@ -140,7 +140,7 @@
     }
   },
   "exit_price": 61455.47,
-  "exit_timestamp": "2026-04-11T13:32:17.415407+00:00",
+  "exit_timestamp": "2026-04-11T13:55:40.446888+00:00",
   "exit_reason": "SL hit",
   "gross_pnl": -3131.100000000006,
   "net_pnl": -3150.100000000006,

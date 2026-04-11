@@ -1,6 +1,6 @@
 {
   "ticket": 1217,
-  "timestamp": "2026-04-11T13:31:43.765870+00:00",
+  "timestamp": "2026-04-11T13:55:06.097109+00:00",
   "symbol": "BTCUSD",
   "direction": "SELL",
   "entry_price": 84299.67,
@@ -122,7 +122,7 @@
     "risk_percent": 0.5,
     "min_rr_ratio": 1.5,
     "confidence_threshold": 0.65,
-    "last_mutation_time": "2026-04-11T13:31:43.765852+00:00",
+    "last_mutation_time": "2026-04-11T13:55:06.097091+00:00",
     "mutation_count": 0,
     "dna_memory_regimes": 0
   },
@@ -140,7 +140,7 @@
     }
   },
   "exit_price": 84220.45,
-  "exit_timestamp": "2026-04-11T13:31:43.773143+00:00",
+  "exit_timestamp": "2026-04-11T13:55:06.104627+00:00",
   "exit_reason": "Dynamic SL hit",
   "gross_pnl": 792.2000000000116,
   "net_pnl": 773.2000000000116,

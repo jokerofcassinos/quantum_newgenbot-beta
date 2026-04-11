@@ -262,15 +262,24 @@ class CompleteBacktestEngine:
         tr = pd.concat([high - low, (high - prev_close).abs(), (low - prev_close).abs()], axis=1).max(axis=1)
         atr = tr.rolling(14).mean().iloc[-1]
         
-        sl_dist = max(atr * 1.5, 200)
-        tp_dist = sl_dist * 2.0
-        
+        # FIXED: Cap SL at 300 points MAX
+        sl_dist = min(max(atr * 1.5, 100), 300)  # Cap at 300 points
+        tp_dist = sl_dist * 2.0  # 1:2 R:R
+
         if direction == "BUY":
             sl = current_price - sl_dist
             tp = current_price + tp_dist
         else:
             sl = current_price + sl_dist
             tp = current_price - tp_dist
+
+        # FIXED: Proper position sizing based on risk
+        # Risk 0.5% of equity per trade, max 0.10 lots
+        risk_amount = self.equity * 0.005  # 0.5% risk
+        sl_points = sl_dist  # Already capped at 300
+        # BTCUSD: 1 point × 0.01 lot = $1, so volume = risk / (sl_points * 100)
+        volume = min(risk_amount / max(1, sl_points * 100), 0.10)
+        volume = max(0.01, volume)  # Min 0.01 lots
         
         self.total_signals += 1
         
@@ -279,7 +288,7 @@ class CompleteBacktestEngine:
             'entry_price': current_price,
             'stop_loss': sl,
             'take_profit': tp,
-            'volume': 0.10,
+            'volume': volume,  # FIXED: Dynamic position sizing
             'confidence': confidence,
             'atr': atr,
             'rsi': rsi,
