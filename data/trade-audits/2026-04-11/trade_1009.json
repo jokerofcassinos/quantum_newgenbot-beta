@@ -1,12 +1,12 @@
 {
   "ticket": 1009,
-  "timestamp": "2026-04-11T13:53:27.877318+00:00",
+  "timestamp": "2026-04-11T14:22:45.369091+00:00",
   "symbol": "BTCUSD",
   "direction": "SELL",
   "entry_price": 85159.76,
-  "stop_loss": 85769.465,
-  "take_profit": 83940.34999999999,
-  "volume": 0.1,
+  "stop_loss": 85459.76,
+  "take_profit": 84559.76,
+  "volume": 0.03203366155661272,
   "strategy_name": "momentum_scalping",
   "signal_confidence": 0.783881676068748,
   "market_regime": {
@@ -95,18 +95,18 @@
     "exhaustion_signals": []
   },
   "risk_context": {
-    "capital": 97013.70000000016,
-    "equity": 97013.70000000016,
+    "capital": 96100.98466983816,
+    "equity": 96100.98466983816,
     "daily_pnl": 0,
     "daily_pnl_percent": 0,
-    "total_pnl": -2986.299999999843,
-    "total_pnl_percent": -2.986299999999842,
-    "current_drawdown": 9.274699999999953,
-    "max_drawdown": 9.274699999999953,
+    "total_pnl": -3899.015330161841,
+    "total_pnl_percent": -3.899015330161837,
+    "current_drawdown": 3.899015330161841,
+    "max_drawdown": 3.899015330161841,
     "consecutive_wins": 0,
     "consecutive_losses": 1,
     "daily_loss_used_percent": 0,
-    "total_loss_used_percent": 9.274699999999953,
+    "total_loss_used_percent": 3.899015330161841,
     "ftmo_daily_remaining": 5000,
     "ftmo_total_remaining": 10000
   },
@@ -122,35 +122,33 @@
     "risk_percent": 0.5,
     "min_rr_ratio": 1.5,
     "confidence_threshold": 0.65,
-    "last_mutation_time": "2026-04-11T13:53:27.877300+00:00",
+    "last_mutation_time": "2026-04-11T14:22:45.369072+00:00",
     "mutation_count": 0,
     "dna_memory_regimes": 0
   },
   "smart_order_manager": {
-    "virtual_tp_original": 83940.34999999999,
-    "virtual_tp_current": 83940.34999999999,
+    "virtual_tp_original": 84559.76,
+    "virtual_tp_current": 84559.76,
     "virtual_tp_adjustment_factor": 1.0,
     "virtual_tp_difficulty": "moderate",
-    "dynamic_sl_original": 85769.465,
-    "dynamic_sl_current": 85769.465,
+    "dynamic_sl_original": 85459.76,
+    "dynamic_sl_current": 85459.76,
     "breakeven_activated": false,
     "profit_targets_reached": [],
     "momentum_at_entry": {
       "velocity": 0.5
     }
   },
-  "exit_price": 85808.17,
-  "exit_timestamp": "2026-04-11T13:53:27.898429+00:00",
+  "exit_price": 85019.34,
+  "exit_timestamp": "2026-04-11T14:22:45.374526+00:00",
   "exit_reason": "Dynamic SL hit",
-  "gross_pnl": -6484.100000000035,
-  "net_pnl": -6503.100000000035,
-  "duration_minutes": 75,
-  "max_profit_reached": -6434.100000000035,
+  "gross_pnl": 449.81667557795026,
+  "net_pnl": 443.7302798821938,
+  "duration_minutes": 10,
+  "max_profit_reached": 499.81667557795026,
   "max_drawdown_reached": -20,
-  "was_error": true,
-  "error_type": "traded_in_low_liquidity_session",
-  "severity": "major",
-  "lessons_learned": [
-    "AVOID trading in Asian session/weekends"
-  ]
+  "was_error": false,
+  "error_type": null,
+  "severity": null,
+  "lessons_learned": []
 }

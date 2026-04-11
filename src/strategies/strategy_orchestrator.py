@@ -21,6 +21,12 @@ from src.strategies.advanced_strategies import (
     OrderBlockStrategy, FVGStrategy, AdvancedSignal
 )
 
+from src.strategies.new_execution_agents import (
+    MSNRStrategy, MSNRAlchemistStrategy, IFVGStrategy,
+    OrderFlowStrategy, SupplyDemandStrategy, FibonacciStrategy,
+    IcebergStrategy
+)
+
 
 @dataclass
 class StrategyVote:
@@ -61,49 +67,74 @@ class StrategyOrchestrator:
     
     def __init__(self, dna_params: Dict[str, Any]):
         self.dna_params = dna_params
-        
-        # Initialize all strategies
+
+        # Initialize ALL 12 Strategies (5 original + 7 new)
         self.strategies = {
+            # Original 5
             "liquidity": LiquidityStrategy(),
             "thermodynamic": ThermodynamicStrategy(),
             "physics": PhysicsStrategy(),
             "order_block": OrderBlockStrategy(),
             "fvg": FVGStrategy(),
+            # New 7 Execution Agents
+            "msnr": MSNRStrategy(dna_params),
+            "msnr_alchemist": MSNRAlchemistStrategy(dna_params),
+            "ifvg": IFVGStrategy(dna_params),
+            "order_flow": OrderFlowStrategy(dna_params),
+            "supply_demand": SupplyDemandStrategy(dna_params),
+            "fibonacci": FibonacciStrategy(dna_params),
+            "iceberg": IcebergStrategy(dna_params),
         }
         
         # Strategy weights per regime (DNA-adjustable)
         self.regime_weights = {
             "trending_strong_bull": {
-                "liquidity": 0.25, "thermodynamic": 0.15, "physics": 0.20,
-                "order_block": 0.25, "fvg": 0.15,
+                "liquidity": 0.10, "thermodynamic": 0.08, "physics": 0.10,
+                "order_block": 0.10, "fvg": 0.07,
+                "msnr": 0.10, "msnr_alchemist": 0.10, "ifvg": 0.05,
+                "order_flow": 0.10, "supply_demand": 0.08, "fibonacci": 0.07, "iceberg": 0.05,
             },
             "trending_strong_bear": {
-                "liquidity": 0.25, "thermodynamic": 0.15, "physics": 0.20,
-                "order_block": 0.25, "fvg": 0.15,
+                "liquidity": 0.10, "thermodynamic": 0.08, "physics": 0.10,
+                "order_block": 0.10, "fvg": 0.07,
+                "msnr": 0.10, "msnr_alchemist": 0.10, "ifvg": 0.05,
+                "order_flow": 0.10, "supply_demand": 0.08, "fibonacci": 0.07, "iceberg": 0.05,
             },
             "trending_moderate_bull": {
-                "liquidity": 0.20, "thermodynamic": 0.20, "physics": 0.20,
-                "order_block": 0.20, "fvg": 0.20,
+                "liquidity": 0.08, "thermodynamic": 0.08, "physics": 0.08,
+                "order_block": 0.08, "fvg": 0.08,
+                "msnr": 0.08, "msnr_alchemist": 0.08, "ifvg": 0.08,
+                "order_flow": 0.08, "supply_demand": 0.08, "fibonacci": 0.08, "iceberg": 0.08,
             },
             "trending_moderate_bear": {
-                "liquidity": 0.20, "thermodynamic": 0.20, "physics": 0.20,
-                "order_block": 0.20, "fvg": 0.20,
+                "liquidity": 0.08, "thermodynamic": 0.08, "physics": 0.08,
+                "order_block": 0.08, "fvg": 0.08,
+                "msnr": 0.08, "msnr_alchemist": 0.08, "ifvg": 0.08,
+                "order_flow": 0.08, "supply_demand": 0.08, "fibonacci": 0.08, "iceberg": 0.08,
             },
             "ranging": {
-                "liquidity": 0.30, "thermodynamic": 0.25, "physics": 0.15,
-                "order_block": 0.20, "fvg": 0.10,
+                "liquidity": 0.10, "thermodynamic": 0.10, "physics": 0.08,
+                "order_block": 0.08, "fvg": 0.08,
+                "msnr": 0.08, "msnr_alchemist": 0.08, "ifvg": 0.10,
+                "order_flow": 0.08, "supply_demand": 0.10, "fibonacci": 0.08, "iceberg": 0.06,
             },
             "high_volatility": {
-                "liquidity": 0.35, "thermodynamic": 0.20, "physics": 0.25,
-                "order_block": 0.10, "fvg": 0.10,
+                "liquidity": 0.12, "thermodynamic": 0.08, "physics": 0.10,
+                "order_block": 0.05, "fvg": 0.05,
+                "msnr": 0.10, "msnr_alchemist": 0.08, "ifvg": 0.05,
+                "order_flow": 0.10, "supply_demand": 0.08, "fibonacci": 0.06, "iceberg": 0.08,
             },
             "crashing": {
-                "liquidity": 0.40, "thermodynamic": 0.20, "physics": 0.30,
-                "order_block": 0.05, "fvg": 0.05,
+                "liquidity": 0.12, "thermodynamic": 0.08, "physics": 0.10,
+                "order_block": 0.03, "fvg": 0.03,
+                "msnr": 0.10, "msnr_alchemist": 0.08, "ifvg": 0.03,
+                "order_flow": 0.10, "supply_demand": 0.08, "fibonacci": 0.04, "iceberg": 0.10,
             },
             "chop": {
-                "liquidity": 0.30, "thermodynamic": 0.30, "physics": 0.20,
-                "order_block": 0.10, "fvg": 0.10,
+                "liquidity": 0.10, "thermodynamic": 0.10, "physics": 0.08,
+                "order_block": 0.05, "fvg": 0.05,
+                "msnr": 0.08, "msnr_alchemist": 0.08, "ifvg": 0.10,
+                "order_flow": 0.08, "supply_demand": 0.10, "fibonacci": 0.08, "iceberg": 0.10,
             },
         }
         
@@ -111,7 +142,8 @@ class StrategyOrchestrator:
         self.strategy_performance = {name: {"trades": 0, "wins": 0} for name in self.strategies}
         
         logger.info("🎭 Strategy Orchestrator initialized")
-        logger.info(f"   5 Strategies: Liquidity, Thermodynamic, Physics, Order Block, FVG")
+        logger.info(f"   12 Strategies: Liquidity, Thermodynamic, Physics, Order Block, FVG")
+        logger.info(f"   + MSNR, MSNR Alchemist, IFVG, OrderFlow, Supply/Demand, Fib, Iceberg")
     
     def orchestrate(self, candles: pd.DataFrame, current_price: float, 
                    regime: str, profile_weights: Dict[str, float] = None) -> OrchestrationResult:
