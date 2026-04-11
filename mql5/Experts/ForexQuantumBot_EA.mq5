@@ -56,6 +56,12 @@ bool tradingEnabled = true;
 bool connectionValidated = false;
 datetime lastSignalCheck = 0;
 
+// Forward declarations
+bool ValidateMT5Connection();
+bool CheckSignalFileAccess();
+bool CheckPythonHandshake();
+void ResetDailyStats();
+
 struct TradeSignal {
    datetime timestamp;
    string direction;
@@ -302,8 +308,9 @@ void CheckForSignals() {
    }
    
    // Check signal age (max 10 minutes for M5)
-   if(TimeCurrent() - currentSignal.timestamp > 600) {
-      Print("⏰ Signal too old (", (TimeCurrent() - currentSignal.timestamp), "s) - ignoring");
+   int signalAge = (int)(TimeCurrent() - currentSignal.timestamp);
+   if(signalAge > 600) {
+      Print("⏰ Signal too old (", signalAge, "s) - ignoring");
       return;
    }
    
