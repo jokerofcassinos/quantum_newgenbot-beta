@@ -1,0 +1,3 @@
+D:\msys64\mingw64\bin\cmake.exe -E rm -f CMakeFiles\test_quantum_systems.dir/objects.a
+D:\msys64\ucrt64\bin\ar.exe qc CMakeFiles\test_quantum_systems.dir/objects.a @CMakeFiles\test_quantum_systems.dir\objects1.rsp
+D:\msys64\ucrt64\bin\c++.exe -O3 -DNDEBUG -Wl,--whole-archive CMakeFiles\test_quantum_systems.dir/objects.a -Wl,--no-whole-archive -o test_quantum_systems.exe -Wl,--out-implib,libtest_quantum_systems.dll.a -Wl,--major-image-version,0,--minor-image-version,0 @CMakeFiles\test_quantum_systems.dir\linkLibs.rsp

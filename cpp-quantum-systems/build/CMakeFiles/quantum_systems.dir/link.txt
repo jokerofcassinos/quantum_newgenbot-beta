@@ -1,0 +1,2 @@
+D:\msys64\ucrt64\bin\ar.exe qc libquantum_systems.a CMakeFiles/quantum_systems.dir/src/quantum/dimension_manager.cpp.obj CMakeFiles/quantum_systems.dir/src/core/core_utils.cpp.obj
+D:\msys64\ucrt64\bin\ranlib.exe libquantum_systems.a

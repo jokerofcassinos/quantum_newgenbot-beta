@@ -1,0 +1,40 @@
+2026-04-10 19:44:45.781 | INFO     | __main__:connect_mt5:57 - 🔌 Connecting to MT5...
+2026-04-10 19:44:45.793 | INFO     | __main__:connect_mt5:65 - ✅ Connected to account: 1513068916
+2026-04-10 19:44:45.793 | INFO     | __main__:connect_mt5:66 - 💵 Balance: $100,000.00
+2026-04-10 19:44:45.793 | INFO     | __main__:connect_mt5:67 - 📊 Equity: $100,000.00
+2026-04-10 19:44:45.794 | INFO     | __main__:connect_mt5:68 - 📈 Leverage: 1:100
+2026-04-10 19:44:45.794 | INFO     | __main__:connect_mt5:69 - 🖥️ Server: FTMO-Demo
+2026-04-10 19:44:45.794 | INFO     | __main__:connect_mt5:81 - 📊 BTCUSD Spread: 100 points
+2026-04-10 19:44:45.795 | INFO     | __main__:connect_mt5:82 -    Min lot: 0.01
+2026-04-10 19:44:45.801 | INFO     | __main__:connect_mt5:83 -    Max lot: 5.0
+2026-04-10 19:44:45.801 | DEBUG    | src.core.config_manager:__init__:26 - 📂 ConfigManager initialized at: D:\forex-project2k26\config
+2026-04-10 19:44:45.801 | INFO     | src.execution.mt5.mt5_connector:__init__:46 - 🔌 MT5 Connector initialized
+2026-04-10 19:44:45.802 | INFO     | src.execution.mt5.market_data:__init__:40 - 📊 Market Data Fetcher initialized
+2026-04-10 19:44:45.812 | INFO     | src.execution.mt5.market_data:get_candles:127 - 📊 Retrieved 200 M5 candles
+2026-04-10 19:44:45.813 | INFO     | src.execution.mt5.market_data:get_candles:128 -    Range: 2026-04-10 08:40:00 to 2026-04-11 01:25:00
+2026-04-10 19:44:45.815 | INFO     | src.execution.mt5.market_data:get_candles:129 -    Price range: $71391.08 - $73404.41
+2026-04-10 19:44:45.815 | INFO     | __main__:get_real_data:108 - 📊 Retrieved 200 REAL M5 candles
+2026-04-10 19:44:45.816 | INFO     | __main__:get_real_data:109 -    Range: 2026-04-10 08:40:00 → 2026-04-11 01:25:00
+2026-04-10 19:44:45.816 | INFO     | __main__:get_real_data:110 -    Price: $72,125.97 → $72,976.04
+2026-04-10 19:44:45.817 | INFO     | __main__:get_real_data:111 -    High: $73,404.41 | Low: $71,391.08
+2026-04-10 19:44:45.817 | DEBUG    | src.core.config_manager:__init__:26 - 📂 ConfigManager initialized at: D:\forex-project2k26\config
+2026-04-10 19:44:45.817 | INFO     | src.core.config_manager:load_json:33 - ✅ Config loaded: current_dna.json
+2026-04-10 19:44:45.818 | INFO     | src.strategies.neural_regime_profiles:__init__:128 - 🧠 Neural Regime Profiler initialized
+2026-04-10 19:44:45.818 | INFO     | src.strategies.neural_regime_profiles:__init__:129 -    5 Profiles: Aggressive, Momentum, Mean Reversion, Defensive, Scalper
+2026-04-10 19:44:45.818 | INFO     | src.strategies.strategy_orchestrator:__init__:112 - 🎭 Strategy Orchestrator initialized
+2026-04-10 19:44:45.819 | INFO     | src.strategies.strategy_orchestrator:__init__:113 -    5 Strategies: Liquidity, Thermodynamic, Physics, Order Block, FVG
+2026-04-10 19:44:45.819 | INFO     | src.strategies.coherence_engine:__init__:53 - 🔬 Coherence Engine initialized
+2026-04-10 19:44:45.819 | INFO     | src.dna.realtime_dna:__init__:73 - 🧬 Real-Time DNA Engine initialized
+2026-04-10 19:44:45.820 | INFO     | src.dna.realtime_dna:__init__:74 -    Adaptation Speed: 0.05
+2026-04-10 19:44:45.820 | INFO     | src.dna.realtime_dna:__init__:75 -    Max Mutations/Bar: 5
+2026-04-10 19:44:45.821 | INFO     | src.monitoring.neural_trade_auditor:__init__:260 - 🔬 Neural Trade Auditor initialized at data\trade-audits
+2026-04-10 19:44:45.821 | INFO     | src.monitoring.health_monitor:__init__:69 - 🏥 Health Monitor initialized
+2026-04-10 19:44:45.830 | INFO     | src.strategies.neural_regime_profiles:select_best_profile:342 - 🧠 Profile Selected: SCALPER
+2026-04-10 19:44:45.830 | INFO     | src.strategies.neural_regime_profiles:select_best_profile:343 -    Regime: chop
+2026-04-10 19:44:45.831 | INFO     | src.strategies.neural_regime_profiles:select_best_profile:344 -    Confidence: 0.95
+2026-04-10 19:44:45.831 | INFO     | src.strategies.neural_regime_profiles:select_best_profile:345 -    Volatility: 3.0%
+2026-04-10 19:44:45.831 | INFO     | src.strategies.neural_regime_profiles:select_best_profile:346 -    Session: asian
+2026-04-10 19:44:45.890 | INFO     | src.strategies.strategy_orchestrator:orchestrate:232 - 🎭 Orchestration Result: NEUTRAL
+2026-04-10 19:44:45.891 | INFO     | src.strategies.strategy_orchestrator:orchestrate:233 -    Consensus: +0.03
+2026-04-10 19:44:45.891 | INFO     | src.strategies.strategy_orchestrator:orchestrate:234 -    Coherence: 0.60
+2026-04-10 19:44:45.891 | INFO     | src.strategies.strategy_orchestrator:orchestrate:235 -    Buy: 0.07 | Sell: 0.07 | Neutral: 0.00

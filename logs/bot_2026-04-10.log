@@ -1,0 +1,20 @@
+2026-04-10 16:50:07.130 | DEBUG    | src.core.config_manager:__init__:26 - 📂 ConfigManager initialized at: D:\forex-project2k26\config
+2026-04-10 16:50:07.131 | INFO     | src.core.config_manager:load_json:33 - ✅ Config loaded: current_dna.json
+2026-04-10 16:50:07.131 | INFO     | __main__:main:52 - 🧬 DNA carregado: D:\forex-project2k26\config\dna\current_dna.json
+2026-04-10 16:50:07.132 | INFO     | src.core.config_manager:load_json:33 - ✅ Config loaded: absolute_limits.json
+2026-04-10 16:50:07.132 | INFO     | __main__:main:56 - 🛡️ Limites absolutos carregados: D:\forex-project2k26\config\dna\absolute_limits.json
+2026-04-10 16:50:07.133 | INFO     | src.dna.dna_engine:__init__:45 - 🧬 DNA Engine initialized
+2026-04-10 16:50:07.138 | INFO     | src.core.orchestrator:__init__:42 - 🎯 Orchestrator initialized
+2026-04-10 16:50:07.140 | INFO     | src.core.orchestrator:run:47 - 🚀 Starting main orchestration loop...
+2026-04-10 16:50:07.140 | INFO     | src.core.orchestrator:run:52 - ✅ MT5 connection: PENDING (implementation needed)
+2026-04-10 16:50:07.141 | INFO     | src.core.config_manager:load_json:33 - ✅ Config loaded: current_dna.json
+2026-04-10 16:50:07.141 | INFO     | src.core.config_manager:load_json:33 - ✅ Config loaded: dna_memory.json
+2026-04-10 16:50:07.142 | INFO     | src.core.config_manager:load_json:33 - ✅ Config loaded: absolute_limits.json
+2026-04-10 16:50:07.142 | INFO     | src.dna.dna_engine:load_dna:53 - 🧬 DNA loaded with 9 top-level strands
+2026-04-10 16:50:07.143 | INFO     | src.dna.dna_engine:load_dna:54 - 🧠 DNA Memory contains 0 regimes
+2026-04-10 16:50:07.144 | INFO     | src.core.config_manager:load_json:33 - ✅ Config loaded: absolute_limits.json
+2026-04-10 16:50:07.144 | INFO     | src.core.config_manager:validate_dna_against_limits:143 - ✅ DNA validation passed - All within safety limits
+2026-04-10 16:50:07.144 | INFO     | src.core.orchestrator:run:64 - 🔬 Detecting initial market regime...
+2026-04-10 16:50:52.148 | INFO     | src.core.orchestrator:trading_loop:119 - 📊 Loop #10 - System operational
+2026-04-10 16:51:42.152 | INFO     | src.core.orchestrator:trading_loop:119 - 📊 Loop #20 - System operational
+2026-04-10 16:52:05.607 | INFO     | src.core.orchestrator:trading_loop:125 - ⚠️ Trading loop cancelled

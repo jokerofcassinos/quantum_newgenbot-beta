@@ -1,0 +1,18 @@
+{
+  "_comment": "DNA MEMORY - Memória de Regimes de Mercado",
+  "_version": "1.0.0",
+  "_created": "2026-04-10",
+  "_description": "Armazena configurações que funcionaram em regimes similares",
+  
+  "regimes": {},
+  
+  "statistics": {
+    "total_regimes_identified": 0,
+    "total_mutations_applied": 0,
+    "successful_mutations": 0,
+    "rejected_mutations": 0,
+    "last_regime_change": null,
+    "best_performing_regime": null,
+    "worst_performing_regime": null
+  }
+}

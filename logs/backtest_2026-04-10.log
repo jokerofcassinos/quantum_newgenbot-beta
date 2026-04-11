@@ -1,0 +1,31 @@
+2026-04-10 15:39:02.966 | INFO     | __main__:run_backtest:109 - 
+================================================================================
+2026-04-10 15:39:02.967 | INFO     | __main__:run_backtest:110 - 🚀 FOREX QUANTUM BOT - BACKTESTING SYSTEM
+2026-04-10 15:39:02.967 | INFO     | __main__:run_backtest:111 - ================================================================================
+2026-04-10 15:39:02.968 | INFO     | __main__:run_backtest:112 - 💡 This will run a complete backtest with realistic FTMO costs
+2026-04-10 15:39:02.968 | INFO     | __main__:run_backtest:113 - ================================================================================
+
+2026-04-10 15:39:02.968 | INFO     | __main__:run_backtest:116 - ⚙️ Step 1: Loading configuration...
+2026-04-10 15:39:02.971 | DEBUG    | src.core.config_manager:__init__:26 - 📂 ConfigManager initialized at: D:\forex-project2k26\config
+2026-04-10 15:39:02.971 | INFO     | src.core.config_manager:load_json:33 - ✅ Config loaded: current_dna.json
+2026-04-10 15:39:02.972 | INFO     | src.core.config_manager:load_json:33 - ✅ Config loaded: absolute_limits.json
+2026-04-10 15:39:02.972 | INFO     | __main__:run_backtest:120 - ✅ Configuration loaded
+
+2026-04-10 15:39:02.973 | INFO     | __main__:run_backtest:123 - 📥 Step 2: Loading historical data...
+2026-04-10 15:39:02.973 | INFO     | __main__:load_historical_data:62 - ================================================================================
+2026-04-10 15:39:02.973 | INFO     | __main__:load_historical_data:63 - 📥 LOADING HISTORICAL DATA FROM MT5
+2026-04-10 15:39:02.974 | INFO     | __main__:load_historical_data:64 - ================================================================================
+2026-04-10 15:39:02.985 | INFO     | __main__:load_historical_data:77 - 📊 Loading M5 data from 2025-10-12...
+2026-04-10 15:39:02.986 | INFO     | __main__:load_historical_data:88 -    Loading M5...
+2026-04-10 15:39:02.986 | WARNING  | __main__:load_historical_data:97 -    ⚠️ M5: No data available
+2026-04-10 15:39:02.986 | INFO     | __main__:load_historical_data:88 -    Loading M15...
+2026-04-10 15:39:02.987 | WARNING  | __main__:load_historical_data:97 -    ⚠️ M15: No data available
+2026-04-10 15:39:02.987 | INFO     | __main__:load_historical_data:88 -    Loading H1...
+2026-04-10 15:39:02.987 | WARNING  | __main__:load_historical_data:97 -    ⚠️ H1: No data available
+2026-04-10 15:39:02.988 | INFO     | __main__:load_historical_data:88 -    Loading H4...
+2026-04-10 15:39:02.988 | WARNING  | __main__:load_historical_data:97 -    ⚠️ H4: No data available
+2026-04-10 15:39:02.988 | INFO     | __main__:load_historical_data:88 -    Loading D1...
+2026-04-10 15:39:02.989 | WARNING  | __main__:load_historical_data:97 -    ⚠️ D1: No data available
+2026-04-10 15:39:02.989 | ERROR    | __main__:run_backtest:127 - ❌ No historical data available!
+2026-04-10 15:39:02.989 | INFO     | __main__:run_backtest:128 - 
+💡 TIP: Make sure MT5 is installed and BTCUSD is available

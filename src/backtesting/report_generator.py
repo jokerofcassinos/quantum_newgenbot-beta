@@ -1,0 +1,713 @@
+"""
+Report Generator - Creates interactive HTML reports with glassmorphism UI
+CEO: Qwen Code | Created: 2026-04-10
+
+Features:
+- Modern glassmorphism design
+- Parallax scrolling effects
+- Dynamic interactions
+- Animated charts (Plotly.js)
+- Responsive layout
+- Dark mode by default
+"""
+
+import json
+from typing import Dict, Any
+from datetime import datetime
+from pathlib import Path
+
+
+class ReportGenerator:
+    """Generates interactive HTML backtest reports"""
+    
+    def __init__(self, output_dir: str = "data/backtest-results"):
+        self.output_dir = Path(output_dir)
+        self.output_dir.mkdir(parents=True, exist_ok=True)
+    
+    def generate_report(self, results: Dict[str, Any], filename: str = None) -> str:
+        """Generate complete HTML report"""
+        
+        if filename is None:
+            timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
+            filename = f"backtest_report_{timestamp}.html"
+        
+        filepath = self.output_dir / filename
+        
+        html_content = self._build_html(results)
+        
+        with open(filepath, 'w', encoding='utf-8') as f:
+            f.write(html_content)
+        
+        return str(filepath)
+    
+    def _build_html(self, results: Dict[str, Any]) -> str:
+        """Build complete HTML document"""
+        
+        summary = results.get('summary', {})
+        risk = results.get('risk', {})
+        costs = results.get('costs', {})
+        ftmo = results.get('ftmo', {})
+        equity_curve = results.get('equity_curve', [])
+        trades = results.get('trades', [])
+        
+        # Convert datetime objects to strings for JSON
+        equity_curve_str = json.dumps([
+            {**d, 'time': str(d['time'])} for d in (equity_curve[:500] if len(equity_curve) > 500 else equity_curve)
+        ])
+        
+        return f"""<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Forex Quantum Bot - Backtest Report</title>
+    <script src="https://cdn.plot.ly/plotly-2.27.0.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        * {{
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }}
+        
+        :root {{
+            --bg-primary: #0a0e27;
+            --bg-secondary: #1a1f3a;
+            --accent-cyan: #00d4ff;
+            --accent-purple: #7c3aed;
+            --accent-green: #10b981;
+            --accent-red: #ef4444;
+            --accent-gold: #f59e0b;
+            --text-primary: #f8fafc;
+            --text-secondary: #94a3b8;
+            --glass-bg: rgba(255, 255, 255, 0.05);
+            --glass-border: rgba(255, 255, 255, 0.1);
+        }}
+        
+        body {{
+            font-family: 'Inter', -apple-system, sans-serif;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }}
+        
+        /* Animated background */
+        .bg-animation {{
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            background: 
+                radial-gradient(ellipse at 20% 50%, rgba(124, 58, 237, 0.15) 0%, transparent 50%),
+                radial-gradient(ellipse at 80% 20%, rgba(0, 212, 255, 0.1) 0%, transparent 50%),
+                radial-gradient(ellipse at 40% 80%, rgba(16, 185, 129, 0.1) 0%, transparent 50%);
+            animation: bgPulse 20s ease-in-out infinite;
+        }}
+        
+        @keyframes bgPulse {{
+            0%, 100% {{ opacity: 1; }}
+            50% {{ opacity: 0.8; }}
+        }}
+        
+        /* Parallax header */
+        .hero {{
+            position: relative;
+            height: 400px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            background: linear-gradient(135deg, #1e3a8a 0%, #7c3aed 50%, #0ea5e9 100%);
+        }}
+        
+        .hero::before {{
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: repeating-linear-gradient(
+                45deg,
+                transparent,
+                transparent 10px,
+                rgba(255,255,255,0.03) 10px,
+                rgba(255,255,255,0.03) 20px
+            );
+            animation: gridMove 30s linear infinite;
+        }}
+        
+        @keyframes gridMove {{
+            0% {{ transform: translate(0, 0); }}
+            100% {{ transform: translate(50px, 50px); }}
+        }}
+        
+        .hero-content {{
+            position: relative;
+            z-index: 2;
+            text-align: center;
+        }}
+        
+        .hero h1 {{
+            font-size: 3.5rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, #fff 0%, #a5b4fc 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 1rem;
+            animation: slideDown 0.8s ease-out;
+        }}
+        
+        @keyframes slideDown {{
+            from {{ transform: translateY(-50px); opacity: 0; }}
+            to {{ transform: translateY(0); opacity: 1; }}
+        }}
+        
+        .hero p {{
+            font-size: 1.25rem;
+            color: rgba(255,255,255,0.9);
+            animation: slideUp 0.8s ease-out 0.2s both;
+        }}
+        
+        /* Main container */
+        .container {{
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 2rem;
+        }}
+        
+        /* Glassmorphism cards */
+        .glass-card {{
+            background: var(--glass-bg);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid var(--glass-border);
+            border-radius: 16px;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            transition: all 0.3s ease;
+            animation: fadeInUp 0.6s ease-out;
+        }}
+        
+        .glass-card:hover {{
+            transform: translateY(-4px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+            border-color: rgba(255,255,255,0.2);
+        }}
+        
+        @keyframes fadeInUp {{
+            from {{ transform: translateY(20px); opacity: 0; }}
+            to {{ transform: translateY(0); opacity: 1; }}
+        }}
+        
+        /* Metrics grid */
+        .metrics-grid {{
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }}
+        
+        .metric-box {{
+            background: linear-gradient(135deg, rgba(124, 58, 237, 0.1) 0%, rgba(0, 212, 255, 0.1) 100%);
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 12px;
+            padding: 1.5rem;
+            text-align: center;
+            transition: all 0.3s ease;
+        }}
+        
+        .metric-box:hover {{
+            transform: scale(1.05);
+            box-shadow: 0 10px 30px rgba(124, 58, 237, 0.2);
+        }}
+        
+        .metric-value {{
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }}
+        
+        .metric-value.positive {{ color: var(--accent-green); }}
+        .metric-value.negative {{ color: var(--accent-red); }}
+        .metric-value.neutral {{ color: var(--accent-cyan); }}
+        
+        .metric-label {{
+            font-size: 0.875rem;
+            color: var(--text-secondary);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }}
+        
+        /* Section titles */
+        .section-title {{
+            font-size: 1.75rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            padding-bottom: 0.75rem;
+            border-bottom: 2px solid var(--accent-cyan);
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }}
+        
+        .section-title span {{
+            font-size: 1.5rem;
+        }}
+        
+        /* FTMO compliance badges */
+        .ftmo-grid {{
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+        }}
+        
+        .ftmo-item {{
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            padding: 1rem;
+            background: rgba(255,255,255,0.03);
+            border-radius: 8px;
+        }}
+        
+        .badge {{
+            display: inline-block;
+            padding: 0.25rem 0.75rem;
+            border-radius: 9999px;
+            font-size: 0.75rem;
+            font-weight: 600;
+        }}
+        
+        .badge-success {{
+            background: rgba(16, 185, 129, 0.2);
+            color: var(--accent-green);
+            border: 1px solid var(--accent-green);
+        }}
+        
+        .badge-danger {{
+            background: rgba(239, 68, 68, 0.2);
+            color: var(--accent-red);
+            border: 1px solid var(--accent-red);
+        }}
+        
+        /* Chart containers */
+        .chart-container {{
+            height: 400px;
+            margin: 1.5rem 0;
+        }}
+        
+        /* Costs breakdown */
+        .costs-bar {{
+            display: flex;
+            height: 40px;
+            border-radius: 8px;
+            overflow: hidden;
+            margin: 1rem 0;
+        }}
+        
+        .costs-segment {{
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: 600;
+            font-size: 0.875rem;
+            transition: all 0.3s ease;
+        }}
+        
+        .costs-segment:hover {{
+            flex: 1.2 !important;
+        }}
+        
+        /* Scroll animations */
+        .scroll-reveal {{
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.6s ease;
+        }}
+        
+        .scroll-reveal.revealed {{
+            opacity: 1;
+            transform: translateY(0);
+        }}
+        
+        /* Parallax effect */
+        .parallax-section {{
+            background-attachment: fixed;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: cover;
+            padding: 3rem;
+            margin: 2rem 0;
+            border-radius: 16px;
+        }}
+        
+        /* Tooltip */
+        .tooltip {{
+            position: relative;
+            cursor: help;
+        }}
+        
+        .tooltip:hover::after {{
+            content: attr(data-tooltip);
+            position: absolute;
+            bottom: 100%;
+            left: 50%;
+            transform: translateX(-50%);
+            padding: 0.5rem 1rem;
+            background: rgba(0,0,0,0.9);
+            color: white;
+            border-radius: 8px;
+            font-size: 0.75rem;
+            white-space: nowrap;
+            z-index: 10;
+        }}
+        
+        /* Responsive */
+        @media (max-width: 768px) {{
+            .hero h1 {{ font-size: 2rem; }}
+            .metrics-grid {{ grid-template-columns: 1fr; }}
+            .container {{ padding: 1rem; }}
+        }}
+    </style>
+</head>
+<body>
+    <div class="bg-animation"></div>
+    
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <h1>🚀 FOREX QUANTUM BOT</h1>
+            <p>Backtest Report | BTCUSD | FTMO Demo $100K</p>
+            <p style="font-size: 0.9rem; margin-top: 0.5rem; opacity: 0.8;">
+                Generated: {datetime.now().strftime("%Y-%m-%d %H:%M:%S")}
+            </p>
+        </div>
+    </section>
+    
+    <div class="container">
+        <!-- Key Metrics -->
+        <div class="section-title"><span>📊</span> Key Performance Metrics</div>
+        <div class="metrics-grid">
+            <div class="metric-box">
+                <div class="metric-value {'positive' if summary.get('net_profit', 0) >= 0 else 'negative'}">
+                    ${summary.get('net_profit', 0):,.2f}
+                </div>
+                <div class="metric-label">Net Profit</div>
+            </div>
+            
+            <div class="metric-box">
+                <div class="metric-value neutral">
+                    {summary.get('win_rate', 0)*100:.1f}%
+                </div>
+                <div class="metric-label">Win Rate</div>
+            </div>
+            
+            <div class="metric-box">
+                <div class="metric-value neutral">
+                    {summary.get('profit_factor', 0):.2f}
+                </div>
+                <div class="metric-label">Profit Factor</div>
+            </div>
+            
+            <div class="metric-box">
+                <div class="metric-value {'negative' if risk.get('max_drawdown_percent', 0) > 5 else 'positive'}">
+                    {risk.get('max_drawdown_percent', 0):.2f}%
+                </div>
+                <div class="metric-label">Max Drawdown</div>
+            </div>
+            
+            <div class="metric-box">
+                <div class="metric-value neutral">
+                    {summary.get('total_trades', 0)}
+                </div>
+                <div class="metric-label">Total Trades</div>
+            </div>
+            
+            <div class="metric-box">
+                <div class="metric-value neutral">
+                    {summary.get('sharpe_ratio', 0):.2f}
+                </div>
+                <div class="metric-label">Sharpe Ratio</div>
+            </div>
+        </div>
+        
+        <!-- Costs Breakdown -->
+        <div class="glass-card scroll-reveal">
+            <div class="section-title"><span>💸</span> Realistic Costs Breakdown</div>
+            <p style="color: var(--text-secondary); margin-bottom: 1rem;">
+                FTMO commissions ($45/lot/side) + Spread + Slippage
+            </p>
+            
+            <div class="costs-bar">
+                <div class="costs-segment" style="flex: {costs.get('total_commissions', 0)}; background: #7c3aed;">
+                    Commission ${costs.get('total_commissions', 0):,.0f}
+                </div>
+                <div class="costs-segment" style="flex: {costs.get('total_spread_costs', 0)}; background: #0ea5e9;">
+                    Spread ${costs.get('total_spread_costs', 0):,.0f}
+                </div>
+                <div class="costs-segment" style="flex: {costs.get('total_slippage_costs', 0)}; background: #f59e0b;">
+                    Slippage ${costs.get('total_slippage_costs', 0):,.0f}
+                </div>
+            </div>
+            
+            <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; margin-top: 1rem;">
+                <div style="text-align: center;">
+                    <div style="font-size: 1.5rem; font-weight: 700; color: #7c3aed;">
+                        ${costs.get('total_commissions', 0):,.2f}
+                    </div>
+                    <div style="font-size: 0.75rem; color: var(--text-secondary);">Total Commissions</div>
+                </div>
+                <div style="text-align: center;">
+                    <div style="font-size: 1.5rem; font-weight: 700; color: #0ea5e9;">
+                        ${costs.get('total_spread_costs', 0):,.2f}
+                    </div>
+                    <div style="font-size: 0.75rem; color: var(--text-secondary);">Total Spread Costs</div>
+                </div>
+                <div style="text-align: center;">
+                    <div style="font-size: 1.5rem; font-weight: 700; color: #f59e0b;">
+                        ${costs.get('total_costs', 0):,.2f}
+                    </div>
+                    <div style="font-size: 0.75rem; color: var(--text-secondary);">Total Costs</div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- FTMO Compliance -->
+        <div class="glass-card scroll-reveal">
+            <div class="section-title"><span>🎯</span> FTMO Challenge Compliance</div>
+            
+            <div class="ftmo-grid">
+                <div class="ftmo-item">
+                    <span class="badge {'badge-success' if ftmo.get('daily_loss_limit_pass') else 'badge-danger'}">
+                        {'✓' if ftmo.get('daily_loss_limit_pass') else '✗'}
+                    </span>
+                    <div>
+                        <div style="font-weight: 600;">Daily Loss Limit</div>
+                        <div style="font-size: 0.75rem; color: var(--text-secondary);">
+                            Max: {ftmo.get('max_daily_loss_percent', 0):.2f}% / 5%
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="ftmo-item">
+                    <span class="badge {'badge-success' if ftmo.get('total_drawdown_pass') else 'badge-danger'}">
+                        {'✓' if ftmo.get('total_drawdown_pass') else '✗'}
+                    </span>
+                    <div>
+                        <div style="font-weight: 600;">Total Drawdown</div>
+                        <div style="font-size: 0.75rem; color: var(--text-secondary);">
+                            Max: {risk.get('max_drawdown_percent', 0):.2f}% / 10%
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="ftmo-item">
+                    <span class="badge {'badge-success' if ftmo.get('min_trading_days_pass') else 'badge-danger'}">
+                        {'✓' if ftmo.get('min_trading_days_pass') else '✗'}
+                    </span>
+                    <div>
+                        <div style="font-weight: 600;">Min Trading Days</div>
+                        <div style="font-size: 0.75rem; color: var(--text-secondary);">
+                            {ftmo.get('trading_days_count', 0)} / 10 days
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="ftmo-item">
+                    <span class="badge {'badge-success' if ftmo.get('consistency_rule_pass') else 'badge-danger'}">
+                        {'✓' if ftmo.get('consistency_rule_pass') else '✗'}
+                    </span>
+                    <div>
+                        <div style="font-weight: 600;">Consistency Rule</div>
+                        <div style="font-size: 0.75rem; color: var(--text-secondary);">
+                            Best day: {ftmo.get('max_single_day_profit_percent', 0):.1f}% / 30%
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div style="margin-top: 1.5rem; padding: 1rem; background: {'rgba(16, 185, 129, 0.1)' if ftmo.get('overall_pass') else 'rgba(239, 68, 68, 0.1)'}; border-radius: 8px; text-align: center;">
+                <div style="font-size: 2rem; margin-bottom: 0.5rem;">
+                    {'✅' if ftmo.get('overall_pass') else '❌'}
+                </div>
+                <div style="font-size: 1.25rem; font-weight: 700;">
+                    {'WOULD PASS FTMO CHALLENGE' if ftmo.get('overall_pass') else 'WOULD NOT PASS'}
+                </div>
+            </div>
+        </div>
+        
+        <!-- Equity Curve Chart -->
+        <div class="glass-card scroll-reveal">
+            <div class="section-title"><span>📈</span> Equity Curve</div>
+            <div id="equity-chart" class="chart-container"></div>
+        </div>
+        
+        <!-- Drawdown Chart -->
+        <div class="glass-card scroll-reveal">
+            <div class="section-title"><span>📉</span> Drawdown</div>
+            <div id="drawdown-chart" class="chart-container"></div>
+        </div>
+        
+        <!-- Monthly Returns -->
+        <div class="glass-card scroll-reveal">
+            <div class="section-title"><span>📅</span> Strategy Statistics</div>
+            
+            <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 1rem;">
+                <div>
+                    <h3 style="margin-bottom: 1rem; color: var(--accent-cyan);">Performance</h3>
+                    <div style="display: grid; gap: 0.5rem;">
+                        <div style="display: flex; justify-content: space-between; padding: 0.5rem; background: rgba(255,255,255,0.03); border-radius: 6px;">
+                            <span>Avg Win</span>
+                            <span style="color: var(--accent-green); font-weight: 600;">
+                                ${summary.get('expectancy', 0):.2f}
+                            </span>
+                        </div>
+                        <div style="display: flex; justify-content: space-between; padding: 0.5rem; background: rgba(255,255,255,0.03); border-radius: 6px;">
+                            <span>Win/Loss Ratio</span>
+                            <span style="font-weight: 600;">{risk.get('win_loss_ratio', 0):.2f}</span>
+                        </div>
+                        <div style="display: flex; justify-content: space-between; padding: 0.5rem; background: rgba(255,255,255,0.03); border-radius: 6px;">
+                            <span>Max Consecutive Wins</span>
+                            <span style="font-weight: 600;">{risk.get('consecutive_wins_max', 0)}</span>
+                        </div>
+                        <div style="display: flex; justify-content: space-between; padding: 0.5rem; background: rgba(255,255,255,0.03); border-radius: 6px;">
+                            <span>Max Consecutive Losses</span>
+                            <span style="font-weight: 600;">{risk.get('consecutive_losses_max', 0)}</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div>
+                    <h3 style="margin-bottom: 1rem; color: var(--accent-purple);">Risk</h3>
+                    <div style="display: grid; gap: 0.5rem;">
+                        <div style="display: flex; justify-content: space-between; padding: 0.5rem; background: rgba(255,255,255,0.03); border-radius: 6px;">
+                            <span>Max Drawdown ($)</span>
+                            <span style="color: var(--accent-red); font-weight: 600;">
+                                ${risk.get('max_drawdown_dollars', 0):,.2f}
+                            </span>
+                        </div>
+                        <div style="display: flex; justify-content: space-between; padding: 0.5rem; background: rgba(255,255,255,0.03); border-radius: 6px;">
+                            <span>Recovery Factor</span>
+                            <span style="font-weight: 600;">{risk.get('recovery_factor', 0):.2f}</span>
+                        </div>
+                        <div style="display: flex; justify-content: space-between; padding: 0.5rem; background: rgba(255,255,255,0.03); border-radius: 6px;">
+                            <span>Avg Trade Duration</span>
+                            <span style="font-weight: 600;">{risk.get('avg_trade_duration_minutes', 0):.0f} min</span>
+                        </div>
+                        <div style="display: flex; justify-content: space-between; padding: 0.5rem; background: rgba(255,255,255,0.03); border-radius: 6px;">
+                            <span>Costs as % Gross</span>
+                            <span style="font-weight: 600;">{costs.get('costs_as_percent_of_gross', 0):.1f}%</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        // Parallax effect on scroll
+        window.addEventListener('scroll', () => {{
+            const scrolled = window.pageYOffset;
+            const hero = document.querySelector('.hero');
+            hero.style.transform = `translateY(${{scrolled * 0.5}}px)`;
+        }});
+        
+        // Scroll reveal animation
+        const observerOptions = {{
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        }};
+        
+        const observer = new IntersectionObserver((entries) => {{
+            entries.forEach(entry => {{
+                if (entry.isIntersecting) {{
+                    entry.target.classList.add('revealed');
+                }}
+            }});
+        }}, observerOptions);
+        
+        document.querySelectorAll('.scroll-reveal').forEach(el => {{
+            observer.observe(el);
+        }});
+        
+        // Equity Chart
+        const equityData = {equity_curve_str};
+        
+        const equityTrace = {{
+            x: equityData.map(d => d.time),
+            y: equityData.map(d => d.equity),
+            type: 'scatter',
+            mode: 'lines',
+            fill: 'tozeroy',
+            line: {{
+                color: '#00d4ff',
+                width: 2
+            }},
+            fillcolor: 'rgba(0, 212, 255, 0.1)'
+        }};
+        
+        const equityLayout = {{
+            paper_bgcolor: 'rgba(0,0,0,0)',
+            plot_bgcolor: 'rgba(0,0,0,0)',
+            font: {{ color: '#f8fafc' }},
+            xaxis: {{
+                gridcolor: 'rgba(255,255,255,0.1)',
+                title: 'Time'
+            }},
+            yaxis: {{
+                gridcolor: 'rgba(255,255,255,0.1)',
+                title: 'Equity ($)'
+            }},
+            margin: {{ t: 20, r: 20, b: 40, l: 60 }}
+        }};
+        
+        Plotly.newPlot('equity-chart', [equityTrace], equityLayout, {{responsive: true}});
+        
+        // Drawdown Chart
+        const ddTrace = {{
+            x: equityData.map(d => d.time),
+            y: equityData.map(d => d.drawdown),
+            type: 'scatter',
+            mode: 'lines',
+            fill: 'tozeroy',
+            line: {{
+                color: '#ef4444',
+                width: 2
+            }},
+            fillcolor: 'rgba(239, 68, 68, 0.2)'
+        }};
+        
+        const ddLayout = {{
+            paper_bgcolor: 'rgba(0,0,0,0)',
+            plot_bgcolor: 'rgba(0,0,0,0)',
+            font: {{ color: '#f8fafc' }},
+            xaxis: {{
+                gridcolor: 'rgba(255,255,255,0.1)',
+                title: 'Time'
+            }},
+            yaxis: {{
+                gridcolor: 'rgba(255,255,255,0.1)',
+                title: 'Drawdown (%)'
+            }},
+            margin: {{ t: 20, r: 20, b: 40, l: 60 }}
+        }};
+        
+        Plotly.newPlot('drawdown-chart', [ddTrace], ddLayout, {{responsive: true}});
+        
+        // Interactive metric boxes
+        document.querySelectorAll('.metric-box').forEach(box => {{
+            box.addEventListener('mouseenter', function() {{
+                this.style.transform = 'scale(1.05) translateY(-4px)';
+            }});
+            box.addEventListener('mouseleave', function() {{
+                this.style.transform = 'scale(1) translateY(0)';
+            }});
+        }});
+    </script>
+</body>
+</html>"""

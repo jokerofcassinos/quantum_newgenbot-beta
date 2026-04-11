@@ -1,0 +1,33 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+*.egg
+*.egg-info/
+dist/
+*.whl
+
+# Virtual Environment
+venv/
+env/
+ENV/
+.venv/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Secrets (NEVER commit these)
+.env
+
+# OS
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Large data files (optional)
+data/market-data/*.csv

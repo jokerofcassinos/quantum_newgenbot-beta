@@ -1,0 +1,31 @@
+{
+  "_comment": "LIMITES ABSOLUTOS DE SEGURANÇA - NUNCA ALTERAR PELO DNA ENGINE",
+  "_version": "1.0.0",
+  "_created": "2026-04-10",
+  "_warning": "Estes são limites de sobrevivência. O DNA Engine NÃO pode alterar estes valores.",
+  
+  "absolute_limits": {
+    "max_risk_per_trade_percent": 2.0,
+    "max_daily_loss_percent": 5.0,
+    "max_total_drawdown_percent": 10.0,
+    "max_positions_simultaneous": 5,
+    "min_risk_reward_ratio": 1.2,
+    "ftmo_rules_compliance": true,
+    
+    "btcusd_specific": {
+      "min_stop_distance_points": 100,
+      "max_spread_points": 50,
+      "min_trade_size_lots": 0.01,
+      "max_trade_size_lots": 10.0,
+      "max_leverage": 500
+    },
+    
+    "emergency_limits": {
+      "max_consecutive_losses": 7,
+      "max_daily_trades": 50,
+      "max_hourly_loss_percent": 2.0,
+      "circuit_breaker_enabled": true,
+      "circuit_breaker_cooldown_minutes": 30
+    }
+  }
+}

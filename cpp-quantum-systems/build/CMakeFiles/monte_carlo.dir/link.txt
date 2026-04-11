@@ -1,0 +1,2 @@
+D:\msys64\ucrt64\bin\ar.exe qc libmonte_carlo.a CMakeFiles/monte_carlo.dir/src/monte_carlo/advanced_simulator.cpp.obj CMakeFiles/monte_carlo.dir/src/monte_carlo/path_generator.cpp.obj CMakeFiles/monte_carlo.dir/src/monte_carlo/density_estimator.cpp.obj CMakeFiles/monte_carlo.dir/src/monte_carlo/risk_analyzer.cpp.obj CMakeFiles/monte_carlo.dir/src/core/core_utils.cpp.obj
+D:\msys64\ucrt64\bin\ranlib.exe libmonte_carlo.a

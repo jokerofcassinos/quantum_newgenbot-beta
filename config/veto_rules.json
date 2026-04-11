@@ -1,0 +1,12 @@
+{
+  "version": "1.0",
+  "generated_at": "2026-04-10T21:40:16.644789+00:00",
+  "total_patterns_analyzed": 0,
+  "rules": [],
+  "implementation": {
+    "check_order": "lethal > major > minor",
+    "min_confidence_threshold": 0.6,
+    "action_on_veto": "REJECT trade immediately",
+    "override_possible": false
+  }
+}
