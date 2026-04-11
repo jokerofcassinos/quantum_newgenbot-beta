@@ -199,6 +199,55 @@ class SmartOrderManagerAudit:
 
 
 @dataclass
+class StrategyVoteAudit:
+    """Individual strategy vote tracking"""
+    strategy_name: str
+    vote: str  # BUY, SELL, NEUTRAL
+    confidence: float
+
+
+@dataclass
+class StrategyVotingAudit:
+    """Complete 12-strategy voting breakdown"""
+    strategy_votes: List[StrategyVoteAudit]  # List of individual votes
+    buy_votes: int
+    sell_votes: int
+    neutral_votes: int
+    total_strategies: int
+    consensus_direction: str
+    consensus_confidence: float
+
+
+@dataclass
+class SessionVetoAudit:
+    """Session-specific veto tracking"""
+    session_name: str  # asian, london, ny, ny_overlap, weekend
+    trading_allowed: bool
+    min_confidence_threshold: float
+    max_position_size: float
+    risk_multiplier: float
+    min_strategy_votes: int
+    min_coherence: float
+    veto_applied: bool
+    veto_reason: Optional[str] = None
+
+
+@dataclass
+class AdvancedVetoV2Audit:
+    """Advanced Veto v2 system tracking"""
+    rsi_extremes_veto: bool
+    rsi_current: float
+    top_bottom_veto: bool
+    rsi_divergence_veto: bool
+    low_liquidity_veto: bool
+    bollinger_extremes_veto: bool
+    session_compatibility_veto: bool
+    all_vetoes_passed: bool
+    vetoed_by: Optional[str] = None
+    veto_severity: Optional[str] = None
+
+
+@dataclass
 class TradeAuditLog:
     """Complete neural state audit for a single trade"""
     # Basic info
@@ -222,6 +271,13 @@ class TradeAuditLog:
     risk_context: RiskContextAudit
     dna_state: DNAStateAudit
     smart_order_manager: SmartOrderManagerAudit
+
+    # NEW: Strategy voting breakdown
+    strategy_voting: Optional[StrategyVotingAudit] = None
+
+    # NEW: Session and Advanced Veto tracking
+    session_veto: Optional[SessionVetoAudit] = None
+    advanced_veto_v2: Optional[AdvancedVetoV2Audit] = None
     
     # Outcome (filled when trade closes)
     exit_price: Optional[float] = None
@@ -277,6 +333,9 @@ class NeuralTradeAuditor:
         risk_context: Dict[str, Any],
         dna_state: Dict[str, Any],
         smart_order_manager: Dict[str, Any],
+        strategy_voting: Dict[str, Any] = None,  # NEW: Optional voting data
+        session_veto: Dict[str, Any] = None,  # NEW: Optional session veto data
+        advanced_veto_v2: Dict[str, Any] = None,  # NEW: Optional advanced veto v2 data
     ) -> TradeAuditLog:
         """
         Capture COMPLETE neural state at trade entry
@@ -284,7 +343,7 @@ class NeuralTradeAuditor:
         This captures EVERYTHING about the market and system state
         """
         timestamp = datetime.now(timezone.utc).isoformat()
-        
+
         # Create dataclasses from dicts
         regime_audit = MarketRegimeAudit(**market_regime)
         mtf_audit = MultiTimeframeAudit(**multi_timeframe)
@@ -294,7 +353,60 @@ class NeuralTradeAuditor:
         risk_audit = RiskContextAudit(**risk_context)
         dna_audit = DNAStateAudit(**dna_state)
         som_audit = SmartOrderManagerAudit(**smart_order_manager)
-        
+
+        # NEW: Process strategy voting data if provided
+        voting_audit = None
+        if strategy_voting:
+            # Convert individual strategy votes to StrategyVoteAudit objects
+            individual_votes = []
+            for strat_name, vote_data in strategy_voting.get('strategy_votes', {}).items():
+                individual_votes.append(StrategyVoteAudit(
+                    strategy_name=strat_name,
+                    vote=vote_data.get('vote', 'NEUTRAL'),
+                    confidence=vote_data.get('confidence', 0.5),
+                ))
+            
+            voting_audit = StrategyVotingAudit(
+                strategy_votes=individual_votes,
+                buy_votes=strategy_voting.get('buy_votes', 0),
+                sell_votes=strategy_voting.get('sell_votes', 0),
+                neutral_votes=strategy_voting.get('neutral_votes', 0),
+                total_strategies=strategy_voting.get('total_strategies', 12),
+                consensus_direction=direction,
+                consensus_confidence=signal_confidence,
+            )
+
+        # NEW: Process session veto data if provided
+        session_veto_audit = None
+        if session_veto:
+            session_veto_audit = SessionVetoAudit(
+                session_name=session_veto.get('session_name', 'unknown'),
+                trading_allowed=session_veto.get('trading_allowed', True),
+                min_confidence_threshold=session_veto.get('min_confidence_threshold', 0.60),
+                max_position_size=session_veto.get('max_position_size', 0.10),
+                risk_multiplier=session_veto.get('risk_multiplier', 1.0),
+                min_strategy_votes=session_veto.get('min_strategy_votes', 3),
+                min_coherence=session_veto.get('min_coherence', 0.55),
+                veto_applied=not session_veto.get('approved', True),
+                veto_reason=session_veto.get('reason'),
+            )
+
+        # NEW: Process advanced veto v2 data if provided
+        advanced_veto_audit = None
+        if advanced_veto_v2:
+            advanced_veto_audit = AdvancedVetoV2Audit(
+                rsi_extremes_veto=advanced_veto_v2.get('rsi_extremes_veto', False),
+                rsi_current=advanced_veto_v2.get('rsi_current', 50.0),
+                top_bottom_veto=advanced_veto_v2.get('top_bottom_veto', False),
+                rsi_divergence_veto=advanced_veto_v2.get('rsi_divergence_veto', False),
+                low_liquidity_veto=advanced_veto_v2.get('low_liquidity_veto', False),
+                bollinger_extremes_veto=advanced_veto_v2.get('bollinger_extremes_veto', False),
+                session_compatibility_veto=advanced_veto_v2.get('session_compatibility_veto', False),
+                all_vetoes_passed=advanced_veto_v2.get('all_vetoes_passed', True),
+                vetoed_by=advanced_veto_v2.get('vetoed_by'),
+                veto_severity=advanced_veto_v2.get('veto_severity'),
+            )
+
         audit = TradeAuditLog(
             ticket=ticket,
             timestamp=timestamp,
@@ -314,6 +426,9 @@ class NeuralTradeAuditor:
             risk_context=risk_audit,
             dna_state=dna_audit,
             smart_order_manager=som_audit,
+            strategy_voting=voting_audit,  # NEW: Add voting audit
+            session_veto=session_veto_audit,  # NEW: Add session veto audit
+            advanced_veto_v2=advanced_veto_audit,  # NEW: Add advanced veto v2 audit
         )
         
         # Store in active audits
