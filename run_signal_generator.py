@@ -56,9 +56,11 @@ class SignalGenerator:
             signal_file = str(signal_dir / "trade_signal.csv")
         
         self.signal_file = signal_file
+        self.handshake_file = signal_file.replace("trade_signal.csv", "connection.txt")
         self.last_signal_time = 0
-        self.signal_interval = 60  # 1 minute
+        self.signal_interval = 300  # 5 minutes (matches M5 timeframe)
         self.running = False
+        self.ea_connected = False
         
         # Performance tracking
         self.signals_generated = 0
@@ -115,6 +117,55 @@ class SignalGenerator:
         logger.info("\n" + "="*80)
         logger.info("✅ ALL SYSTEMS INITIALIZED")
         logger.info("="*80)
+        
+        # Step 4: Validate EA connection via handshake
+        logger.info("\n📡 Step 4: Waiting for EA handshake...")
+        self.wait_for_ea_connection()
+    
+    def wait_for_ea_connection(self, timeout: int = 60):
+        """
+        Wait for EA to write handshake file
+        This ensures EA is running and connected before we start generating signals
+        """
+        import time
+        
+        logger.info(f"⏳ Waiting for EA connection (timeout: {timeout}s)...")
+        logger.info(f"   Handshake file: {self.handshake_file}")
+        
+        start_time = time.time()
+        while time.time() - start_time < timeout:
+            try:
+                if Path(self.handshake_file).exists():
+                    # Read handshake file
+                    with open(self.handshake_file, 'r') as f:
+                        content = f.read()
+                    
+                    # Check if EA is connected
+                    if "EA_CONNECTED=true" in content and "STATUS=READY" in content:
+                        logger.info("\n" + "="*60)
+                        logger.info("✅ EA CONNECTION VALIDATED!")
+                        logger.info("="*60)
+                        
+                        # Parse EA info
+                        for line in content.split('\n'):
+                            if '=' in line:
+                                key, value = line.split('=', 1)
+                                logger.info(f"   {key}: {value}")
+                        
+                        self.ea_connected = True
+                        logger.info("="*60)
+                        return True
+                
+                logger.info(f"   ⏳ Waiting... ({int(time.time() - start_time)}s/{timeout}s)")
+                time.sleep(5)
+                
+            except Exception as e:
+                logger.debug(f"   Handshake check: {e}")
+                time.sleep(2)
+        
+        logger.warning("\n⚠️ EA handshake timeout - continuing anyway (EA may not be running)")
+        self.ea_connected = False
+        return False
     
     async def generate_signal(self) -> bool:
         """
