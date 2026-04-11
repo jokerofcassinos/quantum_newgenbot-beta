@@ -191,6 +191,110 @@ class BaseStrategy(ABC):
             return False, f"Take profit too close: ${tp_distance:.2f}"
         
         return True, "Signal validated"
+
+    def calculate_fixed_sl(self, entry_price: float, direction: str, 
+                          candle_data: pd.DataFrame = None, 
+                          max_points: int = 300) -> float:
+        """
+        Calculate FIXED stop loss capped at max_points
+        
+        Uses technical analysis to find optimal level within 200-300 point range.
+        SL NEVER widens after entry - only trails when in profit.
+        
+        Args:
+            entry_price: Entry price
+            direction: BUY or SELL
+            candle_data: Recent candles for ATR/EMA analysis
+            max_points: Maximum SL distance in points (default 300)
+        
+        Returns:
+            Fixed stop loss price
+        """
+        if candle_data is not None and len(candle_data) >= 20:
+            # Calculate ATR for context
+            high = candle_data['high']
+            low = candle_data['low']
+            close = candle_data['close']
+            
+            tr1 = high - low
+            tr2 = abs(high - close.shift(1))
+            tr3 = abs(low - close.shift(1))
+            tr = pd.concat([tr1, tr2, tr3], axis=1).max(axis=1)
+            atr = tr.rolling(14).mean().iloc[-1]
+            
+            # Find recent swing points
+            lookback = 10
+            recent_lows = low.iloc[-lookback:]
+            recent_highs = high.iloc[-lookback:]
+            
+            swing_low = recent_lows.min()
+            swing_high = recent_highs.max()
+            
+            # Calculate EMA levels
+            ema_9 = close.ewm(span=9).mean().iloc[-1]
+            
+            if direction == "BUY":
+                # For BUY: SL below entry, use best technical level
+                sl_candidates = []
+                
+                # 1. Below swing low (if close enough)
+                if swing_low < entry_price:
+                    dist = entry_price - swing_low
+                    if dist <= max_points:
+                        sl_candidates.append(swing_low)
+                
+                # 2. Below EMA 9 (if close enough)
+                if ema_9 < entry_price:
+                    dist = entry_price - ema_9
+                    if dist <= max_points:
+                        sl_candidates.append(ema_9)
+                
+                # 3. ATR-based (capped)
+                if atr:
+                    atr_sl = entry_price - min(atr * 1.5, max_points)
+                    sl_candidates.append(atr_sl)
+                
+                # 4. Default: max_points below entry
+                sl_candidates.append(entry_price - max_points)
+                
+                # Choose tightest SL (highest value for BUY)
+                stop_loss = max(sl_candidates)
+                stop_loss = max(stop_loss, entry_price - max_points)
+                
+            else:  # SELL
+                sl_candidates = []
+                
+                # 1. Above swing high (if close enough)
+                if swing_high > entry_price:
+                    dist = swing_high - entry_price
+                    if dist <= max_points:
+                        sl_candidates.append(swing_high)
+                
+                # 2. Above EMA 9 (if close enough)
+                if ema_9 > entry_price:
+                    dist = ema_9 - entry_price
+                    if dist <= max_points:
+                        sl_candidates.append(ema_9)
+                
+                # 3. ATR-based (capped)
+                if atr:
+                    atr_sl = entry_price + min(atr * 1.5, max_points)
+                    sl_candidates.append(atr_sl)
+                
+                # 4. Default: max_points above entry
+                sl_candidates.append(entry_price + max_points)
+                
+                # Choose tightest SL (lowest value for SELL)
+                stop_loss = min(sl_candidates)
+                stop_loss = min(stop_loss, entry_price + max_points)
+        else:
+            # No candle data - use fixed distance
+            if direction == "BUY":
+                stop_loss = entry_price - max_points
+            else:
+                stop_loss = entry_price + max_points
+        
+        return round(stop_loss, 2)
     
     def get_stats(self) -> Dict[str, Any]:
         """Get strategy statistics"""

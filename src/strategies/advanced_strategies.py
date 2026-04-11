@@ -67,11 +67,12 @@ class LiquidityStrategy:
         body_size = abs(close.iloc[-1] - close.iloc[-1])
         wick_ratio = (candles['high'].iloc[-1] - candles['low'].iloc[-1]) / max(body_size, 1)
         
-        # Signal logic
+        # Signal logic with FIXED SL capped at 300 points
         if liquidity_sweep_low and wick_ratio > 2.0:
             # Swept lows and rejected = bullish
             entry = current_price
-            sl = current_low - 50
+            # Use fixed SL calculation (capped at 300 points)
+            sl = self.calculate_fixed_sl(entry, "BUY", candles, max_points=300)
             tp = entry + (entry - sl) * 2
             return AdvancedSignal(
                 strategy="liquidity",
@@ -81,14 +82,15 @@ class LiquidityStrategy:
                 stop_loss=sl,
                 take_profit=tp,
                 rr_ratio=2.0,
-                reasoning=f"Liquidity sweep at ${current_low:,.0f} with rejection (wick ratio {wick_ratio:.1f})",
+                reasoning=f"Liquidity sweep at ${current_low:,.0f} with rejection (wick ratio {wick_ratio:.1f}), SL capped at 300 pts",
                 timestamp=datetime.now(timezone.utc).isoformat(),
                 regime_suitability={"trending_bullish": 0.7, "ranging": 0.8, "crashing": 0.6},
             )
         elif liquidity_sweep_high and wick_ratio > 2.0:
             # Swept highs and rejected = bearish
             entry = current_price
-            sl = current_high + 50
+            # Use fixed SL calculation (capped at 300 points)
+            sl = self.calculate_fixed_sl(entry, "SELL", candles, max_points=300)
             tp = entry - (sl - entry) * 2
             return AdvancedSignal(
                 strategy="liquidity",
@@ -98,7 +100,7 @@ class LiquidityStrategy:
                 stop_loss=sl,
                 take_profit=tp,
                 rr_ratio=2.0,
-                reasoning=f"Liquidity sweep at ${current_high:,.0f} with rejection",
+                reasoning=f"Liquidity sweep at ${current_high:,.0f} with rejection, SL capped at 300 pts",
                 timestamp=datetime.now(timezone.utc).isoformat(),
                 regime_suitability={"trending_bearish": 0.7, "ranging": 0.8, "pumping": 0.6},
             )
@@ -154,23 +156,25 @@ class ThermodynamicStrategy:
         older_vol = returns.iloc[:-20].std()
         vol_change = recent_vol / max(0.001, older_vol)
         
-        # Signal logic
+        # Signal logic with FIXED SL capped at 300 points
         if entropy < 3.0 and deviation > 0.02:
             # Low entropy + high deviation = mean reversion likely
             entry = current_price
-            sl = current_price * 1.01 if current_price > mean_price else current_price * 0.99
+            direction = "SELL" if current_price > mean_price else "BUY"
+            # Use fixed SL calculation (capped at 300 points)
+            sl = self.calculate_fixed_sl(entry, direction, candles, max_points=300)
             tp = mean_price
             rr = abs(tp - entry) / abs(sl - entry)
-            
+
             return AdvancedSignal(
                 strategy="thermodynamic",
-                direction="SELL" if current_price > mean_price else "BUY",
+                direction=direction,
                 confidence=0.70,
                 entry_price=entry,
                 stop_loss=sl,
                 take_profit=tp,
                 rr_ratio=rr,
-                reasoning=f"High deviation ({deviation:.1%}) from equilibrium, low entropy ({entropy:.2f})",
+                reasoning=f"High deviation ({deviation:.1%}) from equilibrium, low entropy ({entropy:.2f}), SL capped at 300 pts",
                 timestamp=datetime.now(timezone.utc).isoformat(),
                 regime_suitability={"ranging": 0.9, "chop": 0.8},
             )
@@ -178,10 +182,10 @@ class ThermodynamicStrategy:
             # Phase transition to trending
             direction = "BUY" if returns.iloc[-5:].mean() > 0 else "SELL"
             entry = current_price
-            atr = close.iloc[-20:].std() * 2
-            sl = entry - atr if direction == "BUY" else entry + atr
-            tp = entry + atr * 2 if direction == "BUY" else entry - atr * 2
-            
+            # Use fixed SL calculation (capped at 300 points)
+            sl = self.calculate_fixed_sl(entry, direction, candles, max_points=300)
+            tp = entry + (entry - sl) * 2 if direction == "BUY" else entry - (sl - entry) * 2
+
             return AdvancedSignal(
                 strategy="thermodynamic",
                 direction=direction,
@@ -190,7 +194,7 @@ class ThermodynamicStrategy:
                 stop_loss=sl,
                 take_profit=tp,
                 rr_ratio=2.0,
-                reasoning=f"Phase transition detected (vol change {vol_change:.1f}x), high energy",
+                reasoning=f"Phase transition detected (vol change {vol_change:.1f}x), high energy, SL capped at 300 pts",
                 timestamp=datetime.now(timezone.utc).isoformat(),
                 regime_suitability={"trending_bullish": 0.8 if direction == "BUY" else 0.3,
                                    "trending_bearish": 0.8 if direction == "SELL" else 0.3},
@@ -271,14 +275,15 @@ class OrderBlockStrategy:
         ob_bullish = self._find_bullish_order_blocks(candles)
         ob_bearish = self._find_bearish_order_blocks(candles)
         
-        # Check if price is near order block
+        # Check if price is near order block - SL capped at 300 points
         if ob_bullish:
             nearest_ob = max(ob_bullish, key=lambda x: x['high'])  # Highest OB below price
             if current_price <= nearest_ob['high'] * 1.002 and current_price >= nearest_ob['low'] * 0.998:
                 entry = current_price
-                sl = nearest_ob['low'] - 50
+                # Use fixed SL calculation (capped at 300 points)
+                sl = self.calculate_fixed_sl(entry, "BUY", candles, max_points=300)
                 tp = entry + (entry - sl) * 2
-                
+
                 return AdvancedSignal(
                     strategy="order_block",
                     direction="BUY",
@@ -287,18 +292,19 @@ class OrderBlockStrategy:
                     stop_loss=sl,
                     take_profit=tp,
                     rr_ratio=2.0,
-                    reasoning=f"Price at bullish order block (${nearest_ob['low']:,.0f}-${nearest_ob['high']:,.0f})",
+                    reasoning=f"Price at bullish order block (${nearest_ob['low']:,.0f}-${nearest_ob['high']:,.0f}), SL capped at 300 pts",
                     timestamp=datetime.now(timezone.utc).isoformat(),
                     regime_suitability={"trending_bullish": 0.85, "ranging": 0.7},
                 )
-        
+
         if ob_bearish:
             nearest_ob = min(ob_bearish, key=lambda x: x['low'])  # Lowest OB above price
             if current_price >= nearest_ob['low'] * 0.998 and current_price <= nearest_ob['high'] * 1.002:
                 entry = current_price
-                sl = nearest_ob['high'] + 50
+                # Use fixed SL calculation (capped at 300 points)
+                sl = self.calculate_fixed_sl(entry, "SELL", candles, max_points=300)
                 tp = entry - (sl - entry) * 2
-                
+
                 return AdvancedSignal(
                     strategy="order_block",
                     direction="SELL",
@@ -307,7 +313,7 @@ class OrderBlockStrategy:
                     stop_loss=sl,
                     take_profit=tp,
                     rr_ratio=2.0,
-                    reasoning=f"Price at bearish order block (${nearest_ob['low']:,.0f}-${nearest_ob['high']:,.0f})",
+                    reasoning=f"Price at bearish order block (${nearest_ob['low']:,.0f}-${nearest_ob['high']:,.0f}), SL capped at 300 pts",
                     timestamp=datetime.now(timezone.utc).isoformat(),
                     regime_suitability={"trending_bearish": 0.85, "ranging": 0.7},
                 )
@@ -364,15 +370,16 @@ class FVGStrategy:
         # Detect FVGs
         fvgs = self._detect_fvgs(candles)
         
-        # Check if price is in FVG zone
+        # Check if price is in FVG zone - SL capped at 300 points
         for fvg in fvgs:
             if fvg['low'] <= current_price <= fvg['high']:
                 # Price is in FVG = potential reversal zone
                 direction = "SELL" if fvg['type'] == "bullish_fvg" else "BUY"
                 entry = current_price
-                sl = fvg['high'] + 100 if direction == "SELL" else fvg['low'] - 100
+                # Use fixed SL calculation (capped at 300 points)
+                sl = self.calculate_fixed_sl(entry, direction, candles, max_points=300)
                 tp = entry - (sl - entry) * 2 if direction == "SELL" else entry + (entry - sl) * 2
-                
+
                 return AdvancedSignal(
                     strategy="fvg",
                     direction=direction,
@@ -381,7 +388,7 @@ class FVGStrategy:
                     stop_loss=sl,
                     take_profit=tp,
                     rr_ratio=2.0,
-                    reasoning=f"Price in {'bullish' if fvg['type'] == 'bullish_fvg' else 'bearish'} FVG (${fvg['low']:,.0f}-${fvg['high']:,.0f})",
+                    reasoning=f"Price in {'bullish' if fvg['type'] == 'bullish_fvg' else 'bearish'} FVG (${fvg['low']:,.0f}-${fvg['high']:,.0f}), SL capped at 300 pts",
                     timestamp=datetime.now(timezone.utc).isoformat(),
                     regime_suitability={"ranging": 0.8, "trending_moderate_bull": 0.6, "trending_moderate_bear": 0.6},
                 )
