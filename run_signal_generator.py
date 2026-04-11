@@ -50,13 +50,17 @@ class SignalGenerator:
     """
     
     def __init__(self, signal_file: str = None):
+        # Use MT5 Common Files folder for EA-Python communication
+        # MT5 Common Files is at: C:\Users\<user>\AppData\Roaming\MetaQuotes\Terminal\Common\Files\
+        mt5_common_path = Path.home() / "AppData" / "Roaming" / "MetaQuotes" / "Terminal" / "Common" / "Files" / "quantum_signals"
+        mt5_common_path.mkdir(parents=True, exist_ok=True)
+        
         if signal_file is None:
-            signal_dir = project_root / "data" / "signals"
-            signal_dir.mkdir(parents=True, exist_ok=True)
-            signal_file = str(signal_dir / "trade_signal.csv")
+            signal_file = str(mt5_common_path / "trade_signal.csv")
         
         self.signal_file = signal_file
-        self.handshake_file = signal_file.replace("trade_signal.csv", "connection.txt")
+        self.handshake_file = str(mt5_common_path / "connection.txt")
+        self.mt5_common_path = str(mt5_common_path)
         self.last_signal_time = 0
         self.signal_interval = 300  # 5 minutes (matches M5 timeframe)
         self.running = False
@@ -69,7 +73,9 @@ class SignalGenerator:
         logger.info("="*80)
         logger.info("📡 SIGNAL GENERATOR INITIALIZING")
         logger.info("="*80)
-        logger.info(f"   Signal file: {signal_file}")
+        logger.info(f"   Signal file: {self.signal_file}")
+        logger.info(f"   Handshake file: {self.handshake_file}")
+        logger.info(f"   MT5 Common: {self.mt5_common_path}")
         
         # Initialize all systems
         self._initialize_systems()

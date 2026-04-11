@@ -33,9 +33,9 @@ input int      InpTrailingStart = 200;
 input int      InpTrailingDistance = 150;      
 
 input group "=== CONNECTION SETTINGS ==="
-input string   InpSignalFile = "D:\\forex-project2k26\\data\\signals\\trade_signal.csv";
-input string   InpHandshakeFile = "D:\\forex-project2k26\\data\\signals\\connection.txt";
-input string   InpLogToFile = "D:\\forex-project2k26\\data\\signals\\ea_log.txt";
+input string   InpSignalFile = "quantum_signals\\trade_signal.csv";
+input string   InpHandshakeFile = "quantum_signals\\connection.txt";
+input string   InpLogToFile = "quantum_signals\\ea_log.txt";
 input bool     InpAutoTrade = false;           
 input int      InpSignalCheckInterval = 300;   // 5 minutes (matches M5 timeframe)
 
@@ -182,7 +182,9 @@ bool CheckSignalFileAccess() {
 //| Write handshake file for Python                                   |
 //+------------------------------------------------------------------+
 void WriteHandshakeFile() {
-   int handle = FileOpen(InpHandshakeFile, FILE_WRITE|FILE_TXT|FILE_ANSI);
+   // Use FILE_COMMON flag to write to terminal's common files folder
+   // Python can access this at: C:\Users\<user>\AppData\Roaming\MetaQuotes\Terminal\Common\Files\
+   int handle = FileOpen(InpHandshakeFile, FILE_WRITE|FILE_TXT|FILE_ANSI|FILE_COMMON);
    if(handle != INVALID_HANDLE) {
       FileWriteString(handle, "EA_CONNECTED=true\n");
       FileWriteString(handle, "EA_MAGIC=" + IntegerToString(magicNumber) + "\n");
@@ -193,9 +195,12 @@ void WriteHandshakeFile() {
       FileWriteString(handle, "STATUS=READY\n");
       FileClose(handle);
       
-      Print("✅ Handshake file written: ", InpHandshakeFile);
+      Print("✅ Handshake file written to Common Files");
+      Print("   Path: Terminal\\Common\\Files\\", InpHandshakeFile);
    } else {
-      Print("⚠️ Could not write handshake file");
+      int err = GetLastError();
+      Print("⚠️ Could not write handshake file. Error: ", err);
+      Print("   Check if FILE_COMMON access is enabled");
    }
 }
 
