@@ -404,8 +404,8 @@ void ManagePositions() {
       double openPrice = PositionGetDouble(POSITION_PRICE_OPEN);
       
       double profit = PositionGetDouble(POSITION_PROFIT);
-      double commission = PositionGetDouble(POSITION_COMMISSION) + PositionGetDouble(POSITION_SWAP);
-      double netProfit = profit + commission;
+      double swap = PositionGetDouble(POSITION_SWAP);
+      double netProfit = profit + swap;  // Commission already included in profit
       
       // Update PnL tracking
       totalPnL += netProfit;
@@ -582,7 +582,6 @@ void OnTradeTransaction(const MqlTradeTransaction &trans,
          Print("   Type: ", (trans.deal_type == DEAL_TYPE_BUY) ? "BUY" : "SELL");
          Print("   Volume: ", DoubleToString(trans.volume, 2));
          Print("   Price: ", DoubleToString(trans.price, 2));
-         Print("   Profit: $", DoubleToString(trans.profit, 2));
       }
    }
 }
