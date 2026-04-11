@@ -13,9 +13,6 @@ Systems Integrated:
 """
 
 import sys
-import io
-sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding='utf-8')
-
 from pathlib import Path
 import pandas as pd
 import numpy as np
@@ -30,8 +27,6 @@ from src.monitoring.neural_trade_auditor import NeuralTradeAuditor
 from src.monitoring.trade_pattern_analyzer import TradePatternAnalyzer
 from src.monitoring.veto_orchestrator import VetoOrchestrator
 from src.monitoring.advanced_veto_system import AdvancedVetoSystem
-from src.monitoring.advanced_veto_v2 import AdvancedVetoV2
-from src.strategies.session_profiles import get_session_profile, apply_session_veto, detect_session
 from src.execution.smart_order_manager import SmartOrderManager
 
 
