@@ -578,14 +578,22 @@ class SmartOrderManager:
                     self._trail_sl(state, new_sl_distance, profile.min_profit_lock)
     
     def _trail_sl(self, state: PositionState, distance_points: float, min_profit: float):
-        """Trail SL with specified distance"""
+        """
+        Trail SL with specified distance
+        
+        IMPORTANT: SL can ONLY move in favor of the trade (tighten).
+        SL NEVER widens or moves against the position.
+        Once a position is opened, the initial SL is SACRED and can only improve.
+        """
         if state.direction == 'BUY':
             new_sl = state.current_price - (distance_points * 0.01)
+            # SL can only move UP (closer to profit), never DOWN (wider)
             state.dynamic_sl.current_sl = max(new_sl, state.dynamic_sl.current_sl)
         else:
             new_sl = state.current_price + (distance_points * 0.01)
+            # SL can only move DOWN (closer to profit), never UP (wider)
             state.dynamic_sl.current_sl = min(new_sl, state.dynamic_sl.current_sl)
-        
+
         state.dynamic_sl.profit_locked = abs(state.current_price - state.dynamic_sl.current_sl) * state.volume
     
     def _check_profit_targets(self, state: PositionState) -> List[ProfitTarget]:
