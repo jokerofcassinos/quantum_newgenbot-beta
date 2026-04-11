@@ -45,6 +45,7 @@ class OrchestrationResult:
     signals: List[AdvancedSignal]
     top_signal: Optional[AdvancedSignal]
     reasoning: str
+    individual_votes: Dict[str, Dict[str, Any]] = None  # Individual strategy votes
 
 
 class StrategyOrchestrator:
@@ -144,10 +145,11 @@ class StrategyOrchestrator:
             weights = {k: v / total_weight for k, v in weights.items()}
         
         # Each strategy votes
+        individual_votes = {}
         for name, strategy in self.strategies.items():
             try:
                 signal = strategy.analyze(candles, current_price)
-                
+
                 if signal:
                     weight = weights.get(name, 0.2)
                     vote = StrategyVote(
@@ -160,6 +162,13 @@ class StrategyOrchestrator:
                     )
                     votes.append(vote)
                     signals.append(signal)
+                    individual_votes[name] = {
+                        'direction': signal.direction,
+                        'confidence': signal.confidence,
+                        'weight': weight,
+                        'weighted_vote': signal.confidence * weight,
+                        'reason': signal.reasoning if hasattr(signal, 'reasoning') else ''
+                    }
                 else:
                     # Strategy votes NEUTRAL
                     votes.append(StrategyVote(
@@ -169,6 +178,13 @@ class StrategyOrchestrator:
                         weight=weights.get(name, 0.2),
                         weighted_vote=0.0,
                     ))
+                    individual_votes[name] = {
+                        'direction': 'NEUTRAL',
+                        'confidence': 0.5,
+                        'weight': weights.get(name, 0.2),
+                        'weighted_vote': 0.0,
+                        'reason': 'No signal'
+                    }
             except Exception as e:
                 logger.warning(f"Strategy {name} error: {e}")
                 votes.append(StrategyVote(
@@ -178,6 +194,13 @@ class StrategyOrchestrator:
                     weight=0.0,
                     weighted_vote=0.0,
                 ))
+                individual_votes[name] = {
+                    'direction': 'NEUTRAL',
+                    'confidence': 0.0,
+                    'weight': 0.0,
+                    'weighted_vote': 0.0,
+                    'reason': f'Error: {str(e)}'
+                }
         
         # Calculate consensus
         total_buy = sum(v.weighted_vote for v in votes if v.direction == "BUY")
@@ -227,6 +250,7 @@ class StrategyOrchestrator:
             signals=signals,
             top_signal=top_signal,
             reasoning=reasoning,
+            individual_votes=individual_votes,
         )
         
         logger.info(f"🎭 Orchestration Result: {final_direction}")

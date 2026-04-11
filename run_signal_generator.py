@@ -269,168 +269,177 @@ MT5_COMMON_FILE={mt5_common}
     
     def _create_signal(self, price, volatility, quantum, orchestration, 
                       coherence, profile, mutations) -> dict:
-        """Create final trading signal from all analyses"""
+        """Create final trading signal with CORRECT voting structure"""
         
-        # Collect ALL individual votes with details
+        # ============================================================
+        # PART 1: Calculate BASELINE threshold adjustments
+        # Monte Carlo, Quantum, and Coherence ADJUST threshold - they DON'T vote
+        # ============================================================
+        
+        base_threshold = 0.60  # Default threshold
+        threshold_adjustments = []
+        
+        # 1. Monte Carlo adjusts threshold
+        if quantum.get('monte_carlo'):
+            mc_prob = quantum['monte_carlo'].get('probability_profit', 0.5)
+            mc_mean = quantum['monte_carlo']['mean_price']
+            
+            if mc_prob > 0.60:
+                adjustment = -0.10  # Strong MC signal → easier to trade
+                threshold_adjustments.append({
+                    'system': 'Monte Carlo',
+                    'value': f"Prob profit {mc_prob:.1%}",
+                    'adjustment': adjustment,
+                    'reason': 'High probability of profit'
+                })
+            elif mc_prob < 0.40:
+                adjustment = +0.15  # Weak MC signal → harder to trade
+                threshold_adjustments.append({
+                    'system': 'Monte Carlo',
+                    'value': f"Prob profit {mc_prob:.1%}",
+                    'adjustment': adjustment,
+                    'reason': 'Low probability of profit'
+                })
+            else:
+                threshold_adjustments.append({
+                    'system': 'Monte Carlo',
+                    'value': f"Prob profit {mc_prob:.1%}",
+                    'adjustment': 0.0,
+                    'reason': 'Neutral zone'
+                })
+        
+        # 2. Quantum Prediction adjusts threshold
+        if quantum.get('quantum_prediction'):
+            q_pred = quantum['quantum_prediction']
+            mc_mean = quantum['monte_carlo']['mean_price']
+            price_diff_pct = abs(q_pred['predicted_price'] - mc_mean) / mc_mean
+            
+            if price_diff_pct > 0.02:  # > 2% difference
+                adjustment = -0.05  # Strong quantum signal
+                threshold_adjustments.append({
+                    'system': 'Quantum Prediction',
+                    'value': f"Predicted ${q_pred['predicted_price']:,.2f}",
+                    'adjustment': adjustment,
+                    'reason': f'Strong prediction ({price_diff_pct:.1%} from MC mean)'
+                })
+            elif price_diff_pct < 0.005:  # < 0.5% difference
+                adjustment = +0.10  # Weak/uncertain quantum signal
+                threshold_adjustments.append({
+                    'system': 'Quantum Prediction',
+                    'value': f"Predicted ${q_pred['predicted_price']:,.2f}",
+                    'adjustment': adjustment,
+                    'reason': 'Weak prediction (close to MC mean)'
+                })
+            else:
+                threshold_adjustments.append({
+                    'system': 'Quantum Prediction',
+                    'value': f"Predicted ${q_pred['predicted_price']:,.2f}",
+                    'adjustment': 0.0,
+                    'reason': 'Moderate prediction'
+                })
+        
+        # 3. Coherence Engine adjusts threshold
+        if coherence:
+            if coherence.overall_coherence > 0.7:
+                adjustment = -0.05  # High coherence → easier to trade
+                threshold_adjustments.append({
+                    'system': 'Coherence Engine',
+                    'value': f"Coherence {coherence.overall_coherence:.2f}",
+                    'adjustment': adjustment,
+                    'reason': 'High market coherence'
+                })
+            elif coherence.overall_coherence < 0.4:
+                adjustment = +0.10  # Low coherence → harder to trade
+                threshold_adjustments.append({
+                    'system': 'Coherence Engine',
+                    'value': f"Coherence {coherence.overall_coherence:.2f}",
+                    'adjustment': adjustment,
+                    'reason': 'Low market coherence'
+                })
+            else:
+                threshold_adjustments.append({
+                    'system': 'Coherence Engine',
+                    'value': f"Coherence {coherence.overall_coherence:.2f}",
+                    'adjustment': 0.0,
+                    'reason': 'Moderate coherence'
+                })
+        
+        # Calculate final threshold
+        total_adjustment = sum(ta['adjustment'] for ta in threshold_adjustments)
+        final_threshold = base_threshold + total_adjustment
+        final_threshold = max(0.40, min(0.80, final_threshold))  # Clamp between 0.40-0.80
+        
+        # ============================================================
+        # PART 2: ACTUAL VOTERS - 5 Advanced Strategies
+        # ============================================================
+        
         votes = {
             'BUY': [],
             'SELL': [],
             'NEUTRAL': []
         }
         
-        # 1. Quantum Monte Carlo vote
-        if quantum.get('monte_carlo'):
-            mc_prob = quantum['monte_carlo'].get('probability_profit', 0.5)
-            mc_mean = quantum['monte_carlo']['mean_price']
-            if mc_prob > 0.55:
-                votes['BUY'].append({
-                    'strategy': 'Monte Carlo',
-                    'weight': mc_prob,
-                    'reason': f"Prob profit {mc_prob:.1%} > 55%"
-                })
-            elif mc_prob < 0.45:
-                votes['SELL'].append({
-                    'strategy': 'Monte Carlo',
-                    'weight': 1 - mc_prob,
-                    'reason': f"Prob profit {mc_prob:.1%} < 45%"
-                })
-            else:
-                votes['NEUTRAL'].append({
-                    'strategy': 'Monte Carlo',
-                    'weight': 0.5,
-                    'reason': f"Prob profit {mc_prob:.1%} in neutral zone"
-                })
-        
-        # 2. Quantum Prediction vote
-        if quantum.get('quantum_prediction'):
-            q_pred = quantum['quantum_prediction']
-            mc_mean = quantum['monte_carlo']['mean_price']
-            if q_pred['predicted_price'] > mc_mean * 1.01:
-                votes['BUY'].append({
-                    'strategy': 'Quantum Prediction',
-                    'weight': q_pred['quantum_advantage'],
-                    'reason': f"Predicted ${q_pred['predicted_price']:,.2f} > MC mean ${mc_mean:,.2f}"
-                })
-            elif q_pred['predicted_price'] < mc_mean * 0.99:
-                votes['SELL'].append({
-                    'strategy': 'Quantum Prediction',
-                    'weight': q_pred['quantum_advantage'],
-                    'reason': f"Predicted ${q_pred['predicted_price']:,.2f} < MC mean ${mc_mean:,.2f}"
-                })
-            else:
-                votes['NEUTRAL'].append({
-                    'strategy': 'Quantum Prediction',
-                    'weight': 0.5,
-                    'reason': f"Predicted price close to MC mean"
-                })
-        
-        # 3. Neural Orchestration vote (includes all 5 strategies)
-        if orchestration:
-            # Get individual strategy votes if available
-            if hasattr(orchestration, 'strategy_votes'):
-                for strat_name, strat_vote in orchestration.strategy_votes.items():
-                    if strat_vote == 'BUY':
-                        votes['BUY'].append({
-                            'strategy': f'Neural: {strat_name}',
-                            'weight': 0.2,
-                            'reason': 'Strategy voted BUY'
-                        })
-                    elif strat_vote == 'SELL':
-                        votes['SELL'].append({
-                            'strategy': f'Neural: {strat_name}',
-                            'weight': 0.2,
-                            'reason': 'Strategy voted SELL'
-                        })
-                    else:
-                        votes['NEUTRAL'].append({
-                            'strategy': f'Neural: {strat_name}',
-                            'weight': 0.1,
-                            'reason': 'Strategy voted NEUTRAL'
-                        })
-            
-            # Overall orchestration vote
-            if orchestration.final_direction == 'BUY':
-                votes['BUY'].append({
-                    'strategy': 'Neural Orchestrator',
-                    'weight': abs(orchestration.weighted_consensus),
-                    'reason': f"Consensus {orchestration.weighted_consensus:+.2f}"
-                })
-            elif orchestration.final_direction == 'SELL':
-                votes['SELL'].append({
-                    'strategy': 'Neural Orchestrator',
-                    'weight': abs(orchestration.weighted_consensus),
-                    'reason': f"Consensus {orchestration.weighted_consensus:+.2f}"
-                })
-            else:
-                votes['NEUTRAL'].append({
-                    'strategy': 'Neural Orchestrator',
-                    'weight': 0.5,
-                    'reason': f"Neutral consensus ({orchestration.weighted_consensus:+.2f})"
-                })
-        
-        # 4. Coherence Engine vote
-        if coherence:
-            if coherence.should_trade:
-                if coherence.recommended_action in ['buy', 'strong_buy']:
-                    votes['BUY'].append({
-                        'strategy': 'Coherence Engine',
-                        'weight': coherence.overall_coherence,
-                        'reason': f"Coherence {coherence.overall_coherence:.2f}, action: {coherence.recommended_action}"
-                    })
-                elif coherence.recommended_action in ['sell', 'strong_sell']:
-                    votes['SELL'].append({
-                        'strategy': 'Coherence Engine',
-                        'weight': coherence.overall_coherence,
-                        'reason': f"Coherence {coherence.overall_coherence:.2f}, action: {coherence.recommended_action}"
-                    })
+        # Get individual strategy votes from orchestrator
+        if orchestration and hasattr(orchestration, 'individual_votes') and orchestration.individual_votes:
+            for strat_name, vote_data in orchestration.individual_votes.items():
+                direction = vote_data['direction']
+                confidence = vote_data['confidence']
+                weight = vote_data['weight']
+                reason = vote_data.get('reason', '')
+                
+                vote_entry = {
+                    'strategy': strat_name.replace('_', ' ').title(),
+                    'weight': weight,
+                    'confidence': confidence,
+                    'weighted_vote': confidence * weight,
+                    'reason': reason
+                }
+                
+                if direction == 'BUY':
+                    votes['BUY'].append(vote_entry)
+                elif direction == 'SELL':
+                    votes['SELL'].append(vote_entry)
                 else:
-                    votes['NEUTRAL'].append({
-                        'strategy': 'Coherence Engine',
-                        'weight': coherence.overall_coherence,
-                        'reason': f"Neutral action ({coherence.recommended_action})"
-                    })
-            else:
-                votes['NEUTRAL'].append({
-                    'strategy': 'Coherence Engine',
-                    'weight': 1 - coherence.overall_coherence,
-                    'reason': f"No trade (coherence {coherence.overall_coherence:.2f})"
-                })
+                    votes['NEUTRAL'].append(vote_entry)
+        else:
+            logger.warning("⚠️ No individual votes from orchestrator")
+            return None
         
-        # Log detailed voting
+        # ============================================================
+        # PART 3: Log detailed voting
+        # ============================================================
+        
         logger.info(f"\n{'='*60}")
         logger.info(f"🗳️ STRATEGY VOTING DETAILS")
         logger.info(f"{'='*60}")
         
         logger.info(f"\n🟢 BUY VOTES ({len(votes['BUY'])}):")
         for vote in votes['BUY']:
-            logger.info(f"   ✅ {vote['strategy']}: {vote['reason']} (weight: {vote['weight']:.2f})")
+            logger.info(f"   ✅ {vote['strategy']}: {vote['reason']} (conf: {vote['confidence']:.2f}, weight: {vote['weight']:.2f})")
         
         logger.info(f"\n🔴 SELL VOTES ({len(votes['SELL'])}):")
         for vote in votes['SELL']:
-            logger.info(f"   ❌ {vote['strategy']}: {vote['reason']} (weight: {vote['weight']:.2f})")
+            logger.info(f"   ❌ {vote['strategy']}: {vote['reason']} (conf: {vote['confidence']:.2f}, weight: {vote['weight']:.2f})")
         
         logger.info(f"\n⚪ NEUTRAL VOTES ({len(votes['NEUTRAL'])}):")
         for vote in votes['NEUTRAL']:
-            logger.info(f"   ⏸️ {vote['strategy']}: {vote['reason']} (weight: {vote['weight']:.2f})")
+            logger.info(f"   ⏸️ {vote['strategy']}: {vote['reason']} (conf: {vote['confidence']:.2f}, weight: {vote['weight']:.2f})")
         
-        # Check if we have enough votes to generate signal
-        total_votes = len(votes['BUY']) + len(votes['SELL']) + len(votes['NEUTRAL'])
-        if total_votes == 0:
-            logger.info("\n⏸️ No votes cast - no signal")
-            return None
+        # ============================================================
+        # PART 4: Calculate final result
+        # ============================================================
         
-        # Calculate weighted totals
-        buy_weight = sum(v['weight'] for v in votes['BUY'])
-        sell_weight = sum(v['weight'] for v in votes['SELL'])
-        neutral_weight = sum(v['weight'] for v in votes['NEUTRAL'])
+        buy_weight = sum(v['weighted_vote'] for v in votes['BUY'])
+        sell_weight = sum(v['weighted_vote'] for v in votes['SELL'])
+        neutral_weight = sum(v['weighted_vote'] for v in votes['NEUTRAL'])
         total_weight = buy_weight + sell_weight + neutral_weight
         
         logger.info(f"\n📊 VOTE SUMMARY:")
-        logger.info(f"   BUY:    {len(votes['BUY'])} votes ({buy_weight:.2f} weight)")
-        logger.info(f"   SELL:   {len(votes['SELL'])} votes ({sell_weight:.2f} weight)")
-        logger.info(f"   NEUTRAL: {len(votes['NEUTRAL'])} votes ({neutral_weight:.2f} weight)")
+        logger.info(f"   BUY:    {len(votes['BUY'])} strategies ({buy_weight:.2f} weighted)")
+        logger.info(f"   SELL:   {len(votes['SELL'])} strategies ({sell_weight:.2f} weighted)")
+        logger.info(f"   NEUTRAL: {len(votes['NEUTRAL'])} strategies ({neutral_weight:.2f} weighted)")
         
-        # Determine final direction
+        # Determine direction
         if buy_weight > sell_weight and buy_weight > neutral_weight:
             direction = 'BUY'
             confidence = buy_weight / total_weight if total_weight > 0 else 0
@@ -441,23 +450,34 @@ MT5_COMMON_FILE={mt5_common}
             logger.info(f"\n⏸️ No clear majority - standing aside")
             return None
         
-        # Minimum confidence threshold
-        if confidence < 0.35:
-            logger.info(f"\n⏸️ Confidence too low ({confidence:.2f} < 0.35)")
+        # Check against threshold
+        logger.info(f"\n📊 THRESHOLD CHECK:")
+        logger.info(f"   Base Threshold: {base_threshold:.2f}")
+        logger.info(f"   Adjustments: {total_adjustment:+.2f}")
+        logger.info(f"   Final Threshold: {final_threshold:.2f}")
+        logger.info(f"   Confidence: {confidence:.2f}")
+        
+        if confidence < final_threshold:
+            logger.info(f"   ❌ Confidence {confidence:.2f} < Threshold {final_threshold:.2f} - NO SIGNAL")
             return None
+        
+        logger.info(f"   ✅ Confidence {confidence:.2f} >= Threshold {final_threshold:.2f} - SIGNAL!")
         
         # Calculate SL/TP
         if direction == 'BUY':
-            sl = price - 300  # 300 points SL
-            tp = price + 600  # 600 points TP (1:2 R:R)
+            sl = price - 300
+            tp = price + 600
         else:
             sl = price + 300
             tp = price - 600
         
-        # Create detailed voting summary for CSV
+        # Create strategy lists for CSV
         buy_strategies = ", ".join([v['strategy'] for v in votes['BUY']]) if votes['BUY'] else "None"
         sell_strategies = ", ".join([v['strategy'] for v in votes['SELL']]) if votes['SELL'] else "None"
         neutral_strategies = ", ".join([v['strategy'] for v in votes['NEUTRAL']]) if votes['NEUTRAL'] else "None"
+        
+        # Create threshold adjustment summary
+        threshold_summary = "; ".join([f"{t['system']}: {t['adjustment']:+.2f} ({t['reason']})" for t in threshold_adjustments])
         
         signal = {
             'timestamp': datetime.now(timezone.utc).strftime('%Y-%m-%d %H:%M:%S'),
@@ -468,7 +488,7 @@ MT5_COMMON_FILE={mt5_common}
             'take_profit': tp,
             'profile': profile.name.value if profile else 'unknown',
             'regime': self.neural_profiler.current_regime,
-            'signal_count': total_votes,
+            'signal_count': len(votes['BUY']) + len(votes['SELL']) + len(votes['NEUTRAL']),
             'volatility': volatility,
             'buy_votes': len(votes['BUY']),
             'sell_votes': len(votes['SELL']),
@@ -478,6 +498,8 @@ MT5_COMMON_FILE={mt5_common}
             'buy_strategies': buy_strategies,
             'sell_strategies': sell_strategies,
             'neutral_strategies': neutral_strategies,
+            'threshold': final_threshold,
+            'threshold_adjustments': threshold_summary,
         }
         
         return signal
@@ -561,9 +583,10 @@ MT5_COMMON_FILE={mt5_common}
 🧠 Profile: {signal['profile']}
 📊 Regime: {signal['regime']}
 🔬 Total Signals: {signal['signal_count']}
+📊 Threshold: {signal.get('threshold', 0.60):.2f}
 
 🗳️ <b>VOTING BREAKDOWN:</b>
-🟢 BUY: {signal['buy_votes']} votes ({signal['buy_weight']:.2f} weight)
+🟢 BUY: {signal['buy_votes']} strategies ({signal['buy_weight']:.2f} weighted)
 {signal['buy_strategies']}
 
 🔴 SELL: {signal['sell_votes']} votes ({signal['sell_weight']:.2f} weight)
