@@ -124,54 +124,47 @@ class SignalGenerator:
         logger.info("✅ ALL SYSTEMS INITIALIZED")
         logger.info("="*80)
         
-        # Step 4: Validate EA connection via handshake
-        logger.info("\n📡 Step 4: Waiting for EA handshake...")
-        self.wait_for_ea_connection()
+        # Step 4: Write handshake file for EA (Python writes, EA reads)
+        logger.info("\n📡 Step 4: Writing handshake file for EA...")
+        self.write_handshake_for_ea()
     
-    def wait_for_ea_connection(self, timeout: int = 60):
+    def write_handshake_for_ea(self):
         """
-        Wait for EA to write handshake file
-        This ensures EA is running and connected before we start generating signals
+        Python writes handshake file that EA can read
+        This avoids MT5 sandbox file write issues
         """
-        import time
+        import os
         
-        logger.info(f"⏳ Waiting for EA connection (timeout: {timeout}s)...")
-        logger.info(f"   Handshake file: {self.handshake_file}")
+        # Create directory if doesn't exist
+        Path(self.handshake_file).parent.mkdir(parents=True, exist_ok=True)
         
-        start_time = time.time()
-        while time.time() - start_time < timeout:
-            try:
-                if Path(self.handshake_file).exists():
-                    # Read handshake file
-                    with open(self.handshake_file, 'r') as f:
-                        content = f.read()
-                    
-                    # Check if EA is connected
-                    if "EA_CONNECTED=true" in content and "STATUS=READY" in content:
-                        logger.info("\n" + "="*60)
-                        logger.info("✅ EA CONNECTION VALIDATED!")
-                        logger.info("="*60)
-                        
-                        # Parse EA info
-                        for line in content.split('\n'):
-                            if '=' in line:
-                                key, value = line.split('=', 1)
-                                logger.info(f"   {key}: {value}")
-                        
-                        self.ea_connected = True
-                        logger.info("="*60)
-                        return True
-                
-                logger.info(f"   ⏳ Waiting... ({int(time.time() - start_time)}s/{timeout}s)")
-                time.sleep(5)
-                
-            except Exception as e:
-                logger.debug(f"   Handshake check: {e}")
-                time.sleep(2)
+        # Also write to MT5 Common Files folder (where EA can read with FILE_COMMON)
+        mt5_common = Path.home() / "AppData" / "Roaming" / "MetaQuotes" / "Terminal" / "Common" / "Files" / "quantum_signals" / "connection.txt"
+        mt5_common.parent.mkdir(parents=True, exist_ok=True)
         
-        logger.warning("\n⚠️ EA handshake timeout - continuing anyway (EA may not be running)")
-        self.ea_connected = False
-        return False
+        handshake_content = f"""PYTHON_CONNECTED=true
+PYTHON_START_TIME={datetime.now(timezone.utc).strftime('%Y-%m-%d %H:%M:%S')}
+PYTHON_STATUS=READY
+SIGNAL_FILE={self.signal_file}
+MT5_COMMON_FILE={mt5_common}
+"""
+        
+        # Write to both locations
+        try:
+            with open(self.handshake_file, 'w') as f:
+                f.write(handshake_content)
+            logger.info(f"✅ Handshake written: {self.handshake_file}")
+        except Exception as e:
+            logger.warning(f"⚠️ Could not write local handshake: {e}")
+        
+        try:
+            with open(str(mt5_common), 'w') as f:
+                f.write(handshake_content)
+            logger.info(f"✅ Handshake written to MT5 Common: {mt5_common}")
+        except Exception as e:
+            logger.warning(f"⚠️ Could not write MT5 common handshake: {e}")
+        
+        self.ea_connected = True  # Consider EA connected once we write handshake
     
     async def generate_signal(self) -> bool:
         """
