@@ -272,65 +272,193 @@ class SignalGenerator:
                       coherence, profile, mutations) -> dict:
         """Create final trading signal from all analyses"""
         
-        # Collect all directional signals
-        signals = []
+        # Collect ALL individual votes with details
+        votes = {
+            'BUY': [],
+            'SELL': [],
+            'NEUTRAL': []
+        }
         
-        # 1. Quantum signal
+        # 1. Quantum Monte Carlo vote
+        if quantum.get('monte_carlo'):
+            mc_prob = quantum['monte_carlo'].get('probability_profit', 0.5)
+            mc_mean = quantum['monte_carlo']['mean_price']
+            if mc_prob > 0.55:
+                votes['BUY'].append({
+                    'strategy': 'Monte Carlo',
+                    'weight': mc_prob,
+                    'reason': f"Prob profit {mc_prob:.1%} > 55%"
+                })
+            elif mc_prob < 0.45:
+                votes['SELL'].append({
+                    'strategy': 'Monte Carlo',
+                    'weight': 1 - mc_prob,
+                    'reason': f"Prob profit {mc_prob:.1%} < 45%"
+                })
+            else:
+                votes['NEUTRAL'].append({
+                    'strategy': 'Monte Carlo',
+                    'weight': 0.5,
+                    'reason': f"Prob profit {mc_prob:.1%} in neutral zone"
+                })
+        
+        # 2. Quantum Prediction vote
         if quantum.get('quantum_prediction'):
             q_pred = quantum['quantum_prediction']
             mc_mean = quantum['monte_carlo']['mean_price']
-            if q_pred['predicted_price'] > mc_mean:
-                signals.append(('BUY', q_pred['quantum_advantage']))
+            if q_pred['predicted_price'] > mc_mean * 1.01:
+                votes['BUY'].append({
+                    'strategy': 'Quantum Prediction',
+                    'weight': q_pred['quantum_advantage'],
+                    'reason': f"Predicted ${q_pred['predicted_price']:,.2f} > MC mean ${mc_mean:,.2f}"
+                })
+            elif q_pred['predicted_price'] < mc_mean * 0.99:
+                votes['SELL'].append({
+                    'strategy': 'Quantum Prediction',
+                    'weight': q_pred['quantum_advantage'],
+                    'reason': f"Predicted ${q_pred['predicted_price']:,.2f} < MC mean ${mc_mean:,.2f}"
+                })
             else:
-                signals.append(('SELL', q_pred['quantum_advantage']))
+                votes['NEUTRAL'].append({
+                    'strategy': 'Quantum Prediction',
+                    'weight': 0.5,
+                    'reason': f"Predicted price close to MC mean"
+                })
         
-        # 2. Neural orchestration
-        if orchestration and orchestration.final_direction in ['BUY', 'SELL']:
-            signals.append((
-                orchestration.final_direction,
-                abs(orchestration.weighted_consensus)
-            ))
+        # 3. Neural Orchestration vote (includes all 5 strategies)
+        if orchestration:
+            # Get individual strategy votes if available
+            if hasattr(orchestration, 'strategy_votes'):
+                for strat_name, strat_vote in orchestration.strategy_votes.items():
+                    if strat_vote == 'BUY':
+                        votes['BUY'].append({
+                            'strategy': f'Neural: {strat_name}',
+                            'weight': 0.2,
+                            'reason': 'Strategy voted BUY'
+                        })
+                    elif strat_vote == 'SELL':
+                        votes['SELL'].append({
+                            'strategy': f'Neural: {strat_name}',
+                            'weight': 0.2,
+                            'reason': 'Strategy voted SELL'
+                        })
+                    else:
+                        votes['NEUTRAL'].append({
+                            'strategy': f'Neural: {strat_name}',
+                            'weight': 0.1,
+                            'reason': 'Strategy voted NEUTRAL'
+                        })
+            
+            # Overall orchestration vote
+            if orchestration.final_direction == 'BUY':
+                votes['BUY'].append({
+                    'strategy': 'Neural Orchestrator',
+                    'weight': abs(orchestration.weighted_consensus),
+                    'reason': f"Consensus {orchestration.weighted_consensus:+.2f}"
+                })
+            elif orchestration.final_direction == 'SELL':
+                votes['SELL'].append({
+                    'strategy': 'Neural Orchestrator',
+                    'weight': abs(orchestration.weighted_consensus),
+                    'reason': f"Consensus {orchestration.weighted_consensus:+.2f}"
+                })
+            else:
+                votes['NEUTRAL'].append({
+                    'strategy': 'Neural Orchestrator',
+                    'weight': 0.5,
+                    'reason': f"Neutral consensus ({orchestration.weighted_consensus:+.2f})"
+                })
         
-        # 3. Coherence
-        if coherence and coherence.should_trade:
-            if coherence.recommended_action in ['buy', 'strong_buy']:
-                signals.append(('BUY', coherence.overall_coherence))
-            elif coherence.recommended_action in ['sell', 'strong_sell']:
-                signals.append(('SELL', coherence.overall_coherence))
+        # 4. Coherence Engine vote
+        if coherence:
+            if coherence.should_trade:
+                if coherence.recommended_action in ['buy', 'strong_buy']:
+                    votes['BUY'].append({
+                        'strategy': 'Coherence Engine',
+                        'weight': coherence.overall_coherence,
+                        'reason': f"Coherence {coherence.overall_coherence:.2f}, action: {coherence.recommended_action}"
+                    })
+                elif coherence.recommended_action in ['sell', 'strong_sell']:
+                    votes['SELL'].append({
+                        'strategy': 'Coherence Engine',
+                        'weight': coherence.overall_coherence,
+                        'reason': f"Coherence {coherence.overall_coherence:.2f}, action: {coherence.recommended_action}"
+                    })
+                else:
+                    votes['NEUTRAL'].append({
+                        'strategy': 'Coherence Engine',
+                        'weight': coherence.overall_coherence,
+                        'reason': f"Neutral action ({coherence.recommended_action})"
+                    })
+            else:
+                votes['NEUTRAL'].append({
+                    'strategy': 'Coherence Engine',
+                    'weight': 1 - coherence.overall_coherence,
+                    'reason': f"No trade (coherence {coherence.overall_coherence:.2f})"
+                })
         
-        if len(signals) < 1:
+        # Log detailed voting
+        logger.info(f"\n{'='*60}")
+        logger.info(f"🗳️ STRATEGY VOTING DETAILS")
+        logger.info(f"{'='*60}")
+        
+        logger.info(f"\n🟢 BUY VOTES ({len(votes['BUY'])}):")
+        for vote in votes['BUY']:
+            logger.info(f"   ✅ {vote['strategy']}: {vote['reason']} (weight: {vote['weight']:.2f})")
+        
+        logger.info(f"\n🔴 SELL VOTES ({len(votes['SELL'])}):")
+        for vote in votes['SELL']:
+            logger.info(f"   ❌ {vote['strategy']}: {vote['reason']} (weight: {vote['weight']:.2f})")
+        
+        logger.info(f"\n⚪ NEUTRAL VOTES ({len(votes['NEUTRAL'])}):")
+        for vote in votes['NEUTRAL']:
+            logger.info(f"   ⏸️ {vote['strategy']}: {vote['reason']} (weight: {vote['weight']:.2f})")
+        
+        # Check if we have enough votes to generate signal
+        total_votes = len(votes['BUY']) + len(votes['SELL']) + len(votes['NEUTRAL'])
+        if total_votes == 0:
+            logger.info("\n⏸️ No votes cast - no signal")
             return None
         
-        # Weighted vote
-        buy_weight = sum(w for d, w in signals if d == 'BUY')
-        sell_weight = sum(w for d, w in signals if d == 'SELL')
-        total = buy_weight + sell_weight
+        # Calculate weighted totals
+        buy_weight = sum(v['weight'] for v in votes['BUY'])
+        sell_weight = sum(v['weight'] for v in votes['SELL'])
+        neutral_weight = sum(v['weight'] for v in votes['NEUTRAL'])
+        total_weight = buy_weight + sell_weight + neutral_weight
         
-        if total == 0:
-            return None
+        logger.info(f"\n📊 VOTE SUMMARY:")
+        logger.info(f"   BUY:    {len(votes['BUY'])} votes ({buy_weight:.2f} weight)")
+        logger.info(f"   SELL:   {len(votes['SELL'])} votes ({sell_weight:.2f} weight)")
+        logger.info(f"   NEUTRAL: {len(votes['NEUTRAL'])} votes ({neutral_weight:.2f} weight)")
         
-        # Determine direction
-        if buy_weight > sell_weight:
+        # Determine final direction
+        if buy_weight > sell_weight and buy_weight > neutral_weight:
             direction = 'BUY'
-            confidence = buy_weight / total
-        elif sell_weight > buy_weight:
+            confidence = buy_weight / total_weight if total_weight > 0 else 0
+        elif sell_weight > buy_weight and sell_weight > neutral_weight:
             direction = 'SELL'
-            confidence = sell_weight / total
+            confidence = sell_weight / total_weight if total_weight > 0 else 0
         else:
+            logger.info(f"\n⏸️ No clear majority - standing aside")
             return None
         
         # Minimum confidence threshold
-        if confidence < 0.65:
+        if confidence < 0.35:
+            logger.info(f"\n⏸️ Confidence too low ({confidence:.2f} < 0.35)")
             return None
         
         # Calculate SL/TP
-        point = 1.0  # BTCUSD point value
         if direction == 'BUY':
-            sl = price - 300 * point  # 300 points SL
-            tp = price + 600 * point  # 600 points TP (1:2 R:R)
+            sl = price - 300  # 300 points SL
+            tp = price + 600  # 600 points TP (1:2 R:R)
         else:
-            sl = price + 300 * point
-            tp = price - 600 * point
+            sl = price + 300
+            tp = price - 600
+        
+        # Create detailed voting summary for CSV
+        buy_strategies = ", ".join([v['strategy'] for v in votes['BUY']]) if votes['BUY'] else "None"
+        sell_strategies = ", ".join([v['strategy'] for v in votes['SELL']]) if votes['SELL'] else "None"
+        neutral_strategies = ", ".join([v['strategy'] for v in votes['NEUTRAL']]) if votes['NEUTRAL'] else "None"
         
         signal = {
             'timestamp': datetime.now(timezone.utc).strftime('%Y-%m-%d %H:%M:%S'),
@@ -341,15 +469,24 @@ class SignalGenerator:
             'take_profit': tp,
             'profile': profile.name.value if profile else 'unknown',
             'regime': self.neural_profiler.current_regime,
-            'signal_count': len(signals),
+            'signal_count': total_votes,
             'volatility': volatility,
+            'buy_votes': len(votes['BUY']),
+            'sell_votes': len(votes['SELL']),
+            'neutral_votes': len(votes['NEUTRAL']),
+            'buy_weight': buy_weight,
+            'sell_weight': sell_weight,
+            'buy_strategies': buy_strategies,
+            'sell_strategies': sell_strategies,
+            'neutral_strategies': neutral_strategies,
         }
         
         return signal
     
     def _write_signal_csv(self, signal: dict):
-        """Write signal to CSV file for MQL5 EA"""
+        """Write signal to CSV file for MQL5 EA with voting details"""
         try:
+            # Write main signal CSV (for EA)
             with open(self.signal_file, 'w', newline='') as f:
                 writer = csv.writer(f)
                 writer.writerow([
@@ -363,14 +500,52 @@ class SignalGenerator:
                     signal['regime'],
                 ])
             
+            # Write detailed voting log (for humans)
+            signal_dir = Path(self.signal_file).parent
+            vote_log_file = signal_dir / f"vote_log_{datetime.now(timezone.utc).strftime('%Y-%m-%d')}.csv"
+            
+            file_exists = vote_log_file.exists()
+            with open(vote_log_file, 'a', newline='') as f:
+                writer = csv.writer(f)
+                if not file_exists:
+                    writer.writerow([
+                        'Timestamp', 'Direction', 'Confidence', 'Entry', 'SL', 'TP',
+                        'Profile', 'Regime', 'Signal Count', 'Volatility',
+                        'Buy Votes', 'Sell Votes', 'Neutral Votes',
+                        'Buy Weight', 'Sell Weight',
+                        'Buy Strategies', 'Sell Strategies', 'Neutral Strategies'
+                    ])
+                
+                writer.writerow([
+                    signal['timestamp'],
+                    signal['direction'],
+                    f"{signal['confidence']:.2f}",
+                    f"{signal['entry_price']:.2f}",
+                    f"{signal['stop_loss']:.2f}",
+                    f"{signal['take_profit']:.2f}",
+                    signal['profile'],
+                    signal['regime'],
+                    signal['signal_count'],
+                    f"{signal['volatility']*100:.1f}%",
+                    signal['buy_votes'],
+                    signal['sell_votes'],
+                    signal['neutral_votes'],
+                    f"{signal['buy_weight']:.2f}",
+                    f"{signal['sell_weight']:.2f}",
+                    signal['buy_strategies'],
+                    signal['sell_strategies'],
+                    signal['neutral_strategies'],
+                ])
+            
             logger.info(f"💾 Signal written to: {self.signal_file}")
+            logger.info(f"📊 Vote log saved to: {vote_log_file}")
             self.last_signal_time = time.time()
         
         except Exception as e:
             logger.error(f"❌ Failed to write signal file: {e}")
     
     def _send_telegram_alert(self, signal: dict):
-        """Send Telegram alert for new signal"""
+        """Send Telegram alert for new signal with voting details"""
         emoji = "🟢" if signal['direction'] == 'BUY' else "🔴"
         
         message = f"""
@@ -386,7 +561,17 @@ class SignalGenerator:
 🧬 Confidence: {signal['confidence']:.2f}
 🧠 Profile: {signal['profile']}
 📊 Regime: {signal['regime']}
-🔬 Signals: {signal['signal_count']}
+🔬 Total Signals: {signal['signal_count']}
+
+🗳️ <b>VOTING BREAKDOWN:</b>
+🟢 BUY: {signal['buy_votes']} votes ({signal['buy_weight']:.2f} weight)
+{signal['buy_strategies']}
+
+🔴 SELL: {signal['sell_votes']} votes ({signal['sell_weight']:.2f} weight)
+{signal['sell_strategies']}
+
+⚪ NEUTRAL: {signal['neutral_votes']} votes
+{signal['neutral_strategies']}
 
 ━━━━━━━━━━━━━━━━━━━━
 ⏰ {datetime.now(timezone.utc).strftime('%H:%M:%S UTC')}
