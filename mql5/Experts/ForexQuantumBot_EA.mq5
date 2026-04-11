@@ -97,9 +97,13 @@ int OnInit() {
       Print("✅ Signal file accessible");
    }
    
-   // Step 3: Write connection handshake file
-   Print("📡 Step 3: Writing handshake file...");
-   WriteHandshakeFile();
+   // Step 3: Check Python handshake file (Python writes, EA reads)
+   Print("📡 Step 3: Checking Python handshake...");
+   if(CheckPythonHandshake()) {
+      Print("✅ Python handshake validated - Signal generator is running");
+   } else {
+      Print("⚠️ Python handshake not found - will generate signals when available");
+   }
    
    // Step 4: Initialize tracking
    ResetDailyStats();
@@ -179,29 +183,32 @@ bool CheckSignalFileAccess() {
 }
 
 //+------------------------------------------------------------------+
-//| Write handshake file for Python                                   |
+//| Check Python handshake file                                       |
 //+------------------------------------------------------------------+
-void WriteHandshakeFile() {
-   // Use FILE_COMMON flag to write to terminal's common files folder
-   // Python can access this at: C:\Users\<user>\AppData\Roaming\MetaQuotes\Terminal\Common\Files\
-   int handle = FileOpen(InpHandshakeFile, FILE_WRITE|FILE_TXT|FILE_ANSI|FILE_COMMON);
-   if(handle != INVALID_HANDLE) {
-      FileWriteString(handle, "EA_CONNECTED=true\n");
-      FileWriteString(handle, "EA_MAGIC=" + IntegerToString(magicNumber) + "\n");
-      FileWriteString(handle, "EA_SYMBOL=" + InpSymbol + "\n");
-      FileWriteString(handle, "EA_TIMEFRAME=" + EnumToString(InpTimeframe) + "\n");
-      FileWriteString(handle, "EA_AUTOTRADE=" + (InpAutoTrade ? "true" : "false") + "\n");
-      FileWriteString(handle, "EA_START_TIME=" + TimeToString(TimeCurrent()) + "\n");
-      FileWriteString(handle, "STATUS=READY\n");
-      FileClose(handle);
-      
-      Print("✅ Handshake file written to Common Files");
-      Print("   Path: Terminal\\Common\\Files\\", InpHandshakeFile);
-   } else {
-      int err = GetLastError();
-      Print("⚠️ Could not write handshake file. Error: ", err);
-      Print("   Check if FILE_COMMON access is enabled");
+bool CheckPythonHandshake() {
+   // Try Common Files first (where Python writes with FILE_COMMON)
+   int handle = FileOpen(InpHandshakeFile, FILE_READ|FILE_TXT|FILE_ANSI|FILE_COMMON);
+   
+   // Fallback to local file
+   if(handle == INVALID_HANDLE) {
+      handle = FileOpen(InpHandshakeFile, FILE_READ|FILE_TXT|FILE_ANSI);
    }
+   
+   if(handle == INVALID_HANDLE) {
+      return false;
+   }
+   
+   // Read and log handshake
+   string content = FileReadString(handle, 1024);
+   FileClose(handle);
+   
+   if(StringFind(content, "PYTHON_CONNECTED=true") >= 0 && 
+      StringFind(content, "PYTHON_STATUS=READY") >= 0) {
+      Print("   ✅ Python is connected and ready");
+      return true;
+   }
+   
+   return false;
 }
 
 //+------------------------------------------------------------------+
