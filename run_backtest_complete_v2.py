@@ -424,6 +424,32 @@ class CompleteBacktestEngineV2:
                                 )
                                 signal['kin_strength'] = kin_strength  # Store for audit
 
+                                # D. M8 Fibonacci System - 8-minute Phi timeframe analysis (Laplace v3.0)
+                                m8_analysis = self.m8_fibonacci.analyze(
+                                    highs=self._high[max(0, i-100):i+1].tolist(),
+                                    lows=self._low[max(0, i-100):i+1].tolist(),
+                                    closes=self._close[max(0, i-100):i+1].tolist(),
+                                    volumes=self._volume[max(0, i-100):i+1].tolist(),
+                                )
+                                signal['m8_analysis'] = m8_analysis
+                                
+                                # D: If M8 signal strongly disagrees with our signal, reduce confidence or veto
+                                if m8_analysis['signal'] != 'NEUTRAL' and m8_analysis['signal'] != signal['direction']:
+                                    # M8 disagrees - check if it's a strong disagreement
+                                    if m8_analysis['confidence'] > 0.6:
+                                        # Strong M8 disagreement - veto the trade
+                                        self.total_vetoes += 1
+                                        continue  # Skip this trade
+                                    else:
+                                        # Weak M8 disagreement - just reduce signal confidence
+                                        signal['confidence'] *= 0.8  # 20% confidence reduction
+                                elif m8_analysis['signal'] == signal['direction']:
+                                    # M8 agrees with our signal - boost confidence
+                                    signal['confidence'] = min(0.95, signal.get('confidence', 0.5) + 0.05)
+                                    signal['m8_confirmed'] = True
+                                else:
+                                    signal['m8_confirmed'] = False
+
                                 # 4. Recursive Self-Debate (metacognitive validation)
                                 market_data = {
                                     'regime': regime,

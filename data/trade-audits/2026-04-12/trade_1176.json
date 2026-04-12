@@ -1,6 +1,6 @@
 {
   "ticket": 1176,
-  "timestamp": "2026-04-12T12:53:36.644015+00:00",
+  "timestamp": "2026-04-12T13:01:16.077138+00:00",
   "symbol": "BTCUSD",
   "direction": "BUY",
   "entry_price": 115226.61,
@@ -95,18 +95,18 @@
     "exhaustion_signals": []
   },
   "risk_context": {
-    "capital": 101492.58116214289,
-    "equity": 101492.58116214289,
+    "capital": 101482.66424714288,
+    "equity": 101482.66424714288,
     "daily_pnl": 0,
     "daily_pnl_percent": 0,
-    "total_pnl": 1492.5811621428875,
-    "total_pnl_percent": 1.4925811621428808,
-    "current_drawdown": 0.01464734374875956,
-    "max_drawdown": 0.01464734374875956,
+    "total_pnl": 1482.6642471428786,
+    "total_pnl_percent": 1.482664247142873,
+    "current_drawdown": 0.014645269822207669,
+    "max_drawdown": 0.014645269822207669,
     "consecutive_wins": 0,
     "consecutive_losses": 2,
     "daily_loss_used_percent": 0,
-    "total_loss_used_percent": 0.01464734374875956,
+    "total_loss_used_percent": 0.014645269822207669,
     "ftmo_daily_remaining": 5000,
     "ftmo_total_remaining": 10000
   },
@@ -122,7 +122,7 @@
     "risk_percent": 1.0,
     "min_rr_ratio": 1.5,
     "confidence_threshold": 0.65,
-    "last_mutation_time": "2026-04-12T12:53:36.643997+00:00",
+    "last_mutation_time": "2026-04-12T13:01:16.077124+00:00",
     "mutation_count": 0,
     "dna_memory_regimes": 0
   },

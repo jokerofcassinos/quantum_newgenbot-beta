@@ -1,6 +1,6 @@
 {
   "ticket": 1024,
-  "timestamp": "2026-04-12T12:53:35.173703+00:00",
+  "timestamp": "2026-04-12T13:01:14.369353+00:00",
   "symbol": "BTCUSD",
   "direction": "SELL",
   "entry_price": 122071.4,
@@ -36,7 +36,7 @@
   "indicators": {
     "ema_9": 122032.77886362559,
     "ema_21": 122012.86702159581,
-    "ema_50": 122196.68570915607,
+    "ema_50": 122196.68570918414,
     "ema_200": 122071.4,
     "sma_20": 121978.272,
     "sma_50": 122071.4,
@@ -95,15 +95,15 @@
     "exhaustion_signals": []
   },
   "risk_context": {
-    "capital": 100038.59512642861,
-    "equity": 100038.59512642861,
+    "capital": 100034.36610357148,
+    "equity": 100034.36610357148,
     "daily_pnl": 0,
     "daily_pnl_percent": 0,
-    "total_pnl": 38.595126428612275,
-    "total_pnl_percent": 0.03859512642860885,
+    "total_pnl": 34.36610357147583,
+    "total_pnl_percent": 0.03436610357148151,
     "current_drawdown": 0.0059992356298036575,
     "max_drawdown": 0.0059992356298036575,
-    "consecutive_wins": 4,
+    "consecutive_wins": 3,
     "consecutive_losses": 0,
     "daily_loss_used_percent": 0,
     "total_loss_used_percent": 0.0059992356298036575,
@@ -122,7 +122,7 @@
     "risk_percent": 1.0,
     "min_rr_ratio": 1.5,
     "confidence_threshold": 0.65,
-    "last_mutation_time": "2026-04-12T12:53:35.173688+00:00",
+    "last_mutation_time": "2026-04-12T13:01:14.369338+00:00",
     "mutation_count": 0,
     "dna_memory_regimes": 0
   },
