@@ -1,6 +1,6 @@
 {
   "ticket": 1317,
-  "timestamp": "2026-04-12T21:07:45.730689+00:00",
+  "timestamp": "2026-04-12T21:58:52.828340+00:00",
   "symbol": "BTCUSD",
   "direction": "BUY",
   "entry_price": 87547.39,
@@ -122,7 +122,7 @@
     "risk_percent": 1.0,
     "min_rr_ratio": 1.5,
     "confidence_threshold": 0.65,
-    "last_mutation_time": "2026-04-12T21:07:45.730673+00:00",
+    "last_mutation_time": "2026-04-12T21:58:52.828326+00:00",
     "mutation_count": 0,
     "dna_memory_regimes": 0
   },
@@ -233,7 +233,7 @@
     "veto_severity": null
   },
   "exit_price": 87281.66,
-  "exit_timestamp": "2026-04-12T21:07:45.745490+00:00",
+  "exit_timestamp": "2026-04-12T21:58:52.839938+00:00",
   "exit_reason": "Smart TP complete",
   "gross_pnl": 80.09839285714042,
   "net_pnl": -56.401607142859575,

@@ -149,25 +149,23 @@ class CompleteBacktestEngineV2:
         self.risk_manager = BacktestRiskManager(initial_capital=100000.0)
         
         # Phase 1: Anti-Metralhadora (DubaiMatrixASI salvage - overtrading prevention)
-        # COMMISSION OPTIMIZATION: Balanced for trade count vs quality
+        # $103K CONFIGURATION: Original settings (proven to work)
         self.anti_metralhadora = AntiMetralhadora(
-            min_interval_minutes=5.0,  # Original (allows more trades)
-            max_trades_per_day=25,  # Original (was reduced to 12-15, too restrictive)
-            min_quality_score=0.40,  # Original (0.50 and 0.65 were too strict)
+            min_interval_minutes=5.0,
+            max_trades_per_day=25,
+            min_quality_score=0.40,
             max_consecutive_losses=3,
             loss_cooldown_minutes=30.0,
         )
         
         # Phase 1: PositionManager Smart TP (DubaiMatrixASI salvage - multi-target exits)
-        # COMMISSION OPTIMIZATION: Balanced 2-level system (saves 50% commissions)
-        # COMPREHENSIVE ANALYSIS: Single-exit had 1% WR (too strict), 4-level had too many commissions
-        # NEW: 70% @ 1:2 R:R + 30% trailing (2 exit events vs 4 = 50% commission savings)
+        # $103K CONFIGURATION: Balanced 2-level system (proven to work)
         self.position_manager = PositionManagerSmartTP(
-            tp1_portion=0.00, tp1_rr=1.0,  # REMOVED (commission waste, exits too early)
-            tp2_portion=0.70, tp2_rr=2.0,  # 70% at 1:2 R:R (main target)
-            tp3_portion=0.00, tp3_rr=3.0,  # REMOVED (consolidated into TP2)
-            trailing_portion=0.30,  # 30% trailing (reduced from 50%)
-            trailing_atr_multiplier=2.0,  # Balanced (was 1.5 too tight, 3.0 too wide)
+            tp1_portion=0.00, tp1_rr=1.0,  # REMOVED (exit too early)
+            tp2_portion=0.50, tp2_rr=2.0,  # 50% at 1:2 R:R (main target)
+            tp3_portion=0.00, tp3_rr=3.0,  # REMOVED (consolidated)
+            trailing_portion=0.50,  # 50% trailing
+            trailing_atr_multiplier=1.5,  # Balanced trailing
         )
         
         # A2: CommissionFloor - prevent premature closure before covering commissions

@@ -1,6 +1,6 @@
 {
   "ticket": 1090,
-  "timestamp": "2026-04-12T21:40:28.808950+00:00",
+  "timestamp": "2026-04-12T21:58:43.913016+00:00",
   "symbol": "BTCUSD",
   "direction": "BUY",
   "entry_price": 108719.39,
@@ -95,18 +95,18 @@
     "exhaustion_signals": []
   },
   "risk_context": {
-    "capital": 135630.14889331118,
-    "equity": 135630.14889331118,
+    "capital": 135281.91756285582,
+    "equity": 135281.91756285582,
     "daily_pnl": 0,
     "daily_pnl_percent": 0,
-    "total_pnl": 35630.14889331118,
-    "total_pnl_percent": 35.63014889331117,
-    "current_drawdown": 1.0616174963172698,
-    "max_drawdown": 1.0616174963172698,
+    "total_pnl": 35281.917562855815,
+    "total_pnl_percent": 35.28191756285581,
+    "current_drawdown": 1.423174493319417,
+    "max_drawdown": 1.423174493319417,
     "consecutive_wins": 0,
     "consecutive_losses": 1,
     "daily_loss_used_percent": 0,
-    "total_loss_used_percent": 1.0616174963172698,
+    "total_loss_used_percent": 1.423174493319417,
     "ftmo_daily_remaining": 5000,
     "ftmo_total_remaining": 10000
   },
@@ -122,7 +122,7 @@
     "risk_percent": 1.0,
     "min_rr_ratio": 1.5,
     "confidence_threshold": 0.65,
-    "last_mutation_time": "2026-04-12T21:40:28.808932+00:00",
+    "last_mutation_time": "2026-04-12T21:58:43.913004+00:00",
     "mutation_count": 0,
     "dna_memory_regimes": 0
   },
@@ -233,17 +233,18 @@
     "veto_severity": null
   },
   "exit_price": 108484.79,
-  "exit_timestamp": "2026-04-12T21:40:28.812663+00:00",
+  "exit_timestamp": "2026-04-12T21:58:43.916624+00:00",
   "exit_reason": "Smart TP complete",
-  "gross_pnl": 136.5,
-  "net_pnl": 0.0,
+  "gross_pnl": -19.993928571420838,
+  "net_pnl": -156.49392857142084,
   "duration_minutes": 15,
   "max_profit_reached": 0.0,
   "max_drawdown_reached": -234.60000000000582,
   "was_error": true,
-  "error_type": "low_confidence_entry",
+  "error_type": "low_confidence_entry;traded_in_low_liquidity_session",
   "severity": "major",
   "lessons_learned": [
-    "REJECT signals with confidence < 0.65"
+    "REJECT signals with confidence < 0.65",
+    "AVOID trading in Asian session/weekends"
   ]
 }

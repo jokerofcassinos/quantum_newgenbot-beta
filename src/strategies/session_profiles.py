@@ -29,9 +29,7 @@ class SessionProfile:
 
 
 SESSION_PROFILES = {
-    # Asian Session (00:00 - 07:00 UTC) - COMMISSION OPTIMIZATION: Original settings
-    # COMPREHENSIVE ANALYSIS: Disabling Asian removed too many trades
-    # Keeping original settings but Smart TP is now 2-level (saves commissions)
+    # Asian Session (00:00 - 07:00 UTC) - $103K CONFIGURATION: Original settings
     "asian": SessionProfile(
         session_name="Asian",
         min_confidence_threshold=0.40,
