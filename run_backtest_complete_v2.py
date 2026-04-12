@@ -462,9 +462,9 @@ class CompleteBacktestEngineV2:
                                 signal['vpin'] = vpin_value
                                 
                                 # C: Veto if VPIN shows only retail noise (no institutional activity)
-                                # VPIN < 0.15 = balanced buy/sell = noise/chop = avoid
-                                # VPIN > 0.15 = imbalance = institutional activity = trade
-                                if vpin_value < 0.15:
+                                # VPIN < 0.20 = balanced buy/sell = noise/chop = avoid (increased from 0.15)
+                                # VPIN > 0.20 = imbalance = institutional activity = trade
+                                if vpin_value < 0.20:
                                     self.total_vetoes += 1
                                     continue  # Skip this trade - retail noise environment
 
