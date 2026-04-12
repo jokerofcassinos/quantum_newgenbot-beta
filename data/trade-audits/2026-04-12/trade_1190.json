@@ -1,21 +1,21 @@
 {
   "ticket": 1190,
-  "timestamp": "2026-04-12T12:16:34.135651+00:00",
+  "timestamp": "2026-04-12T12:40:36.543476+00:00",
   "symbol": "BTCUSD",
   "direction": "BUY",
-  "entry_price": 87584.71,
-  "stop_loss": 87284.71,
-  "take_profit": 88184.71,
+  "entry_price": 114947.36,
+  "stop_loss": 115247.36,
+  "take_profit": 114047.36,
   "volume": 0.1,
   "strategy_name": "complete_system_v2",
-  "signal_confidence": 0.5,
+  "signal_confidence": 0.4166666666666667,
   "market_regime": {
     "regime_type": "ranging",
     "regime_confidence": 0.7,
     "trend_strength": 0.5,
     "trend_direction": "buy",
     "volatility_regime": "medium",
-    "volatility_value": 76.44142857142702,
+    "volatility_value": 158.81214285714356,
     "volume_regime": "normal",
     "volume_ratio": 1.0,
     "market_phase": "unknown",
@@ -34,16 +34,16 @@
     "conflict_detected": false
   },
   "indicators": {
-    "ema_9": 87586.429334137,
-    "ema_21": 87543.55018204074,
-    "ema_50": 87518.07976454147,
-    "ema_200": 87584.71,
-    "sma_20": 87523.4845,
-    "sma_50": 87584.71,
-    "ema_9_21_cross": "bullish",
+    "ema_9": 114957.78258670296,
+    "ema_21": 115052.06924107955,
+    "ema_50": 115164.60756704351,
+    "ema_200": 114947.36,
+    "sma_20": 115056.3795,
+    "sma_50": 114947.36,
+    "ema_9_21_cross": "bearish",
     "ema_21_50_cross": "neutral",
     "price_vs_ema_200": "above",
-    "rsi_14": 54.13345925186652,
+    "rsi_14": 45.703791230580734,
     "rsi_regime": "neutral",
     "macd_line": 0,
     "macd_signal": 0,
@@ -51,26 +51,26 @@
     "macd_cross": "neutral",
     "stochastic_k": 50,
     "stochastic_d": 50,
-    "atr_14": 76.44142857142702,
+    "atr_14": 158.81214285714356,
     "atr_percentile": 50.0,
-    "bollinger_upper": 87676.0728222891,
-    "bollinger_middle": 87523.4845,
-    "bollinger_lower": 87370.8961777109,
-    "bollinger_width": 305.17664457819774,
+    "bollinger_upper": 115316.53870375609,
+    "bollinger_middle": 115056.3795,
+    "bollinger_lower": 114796.2202962439,
+    "bollinger_width": 520.3184075121826,
     "price_vs_bollinger": "inside",
-    "volume_current": 709.0,
-    "volume_avg_20": 696.2,
+    "volume_current": 1037.0,
+    "volume_avg_20": 682.55,
     "volume_ratio": 1.0,
     "volume_trend": "stable",
     "obv_trend": "neutral"
   },
   "price_action": {
-    "current_price": 87584.71,
+    "current_price": 114947.36,
     "price_change_1h": 0.5,
     "price_change_4h": 1.0,
     "price_change_24h": 2.0,
-    "nearest_support": 87084.71,
-    "nearest_resistance": 88084.71,
+    "nearest_support": 114447.36,
+    "nearest_resistance": 115447.36,
     "distance_to_support_pct": 0.68,
     "distance_to_resistance_pct": 0.68,
     "current_candle_type": "bullish",
@@ -95,18 +95,18 @@
     "exhaustion_signals": []
   },
   "risk_context": {
-    "capital": 100887.07436714295,
-    "equity": 100887.07436714295,
+    "capital": 101177.59051214291,
+    "equity": 101177.59051214291,
     "daily_pnl": 0,
     "daily_pnl_percent": 0,
-    "total_pnl": 887.0743671429518,
-    "total_pnl_percent": 0.8870743671429482,
-    "current_drawdown": 0.010579053934525384,
-    "max_drawdown": 0.010579053934525384,
+    "total_pnl": 1177.5905121429096,
+    "total_pnl_percent": 1.177590512142901,
+    "current_drawdown": 0.01469132805023242,
+    "max_drawdown": 0.01469132805023242,
     "consecutive_wins": 0,
     "consecutive_losses": 1,
     "daily_loss_used_percent": 0,
-    "total_loss_used_percent": 0.010579053934525384,
+    "total_loss_used_percent": 0.01469132805023242,
     "ftmo_daily_remaining": 5000,
     "ftmo_total_remaining": 10000
   },
@@ -122,17 +122,17 @@
     "risk_percent": 1.0,
     "min_rr_ratio": 1.5,
     "confidence_threshold": 0.65,
-    "last_mutation_time": "2026-04-12T12:16:34.135629+00:00",
+    "last_mutation_time": "2026-04-12T12:40:36.543461+00:00",
     "mutation_count": 0,
     "dna_memory_regimes": 0
   },
   "smart_order_manager": {
-    "virtual_tp_original": 88184.71,
-    "virtual_tp_current": 88184.71,
+    "virtual_tp_original": 114047.36,
+    "virtual_tp_current": 114047.36,
     "virtual_tp_adjustment_factor": 1.0,
     "virtual_tp_difficulty": "moderate",
-    "dynamic_sl_original": 87284.71,
-    "dynamic_sl_current": 87284.71,
+    "dynamic_sl_original": 115247.36,
+    "dynamic_sl_current": 115247.36,
     "breakeven_activated": false,
     "profit_targets_reached": [],
     "momentum_at_entry": {
@@ -148,8 +148,8 @@
       },
       {
         "strategy_name": "liquidity",
-        "vote": "BUY",
-        "confidence": 0.65
+        "vote": "NEUTRAL",
+        "confidence": 0.5
       },
       {
         "strategy_name": "thermodynamic",
@@ -168,18 +168,18 @@
       },
       {
         "strategy_name": "fvg",
-        "vote": "BUY",
+        "vote": "SELL",
         "confidence": 0.62
       },
       {
         "strategy_name": "msnr",
-        "vote": "BUY",
-        "confidence": 0.68
+        "vote": "NEUTRAL",
+        "confidence": 0.5
       },
       {
         "strategy_name": "msnr_alchemist",
-        "vote": "NEUTRAL",
-        "confidence": 0.5
+        "vote": "SELL",
+        "confidence": 0.7259651307596513
       },
       {
         "strategy_name": "ifvg",
@@ -188,26 +188,26 @@
       },
       {
         "strategy_name": "order_flow",
-        "vote": "BUY",
-        "confidence": 0.6269828106151991
+        "vote": "SELL",
+        "confidence": 0.6192260909229133
       },
       {
         "strategy_name": "supply_demand",
-        "vote": "SELL",
-        "confidence": 0.65
+        "vote": "NEUTRAL",
+        "confidence": 0.5
       },
       {
         "strategy_name": "fibonacci",
-        "vote": "BUY",
+        "vote": "SELL",
         "confidence": 0.68
       }
     ],
-    "buy_votes": 6,
-    "sell_votes": 2,
-    "neutral_votes": 4,
+    "buy_votes": 1,
+    "sell_votes": 5,
+    "neutral_votes": 6,
     "total_strategies": 12,
     "consensus_direction": "BUY",
-    "consensus_confidence": 0.5
+    "consensus_confidence": 0.4166666666666667
   },
   "session_veto": {
     "session_name": "ny",

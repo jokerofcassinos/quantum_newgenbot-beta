@@ -150,7 +150,7 @@ class CompleteBacktestEngineV2:
             tp2_portion=0.30, tp2_rr=2.0,
             tp3_portion=0.20, tp3_rr=3.0,
             trailing_portion=0.20,
-            trailing_atr_multiplier=1.5,
+            trailing_atr_multiplier=2.0,  # Increased from 1.5 to match higher R:R
         )
         
         # Phase 1: RiskQuantumEngine (DubaiMatrixASI salvage - 5-factor position sizing)
@@ -353,7 +353,7 @@ class CompleteBacktestEngineV2:
                     # Calculate SL/TP distances for risk validation
                     atr = self._atr[i]
                     sl_dist_for_risk = min(max(atr * 2.0, 500), 3000)
-                    tp_dist_for_risk = sl_dist_for_risk * 2.0
+                    tp_dist_for_risk = sl_dist_for_risk * 3.0  # A1: 1:3 R:R for higher profit per trade
                     
                     session = detect_session(cur_time)
                     session_profile = get_session_profile(session)
@@ -1018,10 +1018,9 @@ class CompleteBacktestEngineV2:
             except Exception:
                 pass
 
-        # SCALPER MODE: Optimized SL/TP for scalping - wider targets for better R:R
-        # Scalpers need realistic targets: 1.5x ATR stop, 3.0x ATR target (1:2 R:R)
+        # SCALPER MODE: Optimized SL/TP for scalping - A1: 1:3 R:R for higher profit per trade
         sl_dist = min(max(atr * 1.5, 300), 2000)  # Tight stop: 1.5x ATR
-        tp_dist = sl_dist * 2.0  # 1:2 R:R target (simpler, more reliable)
+        tp_dist = sl_dist * 3.0  # A1: 1:3 R:R target (increased from 2.0)
 
         if direction == "BUY":
             sl = current_price - sl_dist
