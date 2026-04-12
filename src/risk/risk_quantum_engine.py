@@ -140,9 +140,18 @@ class RiskQuantumEngine:
         adjusted_risk_percent = kelly_percent * vol_adjustment * confidence_scaling * dd_protection * correlation_adjustment
         adjusted_risk_amount = equity * (adjusted_risk_percent / 100.0)
         
-        # Convert to lot size (simplified: 1 lot = $1 per point move for BTCUSD)
-        # In practice, this would use symbol specs
-        lot_size = adjusted_risk_amount / max(1, current_volatility)
+        # BOOSTED position sizing for BTCUSD
+        # Instead of dividing by ATR (which produces tiny lots), use risk-based sizing
+        # For BTCUSD: 1 lot = $1 per point, so volume = risk_amount / stop_distance
+        # We assume typical stop distance of ~1.5x ATR for position sizing purposes
+        typical_stop_distance = current_volatility * 1.5  # 1.5x ATR stop
+        lot_size = adjusted_risk_amount / max(100, typical_stop_distance)  # Min $100 stop distance
+        
+        # BOOST: Multiply by risk multiplier to utilize available margin
+        # With only 0.07% DD, we can safely use larger positions
+        # Scale up to use more of the available max_position_size
+        risk_multiplier = 5.0  # BOOST: 5x multiplier for larger positions
+        lot_size *= risk_multiplier
         
         # Apply limits
         lot_size = max(self.min_position_size, min(self.max_position_size, lot_size))
