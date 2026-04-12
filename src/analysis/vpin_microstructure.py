@@ -142,12 +142,66 @@ class VPINMicrostructure:
     def should_trade(self) -> bool:
         """
         Determine if current conditions are suitable for trading.
-        
+
         Returns:
             True if institutional activity detected (good trading conditions)
         """
         if not self.vpin_history:
             return True  # Default allow
-        
+
         # Trade when VPIN shows institutional activity (not just noise)
         return self.vpin_history[-1] > 0.3
+
+    def calculate_vpin_from_candles(
+        self,
+        highs: List[float],
+        lows: List[float],
+        closes: List[float],
+        volumes: List[float],
+        lookback: int = 20,
+    ) -> float:
+        """
+        Calculate VPIN approximation from OHLCV candle data.
+        
+        Since we don't have tick data in backtest, we estimate buy/sell volume
+        based on where the close is within the candle range.
+        
+        Args:
+            highs: Candle highs
+            lows: Candle lows
+            closes: Candle closes
+            volumes: Candle volumes
+            lookback: Number of candles to analyze
+            
+        Returns:
+            VPIN value (0.0 to 1.0)
+        """
+        if len(closes) < lookback:
+            return 0.5  # Not enough data
+        
+        h = np.array(highs[-lookback:])
+        l = np.array(lows[-lookback:])
+        c = np.array(closes[-lookback:])
+        v = np.array(volumes[-lookback:])
+        
+        # Estimate buy/sell volume based on close position within candle
+        # Close near high = buying pressure, close near low = selling pressure
+        candle_range = h - l
+        candle_range = np.where(candle_range == 0, 1e-10, candle_range)  # Avoid division by zero
+        
+        buy_pressure = (c - l) / candle_range  # 0 = sold at low, 1 = bought at high
+        sell_pressure = 1 - buy_pressure
+        
+        buy_volume = v * buy_pressure
+        sell_volume = v * sell_pressure
+        
+        total_buy = np.sum(buy_volume)
+        total_sell = np.sum(sell_volume)
+        total_volume = total_buy + total_sell
+        
+        if total_volume == 0:
+            return 0.5
+        
+        vpin = abs(total_buy - total_sell) / total_volume
+        
+        return vpin

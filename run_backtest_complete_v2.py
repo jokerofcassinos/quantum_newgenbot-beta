@@ -450,6 +450,24 @@ class CompleteBacktestEngineV2:
                                 else:
                                     signal['m8_confirmed'] = False
 
+                                # C. VPIN Microstructure - filter out retail noise trades (Atl4s)
+                                # Calculate VPIN from recent candle data to detect institutional activity
+                                vpin_value = self.vpin.calculate_vpin_from_candles(
+                                    highs=self._high[max(0, i-50):i+1].tolist(),
+                                    lows=self._low[max(0, i-50):i+1].tolist(),
+                                    closes=self._close[max(0, i-50):i+1].tolist(),
+                                    volumes=self._volume[max(0, i-50):i+1].tolist(),
+                                    lookback=20,
+                                )
+                                signal['vpin'] = vpin_value
+                                
+                                # C: Veto if VPIN shows only retail noise (no institutional activity)
+                                # VPIN < 0.15 = balanced buy/sell = noise/chop = avoid
+                                # VPIN > 0.15 = imbalance = institutional activity = trade
+                                if vpin_value < 0.15:
+                                    self.total_vetoes += 1
+                                    continue  # Skip this trade - retail noise environment
+
                                 # 4. Recursive Self-Debate (metacognitive validation)
                                 market_data = {
                                     'regime': regime,
