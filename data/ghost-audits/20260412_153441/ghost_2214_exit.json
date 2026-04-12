@@ -1,0 +1,17 @@
+{
+  "trade_id": 2214,
+  "type": "ghost_exit",
+  "direction": "BUY",
+  "entry_price": 90129.68,
+  "exit_price": 89829.68,
+  "pnl": -819.6987867612402,
+  "is_win": false,
+  "exit_reason": "SL_hit",
+  "veto_reason": "session_veto:Confidence 0.42 < 0.45 (Weekend Profitable Hours threshold)",
+  "session": "weekend_profitable",
+  "confidence": 0.4166666666666667,
+  "regime": "unknown",
+  "duration_bars": 42,
+  "open_time": "2025-12-14 08:40:00",
+  "timestamp": "2026-04-12T18:34:51.164213+00:00"
+}

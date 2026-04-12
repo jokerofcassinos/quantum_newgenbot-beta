@@ -1,0 +1,17 @@
+{
+  "trade_id": 1909,
+  "type": "ghost_exit",
+  "direction": "BUY",
+  "entry_price": 92583.47,
+  "exit_price": 92283.47,
+  "pnl": -352.9260274162036,
+  "is_win": false,
+  "exit_reason": "SL_hit",
+  "veto_reason": "ghost_audit:weekday_destructive_hours_10UTC",
+  "session": "london",
+  "confidence": 0.4966666666666667,
+  "regime": "unknown",
+  "duration_bars": 21,
+  "open_time": "2025-12-10 10:45:00",
+  "timestamp": "2026-04-12T18:34:50.488204+00:00"
+}

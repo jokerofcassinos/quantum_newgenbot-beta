@@ -1,0 +1,17 @@
+{
+  "trade_id": 5045,
+  "type": "ghost_exit",
+  "direction": "BUY",
+  "entry_price": 92584.6,
+  "exit_price": 92284.6,
+  "pnl": -641.3252740929306,
+  "is_win": false,
+  "exit_reason": "SL_hit",
+  "veto_reason": "ghost_audit:low_volatility_chop",
+  "session": "asian",
+  "confidence": 0.5633333333333334,
+  "regime": "unknown",
+  "duration_bars": 226,
+  "open_time": "2026-01-19 06:05:00",
+  "timestamp": "2026-04-12T18:34:58.970087+00:00"
+}

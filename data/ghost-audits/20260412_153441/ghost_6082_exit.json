@@ -1,0 +1,17 @@
+{
+  "trade_id": 6082,
+  "type": "ghost_exit",
+  "direction": "BUY",
+  "entry_price": 67986.21,
+  "exit_price": 67686.21,
+  "pnl": -679.3448495417205,
+  "is_win": false,
+  "exit_reason": "SL_hit",
+  "veto_reason": "session_veto:Confidence 0.42 < 0.45 (Weekend Profitable Hours threshold)",
+  "session": "weekend_profitable",
+  "confidence": 0.4166666666666667,
+  "regime": "unknown",
+  "duration_bars": 78,
+  "open_time": "2026-02-22 09:05:00",
+  "timestamp": "2026-04-12T18:35:05.635263+00:00"
+}

@@ -1,0 +1,17 @@
+{
+  "trade_id": 3394,
+  "type": "ghost_exit",
+  "direction": "BUY",
+  "entry_price": 87386.39,
+  "exit_price": 87086.39,
+  "pnl": -363.65683684454643,
+  "is_win": false,
+  "exit_reason": "SL_hit",
+  "veto_reason": "ghost_audit:weekday_destructive_hours_16UTC",
+  "session": "ny",
+  "confidence": 0.4966666666666667,
+  "regime": "unknown",
+  "duration_bars": 78,
+  "open_time": "2025-12-29 16:15:00",
+  "timestamp": "2026-04-12T18:34:54.113191+00:00"
+}

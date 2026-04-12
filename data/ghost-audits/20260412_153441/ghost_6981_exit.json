@@ -1,0 +1,17 @@
+{
+  "trade_id": 6981,
+  "type": "ghost_exit",
+  "direction": "SELL",
+  "entry_price": 66808.11,
+  "exit_price": 65908.11,
+  "pnl": 1484.5150248762498,
+  "is_win": true,
+  "exit_reason": "TP_hit",
+  "veto_reason": "session_veto:Confidence 0.42 < 0.45 (Weekend Profitable Hours threshold)",
+  "session": "weekend_profitable",
+  "confidence": 0.4166666666666667,
+  "regime": "unknown",
+  "duration_bars": 329,
+  "open_time": "2026-03-28 20:55:00",
+  "timestamp": "2026-04-12T18:35:12.834548+00:00"
+}

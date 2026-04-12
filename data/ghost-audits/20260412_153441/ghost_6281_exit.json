@@ -1,0 +1,17 @@
+{
+  "trade_id": 6281,
+  "type": "ghost_exit",
+  "direction": "BUY",
+  "entry_price": 66053.85,
+  "exit_price": 65753.85,
+  "pnl": -242.65065247508912,
+  "is_win": false,
+  "exit_reason": "SL_hit",
+  "veto_reason": "ghost_audit:weekday_destructive_hours_13UTC",
+  "session": "ny_overlap",
+  "confidence": 0.4966666666666667,
+  "regime": "unknown",
+  "duration_bars": 19,
+  "open_time": "2026-03-02 13:30:00",
+  "timestamp": "2026-04-12T18:35:07.089238+00:00"
+}

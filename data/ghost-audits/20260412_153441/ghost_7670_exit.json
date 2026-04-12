@@ -1,0 +1,17 @@
+{
+  "trade_id": 7670,
+  "type": "ghost_exit",
+  "direction": "SELL",
+  "entry_price": 73062.64,
+  "exit_price": 73362.64,
+  "pnl": -305.1191855637587,
+  "is_win": false,
+  "exit_reason": "SL_hit",
+  "veto_reason": "session_veto:Confidence 0.42 < 0.45 (Weekend Profitable Hours threshold)",
+  "session": "weekend_profitable",
+  "confidence": 0.4166666666666667,
+  "regime": "unknown",
+  "duration_bars": 15,
+  "open_time": "2026-04-11 20:20:00",
+  "timestamp": "2026-04-12T18:35:16.005091+00:00"
+}

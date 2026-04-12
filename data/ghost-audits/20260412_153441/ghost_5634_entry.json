@@ -1,0 +1,15 @@
+{
+  "trade_id": 5634,
+  "type": "ghost_entry",
+  "direction": "BUY",
+  "entry_price": 89252.96,
+  "stop_loss": 88952.96,
+  "take_profit": 90152.96,
+  "volume": 2.0735847456275067,
+  "veto_reason": "ghost_audit:low_volatility_chop",
+  "session": "asian",
+  "confidence": 0.58,
+  "regime": "unknown",
+  "open_time": "2026-01-29 01:25:00",
+  "timestamp": "2026-04-12T18:35:01.079900+00:00"
+}

@@ -1,0 +1,17 @@
+{
+  "trade_id": 5847,
+  "type": "ghost_exit",
+  "direction": "BUY",
+  "entry_price": 68884.43,
+  "exit_price": 69784.43,
+  "pnl": 2850.3139902076537,
+  "is_win": true,
+  "exit_reason": "TP_hit",
+  "veto_reason": "anti_metralhadora:session_blocked",
+  "session": "weekend_profitable",
+  "confidence": 0.58,
+  "regime": "unknown",
+  "duration_bars": 18,
+  "open_time": "2026-02-14 09:15:00",
+  "timestamp": "2026-04-12T18:35:04.020212+00:00"
+}

@@ -1,0 +1,17 @@
+{
+  "trade_id": 5774,
+  "type": "ghost_exit",
+  "direction": "BUY",
+  "entry_price": 65892.65,
+  "exit_price": 67232.38357142855,
+  "pnl": 563.1662923713028,
+  "is_win": true,
+  "exit_reason": "TP_hit",
+  "veto_reason": "ghost_audit:weekday_destructive_hours_12UTC",
+  "session": "london",
+  "confidence": 0.4966666666666667,
+  "regime": "unknown",
+  "duration_bars": 39,
+  "open_time": "2026-02-06 12:05:00",
+  "timestamp": "2026-04-12T18:35:02.640740+00:00"
+}

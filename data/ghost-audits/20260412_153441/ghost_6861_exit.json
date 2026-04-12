@@ -1,0 +1,17 @@
+{
+  "trade_id": 6861,
+  "type": "ghost_exit",
+  "direction": "BUY",
+  "entry_price": 70913.65,
+  "exit_price": 70613.65,
+  "pnl": -233.75296454835285,
+  "is_win": false,
+  "exit_reason": "SL_hit",
+  "veto_reason": "anti_metralhadora:session_limit",
+  "session": "asian",
+  "confidence": 0.4966666666666667,
+  "regime": "unknown",
+  "duration_bars": 5,
+  "open_time": "2026-03-23 22:35:00",
+  "timestamp": "2026-04-12T18:35:11.455462+00:00"
+}

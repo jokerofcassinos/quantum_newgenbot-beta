@@ -1,0 +1,17 @@
+{
+  "trade_id": 5100,
+  "type": "ghost_exit",
+  "direction": "BUY",
+  "entry_price": 92509.6,
+  "exit_price": 92209.6,
+  "pnl": -335.1359969996551,
+  "is_win": false,
+  "exit_reason": "SL_hit",
+  "veto_reason": "anti_metralhadora:session_limit",
+  "session": "asian",
+  "confidence": 0.4966666666666667,
+  "regime": "unknown",
+  "duration_bars": 17,
+  "open_time": "2026-01-20 04:50:00",
+  "timestamp": "2026-04-12T18:34:59.026502+00:00"
+}

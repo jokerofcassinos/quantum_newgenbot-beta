@@ -1,0 +1,17 @@
+{
+  "trade_id": 5116,
+  "type": "ghost_exit",
+  "direction": "SELL",
+  "entry_price": 91072.38,
+  "exit_price": 90172.38,
+  "pnl": 587.3001844013478,
+  "is_win": true,
+  "exit_reason": "TP_hit",
+  "veto_reason": "ghost_audit:weekday_destructive_hours_16UTC",
+  "session": "ny",
+  "confidence": 0.5466666666666667,
+  "regime": "unknown",
+  "duration_bars": 11,
+  "open_time": "2026-01-20 16:05:00",
+  "timestamp": "2026-04-12T18:34:59.107209+00:00"
+}

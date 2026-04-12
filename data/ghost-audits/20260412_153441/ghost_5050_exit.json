@@ -1,0 +1,17 @@
+{
+  "trade_id": 5050,
+  "type": "ghost_exit",
+  "direction": "BUY",
+  "entry_price": 92601.71,
+  "exit_price": 92301.71,
+  "pnl": -491.62871281919786,
+  "is_win": false,
+  "exit_reason": "SL_hit",
+  "veto_reason": "ghost_audit:low_volatility_chop",
+  "session": "asian",
+  "confidence": 0.58,
+  "regime": "unknown",
+  "duration_bars": 221,
+  "open_time": "2026-01-19 06:30:00",
+  "timestamp": "2026-04-12T18:34:58.971969+00:00"
+}

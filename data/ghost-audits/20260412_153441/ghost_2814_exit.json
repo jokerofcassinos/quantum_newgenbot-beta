@@ -1,0 +1,17 @@
+{
+  "trade_id": 2814,
+  "type": "ghost_exit",
+  "direction": "BUY",
+  "entry_price": 87738.67,
+  "exit_price": 87438.67,
+  "pnl": -1150.6071253438815,
+  "is_win": false,
+  "exit_reason": "SL_hit",
+  "veto_reason": "advanced_veto:BUY vetoed - price at upper BB",
+  "session": "london",
+  "confidence": 0.58,
+  "regime": "unknown",
+  "duration_bars": 21,
+  "open_time": "2025-12-25 08:35:00",
+  "timestamp": "2026-04-12T18:34:53.012398+00:00"
+}

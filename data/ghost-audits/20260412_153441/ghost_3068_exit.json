@@ -1,0 +1,17 @@
+{
+  "trade_id": 3068,
+  "type": "ghost_exit",
+  "direction": "BUY",
+  "entry_price": 87494.36,
+  "exit_price": 88394.36,
+  "pnl": 3949.4210534077815,
+  "is_win": true,
+  "exit_reason": "TP_hit",
+  "veto_reason": "session_veto:Trading disabled for Weekend session",
+  "session": "weekend",
+  "confidence": 0.5,
+  "regime": "unknown",
+  "duration_bars": 393,
+  "open_time": "2025-12-27 16:45:00",
+  "timestamp": "2026-04-12T18:34:53.929600+00:00"
+}

@@ -1,0 +1,17 @@
+{
+  "trade_id": 7740,
+  "type": "ghost_exit",
+  "direction": "BUY",
+  "entry_price": 71384.0,
+  "exit_price": 71084.0,
+  "pnl": -802.0451661250165,
+  "is_win": false,
+  "exit_reason": "SL_hit",
+  "veto_reason": "session_veto:Trading disabled for Weekend session",
+  "session": "weekend",
+  "confidence": 0.5,
+  "regime": "unknown",
+  "duration_bars": 1,
+  "open_time": "2026-04-12 15:45:00",
+  "timestamp": "2026-04-12T18:35:16.198711+00:00"
+}

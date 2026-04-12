@@ -1,0 +1,17 @@
+{
+  "trade_id": 1705,
+  "type": "ghost_exit",
+  "direction": "BUY",
+  "entry_price": 91461.77,
+  "exit_price": 91161.77,
+  "pnl": -420.38013756481996,
+  "is_win": false,
+  "exit_reason": "SL_hit",
+  "veto_reason": "session_veto:Confidence 0.42 < 0.45 (Weekend Profitable Hours threshold)",
+  "session": "weekend_profitable",
+  "confidence": 0.4166666666666667,
+  "regime": "unknown",
+  "duration_bars": 23,
+  "open_time": "2025-11-30 18:10:00",
+  "timestamp": "2026-04-12T18:34:49.399267+00:00"
+}

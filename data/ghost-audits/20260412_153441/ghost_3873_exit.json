@@ -1,0 +1,17 @@
+{
+  "trade_id": 3873,
+  "type": "ghost_exit",
+  "direction": "BUY",
+  "entry_price": 91257.99,
+  "exit_price": 90957.99,
+  "pnl": -558.7874670337051,
+  "is_win": false,
+  "exit_reason": "SL_hit",
+  "veto_reason": "anti_metralhadora:session_blocked",
+  "session": "weekend_profitable",
+  "confidence": 0.58,
+  "regime": "unknown",
+  "duration_bars": 43,
+  "open_time": "2026-01-04 17:00:00",
+  "timestamp": "2026-04-12T18:34:55.478985+00:00"
+}

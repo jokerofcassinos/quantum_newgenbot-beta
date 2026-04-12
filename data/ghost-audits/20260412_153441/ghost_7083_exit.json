@@ -1,0 +1,17 @@
+{
+  "trade_id": 7083,
+  "type": "ghost_exit",
+  "direction": "SELL",
+  "entry_price": 67349.58,
+  "exit_price": 67649.58,
+  "pnl": -408.9490137250863,
+  "is_win": false,
+  "exit_reason": "SL_hit",
+  "veto_reason": "ghost_audit:weekday_destructive_hours_10UTC",
+  "session": "london",
+  "confidence": 0.5466666666666667,
+  "regime": "unknown",
+  "duration_bars": 9,
+  "open_time": "2026-03-30 10:15:00",
+  "timestamp": "2026-04-12T18:35:12.892593+00:00"
+}

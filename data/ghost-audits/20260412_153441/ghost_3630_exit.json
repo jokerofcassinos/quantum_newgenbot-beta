@@ -1,0 +1,17 @@
+{
+  "trade_id": 3630,
+  "type": "ghost_exit",
+  "direction": "SELL",
+  "entry_price": 89060.44,
+  "exit_price": 89372.65964285714,
+  "pnl": -89.30288513325901,
+  "is_win": false,
+  "exit_reason": "SL_hit",
+  "veto_reason": "ghost_audit:weekday_destructive_hours_16UTC",
+  "session": "ny",
+  "confidence": 0.5466666666666667,
+  "regime": "unknown",
+  "duration_bars": 2,
+  "open_time": "2026-01-02 16:35:00",
+  "timestamp": "2026-04-12T18:34:55.000270+00:00"
+}

@@ -1,0 +1,17 @@
+{
+  "trade_id": 1083,
+  "type": "ghost_exit",
+  "direction": "SELL",
+  "entry_price": 100947.43,
+  "exit_price": 101269.25392857142,
+  "pnl": -173.80681222752938,
+  "is_win": false,
+  "exit_reason": "SL_hit",
+  "veto_reason": "advanced_veto:SELL vetoed - price at lower BB",
+  "session": "asian",
+  "confidence": 0.5466666666666667,
+  "regime": "unknown",
+  "duration_bars": 3,
+  "open_time": "2025-11-07 02:20:00",
+  "timestamp": "2026-04-12T18:34:46.803414+00:00"
+}

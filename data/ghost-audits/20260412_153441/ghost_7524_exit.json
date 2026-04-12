@@ -1,0 +1,17 @@
+{
+  "trade_id": 7524,
+  "type": "ghost_exit",
+  "direction": "BUY",
+  "entry_price": 71293.95,
+  "exit_price": 70993.95,
+  "pnl": -591.6738990313092,
+  "is_win": false,
+  "exit_reason": "SL_hit",
+  "veto_reason": "ghost_audit:weekday_destructive_hours_13UTC",
+  "session": "ny_overlap",
+  "confidence": 0.58,
+  "regime": "unknown",
+  "duration_bars": 32,
+  "open_time": "2026-04-09 13:50:00",
+  "timestamp": "2026-04-12T18:35:15.390323+00:00"
+}

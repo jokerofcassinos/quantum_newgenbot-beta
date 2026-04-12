@@ -1,0 +1,17 @@
+{
+  "trade_id": 7064,
+  "type": "ghost_exit",
+  "direction": "SELL",
+  "entry_price": 66591.01,
+  "exit_price": 65691.01,
+  "pnl": 1417.6683073642164,
+  "is_win": true,
+  "exit_reason": "TP_hit",
+  "veto_reason": "anti_metralhadora:session_blocked",
+  "session": "weekend_profitable",
+  "confidence": 0.63,
+  "regime": "unknown",
+  "duration_bars": 73,
+  "open_time": "2026-03-29 19:25:00",
+  "timestamp": "2026-04-12T18:35:12.840892+00:00"
+}

@@ -1,0 +1,17 @@
+{
+  "trade_id": 6640,
+  "type": "ghost_exit",
+  "direction": "SELL",
+  "entry_price": 73997.0,
+  "exit_price": 73097.0,
+  "pnl": 1191.6589988186693,
+  "is_win": true,
+  "exit_reason": "TP_hit",
+  "veto_reason": "ghost_audit:weekday_destructive_hours_11UTC",
+  "session": "london",
+  "confidence": 0.5466666666666667,
+  "regime": "unknown",
+  "duration_bars": 37,
+  "open_time": "2026-03-18 11:25:00",
+  "timestamp": "2026-04-12T18:35:10.191095+00:00"
+}

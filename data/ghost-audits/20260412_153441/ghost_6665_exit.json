@@ -1,0 +1,17 @@
+{
+  "trade_id": 6665,
+  "type": "ghost_exit",
+  "direction": "SELL",
+  "entry_price": 69264.38,
+  "exit_price": 69564.38,
+  "pnl": -178.23112087015957,
+  "is_win": false,
+  "exit_reason": "SL_hit",
+  "veto_reason": "advanced_veto:SELL vetoed - RSI 17.0 < 28",
+  "session": "ny_overlap",
+  "confidence": 0.5466666666666667,
+  "regime": "unknown",
+  "duration_bars": 9,
+  "open_time": "2026-03-19 15:55:00",
+  "timestamp": "2026-04-12T18:35:10.431158+00:00"
+}

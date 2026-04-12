@@ -1,0 +1,17 @@
+{
+  "trade_id": 385,
+  "type": "ghost_exit",
+  "direction": "BUY",
+  "entry_price": 111141.56,
+  "exit_price": 110830.19,
+  "pnl": -152.2446186647145,
+  "is_win": false,
+  "exit_reason": "SL_hit",
+  "veto_reason": "advanced_veto:BUY vetoed - RSI 72.9 > 72",
+  "session": "london",
+  "confidence": 0.58,
+  "regime": "unknown",
+  "duration_bars": 36,
+  "open_time": "2025-10-24 07:45:00",
+  "timestamp": "2026-04-12T18:34:45.018695+00:00"
+}

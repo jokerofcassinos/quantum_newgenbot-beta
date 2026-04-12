@@ -1,0 +1,17 @@
+{
+  "trade_id": 3965,
+  "type": "ghost_exit",
+  "direction": "SELL",
+  "entry_price": 93509.98,
+  "exit_price": 93809.98,
+  "pnl": -375.9835014523093,
+  "is_win": false,
+  "exit_reason": "SL_hit",
+  "veto_reason": "advanced_veto:SELL vetoed - RSI 27.1 < 28",
+  "session": "london",
+  "confidence": 0.5466666666666667,
+  "regime": "unknown",
+  "duration_bars": 55,
+  "open_time": "2026-01-06 09:10:00",
+  "timestamp": "2026-04-12T18:34:55.853474+00:00"
+}

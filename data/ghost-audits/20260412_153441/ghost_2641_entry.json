@@ -1,0 +1,15 @@
+{
+  "trade_id": 2641,
+  "type": "ghost_entry",
+  "direction": "BUY",
+  "entry_price": 88148.15,
+  "stop_loss": 87848.15,
+  "take_profit": 89048.15,
+  "volume": 3.5062828510677884,
+  "veto_reason": "advanced_veto:BUY vetoed - price at upper BB",
+  "session": "weekend_profitable",
+  "confidence": 0.58,
+  "regime": "unknown",
+  "open_time": "2025-12-21 08:10:00",
+  "timestamp": "2026-04-12T18:34:52.281857+00:00"
+}

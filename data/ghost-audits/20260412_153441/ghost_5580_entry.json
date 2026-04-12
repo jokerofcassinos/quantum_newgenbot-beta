@@ -1,0 +1,15 @@
+{
+  "trade_id": 5580,
+  "type": "ghost_entry",
+  "direction": "SELL",
+  "entry_price": 87650.21,
+  "stop_loss": 87950.21,
+  "take_profit": 86750.21,
+  "volume": 0.8122066835925519,
+  "veto_reason": "advanced_veto:SELL vetoed - RSI 25.9 < 28",
+  "session": "ny",
+  "confidence": 0.5466666666666667,
+  "regime": "unknown",
+  "open_time": "2026-01-26 16:10:00",
+  "timestamp": "2026-04-12T18:35:00.560722+00:00"
+}

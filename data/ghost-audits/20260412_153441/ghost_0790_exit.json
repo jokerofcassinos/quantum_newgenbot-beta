@@ -1,0 +1,17 @@
+{
+  "trade_id": 790,
+  "type": "ghost_exit",
+  "direction": "BUY",
+  "entry_price": 108373.06,
+  "exit_price": 109273.06,
+  "pnl": 559.8180002916979,
+  "is_win": true,
+  "exit_reason": "TP_hit",
+  "veto_reason": "advanced_veto:BUY vetoed - RSI 77.9 > 72",
+  "session": "asian",
+  "confidence": 0.4966666666666667,
+  "regime": "unknown",
+  "duration_bars": 10,
+  "open_time": "2025-10-31 03:00:00",
+  "timestamp": "2026-04-12T18:34:45.936052+00:00"
+}

@@ -1,0 +1,17 @@
+{
+  "trade_id": 705,
+  "type": "ghost_exit",
+  "direction": "SELL",
+  "entry_price": 114952.7,
+  "exit_price": 115252.7,
+  "pnl": -272.1550731049382,
+  "is_win": false,
+  "exit_reason": "SL_hit",
+  "veto_reason": "advanced_veto:SELL vetoed - price at lower BB",
+  "session": "ny",
+  "confidence": 0.5466666666666667,
+  "regime": "unknown",
+  "duration_bars": 4,
+  "open_time": "2025-10-27 16:30:00",
+  "timestamp": "2026-04-12T18:34:45.529022+00:00"
+}

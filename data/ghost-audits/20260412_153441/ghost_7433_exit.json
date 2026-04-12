@@ -1,0 +1,17 @@
+{
+  "trade_id": 7433,
+  "type": "ghost_exit",
+  "direction": "SELL",
+  "entry_price": 67362.13,
+  "exit_price": 67662.13,
+  "pnl": -746.6743236888701,
+  "is_win": false,
+  "exit_reason": "SL_hit",
+  "veto_reason": "anti_metralhadora:session_blocked",
+  "session": "weekend_profitable",
+  "confidence": 0.63,
+  "regime": "unknown",
+  "duration_bars": 36,
+  "open_time": "2026-04-05 20:35:00",
+  "timestamp": "2026-04-12T18:35:14.517712+00:00"
+}

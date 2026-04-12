@@ -1,0 +1,17 @@
+{
+  "trade_id": 1943,
+  "type": "ghost_exit",
+  "direction": "SELL",
+  "entry_price": 90014.1,
+  "exit_price": 90314.1,
+  "pnl": -223.40546914356207,
+  "is_win": false,
+  "exit_reason": "SL_hit",
+  "veto_reason": "ghost_audit:weekday_destructive_hours_16UTC",
+  "session": "ny",
+  "confidence": 0.5466666666666667,
+  "regime": "unknown",
+  "duration_bars": 6,
+  "open_time": "2025-12-11 16:05:00",
+  "timestamp": "2026-04-12T18:34:50.633158+00:00"
+}

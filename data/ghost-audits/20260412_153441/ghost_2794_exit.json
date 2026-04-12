@@ -1,0 +1,17 @@
+{
+  "trade_id": 2794,
+  "type": "ghost_exit",
+  "direction": "BUY",
+  "entry_price": 87333.79,
+  "exit_price": 87033.79,
+  "pnl": -469.91658226071155,
+  "is_win": false,
+  "exit_reason": "SL_hit",
+  "veto_reason": "ghost_audit:weekday_destructive_hours_15UTC",
+  "session": "ny_overlap",
+  "confidence": 0.4966666666666667,
+  "regime": "unknown",
+  "duration_bars": 5,
+  "open_time": "2025-12-24 15:05:00",
+  "timestamp": "2026-04-12T18:34:52.845629+00:00"
+}

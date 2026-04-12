@@ -1,0 +1,17 @@
+{
+  "trade_id": 2880,
+  "type": "ghost_exit",
+  "direction": "SELL",
+  "entry_price": 88570.92,
+  "exit_price": 88878.64285714286,
+  "pnl": -91.70311470474017,
+  "is_win": false,
+  "exit_reason": "SL_hit",
+  "veto_reason": "ghost_audit:weekday_destructive_hours_10UTC",
+  "session": "london",
+  "confidence": 0.5466666666666667,
+  "regime": "unknown",
+  "duration_bars": 21,
+  "open_time": "2025-12-26 10:05:00",
+  "timestamp": "2026-04-12T18:34:53.220192+00:00"
+}

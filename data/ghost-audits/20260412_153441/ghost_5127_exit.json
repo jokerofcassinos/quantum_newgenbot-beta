@@ -1,0 +1,17 @@
+{
+  "trade_id": 5127,
+  "type": "ghost_exit",
+  "direction": "SELL",
+  "entry_price": 89244.33,
+  "exit_price": 88344.33,
+  "pnl": 888.2077676733269,
+  "is_win": true,
+  "exit_reason": "TP_hit",
+  "veto_reason": "ghost_audit:weekday_destructive_hours_11UTC",
+  "session": "london",
+  "confidence": 0.5466666666666667,
+  "regime": "unknown",
+  "duration_bars": 36,
+  "open_time": "2026-01-21 11:10:00",
+  "timestamp": "2026-04-12T18:34:59.280446+00:00"
+}

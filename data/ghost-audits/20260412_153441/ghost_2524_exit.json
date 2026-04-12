@@ -1,0 +1,17 @@
+{
+  "trade_id": 2524,
+  "type": "ghost_exit",
+  "direction": "BUY",
+  "entry_price": 88096.96,
+  "exit_price": 88996.96,
+  "pnl": 3730.4629160622085,
+  "is_win": true,
+  "exit_reason": "TP_hit",
+  "veto_reason": "session_veto:Confidence 0.42 < 0.45 (Weekend Profitable Hours threshold)",
+  "session": "weekend_profitable",
+  "confidence": 0.4166666666666667,
+  "regime": "unknown",
+  "duration_bars": 192,
+  "open_time": "2025-12-20 18:40:00",
+  "timestamp": "2026-04-12T18:34:52.322550+00:00"
+}

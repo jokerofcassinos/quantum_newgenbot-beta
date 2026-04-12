@@ -1,0 +1,17 @@
+{
+  "trade_id": 5640,
+  "type": "ghost_exit",
+  "direction": "SELL",
+  "entry_price": 87748.28,
+  "exit_price": 88048.28,
+  "pnl": -140.70626487187025,
+  "is_win": false,
+  "exit_reason": "SL_hit",
+  "veto_reason": "advanced_veto:SELL vetoed - RSI 7.3 < 28",
+  "session": "asian",
+  "confidence": 0.5466666666666667,
+  "regime": "unknown",
+  "duration_bars": 3,
+  "open_time": "2026-01-29 04:50:00",
+  "timestamp": "2026-04-12T18:35:01.119039+00:00"
+}

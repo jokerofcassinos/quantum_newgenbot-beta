@@ -1,0 +1,17 @@
+{
+  "trade_id": 6829,
+  "type": "ghost_exit",
+  "direction": "SELL",
+  "entry_price": 69124.12,
+  "exit_price": 68224.12,
+  "pnl": 1681.0538449986395,
+  "is_win": true,
+  "exit_reason": "TP_hit",
+  "veto_reason": "session_veto:Confidence 0.42 < 0.45 (Weekend Profitable Hours threshold)",
+  "session": "weekend_profitable",
+  "confidence": 0.4166666666666667,
+  "regime": "unknown",
+  "duration_bars": 66,
+  "open_time": "2026-03-22 09:20:00",
+  "timestamp": "2026-04-12T18:35:11.138076+00:00"
+}

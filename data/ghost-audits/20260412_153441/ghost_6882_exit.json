@@ -1,0 +1,17 @@
+{
+  "trade_id": 6882,
+  "type": "ghost_exit",
+  "direction": "BUY",
+  "entry_price": 71020.04,
+  "exit_price": 71920.04,
+  "pnl": 1164.1246295163464,
+  "is_win": true,
+  "exit_reason": "TP_hit",
+  "veto_reason": "ghost_audit:weekday_destructive_hours_10UTC",
+  "session": "london",
+  "confidence": 0.4966666666666667,
+  "regime": "unknown",
+  "duration_bars": 46,
+  "open_time": "2026-03-25 10:40:00",
+  "timestamp": "2026-04-12T18:35:11.827937+00:00"
+}

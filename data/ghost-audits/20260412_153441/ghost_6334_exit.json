@@ -1,0 +1,17 @@
+{
+  "trade_id": 6334,
+  "type": "ghost_exit",
+  "direction": "BUY",
+  "entry_price": 67845.07,
+  "exit_price": 67545.07,
+  "pnl": -808.8855551194573,
+  "is_win": false,
+  "exit_reason": "SL_hit",
+  "veto_reason": "session_veto:Confidence 0.42 < 0.45 (Weekend Profitable Hours threshold)",
+  "session": "weekend_profitable",
+  "confidence": 0.4166666666666667,
+  "regime": "unknown",
+  "duration_bars": 4,
+  "open_time": "2026-03-07 19:40:00",
+  "timestamp": "2026-04-12T18:35:07.952515+00:00"
+}

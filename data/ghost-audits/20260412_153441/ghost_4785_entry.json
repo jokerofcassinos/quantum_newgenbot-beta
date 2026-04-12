@@ -1,0 +1,15 @@
+{
+  "trade_id": 4785,
+  "type": "ghost_entry",
+  "direction": "BUY",
+  "entry_price": 95404.91,
+  "stop_loss": 95104.91,
+  "take_profit": 96304.91,
+  "volume": 5.0,
+  "veto_reason": "advanced_veto:BUY vetoed - price at upper BB",
+  "session": "weekend_profitable",
+  "confidence": 0.5633333333333334,
+  "regime": "unknown",
+  "open_time": "2026-01-17 20:40:00",
+  "timestamp": "2026-04-12T18:34:58.321378+00:00"
+}

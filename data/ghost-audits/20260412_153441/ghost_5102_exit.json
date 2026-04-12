@@ -1,0 +1,17 @@
+{
+  "trade_id": 5102,
+  "type": "ghost_exit",
+  "direction": "SELL",
+  "entry_price": 91148.76,
+  "exit_price": 90248.76,
+  "pnl": 994.0596252632529,
+  "is_win": true,
+  "exit_reason": "TP_hit",
+  "veto_reason": "ghost_audit:weekday_destructive_hours_10UTC",
+  "session": "london",
+  "confidence": 0.5466666666666667,
+  "regime": "unknown",
+  "duration_bars": 77,
+  "open_time": "2026-01-20 10:20:00",
+  "timestamp": "2026-04-12T18:34:59.104381+00:00"
+}

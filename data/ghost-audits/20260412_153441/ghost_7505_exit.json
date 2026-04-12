@@ -1,0 +1,17 @@
+{
+  "trade_id": 7505,
+  "type": "ghost_exit",
+  "direction": "SELL",
+  "entry_price": 71644.85,
+  "exit_price": 71944.85,
+  "pnl": -488.8126544088853,
+  "is_win": false,
+  "exit_reason": "SL_hit",
+  "veto_reason": "ghost_audit:weekday_destructive_hours_14UTC",
+  "session": "ny_overlap",
+  "confidence": 0.63,
+  "regime": "unknown",
+  "duration_bars": 10,
+  "open_time": "2026-04-08 14:55:00",
+  "timestamp": "2026-04-12T18:35:15.157984+00:00"
+}

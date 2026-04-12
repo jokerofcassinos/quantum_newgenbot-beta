@@ -1,0 +1,17 @@
+{
+  "trade_id": 5771,
+  "type": "ghost_exit",
+  "direction": "SELL",
+  "entry_price": 75161.49,
+  "exit_price": 75461.49,
+  "pnl": -197.1571575669,
+  "is_win": false,
+  "exit_reason": "SL_hit",
+  "veto_reason": "advanced_veto:SELL vetoed - RSI 22.8 < 28",
+  "session": "ny_overlap",
+  "confidence": 0.5466666666666667,
+  "regime": "unknown",
+  "duration_bars": 6,
+  "open_time": "2026-02-04 15:50:00",
+  "timestamp": "2026-04-12T18:35:02.253832+00:00"
+}

@@ -1,0 +1,17 @@
+{
+  "trade_id": 6076,
+  "type": "ghost_exit",
+  "direction": "SELL",
+  "entry_price": 67999.71,
+  "exit_price": 67099.71,
+  "pnl": 2867.2738362328505,
+  "is_win": true,
+  "exit_reason": "TP_hit",
+  "veto_reason": "anti_metralhadora:session_blocked",
+  "session": "weekend_profitable",
+  "confidence": 0.63,
+  "regime": "unknown",
+  "duration_bars": 223,
+  "open_time": "2026-02-22 08:00:00",
+  "timestamp": "2026-04-12T18:35:05.789731+00:00"
+}

@@ -1,0 +1,17 @@
+{
+  "trade_id": 3519,
+  "type": "ghost_exit",
+  "direction": "BUY",
+  "entry_price": 87820.79,
+  "exit_price": 88720.79,
+  "pnl": 2940.1098986574734,
+  "is_win": true,
+  "exit_reason": "TP_hit",
+  "veto_reason": "ghost_audit:weekday_destructive_hours_11UTC",
+  "session": "london",
+  "confidence": 0.58,
+  "regime": "unknown",
+  "duration_bars": 156,
+  "open_time": "2026-01-01 11:50:00",
+  "timestamp": "2026-04-12T18:34:54.832296+00:00"
+}

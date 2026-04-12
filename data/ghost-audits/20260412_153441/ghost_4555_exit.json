@@ -1,0 +1,17 @@
+{
+  "trade_id": 4555,
+  "type": "ghost_exit",
+  "direction": "SELL",
+  "entry_price": 94799.49,
+  "exit_price": 95099.49,
+  "pnl": -365.628668049191,
+  "is_win": false,
+  "exit_reason": "SL_hit",
+  "veto_reason": "ghost_audit:weekday_destructive_hours_14UTC",
+  "session": "ny_overlap",
+  "confidence": 0.5466666666666667,
+  "regime": "unknown",
+  "duration_bars": 6,
+  "open_time": "2026-01-14 14:00:00",
+  "timestamp": "2026-04-12T18:34:57.598494+00:00"
+}

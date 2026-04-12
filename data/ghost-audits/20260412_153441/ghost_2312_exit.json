@@ -1,0 +1,17 @@
+{
+  "trade_id": 2312,
+  "type": "ghost_exit",
+  "direction": "SELL",
+  "entry_price": 86082.38,
+  "exit_price": 86382.38,
+  "pnl": -256.1284448488058,
+  "is_win": false,
+  "exit_reason": "SL_hit",
+  "veto_reason": "anti_metralhadora:session_limit",
+  "session": "asian",
+  "confidence": 0.5466666666666667,
+  "regime": "unknown",
+  "duration_bars": 45,
+  "open_time": "2025-12-16 04:40:00",
+  "timestamp": "2026-04-12T18:34:51.459306+00:00"
+}

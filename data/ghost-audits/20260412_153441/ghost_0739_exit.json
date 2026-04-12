@@ -1,0 +1,17 @@
+{
+  "trade_id": 739,
+  "type": "ghost_exit",
+  "direction": "BUY",
+  "entry_price": 114358.35,
+  "exit_price": 115258.35,
+  "pnl": 1503.8520809170755,
+  "is_win": true,
+  "exit_reason": "TP_hit",
+  "veto_reason": "ghost_audit:weekday_destructive_hours_14UTC",
+  "session": "ny_overlap",
+  "confidence": 0.58,
+  "regime": "unknown",
+  "duration_bars": 24,
+  "open_time": "2025-10-28 14:45:00",
+  "timestamp": "2026-04-12T18:34:45.661632+00:00"
+}

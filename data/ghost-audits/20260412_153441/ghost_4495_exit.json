@@ -1,0 +1,17 @@
+{
+  "trade_id": 4495,
+  "type": "ghost_exit",
+  "direction": "SELL",
+  "entry_price": 90611.1,
+  "exit_price": 90911.1,
+  "pnl": -95.44273678183977,
+  "is_win": false,
+  "exit_reason": "SL_hit",
+  "veto_reason": "advanced_veto:SELL vetoed - RSI 18.0 < 28",
+  "session": "london",
+  "confidence": 0.5466666666666667,
+  "regime": "unknown",
+  "duration_bars": 70,
+  "open_time": "2026-01-12 10:45:00",
+  "timestamp": "2026-04-12T18:34:57.276513+00:00"
+}

@@ -1,0 +1,17 @@
+{
+  "trade_id": 6944,
+  "type": "ghost_exit",
+  "direction": "BUY",
+  "entry_price": 66290.74,
+  "exit_price": 67190.74,
+  "pnl": 2419.4927194087545,
+  "is_win": true,
+  "exit_reason": "TP_hit",
+  "veto_reason": "anti_metralhadora:session_blocked",
+  "session": "weekend_profitable",
+  "confidence": 0.58,
+  "regime": "unknown",
+  "duration_bars": 52,
+  "open_time": "2026-03-28 09:00:00",
+  "timestamp": "2026-04-12T18:35:12.505764+00:00"
+}

@@ -1,0 +1,17 @@
+{
+  "trade_id": 6200,
+  "type": "ghost_exit",
+  "direction": "SELL",
+  "entry_price": 63150.03,
+  "exit_price": 63450.03,
+  "pnl": -326.3641472197459,
+  "is_win": false,
+  "exit_reason": "SL_hit",
+  "veto_reason": "ghost_audit:weekday_destructive_hours_12UTC",
+  "session": "london",
+  "confidence": 0.5466666666666667,
+  "regime": "unknown",
+  "duration_bars": 57,
+  "open_time": "2026-02-24 12:00:00",
+  "timestamp": "2026-04-12T18:35:06.052124+00:00"
+}

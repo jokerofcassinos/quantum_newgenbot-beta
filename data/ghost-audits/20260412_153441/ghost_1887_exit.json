@@ -1,0 +1,17 @@
+{
+  "trade_id": 1887,
+  "type": "ghost_exit",
+  "direction": "BUY",
+  "entry_price": 90381.13,
+  "exit_price": 90081.13,
+  "pnl": -378.17335698823473,
+  "is_win": false,
+  "exit_reason": "SL_hit",
+  "veto_reason": "ghost_audit:weekday_destructive_hours_11UTC",
+  "session": "london",
+  "confidence": 0.4966666666666667,
+  "regime": "unknown",
+  "duration_bars": 12,
+  "open_time": "2025-12-09 11:05:00",
+  "timestamp": "2026-04-12T18:34:50.355011+00:00"
+}

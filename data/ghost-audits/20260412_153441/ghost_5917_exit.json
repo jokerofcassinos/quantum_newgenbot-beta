@@ -1,0 +1,17 @@
+{
+  "trade_id": 5917,
+  "type": "ghost_exit",
+  "direction": "SELL",
+  "entry_price": 67085.83,
+  "exit_price": 67385.83,
+  "pnl": -352.0445386313822,
+  "is_win": false,
+  "exit_reason": "SL_hit",
+  "veto_reason": "advanced_veto:SELL vetoed - RSI 15.4 < 28",
+  "session": "asian",
+  "confidence": 0.5466666666666667,
+  "regime": "unknown",
+  "duration_bars": 18,
+  "open_time": "2026-02-18 03:05:00",
+  "timestamp": "2026-04-12T18:35:04.694523+00:00"
+}

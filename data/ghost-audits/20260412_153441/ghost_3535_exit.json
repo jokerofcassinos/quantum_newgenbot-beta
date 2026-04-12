@@ -1,0 +1,17 @@
+{
+  "trade_id": 3535,
+  "type": "ghost_exit",
+  "direction": "BUY",
+  "entry_price": 87891.8,
+  "exit_price": 88791.8,
+  "pnl": 4500.0,
+  "is_win": true,
+  "exit_reason": "TP_hit",
+  "veto_reason": "advanced_veto:BUY vetoed - RSI 72.7 > 72",
+  "session": "ny_overlap",
+  "confidence": 0.5633333333333334,
+  "regime": "unknown",
+  "duration_bars": 148,
+  "open_time": "2026-01-01 13:10:00",
+  "timestamp": "2026-04-12T18:34:54.852956+00:00"
+}

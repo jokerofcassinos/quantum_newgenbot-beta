@@ -1,0 +1,17 @@
+{
+  "trade_id": 6412,
+  "type": "ghost_exit",
+  "direction": "BUY",
+  "entry_price": 69805.15,
+  "exit_price": 70705.15,
+  "pnl": 868.5859417242202,
+  "is_win": true,
+  "exit_reason": "TP_hit",
+  "veto_reason": "ghost_audit:weekday_destructive_hours_11UTC",
+  "session": "london",
+  "confidence": 0.4966666666666667,
+  "regime": "unknown",
+  "duration_bars": 35,
+  "open_time": "2026-03-12 11:45:00",
+  "timestamp": "2026-04-12T18:35:08.971269+00:00"
+}

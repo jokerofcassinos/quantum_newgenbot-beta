@@ -1,0 +1,17 @@
+{
+  "trade_id": 1303,
+  "type": "ghost_exit",
+  "direction": "BUY",
+  "entry_price": 95917.69,
+  "exit_price": 95617.69,
+  "pnl": -566.1246724896857,
+  "is_win": false,
+  "exit_reason": "SL_hit",
+  "veto_reason": "session_veto:Confidence 0.42 < 0.45 (Weekend Profitable Hours threshold)",
+  "session": "weekend_profitable",
+  "confidence": 0.4166666666666667,
+  "regime": "unknown",
+  "duration_bars": 55,
+  "open_time": "2025-11-16 08:50:00",
+  "timestamp": "2026-04-12T18:34:47.830343+00:00"
+}

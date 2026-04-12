@@ -1,0 +1,17 @@
+{
+  "trade_id": 3389,
+  "type": "ghost_exit",
+  "direction": "SELL",
+  "entry_price": 88068.0,
+  "exit_price": 86966.02071428573,
+  "pnl": 270.5071121676262,
+  "is_win": true,
+  "exit_reason": "TP_hit",
+  "veto_reason": "advanced_veto:SELL vetoed - RSI 16.5 < 28",
+  "session": "london",
+  "confidence": 0.5466666666666667,
+  "regime": "unknown",
+  "duration_bars": 27,
+  "open_time": "2025-12-29 11:55:00",
+  "timestamp": "2026-04-12T18:34:54.057662+00:00"
+}

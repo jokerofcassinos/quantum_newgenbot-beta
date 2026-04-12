@@ -1,0 +1,17 @@
+{
+  "trade_id": 4596,
+  "type": "ghost_exit",
+  "direction": "SELL",
+  "entry_price": 95431.06,
+  "exit_price": 95731.06,
+  "pnl": -258.7766228592501,
+  "is_win": false,
+  "exit_reason": "SL_hit",
+  "veto_reason": "advanced_veto:SELL vetoed - price at lower BB",
+  "session": "asian",
+  "confidence": 0.5466666666666667,
+  "regime": "unknown",
+  "duration_bars": 49,
+  "open_time": "2026-01-16 04:00:00",
+  "timestamp": "2026-04-12T18:34:57.954144+00:00"
+}

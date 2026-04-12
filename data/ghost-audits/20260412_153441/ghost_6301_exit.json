@@ -1,0 +1,17 @@
+{
+  "trade_id": 6301,
+  "type": "ghost_exit",
+  "direction": "SELL",
+  "entry_price": 70375.34,
+  "exit_price": 70675.34,
+  "pnl": -273.36839846149974,
+  "is_win": false,
+  "exit_reason": "SL_hit",
+  "veto_reason": "advanced_veto:SELL vetoed - RSI 12.6 < 28",
+  "session": "london",
+  "confidence": 0.5466666666666667,
+  "regime": "unknown",
+  "duration_bars": 8,
+  "open_time": "2026-03-06 11:25:00",
+  "timestamp": "2026-04-12T18:35:07.807069+00:00"
+}

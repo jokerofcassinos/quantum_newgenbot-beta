@@ -1,0 +1,17 @@
+{
+  "trade_id": 4628,
+  "type": "ghost_exit",
+  "direction": "BUY",
+  "entry_price": 95491.66,
+  "exit_price": 95191.66,
+  "pnl": -637.9727258990697,
+  "is_win": false,
+  "exit_reason": "SL_hit",
+  "veto_reason": "advanced_veto:BUY vetoed - price at upper BB",
+  "session": "ny_overlap",
+  "confidence": 0.58,
+  "regime": "unknown",
+  "duration_bars": 18,
+  "open_time": "2026-01-16 15:10:00",
+  "timestamp": "2026-04-12T18:34:58.041979+00:00"
+}

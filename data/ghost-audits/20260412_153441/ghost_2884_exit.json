@@ -1,0 +1,17 @@
+{
+  "trade_id": 2884,
+  "type": "ghost_exit",
+  "direction": "SELL",
+  "entry_price": 88750.83,
+  "exit_price": 87850.83,
+  "pnl": 1563.6104304543014,
+  "is_win": true,
+  "exit_reason": "TP_hit",
+  "veto_reason": "ghost_audit:weekday_destructive_hours_11UTC",
+  "session": "london",
+  "confidence": 0.5466666666666667,
+  "regime": "unknown",
+  "duration_bars": 64,
+  "open_time": "2025-12-26 11:30:00",
+  "timestamp": "2026-04-12T18:34:53.267153+00:00"
+}

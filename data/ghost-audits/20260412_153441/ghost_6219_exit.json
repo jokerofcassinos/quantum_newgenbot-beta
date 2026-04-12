@@ -1,0 +1,17 @@
+{
+  "trade_id": 6219,
+  "type": "ghost_exit",
+  "direction": "BUY",
+  "entry_price": 66228.12,
+  "exit_price": 67140.51107142857,
+  "pnl": 547.5088812649549,
+  "is_win": true,
+  "exit_reason": "TP_hit",
+  "veto_reason": "ghost_audit:weekday_destructive_hours_16UTC",
+  "session": "ny",
+  "confidence": 0.4966666666666667,
+  "regime": "unknown",
+  "duration_bars": 4,
+  "open_time": "2026-02-25 16:40:00",
+  "timestamp": "2026-04-12T18:35:06.216451+00:00"
+}

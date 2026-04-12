@@ -1,0 +1,17 @@
+{
+  "trade_id": 6233,
+  "type": "ghost_exit",
+  "direction": "SELL",
+  "entry_price": 67663.39,
+  "exit_price": 66500.87607142857,
+  "pnl": 272.5973464063176,
+  "is_win": true,
+  "exit_reason": "TP_hit",
+  "veto_reason": "ghost_audit:weekday_destructive_hours_16UTC",
+  "session": "ny",
+  "confidence": 0.5466666666666667,
+  "regime": "unknown",
+  "duration_bars": 24,
+  "open_time": "2026-02-26 16:55:00",
+  "timestamp": "2026-04-12T18:35:06.444359+00:00"
+}

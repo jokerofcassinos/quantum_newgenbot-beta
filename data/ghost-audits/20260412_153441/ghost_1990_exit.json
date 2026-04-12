@@ -1,0 +1,17 @@
+{
+  "trade_id": 1990,
+  "type": "ghost_exit",
+  "direction": "BUY",
+  "entry_price": 90279.35,
+  "exit_price": 89979.35,
+  "pnl": -695.5014240538418,
+  "is_win": false,
+  "exit_reason": "SL_hit",
+  "veto_reason": "session_veto:Trading disabled for Weekend session",
+  "session": "weekend",
+  "confidence": 0.5,
+  "regime": "unknown",
+  "duration_bars": 166,
+  "open_time": "2025-12-13 02:35:00",
+  "timestamp": "2026-04-12T18:34:50.978852+00:00"
+}

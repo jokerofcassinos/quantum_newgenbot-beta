@@ -1,0 +1,17 @@
+{
+  "trade_id": 4598,
+  "type": "ghost_exit",
+  "direction": "BUY",
+  "entry_price": 95644.28,
+  "exit_price": 95344.28,
+  "pnl": -318.13783566498927,
+  "is_win": false,
+  "exit_reason": "SL_hit",
+  "veto_reason": "advanced_veto:BUY vetoed - RSI 69.3 declining",
+  "session": "london",
+  "confidence": 0.4966666666666667,
+  "regime": "unknown",
+  "duration_bars": 54,
+  "open_time": "2026-01-16 08:05:00",
+  "timestamp": "2026-04-12T18:34:58.000571+00:00"
+}

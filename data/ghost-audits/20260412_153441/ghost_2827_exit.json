@@ -1,0 +1,17 @@
+{
+  "trade_id": 2827,
+  "type": "ghost_exit",
+  "direction": "BUY",
+  "entry_price": 87422.85,
+  "exit_price": 88322.85,
+  "pnl": 2611.7315755847167,
+  "is_win": true,
+  "exit_reason": "TP_hit",
+  "veto_reason": "ghost_audit:weekday_destructive_hours_12UTC",
+  "session": "london",
+  "confidence": 0.4966666666666667,
+  "regime": "unknown",
+  "duration_bars": 67,
+  "open_time": "2025-12-25 12:05:00",
+  "timestamp": "2026-04-12T18:34:53.072947+00:00"
+}

@@ -1,0 +1,15 @@
+{
+  "trade_id": 2870,
+  "type": "ghost_entry",
+  "direction": "BUY",
+  "entry_price": 88111.77,
+  "stop_loss": 87811.77,
+  "take_profit": 89011.77,
+  "volume": 3.6490979288992094,
+  "veto_reason": "ghost_audit:low_volatility_chop",
+  "session": "asian",
+  "confidence": 0.58,
+  "regime": "unknown",
+  "open_time": "2025-12-25 21:55:00",
+  "timestamp": "2026-04-12T18:34:53.121175+00:00"
+}

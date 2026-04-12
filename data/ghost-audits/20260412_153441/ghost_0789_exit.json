@@ -1,0 +1,17 @@
+{
+  "trade_id": 789,
+  "type": "ghost_exit",
+  "direction": "SELL",
+  "entry_price": 108297.07,
+  "exit_price": 107089.27642857145,
+  "pnl": 561.1231852705648,
+  "is_win": true,
+  "exit_reason": "TP_hit",
+  "veto_reason": "advanced_veto:SELL vetoed - RSI 30.9 rising",
+  "session": "ny",
+  "confidence": 0.5466666666666667,
+  "regime": "unknown",
+  "duration_bars": 46,
+  "open_time": "2025-10-30 16:30:00",
+  "timestamp": "2026-04-12T18:34:45.906073+00:00"
+}

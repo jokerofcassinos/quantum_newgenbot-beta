@@ -178,9 +178,12 @@ class CompleteBacktestEngineV2:
         )
         
         # Phase 1: RiskQuantumEngine (DubaiMatrixASI salvage - 5-factor position sizing)
+        # GHOST AUDIT OPTIMIZATION: Increased max position from 1.0 to 5.0
+        # Ghost audit finding: DD is only 0.02%, we have room for larger positions
+        # This allows capturing more profit per trade while maintaining risk management
         self.risk_quantum = RiskQuantumEngine(
             kelly_fraction=0.25,
-            max_position_size=1.0,
+            max_position_size=5.0,  # Increased from 1.0 (DD is only 0.02%)
             min_position_size=0.01,
             base_risk_percent=1.0,
         )

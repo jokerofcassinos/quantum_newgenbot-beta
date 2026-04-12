@@ -1,0 +1,17 @@
+{
+  "trade_id": 2360,
+  "type": "ghost_exit",
+  "direction": "SELL",
+  "entry_price": 87297.38,
+  "exit_price": 87597.38,
+  "pnl": -399.9945404674036,
+  "is_win": false,
+  "exit_reason": "SL_hit",
+  "veto_reason": "ghost_audit:weekday_destructive_hours_14UTC",
+  "session": "ny_overlap",
+  "confidence": 0.5466666666666667,
+  "regime": "unknown",
+  "duration_bars": 6,
+  "open_time": "2025-12-18 14:30:00",
+  "timestamp": "2026-04-12T18:34:51.793204+00:00"
+}

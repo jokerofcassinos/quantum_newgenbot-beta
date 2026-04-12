@@ -1,0 +1,17 @@
+{
+  "trade_id": 6234,
+  "type": "ghost_exit",
+  "direction": "SELL",
+  "entry_price": 67130.25,
+  "exit_price": 67430.25,
+  "pnl": -207.53267287537562,
+  "is_win": false,
+  "exit_reason": "SL_hit",
+  "veto_reason": "advanced_veto:SELL vetoed - RSI 29.2 rising",
+  "session": "asian",
+  "confidence": 0.5466666666666667,
+  "regime": "unknown",
+  "duration_bars": 15,
+  "open_time": "2026-02-27 02:45:00",
+  "timestamp": "2026-04-12T18:35:06.497036+00:00"
+}

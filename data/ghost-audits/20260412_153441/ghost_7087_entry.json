@@ -1,0 +1,15 @@
+{
+  "trade_id": 7087,
+  "type": "ghost_entry",
+  "direction": "SELL",
+  "entry_price": 67448.08,
+  "stop_loss": 67748.08,
+  "take_profit": 66548.08,
+  "volume": 1.224612255061352,
+  "veto_reason": "ghost_audit:weekday_destructive_hours_10UTC",
+  "session": "london",
+  "confidence": 0.5466666666666667,
+  "regime": "unknown",
+  "open_time": "2026-03-30 10:50:00",
+  "timestamp": "2026-04-12T18:35:12.889787+00:00"
+}

@@ -1,0 +1,15 @@
+{
+  "trade_id": 4513,
+  "type": "ghost_entry",
+  "direction": "BUY",
+  "entry_price": 90622.3,
+  "stop_loss": 90322.3,
+  "take_profit": 91522.3,
+  "volume": 1.1692542174535914,
+  "veto_reason": "ghost_audit:weekday_destructive_hours_16UTC",
+  "session": "ny",
+  "confidence": 0.4966666666666667,
+  "regime": "unknown",
+  "open_time": "2026-01-12 16:05:00",
+  "timestamp": "2026-04-12T18:34:57.267200+00:00"
+}

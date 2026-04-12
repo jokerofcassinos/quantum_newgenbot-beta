@@ -1,0 +1,17 @@
+{
+  "trade_id": 5950,
+  "type": "ghost_exit",
+  "direction": "SELL",
+  "entry_price": 66137.06,
+  "exit_price": 66437.06,
+  "pnl": -306.36794979407205,
+  "is_win": false,
+  "exit_reason": "SL_hit",
+  "veto_reason": "advanced_veto:SELL vetoed - RSI 17.5 < 28",
+  "session": "ny_overlap",
+  "confidence": 0.5466666666666667,
+  "regime": "unknown",
+  "duration_bars": 17,
+  "open_time": "2026-02-19 15:25:00",
+  "timestamp": "2026-04-12T18:35:04.984247+00:00"
+}

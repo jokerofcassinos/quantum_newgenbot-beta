@@ -1,0 +1,15 @@
+{
+  "trade_id": 2881,
+  "type": "ghost_entry",
+  "direction": "SELL",
+  "entry_price": 88599.64,
+  "stop_loss": 88899.64,
+  "take_profit": 87699.64,
+  "volume": 0.48607792803594535,
+  "veto_reason": "ghost_audit:weekday_destructive_hours_10UTC",
+  "session": "london",
+  "confidence": 0.5466666666666667,
+  "regime": "unknown",
+  "open_time": "2025-12-26 10:40:00",
+  "timestamp": "2026-04-12T18:34:53.212809+00:00"
+}

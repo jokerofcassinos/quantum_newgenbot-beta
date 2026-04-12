@@ -1,0 +1,17 @@
+{
+  "trade_id": 1890,
+  "type": "ghost_exit",
+  "direction": "SELL",
+  "entry_price": 90262.01,
+  "exit_price": 90562.01,
+  "pnl": -194.03208483760844,
+  "is_win": false,
+  "exit_reason": "SL_hit",
+  "veto_reason": "ghost_audit:weekday_destructive_hours_13UTC",
+  "session": "ny_overlap",
+  "confidence": 0.5466666666666667,
+  "regime": "unknown",
+  "duration_bars": 15,
+  "open_time": "2025-12-09 13:05:00",
+  "timestamp": "2026-04-12T18:34:50.367761+00:00"
+}

@@ -1,0 +1,17 @@
+{
+  "trade_id": 2754,
+  "type": "ghost_exit",
+  "direction": "BUY",
+  "entry_price": 87465.14,
+  "exit_price": 87165.14,
+  "pnl": -501.1967040833943,
+  "is_win": false,
+  "exit_reason": "SL_hit",
+  "veto_reason": "ghost_audit:weekday_destructive_hours_11UTC",
+  "session": "london",
+  "confidence": 0.58,
+  "regime": "unknown",
+  "duration_bars": 66,
+  "open_time": "2025-12-23 11:15:00",
+  "timestamp": "2026-04-12T18:34:52.694759+00:00"
+}

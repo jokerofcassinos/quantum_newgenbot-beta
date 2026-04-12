@@ -1,0 +1,17 @@
+{
+  "trade_id": 5390,
+  "type": "ghost_exit",
+  "direction": "BUY",
+  "entry_price": 89316.0,
+  "exit_price": 89016.0,
+  "pnl": -721.0754257243805,
+  "is_win": false,
+  "exit_reason": "SL_hit",
+  "veto_reason": "session_veto:Confidence 0.42 < 0.45 (Weekend Profitable Hours threshold)",
+  "session": "weekend_profitable",
+  "confidence": 0.4166666666666667,
+  "regime": "unknown",
+  "duration_bars": 99,
+  "open_time": "2026-01-24 19:50:00",
+  "timestamp": "2026-04-12T18:35:00.203660+00:00"
+}

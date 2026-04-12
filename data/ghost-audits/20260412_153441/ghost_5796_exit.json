@@ -1,0 +1,17 @@
+{
+  "trade_id": 5796,
+  "type": "ghost_exit",
+  "direction": "SELL",
+  "entry_price": 69244.27,
+  "exit_price": 68344.27,
+  "pnl": 738.1610755076274,
+  "is_win": true,
+  "exit_reason": "TP_hit",
+  "veto_reason": "advanced_veto:SELL vetoed - RSI 24.1 < 28",
+  "session": "london",
+  "confidence": 0.5466666666666667,
+  "regime": "unknown",
+  "duration_bars": 88,
+  "open_time": "2026-02-10 07:45:00",
+  "timestamp": "2026-04-12T18:35:03.255007+00:00"
+}

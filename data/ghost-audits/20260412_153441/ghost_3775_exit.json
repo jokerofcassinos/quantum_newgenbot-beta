@@ -1,0 +1,17 @@
+{
+  "trade_id": 3775,
+  "type": "ghost_exit",
+  "direction": "BUY",
+  "entry_price": 90135.0,
+  "exit_price": 91035.0,
+  "pnl": 3789.936490673922,
+  "is_win": true,
+  "exit_reason": "TP_hit",
+  "veto_reason": "advanced_veto:BUY vetoed - price at upper BB",
+  "session": "weekend_profitable",
+  "confidence": 0.58,
+  "regime": "unknown",
+  "duration_bars": 54,
+  "open_time": "2026-01-03 20:25:00",
+  "timestamp": "2026-04-12T18:34:55.310500+00:00"
+}

@@ -1,0 +1,17 @@
+{
+  "trade_id": 5682,
+  "type": "ghost_exit",
+  "direction": "SELL",
+  "entry_price": 82338.33,
+  "exit_price": 82638.33,
+  "pnl": -259.70004964672546,
+  "is_win": false,
+  "exit_reason": "SL_hit",
+  "veto_reason": "advanced_veto:SELL vetoed - RSI 19.6 < 28",
+  "session": "london",
+  "confidence": 0.5466666666666667,
+  "regime": "unknown",
+  "duration_bars": 5,
+  "open_time": "2026-01-30 08:35:00",
+  "timestamp": "2026-04-12T18:35:01.366931+00:00"
+}

@@ -1,0 +1,17 @@
+{
+  "trade_id": 6708,
+  "type": "ghost_exit",
+  "direction": "BUY",
+  "entry_price": 70681.98,
+  "exit_price": 70381.98,
+  "pnl": -605.5481053506178,
+  "is_win": false,
+  "exit_reason": "SL_hit",
+  "veto_reason": "session_veto:Confidence 0.42 < 0.45 (Weekend Profitable Hours threshold)",
+  "session": "weekend_profitable",
+  "confidence": 0.4166666666666667,
+  "regime": "unknown",
+  "duration_bars": 124,
+  "open_time": "2026-03-21 09:05:00",
+  "timestamp": "2026-04-12T18:35:10.959813+00:00"
+}

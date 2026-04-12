@@ -1,0 +1,15 @@
+{
+  "trade_id": 4606,
+  "type": "ghost_entry",
+  "direction": "BUY",
+  "entry_price": 95680.5,
+  "stop_loss": 95380.5,
+  "take_profit": 96580.5,
+  "volume": 1.6928430431943575,
+  "veto_reason": "ghost_audit:weekday_destructive_hours_11UTC",
+  "session": "london",
+  "confidence": 0.58,
+  "regime": "unknown",
+  "open_time": "2026-01-16 11:25:00",
+  "timestamp": "2026-04-12T18:34:57.988883+00:00"
+}

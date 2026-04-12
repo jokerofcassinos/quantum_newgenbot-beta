@@ -1,0 +1,17 @@
+{
+  "trade_id": 3313,
+  "type": "ghost_exit",
+  "direction": "BUY",
+  "entry_price": 87915.83,
+  "exit_price": 87615.83,
+  "pnl": -800.3250360646111,
+  "is_win": false,
+  "exit_reason": "SL_hit",
+  "veto_reason": "anti_metralhadora:session_blocked",
+  "session": "weekend_profitable",
+  "confidence": 0.58,
+  "regime": "unknown",
+  "duration_bars": 36,
+  "open_time": "2025-12-28 17:00:00",
+  "timestamp": "2026-04-12T18:34:53.753905+00:00"
+}

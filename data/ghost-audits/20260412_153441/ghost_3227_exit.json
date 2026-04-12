@@ -1,0 +1,17 @@
+{
+  "trade_id": 3227,
+  "type": "ghost_exit",
+  "direction": "BUY",
+  "entry_price": 87657.72,
+  "exit_price": 88557.72,
+  "pnl": 3496.3736479556837,
+  "is_win": true,
+  "exit_reason": "TP_hit",
+  "veto_reason": "session_veto:Confidence 0.42 < 0.45 (Weekend Profitable Hours threshold)",
+  "session": "weekend_profitable",
+  "confidence": 0.4166666666666667,
+  "regime": "unknown",
+  "duration_bars": 222,
+  "open_time": "2025-12-28 09:20:00",
+  "timestamp": "2026-04-12T18:34:53.989398+00:00"
+}

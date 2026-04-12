@@ -1,0 +1,17 @@
+{
+  "trade_id": 2893,
+  "type": "ghost_exit",
+  "direction": "BUY",
+  "entry_price": 88713.1,
+  "exit_price": 88413.1,
+  "pnl": -490.04002323255867,
+  "is_win": false,
+  "exit_reason": "SL_hit",
+  "veto_reason": "ghost_audit:weekday_destructive_hours_12UTC",
+  "session": "london",
+  "confidence": 0.58,
+  "regime": "unknown",
+  "duration_bars": 48,
+  "open_time": "2025-12-26 12:40:00",
+  "timestamp": "2026-04-12T18:34:53.260205+00:00"
+}

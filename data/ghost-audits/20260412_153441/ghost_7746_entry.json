@@ -1,0 +1,15 @@
+{
+  "trade_id": 7746,
+  "type": "ghost_entry",
+  "direction": "BUY",
+  "entry_price": 70839.7,
+  "stop_loss": 70539.7,
+  "take_profit": 71739.7,
+  "volume": 2.289203500738649,
+  "veto_reason": "session_veto:Confidence 0.42 < 0.45 (Weekend Profitable Hours threshold)",
+  "session": "weekend_profitable",
+  "confidence": 0.4166666666666667,
+  "regime": "unknown",
+  "open_time": "2026-04-12 19:50:00",
+  "timestamp": "2026-04-12T18:35:16.242738+00:00"
+}

@@ -1,0 +1,17 @@
+{
+  "trade_id": 5195,
+  "type": "ghost_exit",
+  "direction": "BUY",
+  "entry_price": 89510.87,
+  "exit_price": 89210.87,
+  "pnl": -450.2866433782866,
+  "is_win": false,
+  "exit_reason": "SL_hit",
+  "veto_reason": "ghost_audit:weekday_destructive_hours_10UTC",
+  "session": "london",
+  "confidence": 0.4966666666666667,
+  "regime": "unknown",
+  "duration_bars": 4,
+  "open_time": "2026-01-23 10:10:00",
+  "timestamp": "2026-04-12T18:34:59.748783+00:00"
+}

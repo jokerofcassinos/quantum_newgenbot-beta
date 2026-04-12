@@ -1,0 +1,15 @@
+{
+  "trade_id": 2309,
+  "type": "ghost_entry",
+  "direction": "SELL",
+  "entry_price": 85820.6,
+  "stop_loss": 86120.6,
+  "take_profit": 84920.6,
+  "volume": 0.9237708704387076,
+  "veto_reason": "advanced_veto:SELL vetoed - RSI 16.7 < 28",
+  "session": "asian",
+  "confidence": 0.5466666666666667,
+  "regime": "unknown",
+  "open_time": "2025-12-16 02:55:00",
+  "timestamp": "2026-04-12T18:34:51.422021+00:00"
+}

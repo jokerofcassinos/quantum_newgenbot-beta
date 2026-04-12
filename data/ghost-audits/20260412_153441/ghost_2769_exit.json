@@ -1,0 +1,17 @@
+{
+  "trade_id": 2769,
+  "type": "ghost_exit",
+  "direction": "BUY",
+  "entry_price": 87692.19,
+  "exit_price": 87392.19,
+  "pnl": -425.9272338687308,
+  "is_win": false,
+  "exit_reason": "SL_hit",
+  "veto_reason": "ghost_audit:weekday_destructive_hours_14UTC",
+  "session": "ny_overlap",
+  "confidence": 0.4966666666666667,
+  "regime": "unknown",
+  "duration_bars": 19,
+  "open_time": "2025-12-23 14:00:00",
+  "timestamp": "2026-04-12T18:34:52.680038+00:00"
+}

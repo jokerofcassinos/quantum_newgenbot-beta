@@ -1,0 +1,17 @@
+{
+  "trade_id": 3634,
+  "type": "ghost_exit",
+  "direction": "SELL",
+  "entry_price": 89901.41,
+  "exit_price": 90201.41,
+  "pnl": -444.6451954918013,
+  "is_win": false,
+  "exit_reason": "SL_hit",
+  "veto_reason": "anti_metralhadora:session_limit",
+  "session": "asian",
+  "confidence": 0.5466666666666667,
+  "regime": "unknown",
+  "duration_bars": 3,
+  "open_time": "2026-01-02 23:40:00",
+  "timestamp": "2026-04-12T18:34:55.038915+00:00"
+}

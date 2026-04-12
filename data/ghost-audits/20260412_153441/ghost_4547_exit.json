@@ -1,0 +1,17 @@
+{
+  "trade_id": 4547,
+  "type": "ghost_exit",
+  "direction": "BUY",
+  "entry_price": 94996.61,
+  "exit_price": 95896.61,
+  "pnl": 1241.5215265829413,
+  "is_win": true,
+  "exit_reason": "TP_hit",
+  "veto_reason": "ghost_audit:weekday_destructive_hours_12UTC",
+  "session": "london",
+  "confidence": 0.58,
+  "regime": "unknown",
+  "duration_bars": 51,
+  "open_time": "2026-01-14 12:25:00",
+  "timestamp": "2026-04-12T18:34:57.627088+00:00"
+}

@@ -1,0 +1,17 @@
+{
+  "trade_id": 50,
+  "type": "ghost_exit",
+  "direction": "BUY",
+  "entry_price": 121399.99,
+  "exit_price": 122299.99,
+  "pnl": 457.42860075877275,
+  "is_win": true,
+  "exit_reason": "TP_hit",
+  "veto_reason": "ghost_audit:weekday_destructive_hours_15UTC",
+  "session": "ny_overlap",
+  "confidence": 0.4966666666666667,
+  "regime": "unknown",
+  "duration_bars": 12,
+  "open_time": "2025-10-10 15:35:00",
+  "timestamp": "2026-04-12T18:34:43.755357+00:00"
+}

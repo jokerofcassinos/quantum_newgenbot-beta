@@ -1,0 +1,17 @@
+{
+  "trade_id": 5085,
+  "type": "ghost_exit",
+  "direction": "BUY",
+  "entry_price": 93025.38,
+  "exit_price": 92725.38,
+  "pnl": -400.68404275780784,
+  "is_win": false,
+  "exit_reason": "SL_hit",
+  "veto_reason": "ghost_audit:weekday_destructive_hours_14UTC",
+  "session": "ny_overlap",
+  "confidence": 0.4966666666666667,
+  "regime": "unknown",
+  "duration_bars": 20,
+  "open_time": "2026-01-19 14:55:00",
+  "timestamp": "2026-04-12T18:34:58.871379+00:00"
+}

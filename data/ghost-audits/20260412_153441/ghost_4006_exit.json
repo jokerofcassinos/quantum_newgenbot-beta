@@ -1,0 +1,17 @@
+{
+  "trade_id": 4006,
+  "type": "ghost_exit",
+  "direction": "BUY",
+  "entry_price": 92894.56,
+  "exit_price": 92594.56,
+  "pnl": -558.610666098569,
+  "is_win": false,
+  "exit_reason": "SL_hit",
+  "veto_reason": "advanced_veto:BUY vetoed - RSI 73.7 > 72",
+  "session": "london",
+  "confidence": 0.4966666666666667,
+  "regime": "unknown",
+  "duration_bars": 12,
+  "open_time": "2026-01-07 10:05:00",
+  "timestamp": "2026-04-12T18:34:56.030957+00:00"
+}

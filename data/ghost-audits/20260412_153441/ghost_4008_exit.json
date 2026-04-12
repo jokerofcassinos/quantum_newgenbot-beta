@@ -1,0 +1,17 @@
+{
+  "trade_id": 4008,
+  "type": "ghost_exit",
+  "direction": "BUY",
+  "entry_price": 92823.26,
+  "exit_price": 92523.26,
+  "pnl": -494.429774929437,
+  "is_win": false,
+  "exit_reason": "SL_hit",
+  "veto_reason": "ghost_audit:weekday_destructive_hours_10UTC",
+  "session": "london",
+  "confidence": 0.4966666666666667,
+  "regime": "unknown",
+  "duration_bars": 8,
+  "open_time": "2026-01-07 10:25:00",
+  "timestamp": "2026-04-12T18:34:56.031701+00:00"
+}

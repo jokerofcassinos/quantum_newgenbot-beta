@@ -1,0 +1,17 @@
+{
+  "trade_id": 2655,
+  "type": "ghost_exit",
+  "direction": "BUY",
+  "entry_price": 88082.2,
+  "exit_price": 88982.2,
+  "pnl": 3534.982011063684,
+  "is_win": true,
+  "exit_reason": "TP_hit",
+  "veto_reason": "anti_metralhadora:session_blocked",
+  "session": "weekend_profitable",
+  "confidence": 0.58,
+  "regime": "unknown",
+  "duration_bars": 30,
+  "open_time": "2025-12-21 09:20:00",
+  "timestamp": "2026-04-12T18:34:52.335386+00:00"
+}

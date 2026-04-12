@@ -1,0 +1,17 @@
+{
+  "trade_id": 5613,
+  "type": "ghost_exit",
+  "direction": "BUY",
+  "entry_price": 89111.75,
+  "exit_price": 90011.75,
+  "pnl": 1316.6734041470004,
+  "is_win": true,
+  "exit_reason": "TP_hit",
+  "veto_reason": "ghost_audit:weekday_destructive_hours_10UTC",
+  "session": "london",
+  "confidence": 0.4966666666666667,
+  "regime": "unknown",
+  "duration_bars": 44,
+  "open_time": "2026-01-28 10:10:00",
+  "timestamp": "2026-04-12T18:35:00.986730+00:00"
+}

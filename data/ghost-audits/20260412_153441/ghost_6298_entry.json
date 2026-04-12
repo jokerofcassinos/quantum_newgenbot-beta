@@ -1,0 +1,15 @@
+{
+  "trade_id": 6298,
+  "type": "ghost_entry",
+  "direction": "BUY",
+  "entry_price": 70749.73,
+  "stop_loss": 70449.73,
+  "take_profit": 71649.73,
+  "volume": 1.3246389245184635,
+  "veto_reason": "ghost_audit:weekday_destructive_hours_10UTC",
+  "session": "london",
+  "confidence": 0.4966666666666667,
+  "regime": "unknown",
+  "open_time": "2026-03-06 10:55:00",
+  "timestamp": "2026-04-12T18:35:07.794623+00:00"
+}

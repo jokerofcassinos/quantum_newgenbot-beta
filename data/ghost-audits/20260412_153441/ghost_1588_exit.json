@@ -1,0 +1,17 @@
+{
+  "trade_id": 1588,
+  "type": "ghost_exit",
+  "direction": "SELL",
+  "entry_price": 90652.24,
+  "exit_price": 90952.24,
+  "pnl": -159.7264003033481,
+  "is_win": false,
+  "exit_reason": "SL_hit",
+  "veto_reason": "session_veto:Confidence 0.42 < 0.45 (Weekend Profitable Hours threshold)",
+  "session": "weekend_profitable",
+  "confidence": 0.4166666666666667,
+  "regime": "unknown",
+  "duration_bars": 24,
+  "open_time": "2025-11-29 20:55:00",
+  "timestamp": "2026-04-12T18:34:49.234245+00:00"
+}

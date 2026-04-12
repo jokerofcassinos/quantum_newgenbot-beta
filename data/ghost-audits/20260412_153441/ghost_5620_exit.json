@@ -1,0 +1,17 @@
+{
+  "trade_id": 5620,
+  "type": "ghost_exit",
+  "direction": "SELL",
+  "entry_price": 88942.51,
+  "exit_price": 89242.51,
+  "pnl": -404.57747569773534,
+  "is_win": false,
+  "exit_reason": "SL_hit",
+  "veto_reason": "ghost_audit:weekday_destructive_hours_11UTC",
+  "session": "london",
+  "confidence": 0.5466666666666667,
+  "regime": "unknown",
+  "duration_bars": 3,
+  "open_time": "2026-01-28 11:20:00",
+  "timestamp": "2026-04-12T18:35:00.969141+00:00"
+}

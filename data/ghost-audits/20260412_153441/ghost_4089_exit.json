@@ -1,0 +1,17 @@
+{
+  "trade_id": 4089,
+  "type": "ghost_exit",
+  "direction": "BUY",
+  "entry_price": 90414.48,
+  "exit_price": 90114.48,
+  "pnl": -405.97288498068053,
+  "is_win": false,
+  "exit_reason": "SL_hit",
+  "veto_reason": "ghost_audit:weekday_destructive_hours_14UTC",
+  "session": "ny_overlap",
+  "confidence": 0.4966666666666667,
+  "regime": "unknown",
+  "duration_bars": 30,
+  "open_time": "2026-01-09 14:00:00",
+  "timestamp": "2026-04-12T18:34:56.464965+00:00"
+}

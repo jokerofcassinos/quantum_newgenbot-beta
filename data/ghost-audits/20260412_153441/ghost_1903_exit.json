@@ -1,0 +1,17 @@
+{
+  "trade_id": 1903,
+  "type": "ghost_exit",
+  "direction": "BUY",
+  "entry_price": 90223.8,
+  "exit_price": 91123.8,
+  "pnl": 470.58184405772994,
+  "is_win": true,
+  "exit_reason": "TP_hit",
+  "veto_reason": "ghost_audit:weekday_destructive_hours_16UTC",
+  "session": "ny",
+  "confidence": 0.4966666666666667,
+  "regime": "unknown",
+  "duration_bars": 7,
+  "open_time": "2025-12-09 16:25:00",
+  "timestamp": "2026-04-12T18:34:50.383614+00:00"
+}

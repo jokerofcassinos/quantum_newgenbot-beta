@@ -1,0 +1,17 @@
+{
+  "trade_id": 4572,
+  "type": "ghost_exit",
+  "direction": "BUY",
+  "entry_price": 97580.13,
+  "exit_price": 97204.73357142859,
+  "pnl": -186.21468063745095,
+  "is_win": false,
+  "exit_reason": "SL_hit",
+  "veto_reason": "anti_metralhadora:session_limit",
+  "session": "asian",
+  "confidence": 0.4966666666666667,
+  "regime": "unknown",
+  "duration_bars": 26,
+  "open_time": "2026-01-14 22:10:00",
+  "timestamp": "2026-04-12T18:34:57.685518+00:00"
+}

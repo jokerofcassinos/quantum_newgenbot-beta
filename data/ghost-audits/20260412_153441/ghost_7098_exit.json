@@ -1,0 +1,17 @@
+{
+  "trade_id": 7098,
+  "type": "ghost_exit",
+  "direction": "SELL",
+  "entry_price": 66785.48,
+  "exit_price": 67085.48,
+  "pnl": -256.1855983810549,
+  "is_win": false,
+  "exit_reason": "SL_hit",
+  "veto_reason": "advanced_veto:SELL vetoed - RSI 16.6 < 28",
+  "session": "ny",
+  "confidence": 0.5466666666666667,
+  "regime": "unknown",
+  "duration_bars": 86,
+  "open_time": "2026-03-30 20:25:00",
+  "timestamp": "2026-04-12T18:35:12.994218+00:00"
+}

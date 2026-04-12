@@ -1,0 +1,17 @@
+{
+  "trade_id": 5801,
+  "type": "ghost_exit",
+  "direction": "BUY",
+  "entry_price": 66816.29,
+  "exit_price": 66516.29,
+  "pnl": -302.06881410348484,
+  "is_win": false,
+  "exit_reason": "SL_hit",
+  "veto_reason": "ghost_audit:weekday_destructive_hours_11UTC",
+  "session": "london",
+  "confidence": 0.4966666666666667,
+  "regime": "unknown",
+  "duration_bars": 12,
+  "open_time": "2026-02-11 11:50:00",
+  "timestamp": "2026-04-12T18:35:03.429101+00:00"
+}

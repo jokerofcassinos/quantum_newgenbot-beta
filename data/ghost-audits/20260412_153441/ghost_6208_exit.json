@@ -1,0 +1,17 @@
+{
+  "trade_id": 6208,
+  "type": "ghost_exit",
+  "direction": "BUY",
+  "entry_price": 65392.74,
+  "exit_price": 66292.73999999999,
+  "pnl": 1005.1765210453275,
+  "is_win": true,
+  "exit_reason": "TP_hit",
+  "veto_reason": "advanced_veto:BUY vetoed - RSI 80.2 > 72",
+  "session": "london",
+  "confidence": 0.4966666666666667,
+  "regime": "unknown",
+  "duration_bars": 59,
+  "open_time": "2026-02-25 10:45:00",
+  "timestamp": "2026-04-12T18:35:06.203315+00:00"
+}

@@ -1,0 +1,17 @@
+{
+  "trade_id": 2264,
+  "type": "ghost_exit",
+  "direction": "SELL",
+  "entry_price": 88966.4,
+  "exit_price": 88066.4,
+  "pnl": 1038.0392201036334,
+  "is_win": true,
+  "exit_reason": "TP_hit",
+  "veto_reason": "session_veto:Confidence 0.42 < 0.45 (Weekend Profitable Hours threshold)",
+  "session": "weekend_profitable",
+  "confidence": 0.4166666666666667,
+  "regime": "unknown",
+  "duration_bars": 42,
+  "open_time": "2025-12-14 20:50:00",
+  "timestamp": "2026-04-12T18:34:51.236572+00:00"
+}

@@ -1,0 +1,17 @@
+{
+  "trade_id": 6703,
+  "type": "ghost_exit",
+  "direction": "BUY",
+  "entry_price": 70735.56,
+  "exit_price": 70435.56,
+  "pnl": -653.9668718150729,
+  "is_win": false,
+  "exit_reason": "SL_hit",
+  "veto_reason": "session_veto:Confidence 0.42 < 0.45 (Weekend Profitable Hours threshold)",
+  "session": "weekend_profitable",
+  "confidence": 0.4166666666666667,
+  "regime": "unknown",
+  "duration_bars": 115,
+  "open_time": "2026-03-21 08:40:00",
+  "timestamp": "2026-04-12T18:35:10.932776+00:00"
+}

@@ -1,0 +1,17 @@
+{
+  "trade_id": 1925,
+  "type": "ghost_exit",
+  "direction": "BUY",
+  "entry_price": 90212.83,
+  "exit_price": 89912.83,
+  "pnl": -311.830107252168,
+  "is_win": false,
+  "exit_reason": "SL_hit",
+  "veto_reason": "ghost_audit:weekday_destructive_hours_12UTC",
+  "session": "london",
+  "confidence": 0.4966666666666667,
+  "regime": "unknown",
+  "duration_bars": 41,
+  "open_time": "2025-12-11 12:05:00",
+  "timestamp": "2026-04-12T18:34:50.624700+00:00"
+}

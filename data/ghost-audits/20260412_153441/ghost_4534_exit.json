@@ -1,0 +1,17 @@
+{
+  "trade_id": 4534,
+  "type": "ghost_exit",
+  "direction": "BUY",
+  "entry_price": 92205.69,
+  "exit_price": 91905.69,
+  "pnl": -125.5734849992618,
+  "is_win": false,
+  "exit_reason": "SL_hit",
+  "veto_reason": "advanced_veto:BUY vetoed - price at upper BB",
+  "session": "ny_overlap",
+  "confidence": 0.4966666666666667,
+  "regime": "unknown",
+  "duration_bars": 3,
+  "open_time": "2026-01-13 15:45:00",
+  "timestamp": "2026-04-12T18:34:57.421039+00:00"
+}

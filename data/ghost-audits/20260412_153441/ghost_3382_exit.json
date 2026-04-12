@@ -1,0 +1,17 @@
+{
+  "trade_id": 3382,
+  "type": "ghost_exit",
+  "direction": "SELL",
+  "entry_price": 89742.9,
+  "exit_price": 88842.9,
+  "pnl": 1025.3070006691885,
+  "is_win": true,
+  "exit_reason": "TP_hit",
+  "veto_reason": "ghost_audit:weekday_destructive_hours_10UTC",
+  "session": "london",
+  "confidence": 0.5466666666666667,
+  "regime": "unknown",
+  "duration_bars": 14,
+  "open_time": "2025-12-29 10:20:00",
+  "timestamp": "2026-04-12T18:34:54.042808+00:00"
+}

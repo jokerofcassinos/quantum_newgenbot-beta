@@ -1,0 +1,17 @@
+{
+  "trade_id": 3380,
+  "type": "ghost_exit",
+  "direction": "SELL",
+  "entry_price": 89629.31,
+  "exit_price": 88729.31,
+  "pnl": 1128.0432113327754,
+  "is_win": true,
+  "exit_reason": "TP_hit",
+  "veto_reason": "ghost_audit:weekday_destructive_hours_10UTC",
+  "session": "london",
+  "confidence": 0.63,
+  "regime": "unknown",
+  "duration_bars": 16,
+  "open_time": "2025-12-29 10:10:00",
+  "timestamp": "2026-04-12T18:34:54.042005+00:00"
+}

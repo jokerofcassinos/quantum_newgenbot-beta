@@ -1,0 +1,17 @@
+{
+  "trade_id": 3234,
+  "type": "ghost_exit",
+  "direction": "BUY",
+  "entry_price": 87697.2,
+  "exit_price": 88597.2,
+  "pnl": 4500.0,
+  "is_win": true,
+  "exit_reason": "TP_hit",
+  "veto_reason": "anti_metralhadora:session_blocked",
+  "session": "weekend_profitable",
+  "confidence": 0.5633333333333334,
+  "regime": "unknown",
+  "duration_bars": 215,
+  "open_time": "2025-12-28 09:55:00",
+  "timestamp": "2026-04-12T18:34:53.991860+00:00"
+}

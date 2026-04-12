@@ -1,0 +1,17 @@
+{
+  "trade_id": 1829,
+  "type": "ghost_exit",
+  "direction": "BUY",
+  "entry_price": 89563.74,
+  "exit_price": 89263.74,
+  "pnl": -805.6125023242008,
+  "is_win": false,
+  "exit_reason": "SL_hit",
+  "veto_reason": "session_veto:Confidence 0.42 < 0.45 (Weekend Profitable Hours threshold)",
+  "session": "weekend_profitable",
+  "confidence": 0.4166666666666667,
+  "regime": "unknown",
+  "duration_bars": 15,
+  "open_time": "2025-12-07 08:15:00",
+  "timestamp": "2026-04-12T18:34:50.114963+00:00"
+}

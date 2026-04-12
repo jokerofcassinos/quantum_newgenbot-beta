@@ -1,0 +1,17 @@
+{
+  "trade_id": 6945,
+  "type": "ghost_exit",
+  "direction": "BUY",
+  "entry_price": 66310.15,
+  "exit_price": 67210.15,
+  "pnl": 2336.744838368923,
+  "is_win": true,
+  "exit_reason": "TP_hit",
+  "veto_reason": "anti_metralhadora:session_blocked",
+  "session": "weekend_profitable",
+  "confidence": 0.58,
+  "regime": "unknown",
+  "duration_bars": 51,
+  "open_time": "2026-03-28 09:05:00",
+  "timestamp": "2026-04-12T18:35:12.506294+00:00"
+}

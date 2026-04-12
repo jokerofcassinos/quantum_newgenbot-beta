@@ -1,0 +1,17 @@
+{
+  "trade_id": 3071,
+  "type": "ghost_exit",
+  "direction": "BUY",
+  "entry_price": 87511.22,
+  "exit_price": 88411.22,
+  "pnl": 3477.5749394945474,
+  "is_win": true,
+  "exit_reason": "TP_hit",
+  "veto_reason": "advanced_veto:BUY vetoed - RSI 70.3 declining",
+  "session": "weekend_profitable",
+  "confidence": 0.58,
+  "regime": "unknown",
+  "duration_bars": 388,
+  "open_time": "2025-12-27 17:10:00",
+  "timestamp": "2026-04-12T18:34:53.930700+00:00"
+}

@@ -1,0 +1,17 @@
+{
+  "trade_id": 3942,
+  "type": "ghost_exit",
+  "direction": "BUY",
+  "entry_price": 92481.3,
+  "exit_price": 93381.3,
+  "pnl": 1560.6051474989533,
+  "is_win": true,
+  "exit_reason": "TP_hit",
+  "veto_reason": "ghost_audit:weekday_destructive_hours_10UTC",
+  "session": "london",
+  "confidence": 0.4966666666666667,
+  "regime": "unknown",
+  "duration_bars": 71,
+  "open_time": "2026-01-05 10:50:00",
+  "timestamp": "2026-04-12T18:34:55.689653+00:00"
+}

@@ -1,0 +1,17 @@
+{
+  "trade_id": 5577,
+  "type": "ghost_exit",
+  "direction": "BUY",
+  "entry_price": 87761.56,
+  "exit_price": 88661.56,
+  "pnl": 1421.8131880011554,
+  "is_win": true,
+  "exit_reason": "TP_hit",
+  "veto_reason": "ghost_audit:weekday_destructive_hours_14UTC",
+  "session": "ny_overlap",
+  "confidence": 0.4966666666666667,
+  "regime": "unknown",
+  "duration_bars": 27,
+  "open_time": "2026-01-26 14:55:00",
+  "timestamp": "2026-04-12T18:35:00.578447+00:00"
+}

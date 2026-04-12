@@ -1,0 +1,17 @@
+{
+  "trade_id": 3560,
+  "type": "ghost_exit",
+  "direction": "BUY",
+  "entry_price": 87948.05,
+  "exit_price": 88848.05,
+  "pnl": 3794.9233252794297,
+  "is_win": true,
+  "exit_reason": "TP_hit",
+  "veto_reason": "ghost_audit:weekday_destructive_hours_15UTC",
+  "session": "ny_overlap",
+  "confidence": 0.5633333333333334,
+  "regime": "unknown",
+  "duration_bars": 124,
+  "open_time": "2026-01-01 15:15:00",
+  "timestamp": "2026-04-12T18:34:54.863979+00:00"
+}

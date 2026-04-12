@@ -1,0 +1,17 @@
+{
+  "trade_id": 5590,
+  "type": "ghost_exit",
+  "direction": "SELL",
+  "entry_price": 88009.55,
+  "exit_price": 88309.55,
+  "pnl": -474.92452891145786,
+  "is_win": false,
+  "exit_reason": "SL_hit",
+  "veto_reason": "ghost_audit:weekday_destructive_hours_12UTC",
+  "session": "london",
+  "confidence": 0.5466666666666667,
+  "regime": "unknown",
+  "duration_bars": 48,
+  "open_time": "2026-01-27 12:15:00",
+  "timestamp": "2026-04-12T18:35:00.786400+00:00"
+}

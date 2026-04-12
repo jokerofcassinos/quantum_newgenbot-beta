@@ -1,0 +1,17 @@
+{
+  "trade_id": 1954,
+  "type": "ghost_exit",
+  "direction": "BUY",
+  "entry_price": 92454.1,
+  "exit_price": 92154.1,
+  "pnl": -398.7430329089404,
+  "is_win": false,
+  "exit_reason": "SL_hit",
+  "veto_reason": "ghost_audit:weekday_destructive_hours_12UTC",
+  "session": "london",
+  "confidence": 0.4966666666666667,
+  "regime": "unknown",
+  "duration_bars": 18,
+  "open_time": "2025-12-12 12:55:00",
+  "timestamp": "2026-04-12T18:34:50.758222+00:00"
+}

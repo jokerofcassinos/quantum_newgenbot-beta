@@ -1,0 +1,17 @@
+{
+  "trade_id": 6857,
+  "type": "ghost_exit",
+  "direction": "SELL",
+  "entry_price": 67829.58,
+  "exit_price": 68129.58,
+  "pnl": -145.31550494978885,
+  "is_win": false,
+  "exit_reason": "SL_hit",
+  "veto_reason": "advanced_veto:SELL vetoed - RSI 19.4 < 28",
+  "session": "london",
+  "confidence": 0.5466666666666667,
+  "regime": "unknown",
+  "duration_bars": 9,
+  "open_time": "2026-03-23 09:50:00",
+  "timestamp": "2026-04-12T18:35:11.352816+00:00"
+}

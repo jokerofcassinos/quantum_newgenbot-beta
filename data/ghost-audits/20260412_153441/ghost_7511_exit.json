@@ -1,0 +1,17 @@
+{
+  "trade_id": 7511,
+  "type": "ghost_exit",
+  "direction": "BUY",
+  "entry_price": 71015.49,
+  "exit_price": 70715.49,
+  "pnl": -669.9122206381113,
+  "is_win": false,
+  "exit_reason": "SL_hit",
+  "veto_reason": "ghost_audit:weekday_destructive_hours_10UTC",
+  "session": "london",
+  "confidence": 0.58,
+  "regime": "unknown",
+  "duration_bars": 81,
+  "open_time": "2026-04-09 10:00:00",
+  "timestamp": "2026-04-12T18:35:15.393361+00:00"
+}

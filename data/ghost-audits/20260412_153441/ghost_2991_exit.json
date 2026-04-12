@@ -1,0 +1,17 @@
+{
+  "trade_id": 2991,
+  "type": "ghost_exit",
+  "direction": "BUY",
+  "entry_price": 87551.17,
+  "exit_price": 88451.17,
+  "pnl": 2079.0663645828913,
+  "is_win": true,
+  "exit_reason": "TP_hit",
+  "veto_reason": "advanced_veto:BUY vetoed - price at upper BB",
+  "session": "weekend_profitable",
+  "confidence": 0.58,
+  "regime": "unknown",
+  "duration_bars": 491,
+  "open_time": "2025-12-27 09:25:00",
+  "timestamp": "2026-04-12T18:34:53.955378+00:00"
+}

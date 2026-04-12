@@ -1,0 +1,17 @@
+{
+  "trade_id": 3541,
+  "type": "ghost_exit",
+  "direction": "BUY",
+  "entry_price": 87879.63,
+  "exit_price": 88779.63,
+  "pnl": 3800.9338073927343,
+  "is_win": true,
+  "exit_reason": "TP_hit",
+  "veto_reason": "advanced_veto:BUY vetoed - price at upper BB",
+  "session": "ny_overlap",
+  "confidence": 0.58,
+  "regime": "unknown",
+  "duration_bars": 141,
+  "open_time": "2026-01-01 13:40:00",
+  "timestamp": "2026-04-12T18:34:54.851628+00:00"
+}

@@ -1,0 +1,17 @@
+{
+  "trade_id": 4018,
+  "type": "ghost_exit",
+  "direction": "SELL",
+  "entry_price": 91789.7,
+  "exit_price": 92089.7,
+  "pnl": -164.8960682034094,
+  "is_win": false,
+  "exit_reason": "SL_hit",
+  "veto_reason": "advanced_veto:SELL vetoed - RSI 31.7 rising",
+  "session": "london",
+  "confidence": 0.5466666666666667,
+  "regime": "unknown",
+  "duration_bars": 14,
+  "open_time": "2026-01-07 12:10:00",
+  "timestamp": "2026-04-12T18:34:56.049855+00:00"
+}

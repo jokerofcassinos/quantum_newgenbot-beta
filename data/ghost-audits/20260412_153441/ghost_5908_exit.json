@@ -1,0 +1,17 @@
+{
+  "trade_id": 5908,
+  "type": "ghost_exit",
+  "direction": "BUY",
+  "entry_price": 68236.74,
+  "exit_price": 67762.79357142858,
+  "pnl": -137.76891473969243,
+  "is_win": false,
+  "exit_reason": "SL_hit",
+  "veto_reason": "ghost_audit:weekday_destructive_hours_15UTC",
+  "session": "ny_overlap",
+  "confidence": 0.4966666666666667,
+  "regime": "unknown",
+  "duration_bars": 20,
+  "open_time": "2026-02-16 15:50:00",
+  "timestamp": "2026-04-12T18:35:04.453595+00:00"
+}

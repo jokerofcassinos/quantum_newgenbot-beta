@@ -1,0 +1,17 @@
+{
+  "trade_id": 4272,
+  "type": "ghost_exit",
+  "direction": "BUY",
+  "entry_price": 90469.0,
+  "exit_price": 91369.0,
+  "pnl": 3859.6400043277517,
+  "is_win": true,
+  "exit_reason": "TP_hit",
+  "veto_reason": "session_veto:Trading disabled for Weekend session",
+  "session": "weekend",
+  "confidence": 0.5,
+  "regime": "unknown",
+  "duration_bars": 310,
+  "open_time": "2026-01-10 23:50:00",
+  "timestamp": "2026-04-12T18:34:57.159911+00:00"
+}

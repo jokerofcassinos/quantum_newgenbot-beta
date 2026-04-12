@@ -1,0 +1,17 @@
+{
+  "trade_id": 3977,
+  "type": "ghost_exit",
+  "direction": "BUY",
+  "entry_price": 93550.24,
+  "exit_price": 93250.24,
+  "pnl": -402.3075598253481,
+  "is_win": false,
+  "exit_reason": "SL_hit",
+  "veto_reason": "advanced_veto:BUY vetoed - price at upper BB",
+  "session": "london",
+  "confidence": 0.4966666666666667,
+  "regime": "unknown",
+  "duration_bars": 74,
+  "open_time": "2026-01-06 12:10:00",
+  "timestamp": "2026-04-12T18:34:55.887993+00:00"
+}

@@ -36,3 +36,4 @@ data/market-data/
 logs/  
 __pycache__/  
 .qwen/ 
+data/ghost-audits/  

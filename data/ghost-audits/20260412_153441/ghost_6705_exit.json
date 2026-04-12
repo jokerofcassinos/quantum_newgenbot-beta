@@ -1,0 +1,17 @@
+{
+  "trade_id": 6705,
+  "type": "ghost_exit",
+  "direction": "BUY",
+  "entry_price": 70670.47,
+  "exit_price": 70370.47,
+  "pnl": -760.7386197273954,
+  "is_win": false,
+  "exit_reason": "SL_hit",
+  "veto_reason": "anti_metralhadora:session_blocked",
+  "session": "weekend_profitable",
+  "confidence": 0.58,
+  "regime": "unknown",
+  "duration_bars": 127,
+  "open_time": "2026-03-21 08:50:00",
+  "timestamp": "2026-04-12T18:35:10.958628+00:00"
+}

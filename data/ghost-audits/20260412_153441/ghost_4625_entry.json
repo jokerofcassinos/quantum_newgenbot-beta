@@ -1,0 +1,15 @@
+{
+  "trade_id": 4625,
+  "type": "ghost_entry",
+  "direction": "BUY",
+  "entry_price": 95414.2,
+  "stop_loss": 95114.2,
+  "take_profit": 96314.2,
+  "volume": 1.8969256665022178,
+  "veto_reason": "ghost_audit:weekday_destructive_hours_14UTC",
+  "session": "ny_overlap",
+  "confidence": 0.4966666666666667,
+  "regime": "unknown",
+  "open_time": "2026-01-16 14:55:00",
+  "timestamp": "2026-04-12T18:34:58.024410+00:00"
+}

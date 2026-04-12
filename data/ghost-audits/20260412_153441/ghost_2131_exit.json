@@ -1,0 +1,17 @@
+{
+  "trade_id": 2131,
+  "type": "ghost_exit",
+  "direction": "SELL",
+  "entry_price": 90203.57,
+  "exit_price": 89303.57,
+  "pnl": 899.1274088912187,
+  "is_win": true,
+  "exit_reason": "TP_hit",
+  "veto_reason": "anti_metralhadora:session_blocked",
+  "session": "weekend_profitable",
+  "confidence": 0.63,
+  "regime": "unknown",
+  "duration_bars": 185,
+  "open_time": "2025-12-13 17:00:00",
+  "timestamp": "2026-04-12T18:34:51.189312+00:00"
+}

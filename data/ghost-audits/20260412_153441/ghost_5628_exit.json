@@ -1,0 +1,17 @@
+{
+  "trade_id": 5628,
+  "type": "ghost_exit",
+  "direction": "SELL",
+  "entry_price": 89663.87,
+  "exit_price": 89963.87,
+  "pnl": -232.00823434769387,
+  "is_win": false,
+  "exit_reason": "SL_hit",
+  "veto_reason": "advanced_veto:SELL vetoed - RSI 20.4 < 28",
+  "session": "ny",
+  "confidence": 0.5466666666666667,
+  "regime": "unknown",
+  "duration_bars": 38,
+  "open_time": "2026-01-28 16:40:00",
+  "timestamp": "2026-04-12T18:35:01.041693+00:00"
+}

@@ -1,0 +1,17 @@
+{
+  "trade_id": 6623,
+  "type": "ghost_exit",
+  "direction": "SELL",
+  "entry_price": 73867.71,
+  "exit_price": 74167.71,
+  "pnl": -199.12848998002596,
+  "is_win": false,
+  "exit_reason": "SL_hit",
+  "veto_reason": "advanced_veto:SELL vetoed - price at lower BB",
+  "session": "asian",
+  "confidence": 0.5466666666666667,
+  "regime": "unknown",
+  "duration_bars": 12,
+  "open_time": "2026-03-16 22:50:00",
+  "timestamp": "2026-04-12T18:35:09.830594+00:00"
+}

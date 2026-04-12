@@ -1,0 +1,17 @@
+{
+  "trade_id": 4425,
+  "type": "ghost_exit",
+  "direction": "BUY",
+  "entry_price": 90852.47,
+  "exit_price": 90552.47,
+  "pnl": -476.20697247833016,
+  "is_win": false,
+  "exit_reason": "SL_hit",
+  "veto_reason": "session_veto:Trading disabled for Weekend session",
+  "session": "weekend",
+  "confidence": 0.4166666666666667,
+  "regime": "unknown",
+  "duration_bars": 89,
+  "open_time": "2026-01-11 14:40:00",
+  "timestamp": "2026-04-12T18:34:57.046233+00:00"
+}

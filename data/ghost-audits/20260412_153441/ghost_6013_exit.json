@@ -1,0 +1,17 @@
+{
+  "trade_id": 6013,
+  "type": "ghost_exit",
+  "direction": "SELL",
+  "entry_price": 68193.36,
+  "exit_price": 68493.36,
+  "pnl": -334.17377664069863,
+  "is_win": false,
+  "exit_reason": "SL_hit",
+  "veto_reason": "session_veto:Trading disabled for Weekend session",
+  "session": "weekend",
+  "confidence": 0.4166666666666667,
+  "regime": "unknown",
+  "duration_bars": 64,
+  "open_time": "2026-02-21 12:00:00",
+  "timestamp": "2026-04-12T18:35:05.406834+00:00"
+}

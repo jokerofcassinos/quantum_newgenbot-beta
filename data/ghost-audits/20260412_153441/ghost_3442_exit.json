@@ -1,0 +1,17 @@
+{
+  "trade_id": 3442,
+  "type": "ghost_exit",
+  "direction": "BUY",
+  "entry_price": 88610.27,
+  "exit_price": 88310.27,
+  "pnl": -630.4114563586504,
+  "is_win": false,
+  "exit_reason": "SL_hit",
+  "veto_reason": "ghost_audit:weekday_destructive_hours_10UTC",
+  "session": "london",
+  "confidence": 0.4966666666666667,
+  "regime": "unknown",
+  "duration_bars": 77,
+  "open_time": "2025-12-31 10:20:00",
+  "timestamp": "2026-04-12T18:34:54.451255+00:00"
+}

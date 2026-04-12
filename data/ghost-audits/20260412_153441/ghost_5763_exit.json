@@ -1,0 +1,17 @@
+{
+  "trade_id": 5763,
+  "type": "ghost_exit",
+  "direction": "BUY",
+  "entry_price": 77886.61,
+  "exit_price": 78811.72642857143,
+  "pnl": 547.763721987008,
+  "is_win": true,
+  "exit_reason": "TP_hit",
+  "veto_reason": "ghost_audit:weekday_destructive_hours_16UTC",
+  "session": "ny",
+  "confidence": 0.4966666666666667,
+  "regime": "unknown",
+  "duration_bars": 7,
+  "open_time": "2026-02-02 16:05:00",
+  "timestamp": "2026-04-12T18:35:01.921518+00:00"
+}

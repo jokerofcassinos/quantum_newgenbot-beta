@@ -1,0 +1,17 @@
+{
+  "trade_id": 1964,
+  "type": "ghost_exit",
+  "direction": "BUY",
+  "entry_price": 92407.63,
+  "exit_price": 92107.63,
+  "pnl": -171.4889357383644,
+  "is_win": false,
+  "exit_reason": "SL_hit",
+  "veto_reason": "advanced_veto:BUY vetoed - price at upper BB",
+  "session": "ny",
+  "confidence": 0.4966666666666667,
+  "regime": "unknown",
+  "duration_bars": 4,
+  "open_time": "2025-12-12 16:40:00",
+  "timestamp": "2026-04-12T18:34:50.773211+00:00"
+}

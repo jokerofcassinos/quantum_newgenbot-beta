@@ -1,0 +1,17 @@
+{
+  "trade_id": 5096,
+  "type": "ghost_exit",
+  "direction": "BUY",
+  "entry_price": 93202.74,
+  "exit_price": 92902.74,
+  "pnl": -593.2162469218786,
+  "is_win": false,
+  "exit_reason": "SL_hit",
+  "veto_reason": "advanced_veto:BUY vetoed - RSI 73.0 > 72",
+  "session": "asian",
+  "confidence": 0.4966666666666667,
+  "regime": "unknown",
+  "duration_bars": 18,
+  "open_time": "2026-01-19 22:25:00",
+  "timestamp": "2026-04-12T18:34:58.951533+00:00"
+}

@@ -1,0 +1,17 @@
+{
+  "trade_id": 6411,
+  "type": "ghost_exit",
+  "direction": "SELL",
+  "entry_price": 69512.44,
+  "exit_price": 69812.44,
+  "pnl": -291.12649829996354,
+  "is_win": false,
+  "exit_reason": "SL_hit",
+  "veto_reason": "advanced_veto:SELL vetoed - RSI 18.9 < 28",
+  "session": "asian",
+  "confidence": 0.5466666666666667,
+  "regime": "unknown",
+  "duration_bars": 66,
+  "open_time": "2026-03-12 05:20:00",
+  "timestamp": "2026-04-12T18:35:08.937171+00:00"
+}

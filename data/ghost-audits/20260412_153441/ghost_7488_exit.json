@@ -1,0 +1,17 @@
+{
+  "trade_id": 7488,
+  "type": "ghost_exit",
+  "direction": "BUY",
+  "entry_price": 71312.5,
+  "exit_price": 72212.5,
+  "pnl": 1798.803728820242,
+  "is_win": true,
+  "exit_reason": "TP_hit",
+  "veto_reason": "ghost_audit:low_volatility_chop",
+  "session": "london",
+  "confidence": 0.4966666666666667,
+  "regime": "unknown",
+  "duration_bars": 109,
+  "open_time": "2026-04-08 07:00:00",
+  "timestamp": "2026-04-12T18:35:15.162403+00:00"
+}

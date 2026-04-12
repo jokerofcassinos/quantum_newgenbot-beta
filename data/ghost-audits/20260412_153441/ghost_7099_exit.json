@@ -1,0 +1,17 @@
+{
+  "trade_id": 7099,
+  "type": "ghost_exit",
+  "direction": "SELL",
+  "entry_price": 67562.67,
+  "exit_price": 67862.67,
+  "pnl": -278.7690641921034,
+  "is_win": false,
+  "exit_reason": "SL_hit",
+  "veto_reason": "advanced_veto:SELL vetoed - RSI 20.4 < 28",
+  "session": "asian",
+  "confidence": 0.5466666666666667,
+  "regime": "unknown",
+  "duration_bars": 7,
+  "open_time": "2026-04-01 05:30:00",
+  "timestamp": "2026-04-12T18:35:13.207060+00:00"
+}

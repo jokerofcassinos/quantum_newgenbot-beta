@@ -1,0 +1,17 @@
+{
+  "trade_id": 3601,
+  "type": "ghost_exit",
+  "direction": "BUY",
+  "entry_price": 89484.39,
+  "exit_price": 89184.39,
+  "pnl": -290.2557571294869,
+  "is_win": false,
+  "exit_reason": "SL_hit",
+  "veto_reason": "ghost_audit:weekday_destructive_hours_13UTC",
+  "session": "ny_overlap",
+  "confidence": 0.4966666666666667,
+  "regime": "unknown",
+  "duration_bars": 36,
+  "open_time": "2026-01-02 13:10:00",
+  "timestamp": "2026-04-12T18:34:54.986029+00:00"
+}

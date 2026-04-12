@@ -1,0 +1,17 @@
+{
+  "trade_id": 6307,
+  "type": "ghost_exit",
+  "direction": "SELL",
+  "entry_price": 68342.49,
+  "exit_price": 67442.49,
+  "pnl": 1123.2547599918926,
+  "is_win": true,
+  "exit_reason": "TP_hit",
+  "veto_reason": "session_veto:Trading disabled for Weekend session",
+  "session": "weekend",
+  "confidence": 0.4166666666666667,
+  "regime": "unknown",
+  "duration_bars": 112,
+  "open_time": "2026-03-07 00:40:00",
+  "timestamp": "2026-04-12T18:35:07.950533+00:00"
+}

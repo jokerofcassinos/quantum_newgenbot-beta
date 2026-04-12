@@ -1,0 +1,17 @@
+{
+  "trade_id": 7290,
+  "type": "ghost_exit",
+  "direction": "BUY",
+  "entry_price": 67408.09,
+  "exit_price": 67108.09,
+  "pnl": -761.4667295657127,
+  "is_win": false,
+  "exit_reason": "SL_hit",
+  "veto_reason": "anti_metralhadora:session_blocked",
+  "session": "weekend_profitable",
+  "confidence": 0.58,
+  "regime": "unknown",
+  "duration_bars": 86,
+  "open_time": "2026-04-04 19:45:00",
+  "timestamp": "2026-04-12T18:35:14.179903+00:00"
+}

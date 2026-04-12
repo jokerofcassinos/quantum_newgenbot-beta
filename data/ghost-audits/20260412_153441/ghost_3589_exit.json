@@ -1,0 +1,17 @@
+{
+  "trade_id": 3589,
+  "type": "ghost_exit",
+  "direction": "BUY",
+  "entry_price": 88487.93,
+  "exit_price": 89387.93,
+  "pnl": 1252.1992223529933,
+  "is_win": true,
+  "exit_reason": "TP_hit",
+  "veto_reason": "advanced_veto:BUY vetoed - RSI 72.7 > 72",
+  "session": "asian",
+  "confidence": 0.4966666666666667,
+  "regime": "unknown",
+  "duration_bars": 136,
+  "open_time": "2026-01-02 00:25:00",
+  "timestamp": "2026-04-12T18:34:54.950709+00:00"
+}

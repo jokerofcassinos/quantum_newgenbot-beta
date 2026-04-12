@@ -1,0 +1,17 @@
+{
+  "trade_id": 4554,
+  "type": "ghost_exit",
+  "direction": "BUY",
+  "entry_price": 94763.17,
+  "exit_price": 95663.17,
+  "pnl": 1157.288949737434,
+  "is_win": true,
+  "exit_reason": "TP_hit",
+  "veto_reason": "ghost_audit:weekday_destructive_hours_13UTC",
+  "session": "ny_overlap",
+  "confidence": 0.4966666666666667,
+  "regime": "unknown",
+  "duration_bars": 28,
+  "open_time": "2026-01-14 13:55:00",
+  "timestamp": "2026-04-12T18:34:57.617009+00:00"
+}

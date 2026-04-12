@@ -1,0 +1,17 @@
+{
+  "trade_id": 5851,
+  "type": "ghost_exit",
+  "direction": "BUY",
+  "entry_price": 69181.19,
+  "exit_price": 70081.19,
+  "pnl": 1441.7819394648081,
+  "is_win": true,
+  "exit_reason": "TP_hit",
+  "veto_reason": "advanced_veto:BUY vetoed - RSI 70.4 declining",
+  "session": "weekend_profitable",
+  "confidence": 0.58,
+  "regime": "unknown",
+  "duration_bars": 39,
+  "open_time": "2026-02-14 09:55:00",
+  "timestamp": "2026-04-12T18:35:04.032732+00:00"
+}

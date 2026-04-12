@@ -1,0 +1,17 @@
+{
+  "trade_id": 1894,
+  "type": "ghost_exit",
+  "direction": "SELL",
+  "entry_price": 90206.58,
+  "exit_price": 90506.58,
+  "pnl": -264.57859711867667,
+  "is_win": false,
+  "exit_reason": "SL_hit",
+  "veto_reason": "ghost_audit:weekday_destructive_hours_13UTC",
+  "session": "ny_overlap",
+  "confidence": 0.5466666666666667,
+  "regime": "unknown",
+  "duration_bars": 9,
+  "open_time": "2025-12-09 13:30:00",
+  "timestamp": "2026-04-12T18:34:50.367026+00:00"
+}

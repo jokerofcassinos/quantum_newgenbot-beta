@@ -1,0 +1,17 @@
+{
+  "trade_id": 1763,
+  "type": "ghost_exit",
+  "direction": "SELL",
+  "entry_price": 92076.56,
+  "exit_price": 92376.56,
+  "pnl": -315.66410490613805,
+  "is_win": false,
+  "exit_reason": "SL_hit",
+  "veto_reason": "advanced_veto:SELL vetoed - price at lower BB",
+  "session": "asian",
+  "confidence": 0.5466666666666667,
+  "regime": "unknown",
+  "duration_bars": 8,
+  "open_time": "2025-12-05 01:40:00",
+  "timestamp": "2026-04-12T18:34:49.920262+00:00"
+}

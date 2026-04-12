@@ -1,0 +1,15 @@
+{
+  "trade_id": 5896,
+  "type": "ghost_entry",
+  "direction": "BUY",
+  "entry_price": 68704.99,
+  "stop_loss": 68404.99,
+  "take_profit": 69604.99,
+  "volume": 1.3883371978699275,
+  "veto_reason": "advanced_veto:BUY vetoed - price at upper BB",
+  "session": "london",
+  "confidence": 0.4966666666666667,
+  "regime": "unknown",
+  "open_time": "2026-02-16 10:35:00",
+  "timestamp": "2026-04-12T18:35:04.391070+00:00"
+}

@@ -1,0 +1,17 @@
+{
+  "trade_id": 1879,
+  "type": "ghost_exit",
+  "direction": "SELL",
+  "entry_price": 92107.04,
+  "exit_price": 91207.04,
+  "pnl": 1293.9826426226946,
+  "is_win": true,
+  "exit_reason": "TP_hit",
+  "veto_reason": "ghost_audit:weekday_destructive_hours_12UTC",
+  "session": "london",
+  "confidence": 0.5466666666666667,
+  "regime": "unknown",
+  "duration_bars": 45,
+  "open_time": "2025-12-08 12:35:00",
+  "timestamp": "2026-04-12T18:34:50.287502+00:00"
+}

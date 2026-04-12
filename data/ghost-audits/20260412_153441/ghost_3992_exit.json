@@ -1,0 +1,17 @@
+{
+  "trade_id": 3992,
+  "type": "ghost_exit",
+  "direction": "BUY",
+  "entry_price": 93808.16,
+  "exit_price": 93508.16,
+  "pnl": -544.2074192332215,
+  "is_win": false,
+  "exit_reason": "SL_hit",
+  "veto_reason": "ghost_audit:weekday_destructive_hours_15UTC",
+  "session": "ny_overlap",
+  "confidence": 0.58,
+  "regime": "unknown",
+  "duration_bars": 22,
+  "open_time": "2026-01-06 15:05:00",
+  "timestamp": "2026-04-12T18:34:55.877050+00:00"
+}

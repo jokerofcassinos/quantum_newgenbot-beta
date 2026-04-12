@@ -1,0 +1,17 @@
+{
+  "trade_id": 6151,
+  "type": "ghost_exit",
+  "direction": "BUY",
+  "entry_price": 67541.9,
+  "exit_price": 67241.9,
+  "pnl": -754.053173855759,
+  "is_win": false,
+  "exit_reason": "SL_hit",
+  "veto_reason": "session_veto:Confidence 0.42 < 0.45 (Weekend Profitable Hours threshold)",
+  "session": "weekend_profitable",
+  "confidence": 0.4166666666666667,
+  "regime": "unknown",
+  "duration_bars": 4,
+  "open_time": "2026-02-22 19:10:00",
+  "timestamp": "2026-04-12T18:35:05.704776+00:00"
+}

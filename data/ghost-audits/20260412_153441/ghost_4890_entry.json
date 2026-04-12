@@ -1,0 +1,15 @@
+{
+  "trade_id": 4890,
+  "type": "ghost_entry",
+  "direction": "BUY",
+  "entry_price": 95176.96,
+  "stop_loss": 94876.96,
+  "take_profit": 96076.96,
+  "volume": 2.985997928038546,
+  "veto_reason": "advanced_veto:BUY vetoed - price at upper BB",
+  "session": "weekend_profitable",
+  "confidence": 0.58,
+  "regime": "unknown",
+  "open_time": "2026-01-18 08:35:00",
+  "timestamp": "2026-04-12T18:34:58.498304+00:00"
+}

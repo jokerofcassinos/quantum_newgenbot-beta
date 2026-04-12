@@ -1,0 +1,17 @@
+{
+  "trade_id": 321,
+  "type": "ghost_exit",
+  "direction": "SELL",
+  "entry_price": 110920.78,
+  "exit_price": 111220.78,
+  "pnl": -298.6493511031854,
+  "is_win": false,
+  "exit_reason": "SL_hit",
+  "veto_reason": "ghost_audit:weekday_destructive_hours_15UTC",
+  "session": "ny_overlap",
+  "confidence": 0.5466666666666667,
+  "regime": "unknown",
+  "duration_bars": 29,
+  "open_time": "2025-10-20 15:00:00",
+  "timestamp": "2026-04-12T18:34:44.658385+00:00"
+}

@@ -1,0 +1,17 @@
+{
+  "trade_id": 5864,
+  "type": "ghost_exit",
+  "direction": "BUY",
+  "entry_price": 69750.5,
+  "exit_price": 69450.5,
+  "pnl": -495.45465421500865,
+  "is_win": false,
+  "exit_reason": "SL_hit",
+  "veto_reason": "session_veto:Confidence 0.42 < 0.45 (Weekend Profitable Hours threshold)",
+  "session": "weekend_profitable",
+  "confidence": 0.4166666666666667,
+  "regime": "unknown",
+  "duration_bars": 66,
+  "open_time": "2026-02-14 20:45:00",
+  "timestamp": "2026-04-12T18:35:04.123510+00:00"
+}

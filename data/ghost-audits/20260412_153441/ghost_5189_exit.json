@@ -1,0 +1,17 @@
+{
+  "trade_id": 5189,
+  "type": "ghost_exit",
+  "direction": "BUY",
+  "entry_price": 90152.95,
+  "exit_price": 89852.95,
+  "pnl": -734.7551002055096,
+  "is_win": false,
+  "exit_reason": "SL_hit",
+  "veto_reason": "advanced_veto:BUY vetoed - RSI 74.8 > 72",
+  "session": "ny_overlap",
+  "confidence": 0.4966666666666667,
+  "regime": "unknown",
+  "duration_bars": 2,
+  "open_time": "2026-01-22 15:25:00",
+  "timestamp": "2026-04-12T18:34:59.580494+00:00"
+}

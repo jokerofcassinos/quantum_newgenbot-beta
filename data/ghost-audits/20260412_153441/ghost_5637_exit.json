@@ -1,0 +1,17 @@
+{
+  "trade_id": 5637,
+  "type": "ghost_exit",
+  "direction": "SELL",
+  "entry_price": 88798.03,
+  "exit_price": 87898.03,
+  "pnl": 539.7080749847981,
+  "is_win": true,
+  "exit_reason": "TP_hit",
+  "veto_reason": "advanced_veto:SELL vetoed - price at lower BB",
+  "session": "asian",
+  "confidence": 0.5466666666666667,
+  "regime": "unknown",
+  "duration_bars": 16,
+  "open_time": "2026-01-29 03:25:00",
+  "timestamp": "2026-04-12T18:35:01.115943+00:00"
+}

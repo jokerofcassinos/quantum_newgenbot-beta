@@ -1,0 +1,17 @@
+{
+  "trade_id": 6513,
+  "type": "ghost_exit",
+  "direction": "BUY",
+  "entry_price": 70585.72,
+  "exit_price": 71485.72,
+  "pnl": 4009.664290718557,
+  "is_win": true,
+  "exit_reason": "TP_hit",
+  "veto_reason": "anti_metralhadora:session_blocked",
+  "session": "weekend_profitable",
+  "confidence": 0.58,
+  "regime": "unknown",
+  "duration_bars": 92,
+  "open_time": "2026-03-14 20:55:00",
+  "timestamp": "2026-04-12T18:35:09.497630+00:00"
+}

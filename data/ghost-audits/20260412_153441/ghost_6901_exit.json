@@ -1,0 +1,17 @@
+{
+  "trade_id": 6901,
+  "type": "ghost_exit",
+  "direction": "BUY",
+  "entry_price": 68561.92,
+  "exit_price": 68261.92,
+  "pnl": -268.97151979896074,
+  "is_win": false,
+  "exit_reason": "SL_hit",
+  "veto_reason": "ghost_audit:weekday_destructive_hours_10UTC",
+  "session": "london",
+  "confidence": 0.4966666666666667,
+  "regime": "unknown",
+  "duration_bars": 9,
+  "open_time": "2026-03-27 10:40:00",
+  "timestamp": "2026-04-12T18:35:12.238120+00:00"
+}

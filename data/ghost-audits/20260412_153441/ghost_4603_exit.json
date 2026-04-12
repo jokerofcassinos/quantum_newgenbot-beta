@@ -1,0 +1,17 @@
+{
+  "trade_id": 4603,
+  "type": "ghost_exit",
+  "direction": "BUY",
+  "entry_price": 95662.22,
+  "exit_price": 95362.22,
+  "pnl": -551.4090041678525,
+  "is_win": false,
+  "exit_reason": "SL_hit",
+  "veto_reason": "ghost_audit:weekday_destructive_hours_10UTC",
+  "session": "london",
+  "confidence": 0.58,
+  "regime": "unknown",
+  "duration_bars": 23,
+  "open_time": "2026-01-16 10:35:00",
+  "timestamp": "2026-04-12T18:34:57.999603+00:00"
+}

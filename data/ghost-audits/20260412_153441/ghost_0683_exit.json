@@ -1,0 +1,17 @@
+{
+  "trade_id": 683,
+  "type": "ghost_exit",
+  "direction": "BUY",
+  "entry_price": 114928.05,
+  "exit_price": 115828.05,
+  "pnl": 751.150061871909,
+  "is_win": true,
+  "exit_reason": "TP_hit",
+  "veto_reason": "anti_metralhadora:session_limit",
+  "session": "asian",
+  "confidence": 0.4966666666666667,
+  "regime": "unknown",
+  "duration_bars": 34,
+  "open_time": "2025-10-27 06:55:00",
+  "timestamp": "2026-04-12T18:34:45.494245+00:00"
+}

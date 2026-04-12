@@ -33,7 +33,7 @@ SESSION_PROFILES = {
     "asian": SessionProfile(
         session_name="Asian",
         min_confidence_threshold=0.40,  # Fixed: was 0.75 (aligned with 5/12 = 41.7%)
-        max_position_size=0.03,
+        max_position_size=2.0,  # Increased from 0.03 (Ghost Audit: DD is 0.02%)
         risk_multiplier=0.3,
         min_strategy_votes=5,  # Need 5/12 strategies
         min_coherence=0.40,  # Fixed: was 0.60 (aligned with signal generation)
@@ -45,7 +45,7 @@ SESSION_PROFILES = {
     "london": SessionProfile(
         session_name="London",
         min_confidence_threshold=0.40,  # Fixed: was 0.60 (aligned with 5/12 = 41.7%)
-        max_position_size=0.10,
+        max_position_size=5.0,  # Increased from 0.10 (Ghost Audit: DD is 0.02%)
         risk_multiplier=1.0,
         min_strategy_votes=5,  # Fixed: was 4 (aligned with signal gen minimum)
         min_coherence=0.40,  # Fixed: was 0.55
@@ -57,7 +57,7 @@ SESSION_PROFILES = {
     "ny": SessionProfile(
         session_name="New York",
         min_confidence_threshold=0.40,  # Fixed: was 0.60 (aligned with 5/12 = 41.7%)
-        max_position_size=0.10,
+        max_position_size=5.0,  # Increased from 0.10 (Ghost Audit: DD is 0.02%)
         risk_multiplier=1.0,
         min_strategy_votes=5,  # Fixed: was 4 (aligned with signal gen minimum)
         min_coherence=0.40,  # Fixed: was 0.55
@@ -69,7 +69,7 @@ SESSION_PROFILES = {
     "ny_overlap": SessionProfile(
         session_name="NY/London Overlap",
         min_confidence_threshold=0.40,  # Fixed: was 0.55 (aligned with 5/12 = 41.7%)
-        max_position_size=0.12,
+        max_position_size=5.0,  # Increased from 0.12 (Ghost Audit: DD is 0.02%)
         risk_multiplier=1.2,
         min_strategy_votes=5,  # Fixed: was 3 (aligned with signal gen minimum)
         min_coherence=0.40,  # Fixed: was 0.50
@@ -83,7 +83,7 @@ SESSION_PROFILES = {
     "weekend_profitable": SessionProfile(
         session_name="Weekend Profitable Hours",
         min_confidence_threshold=0.45,  # Slightly higher than normal
-        max_position_size=0.08,  # Slightly reduced
+        max_position_size=3.0,  # Increased from 0.08 (Ghost Audit: DD is 0.02%)
         risk_multiplier=0.8,  # 80% of normal risk
         min_strategy_votes=5,
         min_coherence=0.45,

@@ -1,0 +1,17 @@
+{
+  "trade_id": 7140,
+  "type": "ghost_exit",
+  "direction": "BUY",
+  "entry_price": 66858.94,
+  "exit_price": 67758.94,
+  "pnl": 3504.6797241649456,
+  "is_win": true,
+  "exit_reason": "TP_hit",
+  "veto_reason": "advanced_veto:BUY vetoed - price at upper BB",
+  "session": "asian",
+  "confidence": 0.58,
+  "regime": "unknown",
+  "duration_bars": 444,
+  "open_time": "2026-04-03 23:05:00",
+  "timestamp": "2026-04-12T18:35:14.434669+00:00"
+}

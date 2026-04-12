@@ -1,0 +1,17 @@
+{
+  "trade_id": 2519,
+  "type": "ghost_exit",
+  "direction": "BUY",
+  "entry_price": 88158.76,
+  "exit_price": 87858.76,
+  "pnl": -894.1210850852394,
+  "is_win": false,
+  "exit_reason": "SL_hit",
+  "veto_reason": "anti_metralhadora:session_blocked",
+  "session": "weekend_profitable",
+  "confidence": 0.5633333333333334,
+  "regime": "unknown",
+  "duration_bars": 108,
+  "open_time": "2025-12-20 18:15:00",
+  "timestamp": "2026-04-12T18:34:52.250747+00:00"
+}

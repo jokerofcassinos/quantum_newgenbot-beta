@@ -1,0 +1,17 @@
+{
+  "trade_id": 3395,
+  "type": "ghost_exit",
+  "direction": "SELL",
+  "entry_price": 87149.99,
+  "exit_price": 87449.99,
+  "pnl": -494.0688036874119,
+  "is_win": false,
+  "exit_reason": "SL_hit",
+  "veto_reason": "advanced_veto:SELL vetoed - price at lower BB",
+  "session": "asian",
+  "confidence": 0.5466666666666667,
+  "regime": "unknown",
+  "duration_bars": 72,
+  "open_time": "2025-12-30 02:30:00",
+  "timestamp": "2026-04-12T18:34:54.209822+00:00"
+}

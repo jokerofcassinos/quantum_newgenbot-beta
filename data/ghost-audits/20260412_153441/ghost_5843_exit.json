@@ -1,0 +1,17 @@
+{
+  "trade_id": 5843,
+  "type": "ghost_exit",
+  "direction": "BUY",
+  "entry_price": 68785.58,
+  "exit_price": 69685.58,
+  "pnl": 2026.4381201592748,
+  "is_win": true,
+  "exit_reason": "TP_hit",
+  "veto_reason": "session_veto:Confidence 0.42 < 0.45 (Weekend Profitable Hours threshold)",
+  "session": "weekend_profitable",
+  "confidence": 0.4166666666666667,
+  "regime": "unknown",
+  "duration_bars": 21,
+  "open_time": "2026-02-14 08:20:00",
+  "timestamp": "2026-04-12T18:35:04.007882+00:00"
+}

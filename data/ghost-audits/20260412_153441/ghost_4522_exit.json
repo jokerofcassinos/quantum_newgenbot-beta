@@ -1,0 +1,17 @@
+{
+  "trade_id": 4522,
+  "type": "ghost_exit",
+  "direction": "BUY",
+  "entry_price": 91943.35,
+  "exit_price": 92843.35,
+  "pnl": 1858.6068186905604,
+  "is_win": true,
+  "exit_reason": "TP_hit",
+  "veto_reason": "ghost_audit:weekday_destructive_hours_10UTC",
+  "session": "london",
+  "confidence": 0.4966666666666667,
+  "regime": "unknown",
+  "duration_bars": 78,
+  "open_time": "2026-01-13 10:10:00",
+  "timestamp": "2026-04-12T18:34:57.428942+00:00"
+}

@@ -1,0 +1,17 @@
+{
+  "trade_id": 1826,
+  "type": "ghost_exit",
+  "direction": "BUY",
+  "entry_price": 89502.63,
+  "exit_price": 89202.63,
+  "pnl": -817.8746648960973,
+  "is_win": false,
+  "exit_reason": "SL_hit",
+  "veto_reason": "advanced_veto:BUY vetoed - price at upper BB",
+  "session": "weekend_profitable",
+  "confidence": 0.58,
+  "regime": "unknown",
+  "duration_bars": 19,
+  "open_time": "2025-12-07 08:00:00",
+  "timestamp": "2026-04-12T18:34:50.116790+00:00"
+}

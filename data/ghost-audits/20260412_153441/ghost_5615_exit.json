@@ -1,0 +1,17 @@
+{
+  "trade_id": 5615,
+  "type": "ghost_exit",
+  "direction": "SELL",
+  "entry_price": 89099.15,
+  "exit_price": 89399.15,
+  "pnl": -446.4007223725619,
+  "is_win": false,
+  "exit_reason": "SL_hit",
+  "veto_reason": "advanced_veto:SELL vetoed - price at lower BB",
+  "session": "london",
+  "confidence": 0.5466666666666667,
+  "regime": "unknown",
+  "duration_bars": 15,
+  "open_time": "2026-01-28 10:20:00",
+  "timestamp": "2026-04-12T18:35:00.967934+00:00"
+}

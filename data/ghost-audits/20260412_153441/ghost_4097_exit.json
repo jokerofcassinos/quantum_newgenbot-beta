@@ -1,0 +1,17 @@
+{
+  "trade_id": 4097,
+  "type": "ghost_exit",
+  "direction": "BUY",
+  "entry_price": 90529.48,
+  "exit_price": 90229.48,
+  "pnl": -257.3000680437402,
+  "is_win": false,
+  "exit_reason": "SL_hit",
+  "veto_reason": "advanced_veto:BUY vetoed - price at upper BB",
+  "session": "asian",
+  "confidence": 0.4966666666666667,
+  "regime": "unknown",
+  "duration_bars": 517,
+  "open_time": "2026-01-09 23:25:00",
+  "timestamp": "2026-04-12T18:34:57.083113+00:00"
+}

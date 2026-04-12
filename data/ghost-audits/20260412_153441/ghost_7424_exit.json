@@ -1,0 +1,17 @@
+{
+  "trade_id": 7424,
+  "type": "ghost_exit",
+  "direction": "BUY",
+  "entry_price": 66892.8,
+  "exit_price": 67792.8,
+  "pnl": 3936.709640464379,
+  "is_win": true,
+  "exit_reason": "TP_hit",
+  "veto_reason": "anti_metralhadora:session_blocked",
+  "session": "weekend_profitable",
+  "confidence": 0.5633333333333334,
+  "regime": "unknown",
+  "duration_bars": 7,
+  "open_time": "2026-04-05 17:55:00",
+  "timestamp": "2026-04-12T18:35:14.468628+00:00"
+}

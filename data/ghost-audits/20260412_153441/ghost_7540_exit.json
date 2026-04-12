@@ -1,0 +1,17 @@
+{
+  "trade_id": 7540,
+  "type": "ghost_exit",
+  "direction": "SELL",
+  "entry_price": 71721.18,
+  "exit_price": 72021.18,
+  "pnl": -494.79005832806376,
+  "is_win": false,
+  "exit_reason": "SL_hit",
+  "veto_reason": "ghost_audit:weekday_destructive_hours_12UTC",
+  "session": "london",
+  "confidence": 0.63,
+  "regime": "unknown",
+  "duration_bars": 21,
+  "open_time": "2026-04-10 12:20:00",
+  "timestamp": "2026-04-12T18:35:15.616793+00:00"
+}

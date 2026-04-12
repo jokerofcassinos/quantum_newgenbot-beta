@@ -1,0 +1,15 @@
+{
+  "trade_id": 1485,
+  "type": "ghost_entry",
+  "direction": "SELL",
+  "entry_price": 91095.1,
+  "stop_loss": 91395.1,
+  "take_profit": 90195.1,
+  "volume": 1.089910546314555,
+  "veto_reason": "anti_metralhadora:session_limit",
+  "session": "asian",
+  "confidence": 0.5466666666666667,
+  "regime": "unknown",
+  "open_time": "2025-11-28 22:20:00",
+  "timestamp": "2026-04-12T18:34:49.057217+00:00"
+}

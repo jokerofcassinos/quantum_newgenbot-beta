@@ -1,0 +1,17 @@
+{
+  "trade_id": 7139,
+  "type": "ghost_exit",
+  "direction": "BUY",
+  "entry_price": 66869.6,
+  "exit_price": 67769.6,
+  "pnl": 4500.0,
+  "is_win": true,
+  "exit_reason": "TP_hit",
+  "veto_reason": "advanced_veto:BUY vetoed - RSI 76.0 > 72",
+  "session": "asian",
+  "confidence": 0.5966666666666666,
+  "regime": "unknown",
+  "duration_bars": 448,
+  "open_time": "2026-04-03 22:45:00",
+  "timestamp": "2026-04-12T18:35:14.434294+00:00"
+}

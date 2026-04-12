@@ -1,0 +1,17 @@
+{
+  "trade_id": 3507,
+  "type": "ghost_exit",
+  "direction": "BUY",
+  "entry_price": 87708.32,
+  "exit_price": 88608.32,
+  "pnl": 1586.1620746760284,
+  "is_win": true,
+  "exit_reason": "TP_hit",
+  "veto_reason": "ghost_audit:weekday_destructive_hours_10UTC",
+  "session": "london",
+  "confidence": 0.4966666666666667,
+  "regime": "unknown",
+  "duration_bars": 166,
+  "open_time": "2026-01-01 10:50:00",
+  "timestamp": "2026-04-12T18:34:54.823358+00:00"
+}

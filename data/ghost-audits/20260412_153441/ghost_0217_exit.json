@@ -1,0 +1,17 @@
+{
+  "trade_id": 217,
+  "type": "ghost_exit",
+  "direction": "SELL",
+  "entry_price": 106821.3,
+  "exit_price": 107121.3,
+  "pnl": -370.8788156184776,
+  "is_win": false,
+  "exit_reason": "SL_hit",
+  "veto_reason": "session_veto:Confidence 0.42 < 0.45 (Weekend Profitable Hours threshold)",
+  "session": "weekend_profitable",
+  "confidence": 0.4166666666666667,
+  "regime": "unknown",
+  "duration_bars": 27,
+  "open_time": "2025-10-18 20:50:00",
+  "timestamp": "2026-04-12T18:34:44.437742+00:00"
+}

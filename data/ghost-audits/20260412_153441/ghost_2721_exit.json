@@ -1,0 +1,17 @@
+{
+  "trade_id": 2721,
+  "type": "ghost_exit",
+  "direction": "BUY",
+  "entry_price": 89099.16,
+  "exit_price": 89999.16,
+  "pnl": 1020.8790385958977,
+  "is_win": true,
+  "exit_reason": "TP_hit",
+  "veto_reason": "ghost_audit:weekday_destructive_hours_10UTC",
+  "session": "london",
+  "confidence": 0.4966666666666667,
+  "regime": "unknown",
+  "duration_bars": 44,
+  "open_time": "2025-12-22 10:05:00",
+  "timestamp": "2026-04-12T18:34:52.527116+00:00"
+}

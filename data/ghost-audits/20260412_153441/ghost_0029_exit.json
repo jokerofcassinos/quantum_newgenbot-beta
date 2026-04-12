@@ -1,0 +1,17 @@
+{
+  "trade_id": 29,
+  "type": "ghost_exit",
+  "direction": "SELL",
+  "entry_price": 121209.72,
+  "exit_price": 121509.72,
+  "pnl": -120.49550422441155,
+  "is_win": false,
+  "exit_reason": "SL_hit",
+  "veto_reason": "ghost_audit:weekday_destructive_hours_11UTC",
+  "session": "london",
+  "confidence": 0.5466666666666667,
+  "regime": "unknown",
+  "duration_bars": 4,
+  "open_time": "2025-10-10 11:35:00",
+  "timestamp": "2026-04-12T18:34:43.726812+00:00"
+}
