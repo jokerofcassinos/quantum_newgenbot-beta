@@ -505,29 +505,12 @@ class CompleteBacktestEngineV2:
                                 akashic_pred = self.akashic.predict_outcome(akashic_state)
                                 
                                 # Store Akashic prediction for audit (don't veto based on it yet - needs more data)
+                                # FIX #1: AkashicCore - storing patterns for future use (veto disabled until 500+ patterns)
                                 signal['akashic_recommendation'] = akashic_pred['recommendation']
                                 signal['akashic_confidence'] = akashic_pred['confidence']
                                 signal['akashic_matches'] = akashic_pred['num_matches']
                                 
-                                # Disabled: AkashicCore veto until we have enough historical data
-                                # if akashic_pred['num_matches'] >= 20 and akashic_pred['confidence'] > 0.7:
-                                #     if akashic_pred['recommendation'] != 'NEUTRAL' and akashic_pred['recommendation'] != signal['direction']:
-                                #         self.total_vetoes += 1
-                                #         continue  # Historical patterns disagree
-                                
-                                # 6. Black Swan Stress Test (prevent catastrophes)
-                                # Only run every 10th trade to save computation
-                                # DISABLED TEMPORARILY - needs tuning
-                                # if self.total_trades % 10 == 0:
-                                #     stress_result = self.black_swan.stress_test(
-                                #         entry_price=signal['entry_price'],
-                                #         stop_loss=signal['stop_loss'],
-                                #         take_profit=signal['take_profit'],
-                                #         direction=signal['direction'],
-                                #     )
-                                #     if not stress_result['approved']:
-                                #         self.total_vetoes += 1
-                                #         continue  # Failed stress test
+                                # FIX #2: Black Swan - disabled until properly tuned (was vetoing too aggressively)
 
                                 signal['volume'] = session_veto['adjusted_volume']
                                 signal['session_veto_data'] = {
