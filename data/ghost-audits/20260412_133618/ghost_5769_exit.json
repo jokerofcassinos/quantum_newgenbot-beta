@@ -1,0 +1,17 @@
+{
+  "trade_id": 5769,
+  "type": "ghost_exit",
+  "direction": "BUY",
+  "entry_price": 89142.53,
+  "exit_price": 88842.53,
+  "pnl": -300.0,
+  "is_win": false,
+  "exit_reason": "SL_hit",
+  "veto_reason": "anti_metralhadora:low_quality",
+  "session": "asian",
+  "confidence": 0.4166666666666667,
+  "regime": "unknown",
+  "duration_bars": 63,
+  "open_time": "2026-01-28 01:00:00",
+  "timestamp": "2026-04-12T16:36:37.750496+00:00"
+}

@@ -1,0 +1,17 @@
+{
+  "trade_id": 4834,
+  "type": "ghost_exit",
+  "direction": "SELL",
+  "entry_price": 96975.54,
+  "exit_price": 96075.54,
+  "pnl": 810.7133862386922,
+  "is_win": true,
+  "exit_reason": "TP_hit",
+  "veto_reason": "anti_metralhadora:low_quality",
+  "session": "asian",
+  "confidence": 0.4166666666666667,
+  "regime": "unknown",
+  "duration_bars": 33,
+  "open_time": "2026-01-15 01:50:00",
+  "timestamp": "2026-04-12T16:36:34.734014+00:00"
+}

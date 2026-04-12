@@ -1,0 +1,17 @@
+{
+  "trade_id": 2097,
+  "type": "ghost_exit",
+  "direction": "BUY",
+  "entry_price": 83920.21,
+  "exit_price": 85663.60964285715,
+  "pnl": 490.0125293273083,
+  "is_win": true,
+  "exit_reason": "TP_hit",
+  "veto_reason": "anti_metralhadora:low_quality",
+  "session": "ny",
+  "confidence": 0.4166666666666667,
+  "regime": "unknown",
+  "duration_bars": 53,
+  "open_time": "2025-12-01 17:40:00",
+  "timestamp": "2026-04-12T16:36:26.916029+00:00"
+}

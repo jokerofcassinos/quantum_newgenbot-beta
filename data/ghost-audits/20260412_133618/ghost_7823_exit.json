@@ -1,0 +1,17 @@
+{
+  "trade_id": 7823,
+  "type": "ghost_exit",
+  "direction": "SELL",
+  "entry_price": 70914.77,
+  "exit_price": 71214.77,
+  "pnl": -214.70045205498056,
+  "is_win": false,
+  "exit_reason": "SL_hit",
+  "veto_reason": "anti_metralhadora:low_quality",
+  "session": "asian",
+  "confidence": 0.4166666666666667,
+  "regime": "unknown",
+  "duration_bars": 82,
+  "open_time": "2026-04-09 04:50:00",
+  "timestamp": "2026-04-12T16:36:51.605914+00:00"
+}

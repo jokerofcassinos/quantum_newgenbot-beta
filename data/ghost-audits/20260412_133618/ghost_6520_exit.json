@@ -1,0 +1,17 @@
+{
+  "trade_id": 6520,
+  "type": "ghost_exit",
+  "direction": "SELL",
+  "entry_price": 65433.69,
+  "exit_price": 65733.69,
+  "pnl": -300.0,
+  "is_win": false,
+  "exit_reason": "SL_hit",
+  "veto_reason": "anti_metralhadora:low_quality",
+  "session": "ny_overlap",
+  "confidence": 0.4166666666666667,
+  "regime": "unknown",
+  "duration_bars": 8,
+  "open_time": "2026-02-25 13:35:00",
+  "timestamp": "2026-04-12T16:36:42.905274+00:00"
+}

@@ -1,0 +1,17 @@
+{
+  "trade_id": 4833,
+  "type": "ghost_exit",
+  "direction": "BUY",
+  "entry_price": 97368.65,
+  "exit_price": 97068.65,
+  "pnl": -300.0,
+  "is_win": false,
+  "exit_reason": "SL_hit",
+  "veto_reason": "anti_metralhadora:low_quality",
+  "session": "asian",
+  "confidence": 0.4166666666666667,
+  "regime": "unknown",
+  "duration_bars": 3,
+  "open_time": "2026-01-15 00:15:00",
+  "timestamp": "2026-04-12T16:36:34.702151+00:00"
+}

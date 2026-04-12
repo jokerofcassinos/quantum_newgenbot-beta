@@ -1,0 +1,8 @@
+{
+  "trade_id": 1,
+  "type": "ghost_exit",
+  "direction": "SELL",
+  "entry_price": 121373.41,
+  "exit_price": 121743.22428571428,
+  "pnl": -3.6981428571428117,
+  "is_win": 

@@ -1,0 +1,17 @@
+{
+  "trade_id": 5376,
+  "type": "ghost_exit",
+  "direction": "SELL",
+  "entry_price": 89444.57,
+  "exit_price": 88544.57,
+  "pnl": 327.6786335248666,
+  "is_win": true,
+  "exit_reason": "TP_hit",
+  "veto_reason": "anti_metralhadora:low_quality",
+  "session": "ny",
+  "confidence": 0.4166666666666667,
+  "regime": "unknown",
+  "duration_bars": 12,
+  "open_time": "2026-01-22 16:30:00",
+  "timestamp": "2026-04-12T16:36:36.372179+00:00"
+}

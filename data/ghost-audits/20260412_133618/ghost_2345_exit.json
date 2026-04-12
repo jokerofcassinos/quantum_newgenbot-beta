@@ -1,0 +1,17 @@
+{
+  "trade_id": 2345,
+  "type": "ghost_exit",
+  "direction": "SELL",
+  "entry_price": 90201.86,
+  "exit_price": 90555.65107142857,
+  "pnl": -216.59366388114356,
+  "is_win": false,
+  "exit_reason": "SL_hit",
+  "veto_reason": "advanced_veto:SELL vetoed - RSI 12.8 < 28",
+  "session": "asian",
+  "confidence": 0.4166666666666667,
+  "regime": "unknown",
+  "duration_bars": 157,
+  "open_time": "2025-12-11 04:15:00",
+  "timestamp": "2026-04-12T16:36:28.067646+00:00"
+}

@@ -1,0 +1,17 @@
+{
+  "trade_id": 7344,
+  "type": "ghost_exit",
+  "direction": "BUY",
+  "entry_price": 70067.21,
+  "exit_price": 69749.77571428572,
+  "pnl": -159.591662955165,
+  "is_win": false,
+  "exit_reason": "SL_hit",
+  "veto_reason": "anti_metralhadora:low_quality",
+  "session": "ny",
+  "confidence": 0.4166666666666667,
+  "regime": "unknown",
+  "duration_bars": 3,
+  "open_time": "2026-03-24 16:55:00",
+  "timestamp": "2026-04-12T16:36:48.161649+00:00"
+}

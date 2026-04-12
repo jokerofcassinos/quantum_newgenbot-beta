@@ -1,0 +1,17 @@
+{
+  "trade_id": 80,
+  "type": "ghost_exit",
+  "direction": "BUY",
+  "entry_price": 120975.48,
+  "exit_price": 121875.48,
+  "pnl": 9.0,
+  "is_win": true,
+  "exit_reason": "TP_hit",
+  "veto_reason": "advanced_veto:BUY vetoed - price at upper BB",
+  "session": "asian",
+  "confidence": 0.5,
+  "regime": "unknown",
+  "duration_bars": 197,
+  "open_time": "2025-10-09 23:45:00",
+  "timestamp": "2026-04-12T16:36:21.281493+00:00"
+}

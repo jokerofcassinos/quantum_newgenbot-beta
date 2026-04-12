@@ -1,0 +1,17 @@
+{
+  "trade_id": 1759,
+  "type": "ghost_exit",
+  "direction": "SELL",
+  "entry_price": 89723.8,
+  "exit_price": 90164.15928571428,
+  "pnl": -158.5528414110223,
+  "is_win": false,
+  "exit_reason": "SL_hit",
+  "veto_reason": "anti_metralhadora:low_quality",
+  "session": "ny",
+  "confidence": 0.4166666666666667,
+  "regime": "unknown",
+  "duration_bars": 6,
+  "open_time": "2025-11-26 19:45:00",
+  "timestamp": "2026-04-12T16:36:26.163774+00:00"
+}

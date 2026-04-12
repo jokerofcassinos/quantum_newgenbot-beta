@@ -1,0 +1,17 @@
+{
+  "trade_id": 5929,
+  "type": "ghost_exit",
+  "direction": "BUY",
+  "entry_price": 78391.28,
+  "exit_price": 78091.28,
+  "pnl": -257.77731060298146,
+  "is_win": false,
+  "exit_reason": "SL_hit",
+  "veto_reason": "anti_metralhadora:low_quality",
+  "session": "london",
+  "confidence": 0.4166666666666667,
+  "regime": "unknown",
+  "duration_bars": 9,
+  "open_time": "2026-02-03 07:20:00",
+  "timestamp": "2026-04-12T16:36:38.845246+00:00"
+}

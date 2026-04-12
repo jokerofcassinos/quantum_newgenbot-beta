@@ -1,0 +1,17 @@
+{
+  "trade_id": 6511,
+  "type": "ghost_exit",
+  "direction": "SELL",
+  "entry_price": 65079.99,
+  "exit_price": 65379.99,
+  "pnl": -300.0,
+  "is_win": false,
+  "exit_reason": "SL_hit",
+  "veto_reason": "anti_metralhadora:low_quality",
+  "session": "london",
+  "confidence": 0.4166666666666667,
+  "regime": "unknown",
+  "duration_bars": 14,
+  "open_time": "2026-02-25 09:25:00",
+  "timestamp": "2026-04-12T16:36:42.870579+00:00"
+}

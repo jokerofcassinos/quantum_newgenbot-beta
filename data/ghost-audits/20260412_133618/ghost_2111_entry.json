@@ -1,0 +1,15 @@
+{
+  "trade_id": 2111,
+  "type": "ghost_entry",
+  "direction": "BUY",
+  "entry_price": 90808.22,
+  "stop_loss": 90170.75,
+  "take_profit": 92720.62999999999,
+  "volume": 0.33340549817034343,
+  "veto_reason": "advanced_veto:BUY vetoed - RSI 73.2 > 72",
+  "session": "ny",
+  "confidence": 0.4166666666666667,
+  "regime": "unknown",
+  "open_time": "2025-12-02 17:55:00",
+  "timestamp": "2026-04-12T16:36:27.025654+00:00"
+}

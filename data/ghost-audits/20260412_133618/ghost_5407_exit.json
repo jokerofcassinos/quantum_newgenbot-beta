@@ -1,0 +1,17 @@
+{
+  "trade_id": 5407,
+  "type": "ghost_exit",
+  "direction": "SELL",
+  "entry_price": 89617.49,
+  "exit_price": 89971.11928571429,
+  "pnl": -213.82975807630612,
+  "is_win": false,
+  "exit_reason": "SL_hit",
+  "veto_reason": "advanced_veto:SELL vetoed - RSI 20.4 < 28",
+  "session": "asian",
+  "confidence": 0.4166666666666667,
+  "regime": "unknown",
+  "duration_bars": 5,
+  "open_time": "2026-01-23 21:30:00",
+  "timestamp": "2026-04-12T16:36:36.611512+00:00"
+}

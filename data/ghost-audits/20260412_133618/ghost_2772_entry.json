@@ -1,0 +1,15 @@
+{
+  "trade_id": 2772,
+  "type": "ghost_entry",
+  "direction": "BUY",
+  "entry_price": 87734.64,
+  "stop_loss": 87434.64,
+  "take_profit": 88634.64,
+  "volume": 1.0,
+  "veto_reason": "anti_metralhadora:low_quality",
+  "session": "asian",
+  "confidence": 0.4166666666666667,
+  "regime": "unknown",
+  "open_time": "2025-12-17 00:05:00",
+  "timestamp": "2026-04-12T16:36:28.952108+00:00"
+}

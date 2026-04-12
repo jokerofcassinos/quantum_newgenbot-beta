@@ -1,0 +1,17 @@
+{
+  "trade_id": 6039,
+  "type": "ghost_exit",
+  "direction": "BUY",
+  "entry_price": 67058.28,
+  "exit_price": 67958.28,
+  "pnl": 900.0,
+  "is_win": true,
+  "exit_reason": "TP_hit",
+  "veto_reason": "anti_metralhadora:low_quality",
+  "session": "ny_overlap",
+  "confidence": 0.4166666666666667,
+  "regime": "unknown",
+  "duration_bars": 18,
+  "open_time": "2026-02-13 15:15:00",
+  "timestamp": "2026-04-12T16:36:40.437247+00:00"
+}

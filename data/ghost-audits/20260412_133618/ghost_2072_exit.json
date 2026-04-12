@@ -1,0 +1,17 @@
+{
+  "trade_id": 2072,
+  "type": "ghost_exit",
+  "direction": "SELL",
+  "entry_price": 91046.69,
+  "exit_price": 90146.69,
+  "pnl": 900.0,
+  "is_win": true,
+  "exit_reason": "TP_hit",
+  "veto_reason": "anti_metralhadora:low_quality",
+  "session": "asian",
+  "confidence": 0.4166666666666667,
+  "regime": "unknown",
+  "duration_bars": 18,
+  "open_time": "2025-12-01 00:30:00",
+  "timestamp": "2026-04-12T16:36:26.817924+00:00"
+}

@@ -1,0 +1,15 @@
+{
+  "trade_id": 7320,
+  "type": "ghost_entry",
+  "direction": "SELL",
+  "entry_price": 70962.29,
+  "stop_loss": 71262.29,
+  "take_profit": 70062.29,
+  "volume": 1.0,
+  "veto_reason": "anti_metralhadora:low_quality",
+  "session": "asian",
+  "confidence": 0.4166666666666667,
+  "regime": "unknown",
+  "open_time": "2026-03-24 00:35:00",
+  "timestamp": "2026-04-12T16:36:48.038359+00:00"
+}

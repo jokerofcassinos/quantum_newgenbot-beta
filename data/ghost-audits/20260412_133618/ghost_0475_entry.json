@@ -1,0 +1,15 @@
+{
+  "trade_id": 475,
+  "type": "ghost_entry",
+  "direction": "SELL",
+  "entry_price": 108246.87,
+  "stop_loss": 108578.71821428572,
+  "take_profit": 107251.32535714284,
+  "volume": 0.5898540594273785,
+  "veto_reason": "advanced_veto:SELL vetoed - RSI 12.2 < 28",
+  "session": "london",
+  "confidence": 0.4166666666666667,
+  "regime": "unknown",
+  "open_time": "2025-10-21 07:10:00",
+  "timestamp": "2026-04-12T16:36:22.186893+00:00"
+}

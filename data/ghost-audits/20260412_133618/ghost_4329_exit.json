@@ -1,0 +1,17 @@
+{
+  "trade_id": 4329,
+  "type": "ghost_exit",
+  "direction": "SELL",
+  "entry_price": 90008.8,
+  "exit_price": 90337.255,
+  "pnl": -108.80351487725086,
+  "is_win": false,
+  "exit_reason": "SL_hit",
+  "veto_reason": "anti_metralhadora:low_quality",
+  "session": "london",
+  "confidence": 0.4166666666666667,
+  "regime": "unknown",
+  "duration_bars": 4,
+  "open_time": "2026-01-08 09:10:00",
+  "timestamp": "2026-04-12T16:36:33.227508+00:00"
+}

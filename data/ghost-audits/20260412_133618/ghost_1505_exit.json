@@ -1,0 +1,17 @@
+{
+  "trade_id": 1505,
+  "type": "ghost_exit",
+  "direction": "SELL",
+  "entry_price": 102500.29,
+  "exit_price": 102800.29,
+  "pnl": -163.71136390750078,
+  "is_win": false,
+  "exit_reason": "SL_hit",
+  "veto_reason": "anti_metralhadora:low_quality",
+  "session": "ny_overlap",
+  "confidence": 0.4166666666666667,
+  "regime": "unknown",
+  "duration_bars": 14,
+  "open_time": "2025-11-13 15:40:00",
+  "timestamp": "2026-04-12T16:36:24.902159+00:00"
+}

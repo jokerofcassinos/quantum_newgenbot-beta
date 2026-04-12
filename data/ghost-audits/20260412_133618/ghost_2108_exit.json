@@ -1,0 +1,17 @@
+{
+  "trade_id": 2108,
+  "type": "ghost_exit",
+  "direction": "BUY",
+  "entry_price": 87216.92,
+  "exit_price": 88116.92,
+  "pnl": 896.970072976893,
+  "is_win": true,
+  "exit_reason": "TP_hit",
+  "veto_reason": "advanced_veto:BUY vetoed - RSI 72.7 > 72",
+  "session": "ny_overlap",
+  "confidence": 0.5,
+  "regime": "unknown",
+  "duration_bars": 36,
+  "open_time": "2025-12-02 13:05:00",
+  "timestamp": "2026-04-12T16:36:27.017531+00:00"
+}

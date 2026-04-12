@@ -1,0 +1,17 @@
+{
+  "trade_id": 6508,
+  "type": "ghost_exit",
+  "direction": "SELL",
+  "entry_price": 65402.64,
+  "exit_price": 65702.64,
+  "pnl": -253.16695870042105,
+  "is_win": false,
+  "exit_reason": "SL_hit",
+  "veto_reason": "anti_metralhadora:low_quality",
+  "session": "asian",
+  "confidence": 0.4166666666666667,
+  "regime": "unknown",
+  "duration_bars": 97,
+  "open_time": "2026-02-25 06:10:00",
+  "timestamp": "2026-04-12T16:36:42.904297+00:00"
+}

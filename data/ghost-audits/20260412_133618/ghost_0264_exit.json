@@ -1,0 +1,17 @@
+{
+  "trade_id": 264,
+  "type": "ghost_exit",
+  "direction": "SELL",
+  "entry_price": 110815.01,
+  "exit_price": 109915.01,
+  "pnl": 844.7647519704574,
+  "is_win": true,
+  "exit_reason": "TP_hit",
+  "veto_reason": "anti_metralhadora:low_quality",
+  "session": "london",
+  "confidence": 0.4166666666666667,
+  "regime": "unknown",
+  "duration_bars": 2,
+  "open_time": "2025-10-16 12:20:00",
+  "timestamp": "2026-04-12T16:36:21.738659+00:00"
+}

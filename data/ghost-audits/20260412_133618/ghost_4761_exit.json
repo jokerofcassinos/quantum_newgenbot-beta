@@ -1,0 +1,17 @@
+{
+  "trade_id": 4761,
+  "type": "ghost_exit",
+  "direction": "BUY",
+  "entry_price": 90668.37,
+  "exit_price": 91568.37,
+  "pnl": 451.1137513637062,
+  "is_win": true,
+  "exit_reason": "TP_hit",
+  "veto_reason": "anti_metralhadora:low_quality",
+  "session": "asian",
+  "confidence": 0.4166666666666667,
+  "regime": "unknown",
+  "duration_bars": 22,
+  "open_time": "2026-01-12 01:10:00",
+  "timestamp": "2026-04-12T16:36:34.171173+00:00"
+}

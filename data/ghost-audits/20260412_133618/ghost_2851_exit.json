@@ -1,0 +1,17 @@
+{
+  "trade_id": 2851,
+  "type": "ghost_exit",
+  "direction": "SELL",
+  "entry_price": 88269.74,
+  "exit_price": 88569.74,
+  "pnl": -300.0,
+  "is_win": false,
+  "exit_reason": "SL_hit",
+  "veto_reason": "session_veto:Trading disabled for Weekend session",
+  "session": "weekend",
+  "confidence": 0.4166666666666667,
+  "regime": "unknown",
+  "duration_bars": 395,
+  "open_time": "2025-12-20 00:35:00",
+  "timestamp": "2026-04-12T16:36:29.725802+00:00"
+}

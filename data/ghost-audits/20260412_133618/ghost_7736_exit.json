@@ -1,0 +1,17 @@
+{
+  "trade_id": 7736,
+  "type": "ghost_exit",
+  "direction": "SELL",
+  "entry_price": 69394.69,
+  "exit_price": 69694.69,
+  "pnl": -273.30859546773394,
+  "is_win": false,
+  "exit_reason": "SL_hit",
+  "veto_reason": "anti_metralhadora:low_quality",
+  "session": "ny",
+  "confidence": 0.4166666666666667,
+  "regime": "unknown",
+  "duration_bars": 9,
+  "open_time": "2026-04-06 16:50:00",
+  "timestamp": "2026-04-12T16:36:50.967309+00:00"
+}

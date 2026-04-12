@@ -1,0 +1,15 @@
+{
+  "trade_id": 3887,
+  "type": "ghost_entry",
+  "direction": "SELL",
+  "entry_price": 89055.34,
+  "stop_loss": 89355.34,
+  "take_profit": 88155.34,
+  "volume": 1.0,
+  "veto_reason": "anti_metralhadora:low_quality",
+  "session": "london",
+  "confidence": 0.4166666666666667,
+  "regime": "unknown",
+  "open_time": "2026-01-02 10:35:00",
+  "timestamp": "2026-04-12T16:36:31.970479+00:00"
+}

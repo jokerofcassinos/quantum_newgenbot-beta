@@ -1,0 +1,17 @@
+{
+  "trade_id": 1830,
+  "type": "ghost_exit",
+  "direction": "SELL",
+  "entry_price": 91095.1,
+  "exit_price": 90195.1,
+  "pnl": 900.0,
+  "is_win": true,
+  "exit_reason": "TP_hit",
+  "veto_reason": "anti_metralhadora:low_quality",
+  "session": "asian",
+  "confidence": 0.4166666666666667,
+  "regime": "unknown",
+  "duration_bars": 260,
+  "open_time": "2025-11-28 22:20:00",
+  "timestamp": "2026-04-12T16:36:26.585465+00:00"
+}

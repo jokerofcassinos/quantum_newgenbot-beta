@@ -1,0 +1,17 @@
+{
+  "trade_id": 5911,
+  "type": "ghost_exit",
+  "direction": "BUY",
+  "entry_price": 75042.57,
+  "exit_price": 76586.49107142858,
+  "pnl": 647.8229211761119,
+  "is_win": true,
+  "exit_reason": "TP_hit",
+  "veto_reason": "anti_metralhadora:low_quality",
+  "session": "asian",
+  "confidence": 0.4166666666666667,
+  "regime": "unknown",
+  "duration_bars": 39,
+  "open_time": "2026-02-02 05:25:00",
+  "timestamp": "2026-04-12T16:36:38.716058+00:00"
+}

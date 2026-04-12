@@ -1,0 +1,17 @@
+{
+  "trade_id": 4264,
+  "type": "ghost_exit",
+  "direction": "SELL",
+  "entry_price": 92475.9,
+  "exit_price": 92775.9,
+  "pnl": -232.52247484362178,
+  "is_win": false,
+  "exit_reason": "SL_hit",
+  "veto_reason": "anti_metralhadora:low_quality",
+  "session": "asian",
+  "confidence": 0.4166666666666667,
+  "regime": "unknown",
+  "duration_bars": 4,
+  "open_time": "2026-01-07 04:15:00",
+  "timestamp": "2026-04-12T16:36:32.935134+00:00"
+}

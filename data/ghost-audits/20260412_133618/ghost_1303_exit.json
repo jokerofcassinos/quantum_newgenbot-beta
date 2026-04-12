@@ -1,0 +1,17 @@
+{
+  "trade_id": 1303,
+  "type": "ghost_exit",
+  "direction": "SELL",
+  "entry_price": 103733.17,
+  "exit_price": 104033.17,
+  "pnl": -296.3070923443662,
+  "is_win": false,
+  "exit_reason": "SL_hit",
+  "veto_reason": "anti_metralhadora:low_quality",
+  "session": "asian",
+  "confidence": 0.4166666666666667,
+  "regime": "unknown",
+  "duration_bars": 6,
+  "open_time": "2025-11-06 01:10:00",
+  "timestamp": "2026-04-12T16:36:24.144994+00:00"
+}

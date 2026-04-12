@@ -1,0 +1,17 @@
+{
+  "trade_id": 5346,
+  "type": "ghost_exit",
+  "direction": "SELL",
+  "entry_price": 88616.22,
+  "exit_price": 88917.68357142857,
+  "pnl": -107.15299220081795,
+  "is_win": false,
+  "exit_reason": "SL_hit",
+  "veto_reason": "anti_metralhadora:low_quality",
+  "session": "ny_overlap",
+  "confidence": 0.4166666666666667,
+  "regime": "unknown",
+  "duration_bars": 7,
+  "open_time": "2026-01-21 14:35:00",
+  "timestamp": "2026-04-12T16:36:36.152526+00:00"
+}

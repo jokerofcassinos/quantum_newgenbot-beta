@@ -1,0 +1,17 @@
+{
+  "trade_id": 5932,
+  "type": "ghost_exit",
+  "direction": "SELL",
+  "entry_price": 78538.03,
+  "exit_price": 78838.03,
+  "pnl": -246.74839166957207,
+  "is_win": false,
+  "exit_reason": "SL_hit",
+  "veto_reason": "anti_metralhadora:low_quality",
+  "session": "london",
+  "confidence": 0.4166666666666667,
+  "regime": "unknown",
+  "duration_bars": 4,
+  "open_time": "2026-02-03 08:50:00",
+  "timestamp": "2026-04-12T16:36:38.855552+00:00"
+}

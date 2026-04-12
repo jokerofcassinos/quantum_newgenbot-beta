@@ -1,0 +1,17 @@
+{
+  "trade_id": 3203,
+  "type": "ghost_exit",
+  "direction": "BUY",
+  "entry_price": 88873.18,
+  "exit_price": 89773.18,
+  "pnl": 900.0,
+  "is_win": true,
+  "exit_reason": "TP_hit",
+  "veto_reason": "anti_metralhadora:low_quality",
+  "session": "london",
+  "confidence": 0.4166666666666667,
+  "regime": "unknown",
+  "duration_bars": 32,
+  "open_time": "2025-12-22 07:40:00",
+  "timestamp": "2026-04-12T16:36:29.904487+00:00"
+}

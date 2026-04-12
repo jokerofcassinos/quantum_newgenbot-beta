@@ -1,0 +1,17 @@
+{
+  "trade_id": 6598,
+  "type": "ghost_exit",
+  "direction": "SELL",
+  "entry_price": 66023.35,
+  "exit_price": 66323.35,
+  "pnl": -242.70907727168142,
+  "is_win": false,
+  "exit_reason": "SL_hit",
+  "veto_reason": "anti_metralhadora:low_quality",
+  "session": "london",
+  "confidence": 0.4166666666666667,
+  "regime": "unknown",
+  "duration_bars": 3,
+  "open_time": "2026-03-02 10:45:00",
+  "timestamp": "2026-04-12T16:36:43.812417+00:00"
+}

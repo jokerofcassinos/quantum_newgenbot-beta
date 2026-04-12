@@ -1,0 +1,17 @@
+{
+  "trade_id": 6631,
+  "type": "ghost_exit",
+  "direction": "SELL",
+  "entry_price": 68019.66,
+  "exit_price": 68319.66,
+  "pnl": -229.03392584434354,
+  "is_win": false,
+  "exit_reason": "SL_hit",
+  "veto_reason": "anti_metralhadora:low_quality",
+  "session": "asian",
+  "confidence": 0.4166666666666667,
+  "regime": "unknown",
+  "duration_bars": 8,
+  "open_time": "2026-03-03 23:15:00",
+  "timestamp": "2026-04-12T16:36:44.071175+00:00"
+}

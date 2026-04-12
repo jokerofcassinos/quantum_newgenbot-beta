@@ -1,0 +1,17 @@
+{
+  "trade_id": 2737,
+  "type": "ghost_exit",
+  "direction": "BUY",
+  "entry_price": 85711.0,
+  "exit_price": 85381.86142857143,
+  "pnl": -214.5284026220397,
+  "is_win": false,
+  "exit_reason": "SL_hit",
+  "veto_reason": "anti_metralhadora:low_quality",
+  "session": "asian",
+  "confidence": 0.4166666666666667,
+  "regime": "unknown",
+  "duration_bars": 83,
+  "open_time": "2025-12-15 22:25:00",
+  "timestamp": "2026-04-12T16:36:28.852731+00:00"
+}

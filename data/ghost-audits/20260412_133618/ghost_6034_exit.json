@@ -1,0 +1,17 @@
+{
+  "trade_id": 6034,
+  "type": "ghost_exit",
+  "direction": "BUY",
+  "entry_price": 66446.51,
+  "exit_price": 66146.51,
+  "pnl": -300.0,
+  "is_win": false,
+  "exit_reason": "SL_hit",
+  "veto_reason": "anti_metralhadora:low_quality",
+  "session": "asian",
+  "confidence": 0.4166666666666667,
+  "regime": "unknown",
+  "duration_bars": 24,
+  "open_time": "2026-02-13 06:00:00",
+  "timestamp": "2026-04-12T16:36:40.389241+00:00"
+}

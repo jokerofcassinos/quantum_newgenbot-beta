@@ -1,0 +1,17 @@
+{
+  "trade_id": 7830,
+  "type": "ghost_exit",
+  "direction": "BUY",
+  "entry_price": 70875.33,
+  "exit_price": 70575.33,
+  "pnl": -300.0,
+  "is_win": false,
+  "exit_reason": "SL_hit",
+  "veto_reason": "anti_metralhadora:low_quality",
+  "session": "asian",
+  "confidence": 0.4166666666666667,
+  "regime": "unknown",
+  "duration_bars": 127,
+  "open_time": "2026-04-09 06:40:00",
+  "timestamp": "2026-04-12T16:36:51.682368+00:00"
+}

@@ -1,0 +1,15 @@
+{
+  "trade_id": 3221,
+  "type": "ghost_entry",
+  "direction": "BUY",
+  "entry_price": 88561.51,
+  "stop_loss": 88261.51,
+  "take_profit": 89461.51,
+  "volume": 1.0,
+  "veto_reason": "anti_metralhadora:low_quality",
+  "session": "asian",
+  "confidence": 0.4166666666666667,
+  "regime": "unknown",
+  "open_time": "2025-12-23 03:20:00",
+  "timestamp": "2026-04-12T16:36:30.007702+00:00"
+}

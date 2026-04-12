@@ -1,0 +1,15 @@
+{
+  "trade_id": 6619,
+  "type": "ghost_entry",
+  "direction": "SELL",
+  "entry_price": 68783.35,
+  "stop_loss": 69083.35,
+  "take_profit": 67883.35,
+  "volume": 0.8968417453152678,
+  "veto_reason": "advanced_veto:SELL vetoed - RSI 28.8 rising",
+  "session": "asian",
+  "confidence": 0.4166666666666667,
+  "regime": "unknown",
+  "open_time": "2026-03-03 01:50:00",
+  "timestamp": "2026-04-12T16:36:43.943385+00:00"
+}

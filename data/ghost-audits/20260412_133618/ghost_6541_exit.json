@@ -1,0 +1,17 @@
+{
+  "trade_id": 6541,
+  "type": "ghost_exit",
+  "direction": "BUY",
+  "entry_price": 67766.76,
+  "exit_price": 67466.76,
+  "pnl": -180.25422293120153,
+  "is_win": false,
+  "exit_reason": "SL_hit",
+  "veto_reason": "anti_metralhadora:low_quality",
+  "session": "london",
+  "confidence": 0.4166666666666667,
+  "regime": "unknown",
+  "duration_bars": 29,
+  "open_time": "2026-02-27 07:00:00",
+  "timestamp": "2026-04-12T16:36:43.212241+00:00"
+}

@@ -1,0 +1,17 @@
+{
+  "trade_id": 6490,
+  "type": "ghost_exit",
+  "direction": "SELL",
+  "entry_price": 62935.75,
+  "exit_price": 63247.75642857143,
+  "pnl": -215.1247524936836,
+  "is_win": false,
+  "exit_reason": "SL_hit",
+  "veto_reason": "advanced_veto:SELL vetoed - RSI 11.4 < 28",
+  "session": "asian",
+  "confidence": 0.4166666666666667,
+  "regime": "unknown",
+  "duration_bars": 1,
+  "open_time": "2026-02-24 06:15:00",
+  "timestamp": "2026-04-12T16:36:42.621531+00:00"
+}

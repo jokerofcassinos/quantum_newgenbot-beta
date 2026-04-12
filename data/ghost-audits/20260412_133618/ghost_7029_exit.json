@@ -1,0 +1,17 @@
+{
+  "trade_id": 7029,
+  "type": "ghost_exit",
+  "direction": "BUY",
+  "entry_price": 73618.85,
+  "exit_price": 73160.40392857144,
+  "pnl": -161.18207668653838,
+  "is_win": false,
+  "exit_reason": "SL_hit",
+  "veto_reason": "anti_metralhadora:low_quality",
+  "session": "london",
+  "confidence": 0.4166666666666667,
+  "regime": "unknown",
+  "duration_bars": 49,
+  "open_time": "2026-03-16 07:35:00",
+  "timestamp": "2026-04-12T16:36:46.461938+00:00"
+}

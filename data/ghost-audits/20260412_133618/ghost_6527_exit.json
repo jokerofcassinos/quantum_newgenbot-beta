@@ -1,0 +1,17 @@
+{
+  "trade_id": 6527,
+  "type": "ghost_exit",
+  "direction": "SELL",
+  "entry_price": 68236.77,
+  "exit_price": 68536.77,
+  "pnl": -278.8212544614556,
+  "is_win": false,
+  "exit_reason": "SL_hit",
+  "veto_reason": "anti_metralhadora:low_quality",
+  "session": "asian",
+  "confidence": 0.4166666666666667,
+  "regime": "unknown",
+  "duration_bars": 8,
+  "open_time": "2026-02-26 05:30:00",
+  "timestamp": "2026-04-12T16:36:43.014036+00:00"
+}

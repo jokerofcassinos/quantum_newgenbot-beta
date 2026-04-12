@@ -1,6 +1,6 @@
 {
   "ticket": 1012,
-  "timestamp": "2026-04-12T16:16:35.531293+00:00",
+  "timestamp": "2026-04-12T16:36:21.212435+00:00",
   "symbol": "BTCUSD",
   "direction": "BUY",
   "entry_price": 121643.64,
@@ -36,7 +36,7 @@
   "indicators": {
     "ema_9": 121688.64060685292,
     "ema_21": 121647.97084762275,
-    "ema_50": 121505.76822907488,
+    "ema_50": 121505.76822907451,
     "ema_200": 121643.64,
     "sma_20": 121668.253,
     "sma_50": 121643.64,
@@ -122,7 +122,7 @@
     "risk_percent": 1.0,
     "min_rr_ratio": 1.5,
     "confidence_threshold": 0.65,
-    "last_mutation_time": "2026-04-12T16:16:35.531279+00:00",
+    "last_mutation_time": "2026-04-12T16:36:21.212422+00:00",
     "mutation_count": 0,
     "dna_memory_regimes": 0
   },

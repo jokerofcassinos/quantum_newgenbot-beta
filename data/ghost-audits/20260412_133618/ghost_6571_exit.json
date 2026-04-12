@@ -1,0 +1,17 @@
+{
+  "trade_id": 6571,
+  "type": "ghost_exit",
+  "direction": "SELL",
+  "entry_price": 65671.22,
+  "exit_price": 64771.22,
+  "pnl": 900.0,
+  "is_win": true,
+  "exit_reason": "TP_hit",
+  "veto_reason": "session_veto:Trading disabled for Weekend session",
+  "session": "weekend",
+  "confidence": 0.4166666666666667,
+  "regime": "unknown",
+  "duration_bars": 17,
+  "open_time": "2026-02-28 06:50:00",
+  "timestamp": "2026-04-12T16:36:43.425218+00:00"
+}

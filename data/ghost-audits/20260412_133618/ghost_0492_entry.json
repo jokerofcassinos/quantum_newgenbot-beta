@@ -1,0 +1,15 @@
+{
+  "trade_id": 492,
+  "type": "ghost_entry",
+  "direction": "SELL",
+  "entry_price": 108397.8,
+  "stop_loss": 108697.8,
+  "take_profit": 107497.8,
+  "volume": 0.884763616208511,
+  "veto_reason": "anti_metralhadora:low_quality",
+  "session": "london",
+  "confidence": 0.4166666666666667,
+  "regime": "unknown",
+  "open_time": "2025-10-22 07:10:00",
+  "timestamp": "2026-04-12T16:36:22.278845+00:00"
+}

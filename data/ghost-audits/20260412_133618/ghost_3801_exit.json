@@ -1,0 +1,17 @@
+{
+  "trade_id": 3801,
+  "type": "ghost_exit",
+  "direction": "SELL",
+  "entry_price": 89749.71,
+  "exit_price": 88849.71,
+  "pnl": 900.0,
+  "is_win": true,
+  "exit_reason": "TP_hit",
+  "veto_reason": "advanced_veto:SELL vetoed - RSI 26.9 < 28",
+  "session": "london",
+  "confidence": 0.4166666666666667,
+  "regime": "unknown",
+  "duration_bars": 32,
+  "open_time": "2025-12-29 08:50:00",
+  "timestamp": "2026-04-12T16:36:31.376867+00:00"
+}

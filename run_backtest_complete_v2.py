@@ -45,6 +45,9 @@ from src.risk.great_filter import GreatFilter  # Phase 1: Entry quality validati
 from src.monitoring.trade_registry import TradeRegistry  # Phase 1: Trade audit system (DubaiMatrixASI)
 from src.core.omega_params import OmegaParams  # Phase 1: Centralized config (DubaiMatrixASI)
 
+# Ghost Audit Engine - Shadow trading for veto analysis
+from src.monitoring.ghost_audit_engine import GhostAuditEngine  # Ghost audit for vetoed trades
+
 # Phase 2: Advanced optimizations
 from src.execution.thermodynamic_exit import ThermodynamicExit  # 5-sensor profit management
 from src.strategies.m8_fibonacci_system import M8FibonacciSystem  # 8-min Phi timeframe
@@ -216,6 +219,9 @@ class CompleteBacktestEngineV2:
             model_type="logistic",
             min_trades_for_training=100,
         )
+        
+        # Ghost Audit Engine - Track ALL vetoed trades as ghost positions
+        self.ghost_audit = GhostAuditEngine(audit_dir="data/ghost-audits")
 
         # State
         self.equity = 100000.0
@@ -392,6 +398,14 @@ class CompleteBacktestEngineV2:
 
                     if not session_veto['approved']:
                         self.total_vetoes += 1
+                        # Ghost audit: track this vetoed trade
+                        self.ghost_audit.create_ghost(
+                            signal=signal,
+                            veto_reason=f"session_veto:{session_veto.get('reason', 'unknown')}",
+                            bar_index=i,
+                            cur_time=cur_time,
+                            session=session,
+                        )
                     else:
                         # Basic veto (uses pre-computed values from signal)
                         basic_veto = self._check_basic_veto_fast(signal, i)
@@ -410,17 +424,19 @@ class CompleteBacktestEngineV2:
                                 
                                 if not risk_validation['approved']:
                                     self.total_vetoes += 1
+                                    self.ghost_audit.create_ghost(signal=signal, veto_reason='risk_manager', bar_index=i, cur_time=cur_time, session=session)
                                     continue  # Skip this trade
-                                
+
                                 # Phase 1: Anti-Metralhadora check (DubaiMatrixASI salvage)
                                 allowed, reason, details = self.anti_metralhadora.should_allow_trade(
                                     signal_quality=signal.get('confidence', 0.0),
                                     current_session=session,
                                     current_time=cur_time.to_pydatetime() if hasattr(cur_time, 'to_pydatetime') else cur_time,
                                 )
-                                
+
                                 if not allowed:
                                     self.total_vetoes += 1
+                                    self.ghost_audit.create_ghost(signal=signal, veto_reason=f"anti_metralhadora:{reason}", bar_index=i, cur_time=cur_time, session=session)
                                     continue  # Skip this trade (overtrading prevention)
                                 
                                 # ═══════════════════════════════════════════════════════════════
@@ -615,8 +631,10 @@ class CompleteBacktestEngineV2:
                                 self._open_position_fast(signal, i)
                             else:
                                 self.total_vetoes += 1
+                                self.ghost_audit.create_ghost(signal=signal, veto_reason=f"advanced_veto:{veto_result.get('reason', 'unknown')}", bar_index=i, cur_time=cur_time, session=session)
                         else:
                             self.total_vetoes += 1
+                            self.ghost_audit.create_ghost(signal=signal, veto_reason=f"basic_veto:{basic_veto.reason}", bar_index=i, cur_time=cur_time, session=session)
 
             else:
                 # Phase 1: Position management with Smart TP (DubaiMatrixASI salvage)
@@ -798,6 +816,18 @@ class CompleteBacktestEngineV2:
                     )
 
                     self.current_position = None
+            
+            # Ghost Audit: Update all open ghost positions
+            atr_for_ghost = self._atr[i] if hasattr(self, '_atr') and i < len(self._atr) else 1000
+            closed_ghosts = self.ghost_audit.update_ghosts(
+                cur_high=cur_high,
+                cur_low=cur_low,
+                cur_close=cur_close,
+                bar_index=i,
+                atr=atr_for_ghost,
+            )
+            for ghost in closed_ghosts:
+                self.ghost_audit.record_exit(ghost)
 
             self.peak_equity = max(self.peak_equity, self.equity)
             if self.peak_equity > 0:
@@ -1494,6 +1524,10 @@ def main():
         print(f"   Trades Vetoed: {s.get('total_vetoes', 0)}")
         print(f"   Orders Filed: {s.get('total_filed_orders', 0)}")
         print(f"   Veto Rate: {s.get('veto_rate', 0):.1f}%")
+
+        # Ghost Audit Analysis
+        print(f"\n👻 GHOST AUDIT ANALYSIS:")
+        bt.ghost_audit.print_analysis()
 
 
 if __name__ == "__main__":

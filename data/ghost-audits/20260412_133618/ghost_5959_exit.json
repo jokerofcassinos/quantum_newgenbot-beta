@@ -1,0 +1,17 @@
+{
+  "trade_id": 5959,
+  "type": "ghost_exit",
+  "direction": "SELL",
+  "entry_price": 73963.77,
+  "exit_price": 71720.26285714285,
+  "pnl": 647.8229211761125,
+  "is_win": true,
+  "exit_reason": "TP_hit",
+  "veto_reason": "anti_metralhadora:low_quality",
+  "session": "ny",
+  "confidence": 0.4166666666666667,
+  "regime": "unknown",
+  "duration_bars": 89,
+  "open_time": "2026-02-04 20:40:00",
+  "timestamp": "2026-04-12T16:36:39.073160+00:00"
+}

@@ -1,0 +1,17 @@
+{
+  "trade_id": 6012,
+  "type": "ghost_exit",
+  "direction": "BUY",
+  "entry_price": 66394.06,
+  "exit_price": 65688.72678571429,
+  "pnl": -162.06889352219682,
+  "is_win": false,
+  "exit_reason": "SL_hit",
+  "veto_reason": "anti_metralhadora:low_quality",
+  "session": "ny",
+  "confidence": 0.4166666666666667,
+  "regime": "unknown",
+  "duration_bars": 309,
+  "open_time": "2026-02-11 17:00:00",
+  "timestamp": "2026-04-12T16:36:40.283894+00:00"
+}

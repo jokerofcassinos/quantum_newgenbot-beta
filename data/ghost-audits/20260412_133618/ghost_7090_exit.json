@@ -1,0 +1,17 @@
+{
+  "trade_id": 7090,
+  "type": "ghost_exit",
+  "direction": "SELL",
+  "entry_price": 70046.87,
+  "exit_price": 70360.78357142856,
+  "pnl": -160.58214711048393,
+  "is_win": false,
+  "exit_reason": "SL_hit",
+  "veto_reason": "anti_metralhadora:low_quality",
+  "session": "london",
+  "confidence": 0.4166666666666667,
+  "regime": "unknown",
+  "duration_bars": 20,
+  "open_time": "2026-03-19 10:40:00",
+  "timestamp": "2026-04-12T16:36:47.072547+00:00"
+}

@@ -1,0 +1,15 @@
+{
+  "trade_id": 7793,
+  "type": "ghost_entry",
+  "direction": "SELL",
+  "entry_price": 71771.7,
+  "stop_loss": 72071.7,
+  "take_profit": 70871.7,
+  "volume": 1.0,
+  "veto_reason": "anti_metralhadora:low_quality",
+  "session": "london",
+  "confidence": 0.4166666666666667,
+  "regime": "unknown",
+  "open_time": "2026-04-08 09:35:00",
+  "timestamp": "2026-04-12T16:36:51.335573+00:00"
+}

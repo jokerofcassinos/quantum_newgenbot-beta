@@ -1,0 +1,17 @@
+{
+  "trade_id": 7587,
+  "type": "ghost_exit",
+  "direction": "BUY",
+  "entry_price": 65027.83,
+  "exit_price": 65999.63714285714,
+  "pnl": 320.48938265607205,
+  "is_win": true,
+  "exit_reason": "TP_hit",
+  "veto_reason": "anti_metralhadora:low_quality",
+  "session": "asian",
+  "confidence": 0.4166666666666667,
+  "regime": "unknown",
+  "duration_bars": 3,
+  "open_time": "2026-03-30 01:45:00",
+  "timestamp": "2026-04-12T16:36:49.392220+00:00"
+}

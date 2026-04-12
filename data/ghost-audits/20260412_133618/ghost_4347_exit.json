@@ -1,0 +1,17 @@
+{
+  "trade_id": 4347,
+  "type": "ghost_exit",
+  "direction": "SELL",
+  "entry_price": 90633.77,
+  "exit_price": 89733.77,
+  "pnl": 900.0,
+  "is_win": true,
+  "exit_reason": "TP_hit",
+  "veto_reason": "advanced_veto:SELL vetoed - price at lower BB",
+  "session": "london",
+  "confidence": 0.4166666666666667,
+  "regime": "unknown",
+  "duration_bars": 9,
+  "open_time": "2026-01-09 10:05:00",
+  "timestamp": "2026-04-12T16:36:33.406644+00:00"
+}

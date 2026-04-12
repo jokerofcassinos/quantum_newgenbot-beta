@@ -1,0 +1,17 @@
+{
+  "trade_id": 7815,
+  "type": "ghost_exit",
+  "direction": "SELL",
+  "entry_price": 71132.94,
+  "exit_price": 71432.94,
+  "pnl": -287.6137121974092,
+  "is_win": false,
+  "exit_reason": "SL_hit",
+  "veto_reason": "advanced_veto:SELL vetoed - RSI 30.9 rising",
+  "session": "asian",
+  "confidence": 0.4166666666666667,
+  "regime": "unknown",
+  "duration_bars": 15,
+  "open_time": "2026-04-08 22:05:00",
+  "timestamp": "2026-04-12T16:36:51.478583+00:00"
+}

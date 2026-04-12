@@ -1,0 +1,15 @@
+{
+  "trade_id": 6640,
+  "type": "ghost_entry",
+  "direction": "BUY",
+  "entry_price": 73364.9,
+  "stop_loss": 73023.71857142856,
+  "take_profit": 74388.44428571429,
+  "volume": 0.6319681894934908,
+  "veto_reason": "anti_metralhadora:low_quality",
+  "session": "asian",
+  "confidence": 0.4166666666666667,
+  "regime": "unknown",
+  "open_time": "2026-03-04 22:20:00",
+  "timestamp": "2026-04-12T16:36:44.215114+00:00"
+}

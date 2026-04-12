@@ -1,0 +1,17 @@
+{
+  "trade_id": 2290,
+  "type": "ghost_exit",
+  "direction": "SELL",
+  "entry_price": 91293.55,
+  "exit_price": 91593.55,
+  "pnl": -300.0,
+  "is_win": false,
+  "exit_reason": "SL_hit",
+  "veto_reason": "anti_metralhadora:low_quality",
+  "session": "london",
+  "confidence": 0.4166666666666667,
+  "regime": "unknown",
+  "duration_bars": 17,
+  "open_time": "2025-12-08 07:20:00",
+  "timestamp": "2026-04-12T16:36:27.623031+00:00"
+}

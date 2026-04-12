@@ -1,6 +1,6 @@
 {
   "ticket": 1003,
-  "timestamp": "2026-04-12T16:16:35.412930+00:00",
+  "timestamp": "2026-04-12T16:36:21.048256+00:00",
   "symbol": "BTCUSD",
   "direction": "SELL",
   "entry_price": 122629.9,
@@ -35,8 +35,8 @@
   },
   "indicators": {
     "ema_9": 122786.61825909856,
-    "ema_21": 122777.10309023259,
-    "ema_50": 122562.52659684447,
+    "ema_21": 122777.10309022515,
+    "ema_50": 122562.50887260967,
     "ema_200": 122629.9,
     "sma_20": 122851.049,
     "sma_50": 122629.9,
@@ -122,7 +122,7 @@
     "risk_percent": 1.0,
     "min_rr_ratio": 1.5,
     "confidence_threshold": 0.65,
-    "last_mutation_time": "2026-04-12T16:16:35.412915+00:00",
+    "last_mutation_time": "2026-04-12T16:36:21.048243+00:00",
     "mutation_count": 0,
     "dna_memory_regimes": 0
   },

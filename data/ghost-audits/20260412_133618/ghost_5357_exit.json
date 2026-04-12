@@ -1,0 +1,17 @@
+{
+  "trade_id": 5357,
+  "type": "ghost_exit",
+  "direction": "SELL",
+  "entry_price": 90320.83,
+  "exit_price": 88700.6242857143,
+  "pnl": 482.18846490368395,
+  "is_win": true,
+  "exit_reason": "TP_hit",
+  "veto_reason": "anti_metralhadora:low_quality",
+  "session": "asian",
+  "confidence": 0.4166666666666667,
+  "regime": "unknown",
+  "duration_bars": 232,
+  "open_time": "2026-01-21 21:55:00",
+  "timestamp": "2026-04-12T16:36:36.370557+00:00"
+}

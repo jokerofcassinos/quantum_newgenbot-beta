@@ -1,0 +1,17 @@
+{
+  "trade_id": 5815,
+  "type": "ghost_exit",
+  "direction": "SELL",
+  "entry_price": 89715.25,
+  "exit_price": 90015.25,
+  "pnl": -235.99209879305624,
+  "is_win": false,
+  "exit_reason": "SL_hit",
+  "veto_reason": "anti_metralhadora:low_quality",
+  "session": "ny",
+  "confidence": 0.4166666666666667,
+  "regime": "unknown",
+  "duration_bars": 34,
+  "open_time": "2026-01-28 17:00:00",
+  "timestamp": "2026-04-12T16:36:37.865801+00:00"
+}
