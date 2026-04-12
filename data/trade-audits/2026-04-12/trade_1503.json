@@ -1,6 +1,6 @@
 {
   "ticket": 1503,
-  "timestamp": "2026-04-12T13:12:59.033786+00:00",
+  "timestamp": "2026-04-12T13:24:27.854087+00:00",
   "symbol": "BTCUSD",
   "direction": "BUY",
   "entry_price": 66574.65,
@@ -122,7 +122,7 @@
     "risk_percent": 1.0,
     "min_rr_ratio": 1.5,
     "confidence_threshold": 0.65,
-    "last_mutation_time": "2026-04-12T13:12:59.033772+00:00",
+    "last_mutation_time": "2026-04-12T13:24:27.854075+00:00",
     "mutation_count": 0,
     "dna_memory_regimes": 0
   },
