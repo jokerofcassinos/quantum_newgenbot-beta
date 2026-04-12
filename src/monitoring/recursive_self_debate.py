@@ -25,7 +25,7 @@ class RecursiveSelfDebate:
 
     def __init__(
         self,
-        min_debate_confidence: float = 0.6,
+        min_debate_confidence: float = 0.35,
     ):
         """
         Initialize RecursiveSelfDebate.

@@ -44,6 +44,16 @@ from src.risk.great_filter import GreatFilter  # Phase 1: Entry quality validati
 from src.monitoring.trade_registry import TradeRegistry  # Phase 1: Trade audit system (DubaiMatrixASI)
 from src.core.omega_params import OmegaParams  # Phase 1: Centralized config (DubaiMatrixASI)
 
+# Phase 2: Advanced optimizations
+from src.execution.thermodynamic_exit import ThermodynamicExit  # 5-sensor profit management
+from src.strategies.m8_fibonacci_system import M8FibonacciSystem  # 8-min Phi timeframe
+from src.analysis.regime_detector import RegimeDetector  # Hurst + ADX + Vol + Structure
+from src.monitoring.recursive_self_debate import RecursiveSelfDebate  # Metacognitive validation
+from src.analysis.vpin_microstructure import VPINMicrostructure  # Institutional activity detection
+from src.risk.black_swan_stress_test import BlackSwanStressTest  # Fat-tail simulation
+from src.analysis.kinematics_phase_space import KinematicsPhaseSpace  # Velocity/acceleration features
+from src.memory.akashic_core import AkashicCore  # HDC pattern memory
+
 
 def setup_logging():
     logger.remove()
@@ -165,6 +175,16 @@ class CompleteBacktestEngineV2:
         
         # Phase 1: OmegaParams (DubaiMatrixASI salvage - centralized config)
         self.omega_params = OmegaParams()
+        
+        # Phase 2: Advanced optimizations
+        self.thermodynamic_exit = ThermodynamicExit()
+        self.m8_fibonacci = M8FibonacciSystem()
+        self.regime_detector = RegimeDetector()
+        self.recursive_debate = RecursiveSelfDebate(min_debate_confidence=0.0)  # Only flip signals, don't veto
+        self.vpin = VPINMicrostructure()
+        self.black_swan = BlackSwanStressTest()
+        self.kinematics = KinematicsPhaseSpace()
+        self.akashic = AkashicCore()
 
         # State
         self.equity = 100000.0
@@ -371,6 +391,87 @@ class CompleteBacktestEngineV2:
                                 if not allowed:
                                     self.total_vetoes += 1
                                     continue  # Skip this trade (overtrading prevention)
+                                
+                                # ═══════════════════════════════════════════════════════════════
+                                # Phase 2: Advanced validations (DubaiMatrixASI + Atl4s + Laplace)
+                                # ═══════════════════════════════════════════════════════════════
+                                
+                                # 1. Regime Detection
+                                regime = self.regime_detector.detect_regime(
+                                    highs=self._high[max(0, i-50):i+1],
+                                    lows=self._low[max(0, i-50):i+1],
+                                    closes=self._close[max(0, i-100):i+1],
+                                )
+                                signal['regime'] = regime
+                                
+                                # 2. Kinematics Phase Space
+                                kinematics = self.kinematics.calculate_kinematics(
+                                    prices=self._close[max(0, i-20):i+1],
+                                )
+                                signal['kinematics'] = kinematics
+                                
+                                # 3. Kinematics signal strength
+                                kin_strength = self.kinematics.get_signal_strength(
+                                    kinematics, signal['direction']
+                                )
+                                # Store kinematics strength for audit (don't veto based on it)
+                                signal['kin_strength'] = kin_strength
+
+                                # 4. Recursive Self-Debate (metacognitive validation)
+                                market_data = {
+                                    'regime': regime,
+                                    'volatility': regime.get('volatility_regime', 'normal'),
+                                    'volume_ratio': self._volume[i] / max(1, np.mean(self._volume[max(0, i-20):i+1])),
+                                    'signal_confidence': signal.get('confidence', 0.5),
+                                    'consecutive_losses': self.consecutive_losses,
+                                    'spread_percent': 0.001,  # BTCUSD typical spread
+                                }
+                                
+                                debate_approved, debate_signal, debate_confidence = self.recursive_debate.debate(
+                                    original_signal=signal['direction'],
+                                    signal_confidence=signal.get('confidence', 0.5),
+                                    market_data=market_data,
+                                )
+                                
+                                # Only flip signal, don't veto (debate_approved always true with min_debate_confidence=0.0)
+                                signal['direction'] = debate_signal  # Use debated signal
+                                signal['debate_confidence'] = debate_confidence
+
+                                # 5. AkashicCore Pattern Memory (experience-based validation)
+                                akashic_state = self.akashic.encode_state(
+                                    trend=1.0 if regime['trend_direction'] == 'bullish' else -1.0,
+                                    volatility=0.5,  # Normalized
+                                    volume=market_data['volume_ratio'] / 2.0,
+                                    momentum=kinematics['velocity'] * 100,
+                                    regime=regime['trend_type'],
+                                )
+                                
+                                akashic_pred = self.akashic.predict_outcome(akashic_state)
+                                
+                                # Store Akashic prediction for audit (don't veto based on it yet - needs more data)
+                                signal['akashic_recommendation'] = akashic_pred['recommendation']
+                                signal['akashic_confidence'] = akashic_pred['confidence']
+                                signal['akashic_matches'] = akashic_pred['num_matches']
+                                
+                                # Disabled: AkashicCore veto until we have enough historical data
+                                # if akashic_pred['num_matches'] >= 20 and akashic_pred['confidence'] > 0.7:
+                                #     if akashic_pred['recommendation'] != 'NEUTRAL' and akashic_pred['recommendation'] != signal['direction']:
+                                #         self.total_vetoes += 1
+                                #         continue  # Historical patterns disagree
+                                
+                                # 6. Black Swan Stress Test (prevent catastrophes)
+                                # Only run every 10th trade to save computation
+                                # DISABLED TEMPORARILY - needs tuning
+                                # if self.total_trades % 10 == 0:
+                                #     stress_result = self.black_swan.stress_test(
+                                #         entry_price=signal['entry_price'],
+                                #         stop_loss=signal['stop_loss'],
+                                #         take_profit=signal['take_profit'],
+                                #         direction=signal['direction'],
+                                #     )
+                                #     if not stress_result['approved']:
+                                #         self.total_vetoes += 1
+                                #         continue  # Failed stress test
 
                                 signal['volume'] = session_veto['adjusted_volume']
                                 signal['session_veto_data'] = {
@@ -423,7 +524,35 @@ class CompleteBacktestEngineV2:
                     atr=atr_current,
                 )
                 
-                # Phase 1: Profit Erosion Check (Atl4s salvage - multi-level profit protection)
+                # Phase 2: Thermodynamic Exit - 5-sensor profit management (Laplace v3.0)
+                # Calculate sensors for remaining position
+                if pos.get('thermo_sensors') is None:
+                    pos['thermo_sensors'] = self.thermodynamic_exit.calculate_sensors(
+                        prices=self._close[max(0, i-50):i+1].tolist(),
+                        entry_price=pos['entry_price'],
+                        direction=pos['direction'],
+                    )
+                else:
+                    # Update sensors
+                    pos['thermo_sensors'] = self.thermodynamic_exit.calculate_sensors(
+                        prices=self._close[max(0, i-50):i+1].tolist(),
+                        entry_price=pos['entry_price'],
+                        direction=pos['direction'],
+                    )
+                    
+                    # Check if thermodynamic exit suggests closing
+                    thermo_should_exit, thermo_reason = self.thermodynamic_exit.should_exit(
+                        sensors=pos['thermo_sensors'],
+                        current_tp_distance=abs(pos['take_profit'] - cur_close),
+                        current_sl_distance=abs(pos['stop_loss'] - cur_close),
+                    )
+                    
+                    if thermo_should_exit and pos['thermo_sensors']['current_pnl'] > 10:
+                        logger.info(f"🌡️ Thermodynamic exit: {thermo_reason}")
+                        position_closed = True
+                        realized_pnl = pos['targets']['total_realized_pnl'] + pos['thermo_sensors']['current_pnl'] * pos['remaining_volume']
+                
+                # Fallback: If price hits original SL, close remaining position immediately
                 # Calculate current unrealized PnL for remaining position
                 if pos['direction'] == 'BUY':
                     current_unrealized_pnl = (cur_close - pos['entry_price']) * pos['remaining_volume']
@@ -517,6 +646,19 @@ class CompleteBacktestEngineV2:
                         'targets_hit': sum(1 for t in pos['targets']['targets'] if t['closed']),
                     })
                     
+                    # Phase 2: Store pattern in AkashicCore for future recall
+                    if 'regime' in pos and 'kinematics' in pos:
+                        akashic_state = self.akashic.encode_state(
+                            trend=1.0 if pos['regime']['trend_direction'] == 'bullish' else -1.0,
+                            volatility=0.5,
+                            volume=0.5,
+                            momentum=pos['kinematics']['velocity'] * 100,
+                            regime=pos['regime']['trend_type'],
+                        )
+                        # Store outcome (normalized PnL)
+                        normalized_outcome = total_pnl / max(1, self.equity * 0.01)
+                        self.akashic.store_pattern(akashic_state, normalized_outcome)
+
                     self.current_position = None
 
             self.peak_equity = max(self.peak_equity, self.equity)
