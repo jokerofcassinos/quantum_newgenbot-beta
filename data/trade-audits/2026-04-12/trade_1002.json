@@ -1,6 +1,6 @@
 {
   "ticket": 1002,
-  "timestamp": "2026-04-12T21:07:35.022060+00:00",
+  "timestamp": "2026-04-12T21:40:27.364004+00:00",
   "symbol": "BTCUSD",
   "direction": "SELL",
   "entry_price": 121869.5,
@@ -34,16 +34,16 @@
     "conflict_detected": false
   },
   "indicators": {
-    "ema_9": 121744.83364651163,
-    "ema_21": 121679.49581629659,
-    "ema_50": 121654.36306320892,
+    "ema_9": 121744.83377228476,
+    "ema_21": 121680.4247356642,
+    "ema_50": 121698.20185524403,
     "ema_200": 121869.5,
     "sma_20": 121574.81450000002,
     "sma_50": 121869.5,
     "ema_9_21_cross": "bullish",
     "ema_21_50_cross": "neutral",
     "price_vs_ema_200": "above",
-    "rsi_14": 60.35455782090627,
+    "rsi_14": 60.35308312067491,
     "rsi_regime": "neutral",
     "macd_line": 0,
     "macd_signal": 0,
@@ -95,18 +95,18 @@
     "exhaustion_signals": []
   },
   "risk_context": {
-    "capital": 99869.07892857143,
-    "equity": 99869.07892857143,
+    "capital": 99926.40507142857,
+    "equity": 99926.40507142857,
     "daily_pnl": 0,
     "daily_pnl_percent": 0,
-    "total_pnl": -130.92107142857276,
-    "total_pnl_percent": -0.13092107142856912,
-    "current_drawdown": 0.13092107142857276,
-    "max_drawdown": 0.13092107142857276,
+    "total_pnl": -73.5949285714305,
+    "total_pnl_percent": -0.07359492857142991,
+    "current_drawdown": 0.0735949285714305,
+    "max_drawdown": 0.0735949285714305,
     "consecutive_wins": 0,
     "consecutive_losses": 2,
     "daily_loss_used_percent": 0,
-    "total_loss_used_percent": 0.13092107142857276,
+    "total_loss_used_percent": 0.0735949285714305,
     "ftmo_daily_remaining": 5000,
     "ftmo_total_remaining": 10000
   },
@@ -122,7 +122,7 @@
     "risk_percent": 1.0,
     "min_rr_ratio": 1.5,
     "confidence_threshold": 0.65,
-    "last_mutation_time": "2026-04-12T21:07:35.022045+00:00",
+    "last_mutation_time": "2026-04-12T21:40:27.363992+00:00",
     "mutation_count": 0,
     "dna_memory_regimes": 0
   },
@@ -232,19 +232,18 @@
     "vetoed_by": null,
     "veto_severity": null
   },
-  "exit_price": 122131.48,
-  "exit_timestamp": "2026-04-12T21:07:35.028439+00:00",
+  "exit_price": 121746.9,
+  "exit_timestamp": "2026-04-12T21:40:27.368820+00:00",
   "exit_reason": "Smart TP complete",
-  "gross_pnl": 55.14455357142651,
-  "net_pnl": -81.35544642857349,
-  "duration_minutes": 90,
+  "gross_pnl": 136.5,
+  "net_pnl": 0.0,
+  "duration_minutes": 45,
   "max_profit_reached": 312.24000000000524,
-  "max_drawdown_reached": -261.9799999999959,
+  "max_drawdown_reached": 0.0,
   "was_error": true,
-  "error_type": "low_confidence_entry;traded_in_low_liquidity_session",
+  "error_type": "low_confidence_entry",
   "severity": "major",
   "lessons_learned": [
-    "REJECT signals with confidence < 0.65",
-    "AVOID trading in Asian session/weekends"
+    "REJECT signals with confidence < 0.65"
   ]
 }

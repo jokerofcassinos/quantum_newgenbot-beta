@@ -1,6 +1,6 @@
 {
   "ticket": 1068,
-  "timestamp": "2026-04-12T21:07:35.929028+00:00",
+  "timestamp": "2026-04-12T21:40:28.273402+00:00",
   "symbol": "BTCUSD",
   "direction": "SELL",
   "entry_price": 112352.18,
@@ -95,18 +95,18 @@
     "exhaustion_signals": []
   },
   "risk_context": {
-    "capital": 123949.57060208656,
-    "equity": 123949.57060208656,
+    "capital": 123672.70481008795,
+    "equity": 123672.70481008795,
     "daily_pnl": 0,
     "daily_pnl_percent": 0,
-    "total_pnl": 23949.570602086562,
-    "total_pnl_percent": 23.949570602086556,
-    "current_drawdown": 1.423174493319417,
-    "max_drawdown": 1.423174493319417,
+    "total_pnl": 23672.704810087947,
+    "total_pnl_percent": 23.672704810087943,
+    "current_drawdown": 1.0616174963172698,
+    "max_drawdown": 1.0616174963172698,
     "consecutive_wins": 0,
     "consecutive_losses": 4,
     "daily_loss_used_percent": 0,
-    "total_loss_used_percent": 1.423174493319417,
+    "total_loss_used_percent": 1.0616174963172698,
     "ftmo_daily_remaining": 5000,
     "ftmo_total_remaining": 10000
   },
@@ -122,7 +122,7 @@
     "risk_percent": 1.0,
     "min_rr_ratio": 1.5,
     "confidence_threshold": 0.65,
-    "last_mutation_time": "2026-04-12T21:07:35.929014+00:00",
+    "last_mutation_time": "2026-04-12T21:40:28.273389+00:00",
     "mutation_count": 0,
     "dna_memory_regimes": 0
   },
@@ -233,7 +233,7 @@
     "veto_severity": null
   },
   "exit_price": 111967.37,
-  "exit_timestamp": "2026-04-12T21:07:35.935928+00:00",
+  "exit_timestamp": "2026-04-12T21:40:28.280124+00:00",
   "exit_reason": "Smart TP complete",
   "gross_pnl": 455.0,
   "net_pnl": 0.0,

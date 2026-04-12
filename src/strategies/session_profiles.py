@@ -29,14 +29,16 @@ class SessionProfile:
 
 
 SESSION_PROFILES = {
-    # Asian Session (00:00 - 07:00 UTC) - LOW LIQUIDITY
+    # Asian Session (00:00 - 07:00 UTC) - COMMISSION OPTIMIZATION: Original settings
+    # COMPREHENSIVE ANALYSIS: Disabling Asian removed too many trades
+    # Keeping original settings but Smart TP is now 2-level (saves commissions)
     "asian": SessionProfile(
         session_name="Asian",
-        min_confidence_threshold=0.40,  # Fixed: was 0.75 (aligned with 5/12 = 41.7%)
-        max_position_size=2.0,  # Increased from 0.03 (Ghost Audit: DD is 0.02%)
+        min_confidence_threshold=0.40,
+        max_position_size=2.0,
         risk_multiplier=0.3,
-        min_strategy_votes=5,  # Need 5/12 strategies
-        min_coherence=0.40,  # Fixed: was 0.60 (aligned with signal generation)
+        min_strategy_votes=5,
+        min_coherence=0.40,
         trading_allowed=True,
         description="Low liquidity - require strong consensus"
     ),

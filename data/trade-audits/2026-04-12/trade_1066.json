@@ -1,6 +1,6 @@
 {
   "ticket": 1066,
-  "timestamp": "2026-04-12T21:07:35.907042+00:00",
+  "timestamp": "2026-04-12T21:40:28.250807+00:00",
   "symbol": "BTCUSD",
   "direction": "SELL",
   "entry_price": 112779.28,
@@ -95,18 +95,18 @@
     "exhaustion_signals": []
   },
   "risk_context": {
-    "capital": 124051.20790032776,
-    "equity": 124051.20790032776,
+    "capital": 123213.64828675428,
+    "equity": 123213.64828675428,
     "daily_pnl": 0,
     "daily_pnl_percent": 0,
-    "total_pnl": 24051.20790032776,
-    "total_pnl_percent": 24.051207900327753,
-    "current_drawdown": 1.423174493319417,
-    "max_drawdown": 1.423174493319417,
+    "total_pnl": 23213.64828675428,
+    "total_pnl_percent": 23.213648286754275,
+    "current_drawdown": 1.0616174963172698,
+    "max_drawdown": 1.0616174963172698,
     "consecutive_wins": 0,
     "consecutive_losses": 2,
     "daily_loss_used_percent": 0,
-    "total_loss_used_percent": 1.423174493319417,
+    "total_loss_used_percent": 1.0616174963172698,
     "ftmo_daily_remaining": 5000,
     "ftmo_total_remaining": 10000
   },
@@ -122,7 +122,7 @@
     "risk_percent": 1.0,
     "min_rr_ratio": 1.5,
     "confidence_threshold": 0.65,
-    "last_mutation_time": "2026-04-12T21:07:35.907029+00:00",
+    "last_mutation_time": "2026-04-12T21:40:28.250791+00:00",
     "mutation_count": 0,
     "dna_memory_regimes": 0
   },
@@ -233,18 +233,17 @@
     "veto_severity": null
   },
   "exit_price": 112382.8,
-  "exit_timestamp": "2026-04-12T21:07:35.913361+00:00",
+  "exit_timestamp": "2026-04-12T21:40:28.257480+00:00",
   "exit_reason": "Smart TP complete",
-  "gross_pnl": 50.37267857142433,
-  "net_pnl": -86.12732142857567,
+  "gross_pnl": 136.5,
+  "net_pnl": 0.0,
   "duration_minutes": 70,
-  "max_profit_reached": 336.5849999999991,
+  "max_profit_reached": 673.1699999999983,
   "max_drawdown_reached": 0.0,
   "was_error": true,
-  "error_type": "low_confidence_entry;traded_in_low_liquidity_session",
+  "error_type": "low_confidence_entry",
   "severity": "major",
   "lessons_learned": [
-    "REJECT signals with confidence < 0.65",
-    "AVOID trading in Asian session/weekends"
+    "REJECT signals with confidence < 0.65"
   ]
 }

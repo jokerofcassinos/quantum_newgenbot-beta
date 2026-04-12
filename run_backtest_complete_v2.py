@@ -149,28 +149,25 @@ class CompleteBacktestEngineV2:
         self.risk_manager = BacktestRiskManager(initial_capital=100000.0)
         
         # Phase 1: Anti-Metralhadora (DubaiMatrixASI salvage - overtrading prevention)
-        # GHOST AUDIT FIX: Relaxed to allow more trades (we were vetoing too many good trades)
-        # GHOST AUDIT #3: Confidence Inversion - lower quality allows more signals
+        # COMMISSION OPTIMIZATION: Balanced for trade count vs quality
         self.anti_metralhadora = AntiMetralhadora(
-            min_interval_minutes=5.0,  # Standard interval
-            max_trades_per_day=25,  # Increased from 20 (Ghost Audit: we veto too many good trades)
-            min_quality_score=0.35,  # Reduced from 0.40 (Ghost Audit: 0.4-0.5 outperforms 0.6-0.7)
+            min_interval_minutes=5.0,  # Original (allows more trades)
+            max_trades_per_day=25,  # Original (was reduced to 12-15, too restrictive)
+            min_quality_score=0.40,  # Original (0.50 and 0.65 were too strict)
             max_consecutive_losses=3,
             loss_cooldown_minutes=30.0,
         )
         
         # Phase 1: PositionManager Smart TP (DubaiMatrixASI salvage - multi-target exits)
-        # COMPREHENSIVE ANALYSIS FIX: Simplified from 4-level to 2-level to save commissions
-        # Original: 30/30/20/20 (4 commission events per trade = expensive)
-        # New: 50/50 (2 commission events per trade = 50% commission savings)
-        # - TP1: 50% @ 1:2 R:R (let positions develop more before taking profit)
-        # - Trail: 50% @ 1.5x ATR (reduced from 3.0x for tighter trailing)
+        # COMMISSION OPTIMIZATION: Balanced 2-level system (saves 50% commissions)
+        # COMPREHENSIVE ANALYSIS: Single-exit had 1% WR (too strict), 4-level had too many commissions
+        # NEW: 70% @ 1:2 R:R + 30% trailing (2 exit events vs 4 = 50% commission savings)
         self.position_manager = PositionManagerSmartTP(
-            tp1_portion=0.00, tp1_rr=1.0,  # REMOVED TP1 at 1:1 (was exiting too early)
-            tp2_portion=0.50, tp2_rr=2.0,  # 50% at 1:2 R:R (main target)
-            tp3_portion=0.00, tp3_rr=3.0,  # REMOVED TP3 (consolidated into trailing)
-            trailing_portion=0.50,  # 50% trailing (increased from 20%)
-            trailing_atr_multiplier=1.5,  # Reduced from 3.0 (was too wide)
+            tp1_portion=0.00, tp1_rr=1.0,  # REMOVED (commission waste, exits too early)
+            tp2_portion=0.70, tp2_rr=2.0,  # 70% at 1:2 R:R (main target)
+            tp3_portion=0.00, tp3_rr=3.0,  # REMOVED (consolidated into TP2)
+            trailing_portion=0.30,  # 30% trailing (reduced from 50%)
+            trailing_atr_multiplier=2.0,  # Balanced (was 1.5 too tight, 3.0 too wide)
         )
         
         # A2: CommissionFloor - prevent premature closure before covering commissions

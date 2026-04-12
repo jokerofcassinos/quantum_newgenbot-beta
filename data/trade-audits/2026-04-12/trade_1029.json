@@ -1,6 +1,6 @@
 {
   "ticket": 1029,
-  "timestamp": "2026-04-12T21:07:35.322067+00:00",
+  "timestamp": "2026-04-12T21:40:27.671420+00:00",
   "symbol": "BTCUSD",
   "direction": "BUY",
   "entry_price": 121408.52,
@@ -36,7 +36,7 @@
   "indicators": {
     "ema_9": 121508.64870016041,
     "ema_21": 121438.76583856011,
-    "ema_50": 121259.03042730987,
+    "ema_50": 121259.0304273216,
     "ema_200": 121408.52,
     "sma_20": 121482.24500000001,
     "sma_50": 121408.52,
@@ -95,18 +95,18 @@
     "exhaustion_signals": []
   },
   "risk_context": {
-    "capital": 102587.9788140283,
-    "equity": 102587.9788140283,
+    "capital": 103719.03097693824,
+    "equity": 103719.03097693824,
     "daily_pnl": 0,
     "daily_pnl_percent": 0,
-    "total_pnl": 2587.9788140283054,
-    "total_pnl_percent": 2.587978814028302,
-    "current_drawdown": 0.7851146679296351,
-    "max_drawdown": 0.7851146679296351,
+    "total_pnl": 3719.030976938244,
+    "total_pnl_percent": 3.7190309769382424,
+    "current_drawdown": 0.5935267523721497,
+    "max_drawdown": 0.5935267523721497,
     "consecutive_wins": 1,
     "consecutive_losses": 0,
     "daily_loss_used_percent": 0,
-    "total_loss_used_percent": 0.7851146679296351,
+    "total_loss_used_percent": 0.5935267523721497,
     "ftmo_daily_remaining": 5000,
     "ftmo_total_remaining": 10000
   },
@@ -122,7 +122,7 @@
     "risk_percent": 1.0,
     "min_rr_ratio": 1.5,
     "confidence_threshold": 0.65,
-    "last_mutation_time": "2026-04-12T21:07:35.322054+00:00",
+    "last_mutation_time": "2026-04-12T21:40:27.671407+00:00",
     "mutation_count": 0,
     "dna_memory_regimes": 0
   },
@@ -233,7 +233,7 @@
     "veto_severity": null
   },
   "exit_price": 121579.07,
-  "exit_timestamp": "2026-04-12T21:07:35.326434+00:00",
+  "exit_timestamp": "2026-04-12T21:40:27.676020+00:00",
   "exit_reason": "Smart TP complete",
   "gross_pnl": 136.5,
   "net_pnl": 0.0,

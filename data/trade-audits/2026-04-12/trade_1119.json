@@ -1,6 +1,6 @@
 {
   "ticket": 1119,
-  "timestamp": "2026-04-12T21:07:37.408993+00:00",
+  "timestamp": "2026-04-12T21:40:29.721125+00:00",
   "symbol": "BTCUSD",
   "direction": "SELL",
   "entry_price": 113246.4,
@@ -95,18 +95,18 @@
     "exhaustion_signals": []
   },
   "risk_context": {
-    "capital": 144357.4229414188,
-    "equity": 144357.4229414188,
+    "capital": 143516.0468125764,
+    "equity": 143516.0468125764,
     "daily_pnl": 0,
     "daily_pnl_percent": 0,
-    "total_pnl": 44357.4229414188,
-    "total_pnl_percent": 44.357422941418804,
-    "current_drawdown": 1.423174493319417,
-    "max_drawdown": 1.423174493319417,
+    "total_pnl": 43516.04681257639,
+    "total_pnl_percent": 43.51604681257639,
+    "current_drawdown": 1.0616174963172698,
+    "max_drawdown": 1.0616174963172698,
     "consecutive_wins": 3,
     "consecutive_losses": 0,
     "daily_loss_used_percent": 0,
-    "total_loss_used_percent": 1.423174493319417,
+    "total_loss_used_percent": 1.0616174963172698,
     "ftmo_daily_remaining": 5000,
     "ftmo_total_remaining": 10000
   },
@@ -122,7 +122,7 @@
     "risk_percent": 1.0,
     "min_rr_ratio": 1.5,
     "confidence_threshold": 0.65,
-    "last_mutation_time": "2026-04-12T21:07:37.408980+00:00",
+    "last_mutation_time": "2026-04-12T21:40:29.721111+00:00",
     "mutation_count": 0,
     "dna_memory_regimes": 0
   },
@@ -233,17 +233,15 @@
     "veto_severity": null
   },
   "exit_price": 113521.86,
-  "exit_timestamp": "2026-04-12T21:07:37.412268+00:00",
+  "exit_timestamp": "2026-04-12T21:40:29.724917+00:00",
   "exit_reason": "Smart TP complete",
-  "gross_pnl": -41.73321428572308,
-  "net_pnl": -178.23321428572308,
+  "gross_pnl": 136.5,
+  "net_pnl": 0.0,
   "duration_minutes": 15,
   "max_profit_reached": 0.0,
   "max_drawdown_reached": -275.4600000000064,
-  "was_error": true,
-  "error_type": "traded_in_low_liquidity_session",
-  "severity": "major",
-  "lessons_learned": [
-    "AVOID trading in Asian session/weekends"
-  ]
+  "was_error": false,
+  "error_type": null,
+  "severity": null,
+  "lessons_learned": []
 }
