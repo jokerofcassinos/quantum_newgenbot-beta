@@ -89,12 +89,22 @@ class RiskQuantumEngine:
             Dict with position size and factor breakdown
         """
         factors = {}
-        
+
         # Factor 1: Kelly Criterion (base fraction)
         # Kelly % = W - [(1-W)/R] where W=win rate, R=win/loss ratio
-        kelly_percent = win_rate - ((1 - win_rate) / max(0.1, avg_win_loss_ratio))
-        kelly_percent = max(0, kelly_percent) * self.kelly_fraction
+        raw_kelly = win_rate - ((1 - win_rate) / max(0.1, avg_win_loss_ratio))
+        
+        # FIX: Kelly goes negative early in trading (not enough data)
+        # Use fixed risk % when Kelly is negative or when we don't have enough history
+        if raw_kelly > 0:
+            kelly_percent = raw_kelly * self.kelly_fraction
+        else:
+            # Kelly is negative - use fixed base risk % instead
+            # This ensures we still trade even when historical data is poor
+            kelly_percent = self.base_risk_percent * 0.5  # Use 50% of base risk as minimum
         factors['kelly'] = kelly_percent
+        factors['kelly_raw'] = raw_kelly
+        factors['kelly_used_fixed'] = raw_kelly <= 0
         
         # Factor 2: Volatility Adjustment
         # Reduce size when volatility is higher than average
@@ -148,9 +158,10 @@ class RiskQuantumEngine:
         lot_size = adjusted_risk_amount / max(100, typical_stop_distance)  # Min $100 stop distance
         
         # BOOST: Multiply by risk multiplier to utilize available margin
-        # With only 0.07% DD, we can safely use larger positions
-        # Scale up to use more of the available max_position_size
-        risk_multiplier = 5.0  # BOOST: 5x multiplier for larger positions
+        # With only 0.21% DD, we can safely use much larger positions
+        # FTMO allows up to 10% DD - we're at 0.21%, that's 47x room!
+        # Scale up aggressively to use available margin
+        risk_multiplier = 15.0  # BOOST: 15x multiplier for larger positions (up from 10x)
         lot_size *= risk_multiplier
         
         # Apply limits

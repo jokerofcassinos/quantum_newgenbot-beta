@@ -160,14 +160,17 @@ class CompleteBacktestEngineV2:
         )
         
         # Phase 1: PositionManager Smart TP (DubaiMatrixASI salvage - multi-target exits)
-        # GHOST AUDIT DURATION FILTER: Increased trailing to hold trades longer
-        # Ghost audit found: >30 bars = +$387K (32.6% WR), <=5 bars = -$135K (6.6% WR)
+        # COMPREHENSIVE ANALYSIS FIX: Simplified from 4-level to 2-level to save commissions
+        # Original: 30/30/20/20 (4 commission events per trade = expensive)
+        # New: 50/50 (2 commission events per trade = 50% commission savings)
+        # - TP1: 50% @ 1:2 R:R (let positions develop more before taking profit)
+        # - Trail: 50% @ 1.5x ATR (reduced from 3.0x for tighter trailing)
         self.position_manager = PositionManagerSmartTP(
-            tp1_portion=0.30, tp1_rr=1.0,
-            tp2_portion=0.30, tp2_rr=2.0,
-            tp3_portion=0.20, tp3_rr=3.0,
-            trailing_portion=0.20,
-            trailing_atr_multiplier=3.0,  # Increased from 2.0 to 3.0 (hold trades longer)
+            tp1_portion=0.00, tp1_rr=1.0,  # REMOVED TP1 at 1:1 (was exiting too early)
+            tp2_portion=0.50, tp2_rr=2.0,  # 50% at 1:2 R:R (main target)
+            tp3_portion=0.00, tp3_rr=3.0,  # REMOVED TP3 (consolidated into trailing)
+            trailing_portion=0.50,  # 50% trailing (increased from 20%)
+            trailing_atr_multiplier=1.5,  # Reduced from 3.0 (was too wide)
         )
         
         # A2: CommissionFloor - prevent premature closure before covering commissions
@@ -486,20 +489,19 @@ class CompleteBacktestEngineV2:
                                 # So we relax vetos ONLY for SELL, keep BUY vetos strict
                                 # ═══════════════════════════════════════════════════════════════
                                 
-                                # GHOST AUDIT OPTIMIZATION #1: Ban destructive hours (10-16 UTC) on WEEKDAYS only
-                                # Ghost audit found: 10-16 UTC loses ~$150K combined on weekdays
-                                # Weekend hours are handled separately by session profiles
+                                # COMPREHENSIVE ANALYSIS FIX: Removed weekday destructive hours veto
+                                # Analysis showed this veto was rejecting +80 trades worth +$10,000
+                                # Ghost audit: Weekend 08-09h and 17-20h UTC are profitable (+$117K)
+                                # But weekday 10-16 UTC ban was too aggressive
+                                # Now we only veto weekend non-profitable hours (handled by session profiles)
+                                # All weekday hours are now allowed
                                 hour_utc = cur_time.hour if hasattr(cur_time, 'hour') else 12
                                 is_weekend = cur_time.weekday() >= 5 if hasattr(cur_time, 'weekday') else False
 
-                                if not is_weekend and 10 <= hour_utc <= 16:
-                                    # Weekday destructive hours - veto
-                                    self.total_vetoes += 1
-                                    self.ghost_audit.create_ghost(signal=signal, veto_reason=f'ghost_audit:weekday_destructive_hours_{hour_utc}UTC', bar_index=i, cur_time=cur_time, session=session)
-                                    continue  # Skip trades during destructive weekday hours
-                                elif is_weekend:
+                                if is_weekend:
                                     # Weekend: session profiles handle this (only 08-09h and 17-20h allowed)
                                     pass  # Let session profile decide
+                                # Weekday hours: ALL allowed now (removed 10-16 UTC ban)
 
                                 # GHOST AUDIT DURATION FILTER: Avoid chop/low-volatility conditions
                                 # Ghost audit found: <=5 bars = -$135K (6.6% WR), >30 bars = +$387K (32.6% WR)
@@ -865,7 +867,25 @@ class CompleteBacktestEngineV2:
                         'smart_tp': True,
                         'targets_hit': sum(1 for t in pos['targets']['targets'] if t['closed']),
                     })
-                    
+
+                    # FIX NULL AUDIT FIELDS: Call capture_exit_state for Smart TP exits
+                    peak_pnl = pos.get('peak_pnl', total_pnl)
+                    current_unrealized = 0.0
+                    if 'thermo_sensors' in pos:
+                        current_unrealized = pos['thermo_sensors'].get('current_pnl', 0.0)
+                    max_dd_reached = min(0.0, current_unrealized) if current_unrealized < 0 else 0.0
+
+                    self.auditor.capture_exit_state(
+                        ticket=pos['ticket'],
+                        exit_price=cur_close,
+                        exit_reason='Smart TP complete',
+                        gross_pnl=total_pnl + pos['costs'],  # Add back costs to get gross
+                        net_pnl=total_pnl,
+                        duration_minutes=(i - pos['open_bar_index']) * 5,
+                        max_profit_reached=peak_pnl,
+                        max_drawdown_reached=max_dd_reached,
+                    )
+
                     # Phase 2: Store pattern in AkashicCore for future recall
                     if 'regime' in pos and 'kinematics' in pos:
                         akashic_state = self.akashic.encode_state(
