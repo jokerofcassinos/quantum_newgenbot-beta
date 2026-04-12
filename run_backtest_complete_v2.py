@@ -146,10 +146,11 @@ class CompleteBacktestEngineV2:
         self.risk_manager = BacktestRiskManager(initial_capital=100000.0)
         
         # Phase 1: Anti-Metralhadora (DubaiMatrixASI salvage - overtrading prevention)
+        # OPTIMIZED: Balanced trade frequency vs quality
         self.anti_metralhadora = AntiMetralhadora(
-            min_interval_minutes=5.0,
-            max_trades_per_day=25,
-            min_quality_score=0.40,
+            min_interval_minutes=8.0,  # Increased from 5.0
+            max_trades_per_day=18,  # Reduced from 25
+            min_quality_score=0.42,  # Slightly increased from 0.40
             max_consecutive_losses=3,
             loss_cooldown_minutes=30.0,
         )
@@ -472,8 +473,8 @@ class CompleteBacktestEngineV2:
                                 else:
                                     signal['m8_confirmed'] = False
 
-                                # C. VPIN Microstructure - filter out retail noise trades (Atl4s)
-                                # Calculate VPIN from recent candle data to detect institutional activity
+                                # C. VPIN Microstructure - DISABLED (was filtering too many good trades)
+                                # Calculating for audit only, not vetoing
                                 vpin_value = self.vpin.calculate_vpin_from_candles(
                                     highs=self._high[max(0, i-50):i+1].tolist(),
                                     lows=self._low[max(0, i-50):i+1].tolist(),
@@ -482,13 +483,11 @@ class CompleteBacktestEngineV2:
                                     lookback=20,
                                 )
                                 signal['vpin'] = vpin_value
-                                
-                                # C: Veto if VPIN shows only retail noise (no institutional activity)
-                                # VPIN < 0.15 = balanced buy/sell = noise/chop = avoid (optimal threshold)
-                                # VPIN > 0.15 = imbalance = institutional activity = trade
-                                if vpin_value < 0.15:
-                                    self.total_vetoes += 1
-                                    continue  # Skip this trade - retail noise environment
+
+                                # VPIN VETO DISABLED - was filtering good trades along with bad ones
+                                # if vpin_value < 0.15:
+                                #     self.total_vetoes += 1
+                                #     continue
 
                                 # Phase 3.1: VolatilityRegimeAdaptation - check if we should trade in current volatility
                                 vol_classification = self.volatility_regime.classify_volatility(
@@ -658,8 +657,8 @@ class CompleteBacktestEngineV2:
                         position_closed = False
                         realized_pnl = 0
                 
-                # Phase 2: Thermodynamic Exit - 5-sensor profit management (Laplace v3.0)
-                # Calculate sensors for remaining position
+                # Phase 2: Thermodynamic Exit - DISABLED (closing too early, reducing profit per trade)
+                # Sensors calculated for audit only
                 if pos.get('thermo_sensors') is None:
                     pos['thermo_sensors'] = self.thermodynamic_exit.calculate_sensors(
                         prices=self._close[max(0, i-50):i+1].tolist(),
@@ -667,35 +666,14 @@ class CompleteBacktestEngineV2:
                         direction=pos['direction'],
                     )
                 else:
-                    # Update sensors
                     pos['thermo_sensors'] = self.thermodynamic_exit.calculate_sensors(
                         prices=self._close[max(0, i-50):i+1].tolist(),
                         entry_price=pos['entry_price'],
                         direction=pos['direction'],
                     )
-                    
-                    # Check if thermodynamic exit suggests closing
-                    thermo_should_exit, thermo_reason = self.thermodynamic_exit.should_exit(
-                        sensors=pos['thermo_sensors'],
-                        current_tp_distance=abs(pos['take_profit'] - cur_close),
-                        current_sl_distance=abs(pos['stop_loss'] - cur_close),
-                    )
 
-                    # A2: CommissionFloor - don't close until commissions are covered
-                    current_pnl_for_floor = pos['targets']['total_realized_pnl'] + pos['thermo_sensors']['current_pnl'] * pos['remaining_volume']
-                    floor_allowed, floor_reason = self.commission_floor.should_allow_closure(
-                        current_pnl=current_pnl_for_floor,
-                        position_volume=pos['remaining_volume'],
-                        closure_reason='thermodynamic',
-                    )
-
-                    if thermo_should_exit and floor_allowed and pos['thermo_sensors']['current_pnl'] > 10:
-                        logger.info(f"🌡️ Thermodynamic exit: {thermo_reason}")
-                        position_closed = True
-                        realized_pnl = pos['targets']['total_realized_pnl'] + pos['thermo_sensors']['current_pnl'] * pos['remaining_volume']
-                    elif thermo_should_exit and not floor_allowed:
-                        # Log that we're waiting for commission floor
-                        pass  # Silent - waiting for floor
+                    # ThermodynamicExit veto DISABLED - Smart TP + CommissionFloor handles exits better
+                    # thermo_should_exit, thermo_reason = self.thermodynamic_exit.should_exit(...)
                 
                 # Fallback: If price hits original SL, close remaining position immediately
                 # Calculate current unrealized PnL for remaining position
