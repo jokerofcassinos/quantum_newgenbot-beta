@@ -27,9 +27,12 @@ sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 # Import backtest components (reuse same logic)
 from src.strategies.session_profiles import detect_session, get_session_profile, apply_session_veto
 from src.strategies.advanced_strategies import (
-    MomentumStrategy, LiquidityStrategy, ThermodynamicStrategy, PhysicsStrategy,
-    OrderBlockStrategy, FVGStrategy, MSNRStrategy, MSNRAlchemistStrategy,
-    IFVGStrategy, OrderFlowStrategy, SupplyDemandStrategy, FibonacciStrategy
+    LiquidityStrategy, ThermodynamicStrategy, PhysicsStrategy,
+    OrderBlockStrategy, FVGStrategy
+)
+from src.strategies.new_execution_agents import (
+    MSNRStrategy, MSNRAlchemistStrategy, IFVGStrategy,
+    OrderFlowStrategy, SupplyDemandStrategy, FibonacciStrategy
 )
 from src.execution.smart_order_manager import SmartOrderManager
 from src.execution.position_manager_smart_tp import PositionManagerSmartTP
@@ -122,9 +125,8 @@ class LiveTradingEngine:
         # Session Profiles
         # (imported directly)
         
-        # Strategies (same 12 as backtest)
+        # Strategies (same 11 as backtest)
         self.strategies = {
-            'momentum': MomentumStrategy(),
             'liquidity': LiquidityStrategy(),
             'thermodynamic': ThermodynamicStrategy(),
             'physics': PhysicsStrategy(),
