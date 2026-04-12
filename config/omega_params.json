@@ -1,0 +1,99 @@
+{
+  "version": "1.0.0",
+  "created": "2026-04-11",
+  "trading": {
+    "min_confidence": 0.4,
+    "max_daily_trades": 25,
+    "min_trade_interval_minutes": 5,
+    "max_position_size": 1.0,
+    "risk_per_trade_percent": 1.0
+  },
+  "risk": {
+    "max_drawdown_percent": 10.0,
+    "daily_loss_limit_percent": 5.0,
+    "kelly_fraction": 0.25,
+    "volatility_lookback": 20,
+    "dd_protection_threshold": 0.05,
+    "max_correlation": 0.8
+  },
+  "signals": {
+    "min_votes_needed": 5,
+    "veto_threshold": 0.6,
+    "consensus_min_agents": 5,
+    "regime_weights": {
+      "trending": {
+        "momentum": 0.4,
+        "mean_reversion": 0.1
+      },
+      "ranging": {
+        "momentum": 0.1,
+        "mean_reversion": 0.4
+      }
+    }
+  },
+  "sessions": {
+    "asian": {
+      "enabled": true,
+      "max_trades": 5,
+      "risk_multiplier": 0.5
+    },
+    "london": {
+      "enabled": true,
+      "max_trades": 10,
+      "risk_multiplier": 1.0
+    },
+    "ny": {
+      "enabled": true,
+      "max_trades": 10,
+      "risk_multiplier": 1.0
+    },
+    "ny_overlap": {
+      "enabled": true,
+      "max_trades": 12,
+      "risk_multiplier": 1.2
+    }
+  },
+  "exit": {
+    "smart_tp": {
+      "tp1_portion": 0.3,
+      "tp1_rr": 1.0,
+      "tp2_portion": 0.3,
+      "tp2_rr": 2.0,
+      "tp3_portion": 0.2,
+      "tp3_rr": 3.0,
+      "trailing_portion": 0.2,
+      "trailing_atr_multiplier": 1.5
+    },
+    "profit_erosion_tiers": [
+      [
+        30,
+        0.0
+      ],
+      [
+        50,
+        0.5
+      ],
+      [
+        100,
+        0.4
+      ],
+      [
+        200,
+        0.3
+      ],
+      [
+        300,
+        0.1
+      ],
+      [
+        999999,
+        0.05
+      ]
+    ]
+  },
+  "validation": {
+    "max_spread_points": 50,
+    "max_volatility_multiplier": 3.0,
+    "min_margin_level": 200.0
+  }
+}

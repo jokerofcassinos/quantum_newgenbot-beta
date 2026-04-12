@@ -37,6 +37,12 @@ from src.execution.smart_order_manager import SmartOrderManager
 from src.risk.backtest_risk_manager import BacktestRiskManager  # NEW: Risk Manager integration (BUG #6)
 from src.risk.anti_metralhadora import AntiMetralhadora  # Phase 1: Overtrading prevention (DubaiMatrixASI)
 from src.execution.position_manager_smart_tp import PositionManagerSmartTP  # Phase 1: Multi-target TP (DubaiMatrixASI)
+from src.risk.risk_quantum_engine import RiskQuantumEngine  # Phase 1: 5-factor position sizing (DubaiMatrixASI)
+from src.risk.profit_erosion_tiers import ProfitErosionTiers  # Phase 1: Multi-level profit protection (Atl4s)
+from src.risk.execution_validator import ExecutionValidator  # Phase 1: Pre-trade validation (DubaiMatrixASI)
+from src.risk.great_filter import GreatFilter  # Phase 1: Entry quality validation (Atl4s)
+from src.monitoring.trade_registry import TradeRegistry  # Phase 1: Trade audit system (DubaiMatrixASI)
+from src.core.omega_params import OmegaParams  # Phase 1: Centralized config (DubaiMatrixASI)
 
 
 def setup_logging():
@@ -136,6 +142,29 @@ class CompleteBacktestEngineV2:
             trailing_portion=0.20,
             trailing_atr_multiplier=1.5,
         )
+        
+        # Phase 1: RiskQuantumEngine (DubaiMatrixASI salvage - 5-factor position sizing)
+        self.risk_quantum = RiskQuantumEngine(
+            kelly_fraction=0.25,
+            max_position_size=1.0,
+            min_position_size=0.01,
+            base_risk_percent=1.0,
+        )
+        
+        # Phase 1: ProfitErosionTiers (Atl4s salvage - multi-level profit protection)
+        self.profit_erosion = ProfitErosionTiers()
+        
+        # Phase 1: ExecutionValidator (DubaiMatrixASI salvage - pre-trade validation)
+        self.execution_validator = ExecutionValidator()
+        
+        # Phase 1: GreatFilter (Atl4s salvage - entry quality validation)
+        self.great_filter = GreatFilter()
+        
+        # Phase 1: TradeRegistry (DubaiMatrixASI salvage - comprehensive audit)
+        self.trade_registry = TradeRegistry()
+        
+        # Phase 1: OmegaParams (DubaiMatrixASI salvage - centralized config)
+        self.omega_params = OmegaParams()
 
         # State
         self.equity = 100000.0
@@ -393,6 +422,29 @@ class CompleteBacktestEngineV2:
                     current_volume=pos['remaining_volume'],
                     atr=atr_current,
                 )
+                
+                # Phase 1: Profit Erosion Check (Atl4s salvage - multi-level profit protection)
+                # Calculate current unrealized PnL for remaining position
+                if pos['direction'] == 'BUY':
+                    current_unrealized_pnl = (cur_close - pos['entry_price']) * pos['remaining_volume']
+                else:
+                    current_unrealized_pnl = (pos['entry_price'] - cur_close) * pos['remaining_volume']
+                
+                # Track peak PnL
+                if 'peak_pnl' not in pos:
+                    pos['peak_pnl'] = 0.0
+                pos['peak_pnl'] = max(pos['peak_pnl'], current_unrealized_pnl)
+                
+                # Check erosion
+                should_exit, erosion_reason = self.profit_erosion.check_erosion(
+                    current_pnl=current_unrealized_pnl,
+                    peak_pnl=pos['peak_pnl'],
+                )
+                
+                if should_exit and pos['peak_pnl'] > 30:  # Only exit if we have meaningful profit
+                    logger.info(f"🛡️ Profit erosion triggered: {erosion_reason}")
+                    position_closed = True
+                    realized_pnl = pos['targets']['total_realized_pnl'] + current_unrealized_pnl
                 
                 # Fallback: If price hits original SL, close remaining position immediately
                 original_sl = pos.get('original_stop', pos['stop_loss'])
@@ -832,10 +884,24 @@ class CompleteBacktestEngineV2:
             sl = current_price + sl_dist
             tp = current_price - tp_dist
 
-        # Position sizing - Fixed: removed * 100 multiplier (was making positions 100x too small)
-        risk_amount = self.equity * (self.risk_percent / 100.0)
-        volume = min(risk_amount / max(1, sl_dist), 1.0)  # Max 1.0 lot
-        volume = max(0.01, volume)
+        # Phase 1: RiskQuantumEngine - 5-factor position sizing (DubaiMatrixASI)
+        # Calculate dynamic position size based on Kelly, volatility, confidence, DD, correlation
+        win_rate = self.winning_trades / max(1, self.total_trades) if self.total_trades > 10 else 0.35
+        avg_win_loss_ratio = self.loss_patterns['avg_win_size'] / max(1, self.loss_patterns['avg_loss_size']) if self.loss_patterns['avg_loss_size'] > 0 else 1.5
+        current_dd = self.max_drawdown / 100.0
+        
+        sizing = self.risk_quantum.calculate_position_size(
+            equity=self.equity,
+            win_rate=win_rate,
+            avg_win_loss_ratio=avg_win_loss_ratio,
+            signal_confidence=consensus_conf,
+            current_volatility=atr,
+            avg_volatility=np.mean(self._atr[max(0, idx-20):idx+1]),
+            current_drawdown=current_dd,
+            correlation_factor=1.0,  # Single-position for now
+        )
+        
+        volume = sizing['position_size']
 
         self.total_signals += 1
 
