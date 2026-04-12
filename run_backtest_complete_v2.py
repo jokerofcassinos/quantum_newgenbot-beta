@@ -137,9 +137,9 @@ class CompleteBacktestEngineV2:
         
         # Phase 1: Anti-Metralhadora (DubaiMatrixASI salvage - overtrading prevention)
         self.anti_metralhadora = AntiMetralhadora(
-            min_interval_minutes=5.0,
-            max_trades_per_day=25,
-            min_quality_score=0.40,
+            min_interval_minutes=10.0,  # Increased from 5.0 to reduce trade frequency
+            max_trades_per_day=15,  # Reduced from 25 to cut commissions
+            min_quality_score=0.42,  # Slightly increased from 0.40 for better quality
             max_consecutive_losses=3,
             loss_cooldown_minutes=30.0,
         )
@@ -414,8 +414,12 @@ class CompleteBacktestEngineV2:
                                 kin_strength = self.kinematics.get_signal_strength(
                                     kinematics, signal['direction']
                                 )
-                                # Store kinematics strength for audit (don't veto based on it)
-                                signal['kin_strength'] = kin_strength
+                                signal['kin_strength'] = kin_strength  # Store for audit
+                                
+                                # Only veto if kinematics strongly disagree (<0.15)
+                                if kin_strength < 0.15:
+                                    self.total_vetoes += 1
+                                    continue  # Kinematics strongly disagree
 
                                 # 4. Recursive Self-Debate (metacognitive validation)
                                 market_data = {
@@ -432,10 +436,15 @@ class CompleteBacktestEngineV2:
                                     signal_confidence=signal.get('confidence', 0.5),
                                     market_data=market_data,
                                 )
-                                
-                                # Only flip signal, don't veto (debate_approved always true with min_debate_confidence=0.0)
-                                signal['direction'] = debate_signal  # Use debated signal
-                                signal['debate_confidence'] = debate_confidence
+
+                                # Only flip signal if debate confidence is significantly better (>10% improvement)
+                                # This prevents unnecessary signal flipping that doubles trade count
+                                if debate_confidence > signal.get('confidence', 0.5) + 0.10:
+                                    signal['direction'] = debate_signal  # Use debated signal
+                                    signal['debate_confidence'] = debate_confidence
+                                    signal['debate_used'] = True
+                                else:
+                                    signal['debate_used'] = False  # Keep original signal
 
                                 # 5. AkashicCore Pattern Memory (experience-based validation)
                                 akashic_state = self.akashic.encode_state(
