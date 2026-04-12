@@ -1,0 +1,17 @@
+{
+  "trade_id": 3724,
+  "type": "ghost_exit",
+  "direction": "SELL",
+  "entry_price": 88616.22,
+  "exit_price": 88917.68357142857,
+  "pnl": -115.77140347871594,
+  "is_win": false,
+  "exit_reason": "SL_hit",
+  "veto_reason": "ghost_audit:weekday_destructive_hours_14UTC",
+  "session": "ny_overlap",
+  "confidence": 0.4166666666666667,
+  "regime": "unknown",
+  "duration_bars": 7,
+  "open_time": "2026-01-21 14:35:00",
+  "timestamp": "2026-04-12T18:08:51.490616+00:00"
+}

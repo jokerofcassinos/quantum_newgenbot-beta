@@ -1,0 +1,17 @@
+{
+  "trade_id": 1133,
+  "type": "ghost_exit",
+  "direction": "BUY",
+  "entry_price": 104089.45,
+  "exit_price": 104989.45,
+  "pnl": 566.7421756181227,
+  "is_win": true,
+  "exit_reason": "TP_hit",
+  "veto_reason": "advanced_veto:BUY vetoed - RSI 77.1 > 72",
+  "session": "london",
+  "confidence": 0.4166666666666667,
+  "regime": "unknown",
+  "duration_bars": 6,
+  "open_time": "2025-11-12 10:50:00",
+  "timestamp": "2026-04-12T18:08:41.794039+00:00"
+}

@@ -1,0 +1,17 @@
+{
+  "trade_id": 678,
+  "type": "ghost_exit",
+  "direction": "BUY",
+  "entry_price": 114126.41,
+  "exit_price": 115026.41,
+  "pnl": 900.0,
+  "is_win": true,
+  "exit_reason": "TP_hit",
+  "veto_reason": "ghost_audit:weekday_destructive_hours_11UTC",
+  "session": "london",
+  "confidence": 0.5,
+  "regime": "unknown",
+  "duration_bars": 64,
+  "open_time": "2025-10-28 11:00:00",
+  "timestamp": "2026-04-12T18:08:40.036511+00:00"
+}

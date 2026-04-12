@@ -1,0 +1,17 @@
+{
+  "trade_id": 5718,
+  "type": "ghost_exit",
+  "direction": "SELL",
+  "entry_price": 67864.25,
+  "exit_price": 68164.25,
+  "pnl": -287.9460899392892,
+  "is_win": false,
+  "exit_reason": "SL_hit",
+  "veto_reason": "advanced_veto:SELL vetoed - RSI 24.0 < 28",
+  "session": "ny",
+  "confidence": 0.4166666666666667,
+  "regime": "unknown",
+  "duration_bars": 4,
+  "open_time": "2026-04-07 17:10:00",
+  "timestamp": "2026-04-12T18:09:04.594986+00:00"
+}

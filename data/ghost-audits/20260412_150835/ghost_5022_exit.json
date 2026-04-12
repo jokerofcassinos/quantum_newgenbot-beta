@@ -1,0 +1,17 @@
+{
+  "trade_id": 5022,
+  "type": "ghost_exit",
+  "direction": "BUY",
+  "entry_price": 74046.09,
+  "exit_price": 73746.09,
+  "pnl": -171.81927936437884,
+  "is_win": false,
+  "exit_reason": "SL_hit",
+  "veto_reason": "ghost_audit:weekday_destructive_hours_16UTC",
+  "session": "ny",
+  "confidence": 0.4166666666666667,
+  "regime": "unknown",
+  "duration_bars": 9,
+  "open_time": "2026-03-16 16:40:00",
+  "timestamp": "2026-04-12T18:09:00.116661+00:00"
+}

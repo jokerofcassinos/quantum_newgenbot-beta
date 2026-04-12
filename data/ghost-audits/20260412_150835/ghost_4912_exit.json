@@ -1,0 +1,17 @@
+{
+  "trade_id": 4912,
+  "type": "ghost_exit",
+  "direction": "BUY",
+  "entry_price": 70604.32,
+  "exit_price": 71504.32,
+  "pnl": 900.0,
+  "is_win": true,
+  "exit_reason": "TP_hit",
+  "veto_reason": "anti_metralhadora:session_blocked",
+  "session": "weekend_profitable",
+  "confidence": 0.5833333333333334,
+  "regime": "unknown",
+  "duration_bars": 94,
+  "open_time": "2026-03-14 20:45:00",
+  "timestamp": "2026-04-12T18:08:59.767775+00:00"
+}

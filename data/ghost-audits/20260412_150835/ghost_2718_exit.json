@@ -1,0 +1,17 @@
+{
+  "trade_id": 2718,
+  "type": "ghost_exit",
+  "direction": "SELL",
+  "entry_price": 87685.42,
+  "exit_price": 87985.42,
+  "pnl": -300.0,
+  "is_win": false,
+  "exit_reason": "SL_hit",
+  "veto_reason": "anti_metralhadora:session_limit",
+  "session": "asian",
+  "confidence": 0.4166666666666667,
+  "regime": "unknown",
+  "duration_bars": 49,
+  "open_time": "2025-12-31 23:00:00",
+  "timestamp": "2026-04-12T18:08:48.029796+00:00"
+}

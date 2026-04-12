@@ -1,0 +1,17 @@
+{
+  "trade_id": 4502,
+  "type": "ghost_exit",
+  "direction": "BUY",
+  "entry_price": 67971.8,
+  "exit_price": 67671.8,
+  "pnl": -300.0,
+  "is_win": false,
+  "exit_reason": "SL_hit",
+  "veto_reason": "anti_metralhadora:session_blocked",
+  "session": "weekend_profitable",
+  "confidence": 0.5,
+  "regime": "unknown",
+  "duration_bars": 76,
+  "open_time": "2026-02-22 09:15:00",
+  "timestamp": "2026-04-12T18:08:56.578440+00:00"
+}

@@ -1,0 +1,17 @@
+{
+  "trade_id": 5428,
+  "type": "ghost_exit",
+  "direction": "SELL",
+  "entry_price": 66424.85,
+  "exit_price": 66724.85,
+  "pnl": -300.0,
+  "is_win": false,
+  "exit_reason": "SL_hit",
+  "veto_reason": "session_veto:Confidence 0.42 < 0.45 (Weekend Profitable Hours threshold)",
+  "session": "weekend_profitable",
+  "confidence": 0.4166666666666667,
+  "regime": "unknown",
+  "duration_bars": 56,
+  "open_time": "2026-03-29 18:40:00",
+  "timestamp": "2026-04-12T18:09:02.799783+00:00"
+}

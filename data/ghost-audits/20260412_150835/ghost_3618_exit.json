@@ -1,0 +1,17 @@
+{
+  "trade_id": 3618,
+  "type": "ghost_exit",
+  "direction": "BUY",
+  "entry_price": 91403.24,
+  "exit_price": 92303.24,
+  "pnl": 900.0,
+  "is_win": true,
+  "exit_reason": "TP_hit",
+  "veto_reason": "anti_metralhadora:session_limit",
+  "session": "asian",
+  "confidence": 0.5,
+  "regime": "unknown",
+  "duration_bars": 50,
+  "open_time": "2026-01-13 06:50:00",
+  "timestamp": "2026-04-12T18:08:50.355604+00:00"
+}

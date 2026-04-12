@@ -1,0 +1,17 @@
+{
+  "trade_id": 5432,
+  "type": "ghost_exit",
+  "direction": "SELL",
+  "entry_price": 66572.43,
+  "exit_price": 65672.43,
+  "pnl": 900.0,
+  "is_win": true,
+  "exit_reason": "TP_hit",
+  "veto_reason": "anti_metralhadora:session_blocked",
+  "session": "weekend_profitable",
+  "confidence": 0.5,
+  "regime": "unknown",
+  "duration_bars": 74,
+  "open_time": "2026-03-29 19:20:00",
+  "timestamp": "2026-04-12T18:09:02.829762+00:00"
+}

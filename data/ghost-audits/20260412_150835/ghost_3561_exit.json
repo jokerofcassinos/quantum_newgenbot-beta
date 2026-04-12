@@ -1,0 +1,17 @@
+{
+  "trade_id": 3561,
+  "type": "ghost_exit",
+  "direction": "BUY",
+  "entry_price": 90956.41,
+  "exit_price": 90656.41,
+  "pnl": -300.0,
+  "is_win": false,
+  "exit_reason": "SL_hit",
+  "veto_reason": "anti_metralhadora:session_blocked",
+  "session": "weekend_profitable",
+  "confidence": 0.5,
+  "regime": "unknown",
+  "duration_bars": 2,
+  "open_time": "2026-01-11 17:35:00",
+  "timestamp": "2026-04-12T18:08:49.915942+00:00"
+}

@@ -1,0 +1,17 @@
+{
+  "trade_id": 4209,
+  "type": "ghost_exit",
+  "direction": "SELL",
+  "entry_price": 82322.69,
+  "exit_price": 82622.69,
+  "pnl": -265.54838349134917,
+  "is_win": false,
+  "exit_reason": "SL_hit",
+  "veto_reason": "ghost_audit:weekday_destructive_hours_11UTC",
+  "session": "london",
+  "confidence": 0.4166666666666667,
+  "regime": "unknown",
+  "duration_bars": 11,
+  "open_time": "2026-01-30 11:50:00",
+  "timestamp": "2026-04-12T18:08:53.202620+00:00"
+}

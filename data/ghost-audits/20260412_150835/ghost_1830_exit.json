@@ -1,0 +1,17 @@
+{
+  "trade_id": 1830,
+  "type": "ghost_exit",
+  "direction": "SELL",
+  "entry_price": 90110.07,
+  "exit_price": 89210.07,
+  "pnl": 900.0,
+  "is_win": true,
+  "exit_reason": "TP_hit",
+  "veto_reason": "session_veto:Trading disabled for Weekend session",
+  "session": "weekend",
+  "confidence": 0.4166666666666667,
+  "regime": "unknown",
+  "duration_bars": 102,
+  "open_time": "2025-12-14 01:05:00",
+  "timestamp": "2026-04-12T18:08:45.370572+00:00"
+}

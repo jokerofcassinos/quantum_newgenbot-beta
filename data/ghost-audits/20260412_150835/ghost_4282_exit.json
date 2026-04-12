@@ -1,0 +1,17 @@
+{
+  "trade_id": 4282,
+  "type": "ghost_exit",
+  "direction": "BUY",
+  "entry_price": 69739.73,
+  "exit_price": 69439.73,
+  "pnl": -300.0,
+  "is_win": false,
+  "exit_reason": "SL_hit",
+  "veto_reason": "session_veto:Confidence 0.42 < 0.45 (Weekend Profitable Hours threshold)",
+  "session": "weekend_profitable",
+  "confidence": 0.4166666666666667,
+  "regime": "unknown",
+  "duration_bars": 64,
+  "open_time": "2026-02-14 20:55:00",
+  "timestamp": "2026-04-12T18:08:55.389847+00:00"
+}

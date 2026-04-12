@@ -1,0 +1,15 @@
+{
+  "trade_id": 360,
+  "type": "ghost_entry",
+  "direction": "BUY",
+  "entry_price": 111075.2,
+  "stop_loss": 110769.70464285715,
+  "take_profit": 111991.68607142856,
+  "volume": 0.4317762069684307,
+  "veto_reason": "advanced_veto:BUY vetoed - price at upper BB",
+  "session": "london",
+  "confidence": 0.5,
+  "regime": "unknown",
+  "open_time": "2025-10-24 07:40:00",
+  "timestamp": "2026-04-12T18:08:39.244076+00:00"
+}

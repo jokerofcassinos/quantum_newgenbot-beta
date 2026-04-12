@@ -1,0 +1,15 @@
+{
+  "trade_id": 3035,
+  "type": "ghost_entry",
+  "direction": "SELL",
+  "entry_price": 91188.61,
+  "stop_loss": 91488.61,
+  "take_profit": 90288.61,
+  "volume": 1.0,
+  "veto_reason": "session_veto:Confidence 0.42 < 0.45 (Weekend Profitable Hours threshold)",
+  "session": "weekend_profitable",
+  "confidence": 0.4166666666666667,
+  "regime": "unknown",
+  "open_time": "2026-01-04 20:40:00",
+  "timestamp": "2026-04-12T18:08:48.657027+00:00"
+}

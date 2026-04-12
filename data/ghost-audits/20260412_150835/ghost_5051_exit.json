@@ -1,0 +1,17 @@
+{
+  "trade_id": 5051,
+  "type": "ghost_exit",
+  "direction": "SELL",
+  "entry_price": 72444.29,
+  "exit_price": 71544.29,
+  "pnl": 740.329029552419,
+  "is_win": true,
+  "exit_reason": "TP_hit",
+  "veto_reason": "ghost_audit:weekday_destructive_hours_16UTC",
+  "session": "ny",
+  "confidence": 0.4166666666666667,
+  "regime": "unknown",
+  "duration_bars": 13,
+  "open_time": "2026-03-18 16:25:00",
+  "timestamp": "2026-04-12T18:09:00.467529+00:00"
+}

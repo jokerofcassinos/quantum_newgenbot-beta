@@ -1,0 +1,17 @@
+{
+  "trade_id": 4700,
+  "type": "ghost_exit",
+  "direction": "BUY",
+  "entry_price": 72531.49,
+  "exit_price": 73431.49,
+  "pnl": 738.0115966909724,
+  "is_win": true,
+  "exit_reason": "TP_hit",
+  "veto_reason": "ghost_audit:weekday_destructive_hours_11UTC",
+  "session": "london",
+  "confidence": 0.4166666666666667,
+  "regime": "unknown",
+  "duration_bars": 10,
+  "open_time": "2026-03-05 11:40:00",
+  "timestamp": "2026-04-12T18:08:58.411921+00:00"
+}

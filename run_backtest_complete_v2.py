@@ -448,13 +448,20 @@ class CompleteBacktestEngineV2:
                                 # So we relax vetos ONLY for SELL, keep BUY vetos strict
                                 # ═══════════════════════════════════════════════════════════════
                                 
-                                # GHOST AUDIT OPTIMIZATION #1: Ban destructive hours (10-16 UTC)
-                                # Ghost audit found: 10-16 UTC loses ~$150K combined
+                                # GHOST AUDIT OPTIMIZATION #1: Ban destructive hours (10-16 UTC) on WEEKDAYS only
+                                # Ghost audit found: 10-16 UTC loses ~$150K combined on weekdays
+                                # Weekend hours are handled separately by session profiles
                                 hour_utc = cur_time.hour if hasattr(cur_time, 'hour') else 12
-                                if 10 <= hour_utc <= 16:
+                                is_weekend = cur_time.weekday() >= 5 if hasattr(cur_time, 'weekday') else False
+
+                                if not is_weekend and 10 <= hour_utc <= 16:
+                                    # Weekday destructive hours - veto
                                     self.total_vetoes += 1
-                                    self.ghost_audit.create_ghost(signal=signal, veto_reason=f'ghost_audit:destructive_hours_{hour_utc}UTC', bar_index=i, cur_time=cur_time, session=session)
-                                    continue  # Skip trades during destructive hours (both BUY and SELL)
+                                    self.ghost_audit.create_ghost(signal=signal, veto_reason=f'ghost_audit:weekday_destructive_hours_{hour_utc}UTC', bar_index=i, cur_time=cur_time, session=session)
+                                    continue  # Skip trades during destructive weekday hours
+                                elif is_weekend:
+                                    # Weekend: session profiles handle this (only 08-09h and 17-20h allowed)
+                                    pass  # Let session profile decide
 
                                 # GHOST AUDIT DURATION FILTER: Avoid chop/low-volatility conditions
                                 # Ghost audit found: <=5 bars = -$135K (6.6% WR), >30 bars = +$387K (32.6% WR)

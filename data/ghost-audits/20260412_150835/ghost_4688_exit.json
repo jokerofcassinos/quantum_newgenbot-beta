@@ -1,0 +1,17 @@
+{
+  "trade_id": 4688,
+  "type": "ghost_exit",
+  "direction": "SELL",
+  "entry_price": 66319.26,
+  "exit_price": 65419.259999999995,
+  "pnl": 874.5776342012755,
+  "is_win": true,
+  "exit_reason": "TP_hit",
+  "veto_reason": "ghost_audit:weekday_destructive_hours_13UTC",
+  "session": "ny_overlap",
+  "confidence": 0.4166666666666667,
+  "regime": "unknown",
+  "duration_bars": 25,
+  "open_time": "2026-03-02 13:45:00",
+  "timestamp": "2026-04-12T18:08:57.899089+00:00"
+}

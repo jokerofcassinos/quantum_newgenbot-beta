@@ -1,0 +1,17 @@
+{
+  "trade_id": 4643,
+  "type": "ghost_exit",
+  "direction": "BUY",
+  "entry_price": 66574.65,
+  "exit_price": 66265.73357142856,
+  "pnl": -229.41093424195648,
+  "is_win": false,
+  "exit_reason": "SL_hit",
+  "veto_reason": "ghost_audit:weekday_destructive_hours_12UTC",
+  "session": "london",
+  "confidence": 0.4166666666666667,
+  "regime": "unknown",
+  "duration_bars": 8,
+  "open_time": "2026-02-27 12:55:00",
+  "timestamp": "2026-04-12T18:08:57.459867+00:00"
+}

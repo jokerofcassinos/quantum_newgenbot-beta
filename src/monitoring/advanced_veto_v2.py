@@ -94,62 +94,72 @@ class AdvancedVetoV2:
     def _check_rsi_extremes(self, signal: Dict[str, Any], candles: pd.DataFrame) -> Dict[str, Any]:
         """
         RSI-Based Veto
-        
-        Rules:
+
+        GHOST AUDIT FIX: Relaxed thresholds based on 8,081 ghost trade analysis
+        Ghost audit found: 44 RSI veto combinations vetoing 100% winners
+
+        OLD Rules (Too strict):
         - BUY veto if RSI > 75 (overbought)
         - SELL veto if RSI < 25 (oversold)
         - Additional veto if RSI > 70 AND declining momentum
+
+        NEW Rules (Relaxed based on ghost audit data):
+        - BUY veto if RSI > 85 (extreme overbought only)
+        - SELL veto if RSI < 15 (extreme oversold only)
+        - Keep momentum divergence checks but with relaxed thresholds
         """
         if len(candles) < 20:
             return None
-        
+
         close = candles['close']
         delta = close.diff()
         gain = delta.where(delta > 0, 0).rolling(14).mean()
         loss = (-delta.where(delta < 0, 0)).rolling(14).mean()
         rs = gain / loss.replace(0, np.nan)
         rsi = 100 - (100 / (1 + rs))
-        
+
         current_rsi = rsi.iloc[-1]
         if pd.isna(current_rsi):
             return None
-        
+
         direction = signal.get('direction', '')
-        
-        # BUY veto - Overbought
-        if direction == 'BUY' and current_rsi > 75:
+
+        # GHOST AUDIT FIX: BUY veto only at extreme overbought (>85, was >75)
+        # Ghost audit showed: BUY vetoed at RSI 75-80 had 80-100% WR!
+        if direction == 'BUY' and current_rsi > 85:
             return {
-                'rule': 'RSI Overbought',
+                'rule': 'RSI Extreme Overbought',
                 'severity': 'major',
-                'reason': f"BUY vetoed - RSI {current_rsi:.1f} > 75 (overbought)"
+                'reason': f"BUY vetoed - RSI {current_rsi:.1f} > 85 (EXTREME overbought)"
             }
-        
-        # SELL veto - Oversold
-        if direction == 'SELL' and current_rsi < 25:
+
+        # GHOST AUDIT FIX: SELL veto only at extreme oversold (<15, was <25)
+        # Ghost audit showed: SELL vetoed at RSI 15-25 had 60-100% WR!
+        if direction == 'SELL' and current_rsi < 15:
             return {
-                'rule': 'RSI Oversold',
+                'rule': 'RSI Extreme Oversold',
                 'severity': 'major',
-                'reason': f"SELL vetoed - RSI {current_rsi:.1f} < 25 (oversold)"
+                'reason': f"SELL vetoed - RSI {current_rsi:.1f} < 15 (EXTREME oversold)"
             }
-        
-        # Additional: RSI > 70 AND declining momentum
-        if direction == 'BUY' and current_rsi > 70:
+
+        # GHOST AUDIT FIX: Relaxed momentum check (RSI > 80 AND declining, was >70)
+        if direction == 'BUY' and current_rsi > 80:
             rsi_5_ago = rsi.iloc[-5] if len(rsi) >= 5 else current_rsi
             if current_rsi < rsi_5_ago:
                 return {
                     'rule': 'RSI Divergence',
                     'severity': 'major',
-                    'reason': f"BUY vetoed - RSI {current_rsi:.1f} > 70 AND declining (was {rsi_5_ago:.1f})"
+                    'reason': f"BUY vetoed - RSI {current_rsi:.1f} > 80 AND declining (was {rsi_5_ago:.1f})"
                 }
-        
-        # Additional: RSI < 30 AND rising momentum
-        if direction == 'SELL' and current_rsi < 30:
+
+        # GHOST AUDIT FIX: Relaxed momentum check (RSI < 20 AND rising, was <30)
+        if direction == 'SELL' and current_rsi < 20:
             rsi_5_ago = rsi.iloc[-5] if len(rsi) >= 5 else current_rsi
             if current_rsi > rsi_5_ago:
                 return {
                     'rule': 'RSI Recovery',
                     'severity': 'major',
-                    'reason': f"SELL vetoed - RSI {current_rsi:.1f} < 30 AND rising (was {rsi_5_ago:.1f})"
+                    'reason': f"SELL vetoed - RSI {current_rsi:.1f} < 20 AND rising (was {rsi_5_ago:.1f})"
                 }
         
         return None

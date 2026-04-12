@@ -1,0 +1,17 @@
+{
+  "trade_id": 1861,
+  "type": "ghost_exit",
+  "direction": "BUY",
+  "entry_price": 90099.61,
+  "exit_price": 89799.61,
+  "pnl": -300.0,
+  "is_win": false,
+  "exit_reason": "SL_hit",
+  "veto_reason": "anti_metralhadora:session_blocked",
+  "session": "weekend_profitable",
+  "confidence": 0.5,
+  "regime": "unknown",
+  "duration_bars": 31,
+  "open_time": "2025-12-14 09:35:00",
+  "timestamp": "2026-04-12T18:08:45.348119+00:00"
+}

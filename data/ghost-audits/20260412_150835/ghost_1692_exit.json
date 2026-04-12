@@ -1,0 +1,17 @@
+{
+  "trade_id": 1692,
+  "type": "ghost_exit",
+  "direction": "BUY",
+  "entry_price": 90300.57,
+  "exit_price": 90000.57,
+  "pnl": -300.0,
+  "is_win": false,
+  "exit_reason": "SL_hit",
+  "veto_reason": "advanced_veto:BUY vetoed - price at upper BB",
+  "session": "weekend_profitable",
+  "confidence": 0.5,
+  "regime": "unknown",
+  "duration_bars": 89,
+  "open_time": "2025-12-13 09:00:00",
+  "timestamp": "2026-04-12T18:08:45.195982+00:00"
+}

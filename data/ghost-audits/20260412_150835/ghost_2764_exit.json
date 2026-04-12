@@ -1,0 +1,17 @@
+{
+  "trade_id": 2764,
+  "type": "ghost_exit",
+  "direction": "SELL",
+  "entry_price": 89670.19,
+  "exit_price": 89983.76392857142,
+  "pnl": -280.1648824930133,
+  "is_win": false,
+  "exit_reason": "SL_hit",
+  "veto_reason": "advanced_veto:SELL vetoed - RSI 22.1 < 28",
+  "session": "ny",
+  "confidence": 0.4166666666666667,
+  "regime": "unknown",
+  "duration_bars": 5,
+  "open_time": "2026-01-02 20:50:00",
+  "timestamp": "2026-04-12T18:08:48.232864+00:00"
+}

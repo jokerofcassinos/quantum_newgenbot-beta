@@ -1,0 +1,17 @@
+{
+  "trade_id": 1148,
+  "type": "ghost_exit",
+  "direction": "SELL",
+  "entry_price": 95813.92,
+  "exit_price": 96207.60785714285,
+  "pnl": -222.90509625512982,
+  "is_win": false,
+  "exit_reason": "SL_hit",
+  "veto_reason": "advanced_veto:SELL vetoed - RSI 15.5 < 28",
+  "session": "ny",
+  "confidence": 0.4166666666666667,
+  "regime": "unknown",
+  "duration_bars": 3,
+  "open_time": "2025-11-14 19:55:00",
+  "timestamp": "2026-04-12T18:08:42.027841+00:00"
+}

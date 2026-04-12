@@ -1,0 +1,17 @@
+{
+  "trade_id": 1539,
+  "type": "ghost_exit",
+  "direction": "BUY",
+  "entry_price": 90398.49,
+  "exit_price": 90098.49,
+  "pnl": -300.0,
+  "is_win": false,
+  "exit_reason": "SL_hit",
+  "veto_reason": "ghost_audit:weekday_destructive_hours_11UTC",
+  "session": "london",
+  "confidence": 0.5,
+  "regime": "unknown",
+  "duration_bars": 9,
+  "open_time": "2025-12-09 11:10:00",
+  "timestamp": "2026-04-12T18:08:44.518911+00:00"
+}

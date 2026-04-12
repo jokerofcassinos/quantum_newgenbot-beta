@@ -77,7 +77,21 @@ SESSION_PROFILES = {
         description="Highest liquidity - optimal conditions"
     ),
 
-    # Weekend (Saturday/Sunday) - EXTREME LOW LIQUIDITY
+    # Weekend (Saturday/Sunday) - GHOST AUDIT SELECTIVE HOURS
+    # Ghost audit found: Weekend 08-09h and 17-20h UTC are PROFITABLE (+$117K)
+    # But other weekend hours lose money
+    "weekend_profitable": SessionProfile(
+        session_name="Weekend Profitable Hours",
+        min_confidence_threshold=0.45,  # Slightly higher than normal
+        max_position_size=0.08,  # Slightly reduced
+        risk_multiplier=0.8,  # 80% of normal risk
+        min_strategy_votes=5,
+        min_coherence=0.45,
+        trading_allowed=True,  # ALLOWED during profitable hours
+        description="Weekend 08-09h and 17-20h UTC - profitable hours only"
+    ),
+
+    # Weekend (Saturday/Sunday) - EXTREME LOW LIQUIDITY (other hours)
     "weekend": SessionProfile(
         session_name="Weekend",
         min_confidence_threshold=0.85,  # Extremely high threshold
@@ -85,8 +99,8 @@ SESSION_PROFILES = {
         risk_multiplier=0.1,  # 10% of normal risk
         min_strategy_votes=5,  # ALL strategies must agree
         min_coherence=0.85,  # Near-perfect coherence
-        trading_allowed=False,  # DISABLED by default
-        description="Extreme low liquidity - trading DISABLED"
+        trading_allowed=False,  # DISABLED for non-profitable hours
+        description="Weekend non-profitable hours - trading DISABLED"
     ),
 }
 
@@ -94,23 +108,32 @@ SESSION_PROFILES = {
 def detect_session(dt: datetime = None) -> str:
     """
     Detect current market session based on UTC time
-    
+
+    GHOST AUDIT FIX: Weekend selective hours
+    Ghost audit found: Weekend 08-09h and 17-20h UTC are PROFITABLE (+$117K)
+
     Sessions (UTC):
     - Asian: 00:00 - 07:00
     - London: 07:00 - 13:00
     - NY: 13:00 - 21:00
     - NY Overlap: 13:00 - 16:00 (within NY)
-    - Weekend: Saturday/Sunday
+    - Weekend Profitable: Sat/Sun 08-09h and 17-20h UTC
+    - Weekend: Sat/Sun other hours (DISABLED)
     """
     if dt is None:
         dt = datetime.now(timezone.utc)
-    
+
     # Check weekend first
     if dt.weekday() >= 5:  # 5 = Saturday, 6 = Sunday
-        return "weekend"
-    
+        hour = dt.hour
+        # GHOST AUDIT FIX: Allow weekend only during profitable hours
+        if hour == 8 or hour == 9 or (17 <= hour <= 20):
+            return "weekend_profitable"  # Profitable weekend hours
+        else:
+            return "weekend"  # Non-profitable weekend hours (DISABLED)
+
     hour = dt.hour
-    
+
     if 0 <= hour < 7:
         return "asian"
     elif 7 <= hour < 13:

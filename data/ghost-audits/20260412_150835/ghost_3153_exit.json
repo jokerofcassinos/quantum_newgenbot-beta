@@ -1,0 +1,17 @@
+{
+  "trade_id": 3153,
+  "type": "ghost_exit",
+  "direction": "SELL",
+  "entry_price": 89936.04,
+  "exit_price": 90263.8907142857,
+  "pnl": -115.20603296296338,
+  "is_win": false,
+  "exit_reason": "SL_hit",
+  "veto_reason": "advanced_veto:SELL vetoed - RSI 25.7 < 28",
+  "session": "london",
+  "confidence": 0.4166666666666667,
+  "regime": "unknown",
+  "duration_bars": 5,
+  "open_time": "2026-01-08 09:05:00",
+  "timestamp": "2026-04-12T18:08:49.289668+00:00"
+}

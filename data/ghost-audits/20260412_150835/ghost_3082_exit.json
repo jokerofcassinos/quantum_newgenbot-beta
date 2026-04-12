@@ -1,0 +1,17 @@
+{
+  "trade_id": 3082,
+  "type": "ghost_exit",
+  "direction": "SELL",
+  "entry_price": 92832.65,
+  "exit_price": 93132.65,
+  "pnl": -225.10009251983178,
+  "is_win": false,
+  "exit_reason": "SL_hit",
+  "veto_reason": "ghost_audit:weekday_destructive_hours_16UTC",
+  "session": "ny",
+  "confidence": 0.4166666666666667,
+  "regime": "unknown",
+  "duration_bars": 1,
+  "open_time": "2026-01-05 16:35:00",
+  "timestamp": "2026-04-12T18:08:48.815879+00:00"
+}

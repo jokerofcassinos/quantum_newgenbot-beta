@@ -1,0 +1,17 @@
+{
+  "trade_id": 4696,
+  "type": "ghost_exit",
+  "direction": "SELL",
+  "entry_price": 71460.48,
+  "exit_price": 71965.55035714286,
+  "pnl": -171.1477224015371,
+  "is_win": false,
+  "exit_reason": "SL_hit",
+  "veto_reason": "ghost_audit:weekday_destructive_hours_11UTC",
+  "session": "london",
+  "confidence": 0.4166666666666667,
+  "regime": "unknown",
+  "duration_bars": 57,
+  "open_time": "2026-03-04 11:30:00",
+  "timestamp": "2026-04-12T18:08:58.279362+00:00"
+}

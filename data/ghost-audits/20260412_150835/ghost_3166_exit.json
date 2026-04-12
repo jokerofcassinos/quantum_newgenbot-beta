@@ -1,0 +1,17 @@
+{
+  "trade_id": 3166,
+  "type": "ghost_exit",
+  "direction": "SELL",
+  "entry_price": 90566.19,
+  "exit_price": 90866.19,
+  "pnl": -299.84458238265177,
+  "is_win": false,
+  "exit_reason": "SL_hit",
+  "veto_reason": "advanced_veto:SELL vetoed - RSI 19.5 < 28",
+  "session": "asian",
+  "confidence": 0.4166666666666667,
+  "regime": "unknown",
+  "duration_bars": 9,
+  "open_time": "2026-01-08 22:05:00",
+  "timestamp": "2026-04-12T18:08:49.369102+00:00"
+}

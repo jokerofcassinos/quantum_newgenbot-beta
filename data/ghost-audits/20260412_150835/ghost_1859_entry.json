@@ -1,0 +1,15 @@
+{
+  "trade_id": 1859,
+  "type": "ghost_entry",
+  "direction": "BUY",
+  "entry_price": 90071.36,
+  "stop_loss": 89771.36,
+  "take_profit": 90971.36,
+  "volume": 1.0,
+  "veto_reason": "anti_metralhadora:session_blocked",
+  "session": "weekend_profitable",
+  "confidence": 0.5,
+  "regime": "unknown",
+  "open_time": "2025-12-14 09:25:00",
+  "timestamp": "2026-04-12T18:08:45.314780+00:00"
+}

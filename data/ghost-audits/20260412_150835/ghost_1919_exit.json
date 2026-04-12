@@ -1,0 +1,17 @@
+{
+  "trade_id": 1919,
+  "type": "ghost_exit",
+  "direction": "SELL",
+  "entry_price": 87192.33,
+  "exit_price": 87492.33,
+  "pnl": -300.0,
+  "is_win": false,
+  "exit_reason": "SL_hit",
+  "veto_reason": "ghost_audit:weekday_destructive_hours_14UTC",
+  "session": "ny_overlap",
+  "confidence": 0.4166666666666667,
+  "regime": "unknown",
+  "duration_bars": 15,
+  "open_time": "2025-12-16 14:10:00",
+  "timestamp": "2026-04-12T18:08:45.613834+00:00"
+}

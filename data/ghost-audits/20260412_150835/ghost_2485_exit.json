@@ -1,0 +1,17 @@
+{
+  "trade_id": 2485,
+  "type": "ghost_exit",
+  "direction": "BUY",
+  "entry_price": 87748.98,
+  "exit_price": 87448.98,
+  "pnl": -300.0,
+  "is_win": false,
+  "exit_reason": "SL_hit",
+  "veto_reason": "advanced_veto:BUY vetoed - RSI 72.4 > 72",
+  "session": "weekend_profitable",
+  "confidence": 0.5,
+  "regime": "unknown",
+  "duration_bars": 161,
+  "open_time": "2025-12-28 08:40:00",
+  "timestamp": "2026-04-12T18:08:47.444861+00:00"
+}

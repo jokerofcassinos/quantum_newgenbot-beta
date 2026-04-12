@@ -1,0 +1,17 @@
+{
+  "trade_id": 4826,
+  "type": "ghost_exit",
+  "direction": "BUY",
+  "entry_price": 70287.63,
+  "exit_price": 69987.63,
+  "pnl": -300.0,
+  "is_win": false,
+  "exit_reason": "SL_hit",
+  "veto_reason": "ghost_audit:weekday_destructive_hours_15UTC",
+  "session": "ny_overlap",
+  "confidence": 0.4166666666666667,
+  "regime": "unknown",
+  "duration_bars": 10,
+  "open_time": "2026-03-12 15:30:00",
+  "timestamp": "2026-04-12T18:08:59.392456+00:00"
+}
