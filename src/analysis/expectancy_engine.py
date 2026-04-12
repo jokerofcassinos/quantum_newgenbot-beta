@@ -51,7 +51,7 @@ class ExpectancyEngine:
         
         logger.info("📈 ExpectancyEngine initialized")
         logger.info(f"   Commission/lot/side: ${commission_per_lot_per_side:.2f}")
-        logger.f"   Min expectancy multiple: {min_expectancy_multiple}x")
+        logger.info(f"   Min expectancy multiple: {min_expectancy_multiple}x")
 
     def calculate_total_cost(
         self,

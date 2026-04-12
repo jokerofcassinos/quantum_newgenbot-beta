@@ -55,6 +55,12 @@ from src.risk.black_swan_stress_test import BlackSwanStressTest  # Fat-tail simu
 from src.analysis.kinematics_phase_space import KinematicsPhaseSpace  # Velocity/acceleration features
 from src.memory.akashic_core import AkashicCore  # HDC pattern memory
 
+# Phase 3: Advanced optimizations
+from src.analysis.expectancy_engine import ExpectancyEngine  # Pre-trade expected value
+from src.analysis.multi_timeframe_alignment import MultiTimeframeAlignment  # Cross-TF confirmation
+from src.risk.session_based_risk_profiles import SessionBasedRiskProfiles  # Session risk adjustment
+from src.risk.volatility_regime_adaptation import VolatilityRegimeAdaptation  # Volatility adaptation
+
 
 def setup_logging():
     logger.remove()
@@ -193,6 +199,12 @@ class CompleteBacktestEngineV2:
         self.black_swan = BlackSwanStressTest()
         self.kinematics = KinematicsPhaseSpace()
         self.akashic = AkashicCore()
+        
+        # Phase 3: Advanced optimizations
+        self.expectancy = ExpectancyEngine()
+        self.multi_tf = MultiTimeframeAlignment()
+        self.session_risk = SessionBasedRiskProfiles()
+        self.volatility_regime = VolatilityRegimeAdaptation()
 
         # State
         self.equity = 100000.0
@@ -468,6 +480,17 @@ class CompleteBacktestEngineV2:
                                     self.total_vetoes += 1
                                     continue  # Skip this trade - retail noise environment
 
+                                # Phase 3.1: VolatilityRegimeAdaptation - check if we should trade in current volatility
+                                vol_classification = self.volatility_regime.classify_volatility(
+                                    self._close[max(0, i-100):i+1].tolist()
+                                )
+                                signal['volatility_regime'] = vol_classification['regime']
+                                
+                                # Veto if extreme volatility
+                                if vol_classification['regime'] == 'extreme':
+                                    self.total_vetoes += 1
+                                    continue  # Skip trade - extreme volatility
+
                                 # 4. Recursive Self-Debate (metacognitive validation)
                                 market_data = {
                                     'regime': regime,
@@ -511,6 +534,33 @@ class CompleteBacktestEngineV2:
                                 signal['akashic_matches'] = akashic_pred['num_matches']
                                 
                                 # FIX #2: Black Swan - disabled until properly tuned (was vetoing too aggressively)
+
+                                # Phase 3.2: ExpectancyEngine - validate trade has positive expected value
+                                # Only activate after 50 trades for reliable statistics
+                                if self.total_trades > 50:
+                                    stats = self.expectancy.get_current_stats()
+                                    
+                                    # Use adaptive avg_win/avg_loss from history or defaults
+                                    avg_win = stats['avg_win'] if stats['total_trades'] > 10 else 15.0
+                                    avg_loss = stats['avg_loss'] if stats['total_trades'] > 10 else 8.0
+                                    win_rate = stats['win_rate'] if stats['total_trades'] > 10 else 0.55
+                                    
+                                    # Estimate position volume for cost calculation
+                                    est_volume = session_veto.get('adjusted_volume', 0.01)
+                                    
+                                    expectancy_result = self.expectancy.calculate_expectancy(
+                                        win_rate=win_rate,
+                                        avg_win=avg_win,
+                                        avg_loss=avg_loss,
+                                        position_volume=est_volume,
+                                    )
+                                    
+                                    signal['expectancy'] = expectancy_result
+                                    
+                                    # Veto only if severely negative expectancy
+                                    if expectancy_result['net_expectancy'] < -5.0:
+                                        self.total_vetoes += 1
+                                        continue  # Skip trade - severely negative expectancy
 
                                 signal['volume'] = session_veto['adjusted_volume']
                                 signal['session_veto_data'] = {
@@ -729,6 +779,13 @@ class CompleteBacktestEngineV2:
                         # Store outcome (normalized PnL)
                         normalized_outcome = total_pnl / max(1, self.equity * 0.01)
                         self.akashic.store_pattern(akashic_state, normalized_outcome)
+
+                    # Phase 3: Record trade in ExpectancyEngine for live expectancy calculation
+                    self.expectancy.record_trade(
+                        pnl=total_pnl,
+                        position_volume=pos['volume'],
+                        direction=pos['direction'],
+                    )
 
                     self.current_position = None
 
