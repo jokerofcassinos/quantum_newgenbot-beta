@@ -137,9 +137,9 @@ class CompleteBacktestEngineV2:
         
         # Phase 1: Anti-Metralhadora (DubaiMatrixASI salvage - overtrading prevention)
         self.anti_metralhadora = AntiMetralhadora(
-            min_interval_minutes=10.0,  # Increased from 5.0 to reduce trade frequency
-            max_trades_per_day=15,  # Reduced from 25 to cut commissions
-            min_quality_score=0.42,  # Slightly increased from 0.40 for better quality
+            min_interval_minutes=5.0,
+            max_trades_per_day=25,
+            min_quality_score=0.40,
             max_consecutive_losses=3,
             loss_cooldown_minutes=30.0,
         )
@@ -415,11 +415,6 @@ class CompleteBacktestEngineV2:
                                     kinematics, signal['direction']
                                 )
                                 signal['kin_strength'] = kin_strength  # Store for audit
-                                
-                                # Only veto if kinematics strongly disagree (<0.15)
-                                if kin_strength < 0.15:
-                                    self.total_vetoes += 1
-                                    continue  # Kinematics strongly disagree
 
                                 # 4. Recursive Self-Debate (metacognitive validation)
                                 market_data = {
