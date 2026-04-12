@@ -1,0 +1,17 @@
+{
+  "trade_id": 2029,
+  "type": "ghost_exit",
+  "direction": "SELL",
+  "entry_price": 87235.09,
+  "exit_price": 87535.09,
+  "pnl": -300.0,
+  "is_win": false,
+  "exit_reason": "SL_hit",
+  "veto_reason": "anti_metralhadora:session_limit",
+  "session": "asian",
+  "confidence": 0.4166666666666667,
+  "regime": "unknown",
+  "duration_bars": 156,
+  "open_time": "2025-12-24 05:30:00",
+  "timestamp": "2026-04-12T17:49:33.335527+00:00"
+}

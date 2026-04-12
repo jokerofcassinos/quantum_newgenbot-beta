@@ -1,0 +1,17 @@
+{
+  "trade_id": 173,
+  "type": "ghost_exit",
+  "direction": "BUY",
+  "entry_price": 106816.37,
+  "exit_price": 106516.37,
+  "pnl": -300.0,
+  "is_win": false,
+  "exit_reason": "SL_hit",
+  "veto_reason": "session_veto:Trading disabled for Weekend session",
+  "session": "weekend",
+  "confidence": 0.4166666666666667,
+  "regime": "unknown",
+  "duration_bars": 64,
+  "open_time": "2025-10-18 14:10:00",
+  "timestamp": "2026-04-12T17:49:25.756623+00:00"
+}

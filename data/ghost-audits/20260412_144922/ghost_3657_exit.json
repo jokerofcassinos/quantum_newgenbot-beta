@@ -1,0 +1,17 @@
+{
+  "trade_id": 3657,
+  "type": "ghost_exit",
+  "direction": "BUY",
+  "entry_price": 92515.57,
+  "exit_price": 92215.57,
+  "pnl": -300.0,
+  "is_win": false,
+  "exit_reason": "SL_hit",
+  "veto_reason": "ghost_audit:low_volatility_chop",
+  "session": "asian",
+  "confidence": 0.4166666666666667,
+  "regime": "unknown",
+  "duration_bars": 232,
+  "open_time": "2026-01-19 05:35:00",
+  "timestamp": "2026-04-12T17:49:37.980504+00:00"
+}

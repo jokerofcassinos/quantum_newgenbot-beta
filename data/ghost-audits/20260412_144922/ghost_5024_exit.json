@@ -1,0 +1,17 @@
+{
+  "trade_id": 5024,
+  "type": "ghost_exit",
+  "direction": "SELL",
+  "entry_price": 74302.88,
+  "exit_price": 73402.88,
+  "pnl": 900.0,
+  "is_win": true,
+  "exit_reason": "TP_hit",
+  "veto_reason": "ghost_audit:destructive_hours_10UTC",
+  "session": "london",
+  "confidence": 0.4166666666666667,
+  "regime": "unknown",
+  "duration_bars": 76,
+  "open_time": "2026-03-17 10:30:00",
+  "timestamp": "2026-04-12T17:49:47.006561+00:00"
+}

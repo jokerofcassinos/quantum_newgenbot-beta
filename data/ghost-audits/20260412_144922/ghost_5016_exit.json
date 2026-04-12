@@ -1,0 +1,17 @@
+{
+  "trade_id": 5016,
+  "type": "ghost_exit",
+  "direction": "BUY",
+  "entry_price": 72350.3,
+  "exit_price": 73284.91464285714,
+  "pnl": 508.9616743990137,
+  "is_win": true,
+  "exit_reason": "TP_hit",
+  "veto_reason": "advanced_veto:BUY vetoed - RSI 75.2 > 72",
+  "session": "asian",
+  "confidence": 0.4166666666666667,
+  "regime": "unknown",
+  "duration_bars": 58,
+  "open_time": "2026-03-16 01:40:00",
+  "timestamp": "2026-04-12T17:49:46.795730+00:00"
+}

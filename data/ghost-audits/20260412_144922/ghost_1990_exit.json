@@ -1,0 +1,17 @@
+{
+  "trade_id": 1990,
+  "type": "ghost_exit",
+  "direction": "BUY",
+  "entry_price": 89599.07,
+  "exit_price": 89299.07,
+  "pnl": -204.57898067356535,
+  "is_win": false,
+  "exit_reason": "SL_hit",
+  "veto_reason": "ghost_audit:destructive_hours_10UTC",
+  "session": "london",
+  "confidence": 0.4166666666666667,
+  "regime": "unknown",
+  "duration_bars": 3,
+  "open_time": "2025-12-22 10:35:00",
+  "timestamp": "2026-04-12T17:49:33.025668+00:00"
+}

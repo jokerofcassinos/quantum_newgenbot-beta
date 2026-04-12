@@ -1,0 +1,17 @@
+{
+  "trade_id": 3656,
+  "type": "ghost_exit",
+  "direction": "SELL",
+  "entry_price": 95886.98,
+  "exit_price": 94986.98,
+  "pnl": 713.6124649467744,
+  "is_win": true,
+  "exit_reason": "TP_hit",
+  "veto_reason": "advanced_veto:SELL vetoed - RSI 21.2 < 28",
+  "session": "ny",
+  "confidence": 0.4166666666666667,
+  "regime": "unknown",
+  "duration_bars": 246,
+  "open_time": "2026-01-15 20:35:00",
+  "timestamp": "2026-04-12T17:49:37.496041+00:00"
+}

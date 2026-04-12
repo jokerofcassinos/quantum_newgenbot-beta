@@ -1,0 +1,17 @@
+{
+  "trade_id": 2700,
+  "type": "ghost_exit",
+  "direction": "BUY",
+  "entry_price": 88721.93,
+  "exit_price": 88421.93,
+  "pnl": -300.0,
+  "is_win": false,
+  "exit_reason": "SL_hit",
+  "veto_reason": "ghost_audit:destructive_hours_12UTC",
+  "session": "london",
+  "confidence": 0.5,
+  "regime": "unknown",
+  "duration_bars": 48,
+  "open_time": "2025-12-31 12:45:00",
+  "timestamp": "2026-04-12T17:49:34.712104+00:00"
+}

@@ -1,0 +1,17 @@
+{
+  "trade_id": 3119,
+  "type": "ghost_exit",
+  "direction": "BUY",
+  "entry_price": 91700.12,
+  "exit_price": 91400.12,
+  "pnl": -161.42172997491787,
+  "is_win": false,
+  "exit_reason": "SL_hit",
+  "veto_reason": "ghost_audit:destructive_hours_11UTC",
+  "session": "london",
+  "confidence": 0.4166666666666667,
+  "regime": "unknown",
+  "duration_bars": 64,
+  "open_time": "2026-01-07 11:40:00",
+  "timestamp": "2026-04-12T17:49:35.930953+00:00"
+}

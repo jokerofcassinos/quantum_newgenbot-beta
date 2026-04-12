@@ -1,0 +1,17 @@
+{
+  "trade_id": 1339,
+  "type": "ghost_exit",
+  "direction": "BUY",
+  "entry_price": 91461.12,
+  "exit_price": 92361.12,
+  "pnl": 900.0,
+  "is_win": true,
+  "exit_reason": "TP_hit",
+  "veto_reason": "ghost_audit:destructive_hours_15UTC",
+  "session": "ny_overlap",
+  "confidence": 0.4166666666666667,
+  "regime": "unknown",
+  "duration_bars": 5,
+  "open_time": "2025-11-28 15:20:00",
+  "timestamp": "2026-04-12T17:49:30.236153+00:00"
+}

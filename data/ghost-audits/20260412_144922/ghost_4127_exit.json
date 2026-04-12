@@ -1,0 +1,17 @@
+{
+  "trade_id": 4127,
+  "type": "ghost_exit",
+  "direction": "BUY",
+  "entry_price": 88121.58,
+  "exit_price": 87815.02714285714,
+  "pnl": -230.83228622240995,
+  "is_win": false,
+  "exit_reason": "SL_hit",
+  "veto_reason": "advanced_veto:BUY vetoed - RSI 73.0 > 72",
+  "session": "ny",
+  "confidence": 0.4166666666666667,
+  "regime": "unknown",
+  "duration_bars": 20,
+  "open_time": "2026-01-26 20:35:00",
+  "timestamp": "2026-04-12T17:49:39.309596+00:00"
+}

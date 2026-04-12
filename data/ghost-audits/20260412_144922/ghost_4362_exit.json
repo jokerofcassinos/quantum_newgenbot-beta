@@ -1,0 +1,17 @@
+{
+  "trade_id": 4362,
+  "type": "ghost_exit",
+  "direction": "SELL",
+  "entry_price": 66213.32,
+  "exit_price": 66513.32,
+  "pnl": -300.0,
+  "is_win": false,
+  "exit_reason": "SL_hit",
+  "veto_reason": "advanced_veto:SELL vetoed - RSI 31.7 rising",
+  "session": "ny_overlap",
+  "confidence": 0.4166666666666667,
+  "regime": "unknown",
+  "duration_bars": 16,
+  "open_time": "2026-02-19 15:30:00",
+  "timestamp": "2026-04-12T17:49:42.642872+00:00"
+}

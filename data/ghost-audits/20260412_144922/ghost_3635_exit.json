@@ -1,0 +1,17 @@
+{
+  "trade_id": 3635,
+  "type": "ghost_exit",
+  "direction": "BUY",
+  "entry_price": 95591.85,
+  "exit_price": 96491.85,
+  "pnl": 412.14610386345544,
+  "is_win": true,
+  "exit_reason": "TP_hit",
+  "veto_reason": "ghost_audit:destructive_hours_16UTC",
+  "session": "ny",
+  "confidence": 0.4166666666666667,
+  "regime": "unknown",
+  "duration_bars": 4,
+  "open_time": "2026-01-14 16:25:00",
+  "timestamp": "2026-04-12T17:49:37.231783+00:00"
+}

@@ -1,0 +1,15 @@
+{
+  "trade_id": 5475,
+  "type": "ghost_entry",
+  "direction": "SELL",
+  "entry_price": 68794.55,
+  "stop_loss": 69094.55,
+  "take_profit": 67894.55,
+  "volume": 1.0,
+  "veto_reason": "ghost_audit:destructive_hours_11UTC",
+  "session": "london",
+  "confidence": 0.4166666666666667,
+  "regime": "unknown",
+  "open_time": "2026-04-01 11:35:00",
+  "timestamp": "2026-04-12T17:49:49.849930+00:00"
+}

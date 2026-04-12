@@ -1,0 +1,17 @@
+{
+  "trade_id": 1885,
+  "type": "ghost_exit",
+  "direction": "SELL",
+  "entry_price": 89958.96,
+  "exit_price": 89058.96,
+  "pnl": 828.6127945813201,
+  "is_win": true,
+  "exit_reason": "TP_hit",
+  "veto_reason": "session_veto:Trading disabled for Weekend session",
+  "session": "weekend",
+  "confidence": 0.4166666666666667,
+  "regime": "unknown",
+  "duration_bars": 15,
+  "open_time": "2025-12-14 12:25:00",
+  "timestamp": "2026-04-12T17:49:32.079292+00:00"
+}

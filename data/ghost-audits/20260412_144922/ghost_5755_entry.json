@@ -1,0 +1,15 @@
+{
+  "trade_id": 5755,
+  "type": "ghost_entry",
+  "direction": "BUY",
+  "entry_price": 72276.9,
+  "stop_loss": 71976.9,
+  "take_profit": 73176.9,
+  "volume": 1.0,
+  "veto_reason": "ghost_audit:destructive_hours_16UTC",
+  "session": "ny",
+  "confidence": 0.4166666666666667,
+  "regime": "unknown",
+  "open_time": "2026-04-10 16:55:00",
+  "timestamp": "2026-04-12T17:49:51.760660+00:00"
+}

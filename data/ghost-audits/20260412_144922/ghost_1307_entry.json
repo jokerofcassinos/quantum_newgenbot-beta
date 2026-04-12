@@ -1,0 +1,15 @@
+{
+  "trade_id": 1307,
+  "type": "ghost_entry",
+  "direction": "BUY",
+  "entry_price": 87423.5,
+  "stop_loss": 87123.5,
+  "take_profit": 88323.5,
+  "volume": 1.0,
+  "veto_reason": "ghost_audit:destructive_hours_10UTC",
+  "session": "london",
+  "confidence": 0.4166666666666667,
+  "regime": "unknown",
+  "open_time": "2025-11-25 10:30:00",
+  "timestamp": "2026-04-12T17:49:29.874730+00:00"
+}

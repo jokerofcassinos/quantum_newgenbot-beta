@@ -1,0 +1,17 @@
+{
+  "trade_id": 4353,
+  "type": "ghost_exit",
+  "direction": "SELL",
+  "entry_price": 67102.57,
+  "exit_price": 66202.57,
+  "pnl": 900.0,
+  "is_win": true,
+  "exit_reason": "TP_hit",
+  "veto_reason": "ghost_audit:destructive_hours_11UTC",
+  "session": "london",
+  "confidence": 0.4166666666666667,
+  "regime": "unknown",
+  "duration_bars": 44,
+  "open_time": "2026-02-19 11:25:00",
+  "timestamp": "2026-04-12T17:49:42.632164+00:00"
+}

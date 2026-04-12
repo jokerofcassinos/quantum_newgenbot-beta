@@ -1,0 +1,17 @@
+{
+  "trade_id": 4325,
+  "type": "ghost_exit",
+  "direction": "SELL",
+  "entry_price": 68045.1,
+  "exit_price": 67145.1,
+  "pnl": 900.0,
+  "is_win": true,
+  "exit_reason": "TP_hit",
+  "veto_reason": "ghost_audit:destructive_hours_14UTC",
+  "session": "ny_overlap",
+  "confidence": 0.4166666666666667,
+  "regime": "unknown",
+  "duration_bars": 30,
+  "open_time": "2026-02-17 14:10:00",
+  "timestamp": "2026-04-12T17:49:42.339698+00:00"
+}

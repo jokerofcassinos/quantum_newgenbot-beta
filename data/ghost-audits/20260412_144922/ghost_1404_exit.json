@@ -1,0 +1,17 @@
+{
+  "trade_id": 1404,
+  "type": "ghost_exit",
+  "direction": "BUY",
+  "entry_price": 87088.94,
+  "exit_price": 87988.94,
+  "pnl": 884.3666519370505,
+  "is_win": true,
+  "exit_reason": "TP_hit",
+  "veto_reason": "ghost_audit:destructive_hours_13UTC",
+  "session": "ny_overlap",
+  "confidence": 0.5,
+  "regime": "unknown",
+  "duration_bars": 34,
+  "open_time": "2025-12-02 13:15:00",
+  "timestamp": "2026-04-12T17:49:30.624195+00:00"
+}

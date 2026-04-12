@@ -1,0 +1,15 @@
+{
+  "trade_id": 1998,
+  "type": "ghost_entry",
+  "direction": "BUY",
+  "entry_price": 89982.31,
+  "stop_loss": 89682.31,
+  "take_profit": 90882.31,
+  "volume": 0.9429242821839838,
+  "veto_reason": "ghost_audit:destructive_hours_15UTC",
+  "session": "ny_overlap",
+  "confidence": 0.4166666666666667,
+  "regime": "unknown",
+  "open_time": "2025-12-22 15:20:00",
+  "timestamp": "2026-04-12T17:49:33.042338+00:00"
+}

@@ -1,0 +1,17 @@
+{
+  "trade_id": 3705,
+  "type": "ghost_exit",
+  "direction": "SELL",
+  "entry_price": 91158.97,
+  "exit_price": 90258.97,
+  "pnl": 900.0,
+  "is_win": true,
+  "exit_reason": "TP_hit",
+  "veto_reason": "ghost_audit:destructive_hours_12UTC",
+  "session": "london",
+  "confidence": 0.4166666666666667,
+  "regime": "unknown",
+  "duration_bars": 51,
+  "open_time": "2026-01-20 12:30:00",
+  "timestamp": "2026-04-12T17:49:38.072353+00:00"
+}

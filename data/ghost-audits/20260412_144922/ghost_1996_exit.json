@@ -1,0 +1,17 @@
+{
+  "trade_id": 1996,
+  "type": "ghost_exit",
+  "direction": "BUY",
+  "entry_price": 89812.62,
+  "exit_price": 89512.62,
+  "pnl": -300.0,
+  "is_win": false,
+  "exit_reason": "SL_hit",
+  "veto_reason": "ghost_audit:destructive_hours_13UTC",
+  "session": "ny_overlap",
+  "confidence": 0.5,
+  "regime": "unknown",
+  "duration_bars": 36,
+  "open_time": "2025-12-22 13:35:00",
+  "timestamp": "2026-04-12T17:49:33.048897+00:00"
+}

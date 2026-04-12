@@ -1,0 +1,17 @@
+{
+  "trade_id": 3654,
+  "type": "ghost_exit",
+  "direction": "BUY",
+  "entry_price": 96745.06,
+  "exit_price": 96445.06,
+  "pnl": -256.93354947360706,
+  "is_win": false,
+  "exit_reason": "SL_hit",
+  "veto_reason": "ghost_audit:destructive_hours_16UTC",
+  "session": "ny",
+  "confidence": 0.5,
+  "regime": "unknown",
+  "duration_bars": 2,
+  "open_time": "2026-01-15 16:20:00",
+  "timestamp": "2026-04-12T17:49:37.383112+00:00"
+}

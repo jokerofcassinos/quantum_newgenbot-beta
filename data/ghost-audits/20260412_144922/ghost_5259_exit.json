@@ -1,0 +1,17 @@
+{
+  "trade_id": 5259,
+  "type": "ghost_exit",
+  "direction": "BUY",
+  "entry_price": 71137.92,
+  "exit_price": 70837.92,
+  "pnl": -219.9660977822088,
+  "is_win": false,
+  "exit_reason": "SL_hit",
+  "veto_reason": "advanced_veto:BUY vetoed - RSI 73.9 > 72",
+  "session": "london",
+  "confidence": 0.4166666666666667,
+  "regime": "unknown",
+  "duration_bars": 6,
+  "open_time": "2026-03-24 11:00:00",
+  "timestamp": "2026-04-12T17:49:48.384918+00:00"
+}

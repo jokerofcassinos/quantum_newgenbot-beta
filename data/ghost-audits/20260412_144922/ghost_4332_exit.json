@@ -1,0 +1,17 @@
+{
+  "trade_id": 4332,
+  "type": "ghost_exit",
+  "direction": "BUY",
+  "entry_price": 68345.63,
+  "exit_price": 68045.63,
+  "pnl": -300.0,
+  "is_win": false,
+  "exit_reason": "SL_hit",
+  "veto_reason": "advanced_veto:BUY vetoed - RSI 85.5 > 72",
+  "session": "london",
+  "confidence": 0.4166666666666667,
+  "regime": "unknown",
+  "duration_bars": 7,
+  "open_time": "2026-02-18 10:20:00",
+  "timestamp": "2026-04-12T17:49:42.440590+00:00"
+}

@@ -1,0 +1,17 @@
+{
+  "trade_id": 1985,
+  "type": "ghost_exit",
+  "direction": "SELL",
+  "entry_price": 88662.88,
+  "exit_price": 88962.88,
+  "pnl": -300.0,
+  "is_win": false,
+  "exit_reason": "SL_hit",
+  "veto_reason": "anti_metralhadora:session_limit",
+  "session": "asian",
+  "confidence": 0.4166666666666667,
+  "regime": "unknown",
+  "duration_bars": 7,
+  "open_time": "2025-12-22 05:45:00",
+  "timestamp": "2026-04-12T17:49:32.999777+00:00"
+}

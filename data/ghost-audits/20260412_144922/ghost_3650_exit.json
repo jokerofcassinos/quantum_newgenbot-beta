@@ -1,0 +1,17 @@
+{
+  "trade_id": 3650,
+  "type": "ghost_exit",
+  "direction": "SELL",
+  "entry_price": 96672.51,
+  "exit_price": 96972.51,
+  "pnl": -286.0596922292389,
+  "is_win": false,
+  "exit_reason": "SL_hit",
+  "veto_reason": "ghost_audit:destructive_hours_15UTC",
+  "session": "ny_overlap",
+  "confidence": 0.4166666666666667,
+  "regime": "unknown",
+  "duration_bars": 5,
+  "open_time": "2026-01-15 15:35:00",
+  "timestamp": "2026-04-12T17:49:37.377661+00:00"
+}

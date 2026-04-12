@@ -1,0 +1,17 @@
+{
+  "trade_id": 3728,
+  "type": "ghost_exit",
+  "direction": "BUY",
+  "entry_price": 89862.94,
+  "exit_price": 89376.52535714286,
+  "pnl": -229.65165075679246,
+  "is_win": false,
+  "exit_reason": "SL_hit",
+  "veto_reason": "advanced_veto:BUY vetoed - RSI 85.0 > 72",
+  "session": "asian",
+  "confidence": 0.4166666666666667,
+  "regime": "unknown",
+  "duration_bars": 48,
+  "open_time": "2026-01-21 21:35:00",
+  "timestamp": "2026-04-12T17:49:38.292332+00:00"
+}

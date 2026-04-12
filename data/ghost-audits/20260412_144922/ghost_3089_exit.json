@@ -1,0 +1,17 @@
+{
+  "trade_id": 3089,
+  "type": "ghost_exit",
+  "direction": "SELL",
+  "entry_price": 93465.36,
+  "exit_price": 93765.36,
+  "pnl": -300.0,
+  "is_win": false,
+  "exit_reason": "SL_hit",
+  "veto_reason": "ghost_audit:destructive_hours_11UTC",
+  "session": "london",
+  "confidence": 0.4166666666666667,
+  "regime": "unknown",
+  "duration_bars": 25,
+  "open_time": "2026-01-06 11:20:00",
+  "timestamp": "2026-04-12T17:49:35.722329+00:00"
+}

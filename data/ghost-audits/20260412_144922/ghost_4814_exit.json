@@ -1,0 +1,17 @@
+{
+  "trade_id": 4814,
+  "type": "ghost_exit",
+  "direction": "SELL",
+  "entry_price": 70969.09,
+  "exit_price": 69745.03214285715,
+  "pnl": 339.8256687638744,
+  "is_win": true,
+  "exit_reason": "TP_hit",
+  "veto_reason": "ghost_audit:destructive_hours_16UTC",
+  "session": "ny",
+  "confidence": 0.4166666666666667,
+  "regime": "unknown",
+  "duration_bars": 4,
+  "open_time": "2026-03-11 16:35:00",
+  "timestamp": "2026-04-12T17:49:46.060241+00:00"
+}

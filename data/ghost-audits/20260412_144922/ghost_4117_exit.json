@@ -1,0 +1,17 @@
+{
+  "trade_id": 4117,
+  "type": "ghost_exit",
+  "direction": "BUY",
+  "entry_price": 87874.6,
+  "exit_price": 88774.6,
+  "pnl": 900.0,
+  "is_win": true,
+  "exit_reason": "TP_hit",
+  "veto_reason": "ghost_audit:destructive_hours_14UTC",
+  "session": "ny_overlap",
+  "confidence": 0.5833333333333334,
+  "regime": "unknown",
+  "duration_bars": 35,
+  "open_time": "2026-01-26 14:15:00",
+  "timestamp": "2026-04-12T17:49:39.269619+00:00"
+}

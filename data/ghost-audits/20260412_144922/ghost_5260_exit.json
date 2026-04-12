@@ -1,0 +1,17 @@
+{
+  "trade_id": 5260,
+  "type": "ghost_exit",
+  "direction": "BUY",
+  "entry_price": 70906.38,
+  "exit_price": 70606.38,
+  "pnl": -219.17260914871042,
+  "is_win": false,
+  "exit_reason": "SL_hit",
+  "veto_reason": "ghost_audit:destructive_hours_11UTC",
+  "session": "london",
+  "confidence": 0.4166666666666667,
+  "regime": "unknown",
+  "duration_bars": 60,
+  "open_time": "2026-03-24 11:15:00",
+  "timestamp": "2026-04-12T17:49:48.427869+00:00"
+}

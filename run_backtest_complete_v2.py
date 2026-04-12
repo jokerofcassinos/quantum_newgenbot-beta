@@ -159,12 +159,14 @@ class CompleteBacktestEngineV2:
         )
         
         # Phase 1: PositionManager Smart TP (DubaiMatrixASI salvage - multi-target exits)
+        # GHOST AUDIT DURATION FILTER: Increased trailing to hold trades longer
+        # Ghost audit found: >30 bars = +$387K (32.6% WR), <=5 bars = -$135K (6.6% WR)
         self.position_manager = PositionManagerSmartTP(
             tp1_portion=0.30, tp1_rr=1.0,
             tp2_portion=0.30, tp2_rr=2.0,
             tp3_portion=0.20, tp3_rr=3.0,
             trailing_portion=0.20,
-            trailing_atr_multiplier=2.0,  # Increased from 1.5 to match higher R:R
+            trailing_atr_multiplier=3.0,  # Increased from 2.0 to 3.0 (hold trades longer)
         )
         
         # A2: CommissionFloor - prevent premature closure before covering commissions
@@ -453,6 +455,17 @@ class CompleteBacktestEngineV2:
                                     self.total_vetoes += 1
                                     self.ghost_audit.create_ghost(signal=signal, veto_reason=f'ghost_audit:destructive_hours_{hour_utc}UTC', bar_index=i, cur_time=cur_time, session=session)
                                     continue  # Skip trades during destructive hours (both BUY and SELL)
+
+                                # GHOST AUDIT DURATION FILTER: Avoid chop/low-volatility conditions
+                                # Ghost audit found: <=5 bars = -$135K (6.6% WR), >30 bars = +$387K (32.6% WR)
+                                # Skip entries when ATR is very low (indicates chop/sideways market)
+                                current_atr = self._atr[i] if hasattr(self, '_atr') and i < len(self._atr) else 0
+                                avg_atr = np.mean(self._atr[max(0, i-50):i+1]) if hasattr(self, '_atr') else 0
+                                if avg_atr > 0 and current_atr < avg_atr * 0.5:
+                                    # ATR is <50% of average = chop condition = avoid
+                                    self.total_vetoes += 1
+                                    self.ghost_audit.create_ghost(signal=signal, veto_reason='ghost_audit:low_volatility_chop', bar_index=i, cur_time=cur_time, session=session)
+                                    continue  # Skip trades in chop conditions
 
                                 # Phase 2: Advanced validations (DubaiMatrixASI + Atl4s + Laplace)
                                 
