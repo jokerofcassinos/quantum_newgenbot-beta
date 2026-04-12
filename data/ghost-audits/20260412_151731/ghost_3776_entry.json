@@ -1,0 +1,15 @@
+{
+  "trade_id": 3776,
+  "type": "ghost_entry",
+  "direction": "BUY",
+  "entry_price": 92639.03,
+  "stop_loss": 92339.03,
+  "take_profit": 93539.03,
+  "volume": 1.0,
+  "veto_reason": "ghost_audit:low_volatility_chop",
+  "session": "asian",
+  "confidence": 0.6,
+  "regime": "unknown",
+  "open_time": "2026-01-19 06:25:00",
+  "timestamp": "2026-04-12T18:17:45.995500+00:00"
+}

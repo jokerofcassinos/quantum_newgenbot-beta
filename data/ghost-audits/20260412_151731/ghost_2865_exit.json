@@ -1,0 +1,17 @@
+{
+  "trade_id": 2865,
+  "type": "ghost_exit",
+  "direction": "SELL",
+  "entry_price": 88010.23,
+  "exit_price": 88310.23,
+  "pnl": -119.11235466213778,
+  "is_win": false,
+  "exit_reason": "SL_hit",
+  "veto_reason": "advanced_veto:SELL vetoed - RSI 16.3 < 28",
+  "session": "ny",
+  "confidence": 0.6166666666666667,
+  "regime": "unknown",
+  "duration_bars": 313,
+  "open_time": "2025-12-31 17:15:00",
+  "timestamp": "2026-04-12T18:17:43.028073+00:00"
+}

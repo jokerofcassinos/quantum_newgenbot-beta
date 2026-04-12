@@ -1,0 +1,17 @@
+{
+  "trade_id": 988,
+  "type": "ghost_exit",
+  "direction": "SELL",
+  "entry_price": 100971.66,
+  "exit_price": 100071.66,
+  "pnl": 807.8150923211765,
+  "is_win": true,
+  "exit_reason": "TP_hit",
+  "veto_reason": "advanced_veto:SELL vetoed - RSI 18.8 < 28",
+  "session": "london",
+  "confidence": 0.6166666666666667,
+  "regime": "unknown",
+  "duration_bars": 21,
+  "open_time": "2025-11-07 11:25:00",
+  "timestamp": "2026-04-12T18:17:36.277152+00:00"
+}

@@ -1,0 +1,17 @@
+{
+  "trade_id": 3809,
+  "type": "ghost_exit",
+  "direction": "SELL",
+  "entry_price": 93031.55,
+  "exit_price": 93331.55,
+  "pnl": -300.0,
+  "is_win": false,
+  "exit_reason": "SL_hit",
+  "veto_reason": "ghost_audit:weekday_destructive_hours_15UTC",
+  "session": "ny_overlap",
+  "confidence": 0.6166666666666667,
+  "regime": "unknown",
+  "duration_bars": 38,
+  "open_time": "2026-01-19 15:40:00",
+  "timestamp": "2026-04-12T18:17:46.089134+00:00"
+}

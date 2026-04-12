@@ -1,0 +1,17 @@
+{
+  "trade_id": 1474,
+  "type": "ghost_exit",
+  "direction": "BUY",
+  "entry_price": 90794.21,
+  "exit_price": 91694.21,
+  "pnl": 900.0,
+  "is_win": true,
+  "exit_reason": "TP_hit",
+  "veto_reason": "anti_metralhadora:session_blocked",
+  "session": "weekend_profitable",
+  "confidence": 0.6,
+  "regime": "unknown",
+  "duration_bars": 88,
+  "open_time": "2025-11-30 08:00:00",
+  "timestamp": "2026-04-12T18:17:38.622051+00:00"
+}

@@ -1,0 +1,17 @@
+{
+  "trade_id": 147,
+  "type": "ghost_exit",
+  "direction": "SELL",
+  "entry_price": 108461.98,
+  "exit_price": 107561.98,
+  "pnl": 895.8298120824637,
+  "is_win": true,
+  "exit_reason": "TP_hit",
+  "veto_reason": "advanced_veto:SELL vetoed - RSI 18.8 < 28",
+  "session": "london",
+  "confidence": 0.6166666666666667,
+  "regime": "unknown",
+  "duration_bars": 9,
+  "open_time": "2025-10-17 08:45:00",
+  "timestamp": "2026-04-12T18:17:33.874102+00:00"
+}

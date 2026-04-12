@@ -1,0 +1,17 @@
+{
+  "trade_id": 3278,
+  "type": "ghost_exit",
+  "direction": "SELL",
+  "entry_price": 90517.1,
+  "exit_price": 89617.1,
+  "pnl": 834.8124991461468,
+  "is_win": true,
+  "exit_reason": "TP_hit",
+  "veto_reason": "ghost_audit:weekday_destructive_hours_10UTC",
+  "session": "london",
+  "confidence": 0.6166666666666667,
+  "regime": "unknown",
+  "duration_bars": 77,
+  "open_time": "2026-01-08 10:00:00",
+  "timestamp": "2026-04-12T18:17:44.206502+00:00"
+}

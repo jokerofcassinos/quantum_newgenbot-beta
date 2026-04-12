@@ -1,0 +1,17 @@
+{
+  "trade_id": 1090,
+  "type": "ghost_exit",
+  "direction": "SELL",
+  "entry_price": 104533.82,
+  "exit_price": 103633.82,
+  "pnl": 565.1095532690524,
+  "is_win": true,
+  "exit_reason": "TP_hit",
+  "veto_reason": "advanced_veto:SELL vetoed - RSI 27.9 < 28",
+  "session": "ny_overlap",
+  "confidence": 0.6166666666666667,
+  "regime": "unknown",
+  "duration_bars": 32,
+  "open_time": "2025-11-11 14:50:00",
+  "timestamp": "2026-04-12T18:17:36.676235+00:00"
+}

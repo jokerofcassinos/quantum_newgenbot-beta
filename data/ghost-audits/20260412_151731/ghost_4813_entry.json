@@ -1,0 +1,15 @@
+{
+  "trade_id": 4813,
+  "type": "ghost_entry",
+  "direction": "SELL",
+  "entry_price": 67524.05,
+  "stop_loss": 67824.05,
+  "take_profit": 66624.05,
+  "volume": 0.9062194944024352,
+  "veto_reason": "ghost_audit:weekday_destructive_hours_11UTC",
+  "session": "london",
+  "confidence": 0.6166666666666667,
+  "regime": "unknown",
+  "open_time": "2026-03-09 11:10:00",
+  "timestamp": "2026-04-12T18:17:54.032145+00:00"
+}

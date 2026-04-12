@@ -1,0 +1,17 @@
+{
+  "trade_id": 709,
+  "type": "ghost_exit",
+  "direction": "SELL",
+  "entry_price": 110676.42,
+  "exit_price": 109776.42,
+  "pnl": 878.0588358284965,
+  "is_win": true,
+  "exit_reason": "TP_hit",
+  "veto_reason": "ghost_audit:low_volatility_chop",
+  "session": "asian",
+  "confidence": 0.6166666666666667,
+  "regime": "unknown",
+  "duration_bars": 5,
+  "open_time": "2025-10-30 02:15:00",
+  "timestamp": "2026-04-12T18:17:35.272262+00:00"
+}

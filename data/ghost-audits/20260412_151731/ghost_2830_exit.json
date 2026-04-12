@@ -1,0 +1,17 @@
+{
+  "trade_id": 2830,
+  "type": "ghost_exit",
+  "direction": "BUY",
+  "entry_price": 88149.93,
+  "exit_price": 89049.93,
+  "pnl": 852.6316295871485,
+  "is_win": true,
+  "exit_reason": "TP_hit",
+  "veto_reason": "advanced_veto:BUY vetoed - price at upper BB",
+  "session": "ny",
+  "confidence": 0.5166666666666666,
+  "regime": "unknown",
+  "duration_bars": 20,
+  "open_time": "2025-12-30 16:15:00",
+  "timestamp": "2026-04-12T18:17:42.761424+00:00"
+}

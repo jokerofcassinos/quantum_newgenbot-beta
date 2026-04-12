@@ -1,0 +1,17 @@
+{
+  "trade_id": 1534,
+  "type": "ghost_exit",
+  "direction": "SELL",
+  "entry_price": 91343.95,
+  "exit_price": 90443.95,
+  "pnl": 900.0,
+  "is_win": true,
+  "exit_reason": "TP_hit",
+  "veto_reason": "session_veto:Confidence 0.42 < 0.45 (Weekend Profitable Hours threshold)",
+  "session": "weekend_profitable",
+  "confidence": 0.4166666666666667,
+  "regime": "unknown",
+  "duration_bars": 63,
+  "open_time": "2025-11-30 20:25:00",
+  "timestamp": "2026-04-12T18:17:38.692638+00:00"
+}

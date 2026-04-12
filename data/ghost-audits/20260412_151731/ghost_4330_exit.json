@@ -1,0 +1,17 @@
+{
+  "trade_id": 4330,
+  "type": "ghost_exit",
+  "direction": "BUY",
+  "entry_price": 82720.55,
+  "exit_price": 82417.01107142857,
+  "pnl": -167.9694261713722,
+  "is_win": false,
+  "exit_reason": "SL_hit",
+  "veto_reason": "ghost_audit:weekday_destructive_hours_14UTC",
+  "session": "ny_overlap",
+  "confidence": 0.5166666666666666,
+  "regime": "unknown",
+  "duration_bars": 8,
+  "open_time": "2026-01-30 14:50:00",
+  "timestamp": "2026-04-12T18:17:48.173737+00:00"
+}

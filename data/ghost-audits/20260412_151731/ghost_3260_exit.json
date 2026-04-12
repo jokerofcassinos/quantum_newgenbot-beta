@@ -1,0 +1,17 @@
+{
+  "trade_id": 3260,
+  "type": "ghost_exit",
+  "direction": "SELL",
+  "entry_price": 92099.46,
+  "exit_price": 91199.46,
+  "pnl": 900.0,
+  "is_win": true,
+  "exit_reason": "TP_hit",
+  "veto_reason": "ghost_audit:weekday_destructive_hours_13UTC",
+  "session": "ny_overlap",
+  "confidence": 0.6166666666666667,
+  "regime": "unknown",
+  "duration_bars": 50,
+  "open_time": "2026-01-07 13:05:00",
+  "timestamp": "2026-04-12T18:17:44.085975+00:00"
+}

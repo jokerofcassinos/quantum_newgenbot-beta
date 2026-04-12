@@ -1,0 +1,17 @@
+{
+  "trade_id": 3148,
+  "type": "ghost_exit",
+  "direction": "BUY",
+  "entry_price": 91367.74,
+  "exit_price": 91067.74,
+  "pnl": -300.0,
+  "is_win": false,
+  "exit_reason": "SL_hit",
+  "veto_reason": "advanced_veto:BUY vetoed - RSI 73.5 > 72",
+  "session": "weekend_profitable",
+  "confidence": 0.5333333333333333,
+  "regime": "unknown",
+  "duration_bars": 30,
+  "open_time": "2026-01-04 18:00:00",
+  "timestamp": "2026-04-12T18:17:43.607555+00:00"
+}

@@ -1,0 +1,17 @@
+{
+  "trade_id": 4720,
+  "type": "ghost_exit",
+  "direction": "SELL",
+  "entry_price": 70513.42,
+  "exit_price": 70813.42,
+  "pnl": -300.0,
+  "is_win": false,
+  "exit_reason": "SL_hit",
+  "veto_reason": "advanced_veto:SELL vetoed - RSI 19.9 < 28",
+  "session": "asian",
+  "confidence": 0.6166666666666667,
+  "regime": "unknown",
+  "duration_bars": 24,
+  "open_time": "2026-03-06 06:45:00",
+  "timestamp": "2026-04-12T18:17:53.645962+00:00"
+}

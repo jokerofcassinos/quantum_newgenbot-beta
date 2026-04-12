@@ -1,0 +1,15 @@
+{
+  "trade_id": 5304,
+  "type": "ghost_entry",
+  "direction": "SELL",
+  "entry_price": 67709.96,
+  "stop_loss": 68009.96,
+  "take_profit": 66809.96,
+  "volume": 0.6234810347595967,
+  "veto_reason": "advanced_veto:SELL vetoed - RSI 29.7 rising",
+  "session": "london",
+  "confidence": 0.6166666666666667,
+  "regime": "unknown",
+  "open_time": "2026-03-27 12:10:00",
+  "timestamp": "2026-04-12T18:17:57.572137+00:00"
+}

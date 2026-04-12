@@ -1,0 +1,17 @@
+{
+  "trade_id": 3294,
+  "type": "ghost_exit",
+  "direction": "SELL",
+  "entry_price": 90541.47,
+  "exit_price": 90841.47,
+  "pnl": -175.38349279830166,
+  "is_win": false,
+  "exit_reason": "SL_hit",
+  "veto_reason": "advanced_veto:SELL vetoed - RSI 29.9 rising",
+  "session": "london",
+  "confidence": 0.6166666666666667,
+  "regime": "unknown",
+  "duration_bars": 60,
+  "open_time": "2026-01-09 10:30:00",
+  "timestamp": "2026-04-12T18:17:44.355624+00:00"
+}

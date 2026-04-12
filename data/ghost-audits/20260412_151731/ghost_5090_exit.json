@@ -1,0 +1,17 @@
+{
+  "trade_id": 5090,
+  "type": "ghost_exit",
+  "direction": "SELL",
+  "entry_price": 70648.43,
+  "exit_price": 69748.43,
+  "pnl": 900.0,
+  "is_win": true,
+  "exit_reason": "TP_hit",
+  "veto_reason": "ghost_audit:weekday_destructive_hours_14UTC",
+  "session": "ny_overlap",
+  "confidence": 0.6166666666666667,
+  "regime": "unknown",
+  "duration_bars": 33,
+  "open_time": "2026-03-20 14:15:00",
+  "timestamp": "2026-04-12T18:17:56.174896+00:00"
+}

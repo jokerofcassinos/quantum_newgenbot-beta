@@ -1,0 +1,17 @@
+{
+  "trade_id": 684,
+  "type": "ghost_exit",
+  "direction": "SELL",
+  "entry_price": 113869.38,
+  "exit_price": 112806.35142857143,
+  "pnl": 518.8974570927421,
+  "is_win": true,
+  "exit_reason": "TP_hit",
+  "veto_reason": "advanced_veto:SELL vetoed - RSI 16.9 < 28",
+  "session": "asian",
+  "confidence": 0.6166666666666667,
+  "regime": "unknown",
+  "duration_bars": 10,
+  "open_time": "2025-10-28 22:20:00",
+  "timestamp": "2026-04-12T18:17:35.161179+00:00"
+}

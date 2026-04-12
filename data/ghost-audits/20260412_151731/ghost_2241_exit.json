@@ -1,0 +1,17 @@
+{
+  "trade_id": 2241,
+  "type": "ghost_exit",
+  "direction": "BUY",
+  "entry_price": 87810.83,
+  "exit_price": 87510.83,
+  "pnl": -300.0,
+  "is_win": false,
+  "exit_reason": "SL_hit",
+  "veto_reason": "anti_metralhadora:session_limit",
+  "session": "asian",
+  "confidence": 0.5333333333333333,
+  "regime": "unknown",
+  "duration_bars": 53,
+  "open_time": "2025-12-25 05:55:00",
+  "timestamp": "2026-04-12T18:17:41.642851+00:00"
+}

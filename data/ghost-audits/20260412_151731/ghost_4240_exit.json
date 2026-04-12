@@ -1,0 +1,17 @@
+{
+  "trade_id": 4240,
+  "type": "ghost_exit",
+  "direction": "BUY",
+  "entry_price": 87787.6,
+  "exit_price": 88687.6,
+  "pnl": 900.0,
+  "is_win": true,
+  "exit_reason": "TP_hit",
+  "veto_reason": "ghost_audit:weekday_destructive_hours_12UTC",
+  "session": "london",
+  "confidence": 0.5166666666666666,
+  "regime": "unknown",
+  "duration_bars": 71,
+  "open_time": "2026-01-27 12:35:00",
+  "timestamp": "2026-04-12T18:17:47.701606+00:00"
+}

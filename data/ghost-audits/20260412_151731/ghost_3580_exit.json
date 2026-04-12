@@ -1,0 +1,17 @@
+{
+  "trade_id": 3580,
+  "type": "ghost_exit",
+  "direction": "BUY",
+  "entry_price": 90627.14,
+  "exit_price": 90327.14,
+  "pnl": -300.0,
+  "is_win": false,
+  "exit_reason": "SL_hit",
+  "veto_reason": "anti_metralhadora:session_blocked",
+  "session": "weekend_profitable",
+  "confidence": 0.6,
+  "regime": "unknown",
+  "duration_bars": 162,
+  "open_time": "2026-01-11 08:35:00",
+  "timestamp": "2026-04-12T18:17:44.827994+00:00"
+}

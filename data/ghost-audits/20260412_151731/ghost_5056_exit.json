@@ -1,0 +1,17 @@
+{
+  "trade_id": 5056,
+  "type": "ghost_exit",
+  "direction": "SELL",
+  "entry_price": 74015.9,
+  "exit_price": 73115.9,
+  "pnl": 900.0,
+  "is_win": true,
+  "exit_reason": "TP_hit",
+  "veto_reason": "ghost_audit:weekday_destructive_hours_11UTC",
+  "session": "london",
+  "confidence": 0.6166666666666667,
+  "regime": "unknown",
+  "duration_bars": 38,
+  "open_time": "2026-03-18 11:20:00",
+  "timestamp": "2026-04-12T18:17:55.808779+00:00"
+}

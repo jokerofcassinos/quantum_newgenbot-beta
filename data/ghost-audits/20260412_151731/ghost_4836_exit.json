@@ -1,0 +1,17 @@
+{
+  "trade_id": 4836,
+  "type": "ghost_exit",
+  "direction": "BUY",
+  "entry_price": 69641.4,
+  "exit_price": 70541.4,
+  "pnl": 900.0,
+  "is_win": true,
+  "exit_reason": "TP_hit",
+  "veto_reason": "ghost_audit:weekday_destructive_hours_12UTC",
+  "session": "london",
+  "confidence": 0.5166666666666666,
+  "regime": "unknown",
+  "duration_bars": 24,
+  "open_time": "2026-03-12 12:20:00",
+  "timestamp": "2026-04-12T18:17:54.592547+00:00"
+}

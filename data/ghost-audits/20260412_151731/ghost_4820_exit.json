@@ -1,0 +1,17 @@
+{
+  "trade_id": 4820,
+  "type": "ghost_exit",
+  "direction": "SELL",
+  "entry_price": 70192.61,
+  "exit_price": 68979.58357142858,
+  "pnl": 668.3100897558963,
+  "is_win": true,
+  "exit_reason": "TP_hit",
+  "veto_reason": "advanced_veto:SELL vetoed - RSI 18.6 < 28",
+  "session": "asian",
+  "confidence": 0.6166666666666667,
+  "regime": "unknown",
+  "duration_bars": 212,
+  "open_time": "2026-03-10 21:15:00",
+  "timestamp": "2026-04-12T18:17:54.429183+00:00"
+}

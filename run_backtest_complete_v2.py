@@ -150,10 +150,11 @@ class CompleteBacktestEngineV2:
         
         # Phase 1: Anti-Metralhadora (DubaiMatrixASI salvage - overtrading prevention)
         # GHOST AUDIT FIX: Relaxed to allow more trades (we were vetoing too many good trades)
+        # GHOST AUDIT #3: Confidence Inversion - lower quality allows more signals
         self.anti_metralhadora = AntiMetralhadora(
             min_interval_minutes=5.0,  # Standard interval
             max_trades_per_day=25,  # Increased from 20 (Ghost Audit: we veto too many good trades)
-            min_quality_score=0.40,  # Standard quality threshold
+            min_quality_score=0.35,  # Reduced from 0.40 (Ghost Audit: 0.4-0.5 outperforms 0.6-0.7)
             max_consecutive_losses=3,
             loss_cooldown_minutes=30.0,
         )
@@ -409,6 +410,40 @@ class CompleteBacktestEngineV2:
                             session=session,
                         )
                     else:
+                        # ═══════════════════════════════════════════════════════════════
+                        # GHOST AUDIT #1: Confidence Inversion
+                        # Ghost audit found: 0.4-0.5 confidence outperforms 0.6-0.7
+                        # Lower confidence signals have more edge (less obvious = more alpha)
+                        # ═══════════════════════════════════════════════════════════════
+                        original_confidence = signal.get('confidence', 0.5)
+                        
+                        # Invert confidence: boost medium, reduce high
+                        if 0.35 <= original_confidence <= 0.50:
+                            # Medium confidence - boost it (these have edge)
+                            signal['confidence'] = min(0.70, original_confidence + 0.15)
+                            signal['confidence_inverted'] = True
+                        elif original_confidence > 0.65:
+                            # High confidence - reduce it (already priced in)
+                            signal['confidence'] = max(0.40, original_confidence - 0.10)
+                            signal['confidence_inverted'] = True
+                        else:
+                            signal['confidence_inverted'] = False
+
+                        # ═══════════════════════════════════════════════════════════════
+                        # GHOST AUDIT #2: SELL vs BUY Asymmetry
+                        # Ghost audit found: SELL outperforms BUY significantly
+                        # SELL: +$82K, BUY: -$148K (in vetoed trades)
+                        # ═══════════════════════════════════════════════════════════════
+                        direction = signal.get('direction', '')
+                        if direction == 'SELL':
+                            # SELL gets confidence boost (better performance)
+                            signal['confidence'] = min(0.95, signal.get('confidence', 0.5) + 0.05)
+                            signal['sell_boosted'] = True
+                        elif direction == 'BUY':
+                            # BUY gets confidence penalty (worse performance)
+                            signal['confidence'] = max(0.30, signal.get('confidence', 0.5) - 0.05)
+                            signal['buy_penalized'] = True
+
                         # Basic veto (uses pre-computed values from signal)
                         basic_veto = self._check_basic_veto_fast(signal, i)
 

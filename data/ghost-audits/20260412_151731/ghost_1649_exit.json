@@ -1,0 +1,17 @@
+{
+  "trade_id": 1649,
+  "type": "ghost_exit",
+  "direction": "BUY",
+  "entry_price": 89540.42,
+  "exit_price": 89240.42,
+  "pnl": -300.0,
+  "is_win": false,
+  "exit_reason": "SL_hit",
+  "veto_reason": "anti_metralhadora:session_blocked",
+  "session": "weekend_profitable",
+  "confidence": 0.6,
+  "regime": "unknown",
+  "duration_bars": 8,
+  "open_time": "2025-12-07 08:50:00",
+  "timestamp": "2026-04-12T18:17:39.320083+00:00"
+}

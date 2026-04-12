@@ -1,0 +1,17 @@
+{
+  "trade_id": 1409,
+  "type": "ghost_exit",
+  "direction": "SELL",
+  "entry_price": 90595.05,
+  "exit_price": 90895.05,
+  "pnl": -203.2461838873786,
+  "is_win": false,
+  "exit_reason": "SL_hit",
+  "veto_reason": "session_veto:Confidence 0.42 < 0.45 (Weekend Profitable Hours threshold)",
+  "session": "weekend_profitable",
+  "confidence": 0.4166666666666667,
+  "regime": "unknown",
+  "duration_bars": 24,
+  "open_time": "2025-11-29 20:50:00",
+  "timestamp": "2026-04-12T18:17:38.483041+00:00"
+}

@@ -1,0 +1,17 @@
+{
+  "trade_id": 5080,
+  "type": "ghost_exit",
+  "direction": "SELL",
+  "entry_price": 69554.6,
+  "exit_price": 69854.6,
+  "pnl": -300.0,
+  "is_win": false,
+  "exit_reason": "SL_hit",
+  "veto_reason": "advanced_veto:SELL vetoed - RSI 23.4 < 28",
+  "session": "ny_overlap",
+  "confidence": 0.6166666666666667,
+  "regime": "unknown",
+  "duration_bars": 16,
+  "open_time": "2026-03-19 15:30:00",
+  "timestamp": "2026-04-12T18:17:55.998844+00:00"
+}

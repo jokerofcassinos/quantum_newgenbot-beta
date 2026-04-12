@@ -1,6 +1,6 @@
 {
   "ticket": 1015,
-  "timestamp": "2026-04-12T18:08:38.155370+00:00",
+  "timestamp": "2026-04-12T18:17:33.530759+00:00",
   "symbol": "BTCUSD",
   "direction": "SELL",
   "entry_price": 114893.93,
@@ -8,7 +8,7 @@
   "take_profit": 116016.25571428571,
   "volume": 0.03,
   "strategy_name": "complete_system_v2",
-  "signal_confidence": 0.4166666666666667,
+  "signal_confidence": 0.5166666666666666,
   "market_regime": {
     "regime_type": "ranging",
     "regime_confidence": 0.7,
@@ -122,7 +122,7 @@
     "risk_percent": 1.0,
     "min_rr_ratio": 1.5,
     "confidence_threshold": 0.65,
-    "last_mutation_time": "2026-04-12T18:08:38.155354+00:00",
+    "last_mutation_time": "2026-04-12T18:17:33.530742+00:00",
     "mutation_count": 0,
     "dna_memory_regimes": 0
   },
@@ -207,7 +207,7 @@
     "neutral_votes": 5,
     "total_strategies": 12,
     "consensus_direction": "SELL",
-    "consensus_confidence": 0.4166666666666667
+    "consensus_confidence": 0.5166666666666666
   },
   "session_veto": {
     "session_name": "asian",

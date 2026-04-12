@@ -1,0 +1,17 @@
+{
+  "trade_id": 683,
+  "type": "ghost_exit",
+  "direction": "BUY",
+  "entry_price": 115252.64,
+  "exit_price": 114952.57035714286,
+  "pnl": -115.31054602060861,
+  "is_win": false,
+  "exit_reason": "SL_hit",
+  "veto_reason": "advanced_veto:BUY vetoed - RSI 76.9 > 72",
+  "session": "ny",
+  "confidence": 0.5166666666666666,
+  "regime": "unknown",
+  "duration_bars": 10,
+  "open_time": "2025-10-28 16:50:00",
+  "timestamp": "2026-04-12T18:17:35.145422+00:00"
+}

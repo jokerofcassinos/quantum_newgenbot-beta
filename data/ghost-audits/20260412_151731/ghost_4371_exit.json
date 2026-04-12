@@ -1,0 +1,17 @@
+{
+  "trade_id": 4371,
+  "type": "ghost_exit",
+  "direction": "BUY",
+  "entry_price": 68999.58,
+  "exit_price": 68675.295,
+  "pnl": -225.76955021121017,
+  "is_win": false,
+  "exit_reason": "SL_hit",
+  "veto_reason": "ghost_audit:weekday_destructive_hours_12UTC",
+  "session": "london",
+  "confidence": 0.5166666666666666,
+  "regime": "unknown",
+  "duration_bars": 1,
+  "open_time": "2026-02-09 12:25:00",
+  "timestamp": "2026-04-12T18:17:49.627753+00:00"
+}

@@ -1,6 +1,6 @@
 {
   "ticket": 1000,
-  "timestamp": "2026-04-12T18:08:37.630741+00:00",
+  "timestamp": "2026-04-12T18:17:33.099532+00:00",
   "symbol": "BTCUSD",
   "direction": "SELL",
   "entry_price": 122005.56,
@@ -8,7 +8,7 @@
   "take_profit": 121105.56,
   "volume": 0.01,
   "strategy_name": "complete_system_v2",
-  "signal_confidence": 0.4166666666666667,
+  "signal_confidence": 0.6166666666666667,
   "market_regime": {
     "regime_type": "ranging",
     "regime_confidence": 0.7,
@@ -34,16 +34,16 @@
     "conflict_detected": false
   },
   "indicators": {
-    "ema_9": 121952.77889549991,
-    "ema_21": 121719.74193038188,
-    "ema_50": 121528.07108222104,
+    "ema_9": 121952.77851702334,
+    "ema_21": 121718.95456270887,
+    "ema_50": 121506.588061292,
     "ema_200": 122005.56,
     "sma_20": 121695.58450000001,
     "sma_50": 122005.56,
     "ema_9_21_cross": "bullish",
     "ema_21_50_cross": "neutral",
     "price_vs_ema_200": "above",
-    "rsi_14": 64.5072627423148,
+    "rsi_14": 64.51252906570512,
     "rsi_regime": "neutral",
     "macd_line": 0,
     "macd_signal": 0,
@@ -122,7 +122,7 @@
     "risk_percent": 1.0,
     "min_rr_ratio": 1.5,
     "confidence_threshold": 0.65,
-    "last_mutation_time": "2026-04-12T18:08:37.630720+00:00",
+    "last_mutation_time": "2026-04-12T18:17:33.099511+00:00",
     "mutation_count": 0,
     "dna_memory_regimes": 0
   },
@@ -144,7 +144,7 @@
       {
         "strategy_name": "momentum",
         "vote": "BUY",
-        "confidence": 0.657301560302179
+        "confidence": 0.6574950734166066
       },
       {
         "strategy_name": "liquidity",
@@ -207,7 +207,7 @@
     "neutral_votes": 4,
     "total_strategies": 12,
     "consensus_direction": "SELL",
-    "consensus_confidence": 0.4166666666666667
+    "consensus_confidence": 0.6166666666666667
   },
   "session_veto": {
     "session_name": "asian",

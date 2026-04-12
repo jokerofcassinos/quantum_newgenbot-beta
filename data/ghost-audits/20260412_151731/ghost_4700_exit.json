@@ -1,0 +1,17 @@
+{
+  "trade_id": 4700,
+  "type": "ghost_exit",
+  "direction": "SELL",
+  "entry_price": 66023.35,
+  "exit_price": 66323.35,
+  "pnl": -250.76944088002702,
+  "is_win": false,
+  "exit_reason": "SL_hit",
+  "veto_reason": "ghost_audit:weekday_destructive_hours_10UTC",
+  "session": "london",
+  "confidence": 0.6166666666666667,
+  "regime": "unknown",
+  "duration_bars": 3,
+  "open_time": "2026-03-02 10:45:00",
+  "timestamp": "2026-04-12T18:17:52.853938+00:00"
+}

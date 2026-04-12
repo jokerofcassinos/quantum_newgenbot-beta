@@ -1,0 +1,17 @@
+{
+  "trade_id": 5306,
+  "type": "ghost_exit",
+  "direction": "SELL",
+  "entry_price": 66412.91,
+  "exit_price": 66757.15142857144,
+  "pnl": -168.9577936249,
+  "is_win": false,
+  "exit_reason": "SL_hit",
+  "veto_reason": "advanced_veto:SELL vetoed - RSI 8.2 < 28",
+  "session": "ny_overlap",
+  "confidence": 0.6166666666666667,
+  "regime": "unknown",
+  "duration_bars": 9,
+  "open_time": "2026-03-27 14:00:00",
+  "timestamp": "2026-04-12T18:17:57.589436+00:00"
+}

@@ -1,0 +1,15 @@
+{
+  "trade_id": 1741,
+  "type": "ghost_entry",
+  "direction": "BUY",
+  "entry_price": 90099.8,
+  "stop_loss": 89799.8,
+  "take_profit": 90999.8,
+  "volume": 1.0,
+  "veto_reason": "ghost_audit:weekday_destructive_hours_14UTC",
+  "session": "ny_overlap",
+  "confidence": 0.5166666666666666,
+  "regime": "unknown",
+  "open_time": "2025-12-11 14:50:00",
+  "timestamp": "2026-04-12T18:17:39.805379+00:00"
+}

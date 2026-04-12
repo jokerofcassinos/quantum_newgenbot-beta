@@ -1,0 +1,17 @@
+{
+  "trade_id": 2800,
+  "type": "ghost_exit",
+  "direction": "SELL",
+  "entry_price": 88022.1,
+  "exit_price": 86956.30071428574,
+  "pnl": 345.2977076861847,
+  "is_win": true,
+  "exit_reason": "TP_hit",
+  "veto_reason": "advanced_veto:SELL vetoed - RSI 15.8 < 28",
+  "session": "london",
+  "confidence": 0.6166666666666667,
+  "regime": "unknown",
+  "duration_bars": 26,
+  "open_time": "2025-12-29 12:00:00",
+  "timestamp": "2026-04-12T18:17:42.611253+00:00"
+}

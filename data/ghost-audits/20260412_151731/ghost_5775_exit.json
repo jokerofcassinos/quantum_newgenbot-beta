@@ -1,0 +1,17 @@
+{
+  "trade_id": 5775,
+  "type": "ghost_exit",
+  "direction": "SELL",
+  "entry_price": 70929.45,
+  "exit_price": 71229.45,
+  "pnl": -300.0,
+  "is_win": false,
+  "exit_reason": "SL_hit",
+  "veto_reason": "advanced_veto:SELL vetoed - RSI 22.2 < 28",
+  "session": "asian",
+  "confidence": 0.6166666666666667,
+  "regime": "unknown",
+  "duration_bars": 116,
+  "open_time": "2026-04-09 02:00:00",
+  "timestamp": "2026-04-12T18:18:00.380684+00:00"
+}

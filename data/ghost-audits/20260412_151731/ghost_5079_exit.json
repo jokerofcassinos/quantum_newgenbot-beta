@@ -1,0 +1,17 @@
+{
+  "trade_id": 5079,
+  "type": "ghost_exit",
+  "direction": "SELL",
+  "entry_price": 69772.41,
+  "exit_price": 70072.41,
+  "pnl": -300.0,
+  "is_win": false,
+  "exit_reason": "SL_hit",
+  "veto_reason": "advanced_veto:SELL vetoed - RSI 30.1 rising",
+  "session": "ny_overlap",
+  "confidence": 0.6166666666666667,
+  "regime": "unknown",
+  "duration_bars": 22,
+  "open_time": "2026-03-19 15:10:00",
+  "timestamp": "2026-04-12T18:17:56.000222+00:00"
+}

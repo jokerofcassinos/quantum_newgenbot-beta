@@ -1,0 +1,17 @@
+{
+  "trade_id": 2744,
+  "type": "ghost_exit",
+  "direction": "BUY",
+  "entry_price": 87837.56,
+  "exit_price": 87537.56,
+  "pnl": -300.0,
+  "is_win": false,
+  "exit_reason": "SL_hit",
+  "veto_reason": "session_veto:Confidence 0.42 < 0.45 (Weekend Profitable Hours threshold)",
+  "session": "weekend_profitable",
+  "confidence": 0.4166666666666667,
+  "regime": "unknown",
+  "duration_bars": 26,
+  "open_time": "2025-12-28 18:05:00",
+  "timestamp": "2026-04-12T18:17:42.360176+00:00"
+}

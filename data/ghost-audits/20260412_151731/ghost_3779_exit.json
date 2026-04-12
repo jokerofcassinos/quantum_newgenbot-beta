@@ -1,0 +1,17 @@
+{
+  "trade_id": 3779,
+  "type": "ghost_exit",
+  "direction": "BUY",
+  "entry_price": 92614.01,
+  "exit_price": 92314.01,
+  "pnl": -300.0,
+  "is_win": false,
+  "exit_reason": "SL_hit",
+  "veto_reason": "ghost_audit:low_volatility_chop",
+  "session": "asian",
+  "confidence": 0.5166666666666666,
+  "regime": "unknown",
+  "duration_bars": 216,
+  "open_time": "2026-01-19 06:55:00",
+  "timestamp": "2026-04-12T18:17:46.165530+00:00"
+}
