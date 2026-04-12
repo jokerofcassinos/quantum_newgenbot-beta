@@ -1,0 +1,17 @@
+{
+  "trade_id": 7315,
+  "type": "ghost_exit",
+  "direction": "BUY",
+  "entry_price": 87775.56,
+  "exit_price": 88675.56,
+  "pnl": 900.0,
+  "is_win": true,
+  "exit_reason": "TP_hit",
+  "veto_reason": "anti_metralhadora:low_quality",
+  "session": "london",
+  "confidence": 0.4166666666666667,
+  "regime": "unknown",
+  "duration_bars": 111,
+  "open_time": "2026-01-26 07:55:00",
+  "timestamp": "2026-04-12T17:20:44.213610+00:00"
+}

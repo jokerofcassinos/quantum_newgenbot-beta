@@ -1,0 +1,17 @@
+{
+  "trade_id": 1960,
+  "type": "ghost_exit",
+  "direction": "BUY",
+  "entry_price": 90724.25,
+  "exit_price": 90424.25,
+  "pnl": -211.87804046110986,
+  "is_win": false,
+  "exit_reason": "SL_hit",
+  "veto_reason": "ghost_audit:sell_only_mode",
+  "session": "asian",
+  "confidence": 0.4166666666666667,
+  "regime": "unknown",
+  "duration_bars": 22,
+  "open_time": "2025-12-09 00:40:00",
+  "timestamp": "2026-04-12T17:22:36.466187+00:00"
+}

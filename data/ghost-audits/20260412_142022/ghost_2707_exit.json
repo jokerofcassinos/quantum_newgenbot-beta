@@ -1,0 +1,17 @@
+{
+  "trade_id": 2707,
+  "type": "ghost_exit",
+  "direction": "BUY",
+  "entry_price": 89896.59,
+  "exit_price": 89277.8775,
+  "pnl": -70.00625161112335,
+  "is_win": false,
+  "exit_reason": "SL_hit",
+  "veto_reason": "anti_metralhadora:low_quality",
+  "session": "ny",
+  "confidence": 0.4166666666666667,
+  "regime": "unknown",
+  "duration_bars": 460,
+  "open_time": "2025-12-12 17:55:00",
+  "timestamp": "2026-04-12T17:20:33.689835+00:00"
+}

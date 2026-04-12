@@ -1,0 +1,17 @@
+{
+  "trade_id": 1850,
+  "type": "ghost_exit",
+  "direction": "BUY",
+  "entry_price": 92412.6,
+  "exit_price": 92112.6,
+  "pnl": -143.6031069016104,
+  "is_win": false,
+  "exit_reason": "SL_hit",
+  "veto_reason": "anti_metralhadora:low_quality",
+  "session": "asian",
+  "confidence": 0.4166666666666667,
+  "regime": "unknown",
+  "duration_bars": 5,
+  "open_time": "2025-11-20 05:50:00",
+  "timestamp": "2026-04-12T17:20:30.101647+00:00"
+}

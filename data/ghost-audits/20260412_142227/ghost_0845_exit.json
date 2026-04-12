@@ -1,0 +1,17 @@
+{
+  "trade_id": 845,
+  "type": "ghost_exit",
+  "direction": "BUY",
+  "entry_price": 113840.72,
+  "exit_price": 113540.72,
+  "pnl": -300.0,
+  "is_win": false,
+  "exit_reason": "SL_hit",
+  "veto_reason": "ghost_audit:sell_only_mode",
+  "session": "london",
+  "confidence": 0.5,
+  "regime": "unknown",
+  "duration_bars": 5,
+  "open_time": "2025-10-28 08:20:00",
+  "timestamp": "2026-04-12T17:22:31.761799+00:00"
+}

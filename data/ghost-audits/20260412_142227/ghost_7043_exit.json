@@ -1,0 +1,17 @@
+{
+  "trade_id": 7043,
+  "type": "ghost_exit",
+  "direction": "BUY",
+  "entry_price": 72505.41,
+  "exit_price": 73405.41,
+  "pnl": 824.2816776206112,
+  "is_win": true,
+  "exit_reason": "TP_hit",
+  "veto_reason": "ghost_audit:sell_only_mode",
+  "session": "asian",
+  "confidence": 0.4166666666666667,
+  "regime": "unknown",
+  "duration_bars": 35,
+  "open_time": "2026-03-16 03:35:00",
+  "timestamp": "2026-04-12T17:22:55.335585+00:00"
+}

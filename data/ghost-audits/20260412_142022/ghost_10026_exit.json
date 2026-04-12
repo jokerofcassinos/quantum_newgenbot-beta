@@ -1,0 +1,17 @@
+{
+  "trade_id": 10026,
+  "type": "ghost_exit",
+  "direction": "SELL",
+  "entry_price": 71077.84,
+  "exit_price": 71377.84,
+  "pnl": -249.71497329274507,
+  "is_win": false,
+  "exit_reason": "SL_hit",
+  "veto_reason": "advanced_veto:SELL vetoed - price at lower BB",
+  "session": "ny",
+  "confidence": 0.4166666666666667,
+  "regime": "unknown",
+  "duration_bars": 25,
+  "open_time": "2026-04-09 16:10:00",
+  "timestamp": "2026-04-12T17:21:00.981948+00:00"
+}

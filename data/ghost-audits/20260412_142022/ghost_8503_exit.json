@@ -1,0 +1,17 @@
+{
+  "trade_id": 8503,
+  "type": "ghost_exit",
+  "direction": "SELL",
+  "entry_price": 67604.09,
+  "exit_price": 67954.745,
+  "pnl": -184.14557685173185,
+  "is_win": false,
+  "exit_reason": "SL_hit",
+  "veto_reason": "anti_metralhadora:low_quality",
+  "session": "asian",
+  "confidence": 0.4166666666666667,
+  "regime": "unknown",
+  "duration_bars": 30,
+  "open_time": "2026-03-09 06:15:00",
+  "timestamp": "2026-04-12T17:20:52.727204+00:00"
+}

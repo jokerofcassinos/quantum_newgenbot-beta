@@ -1,0 +1,17 @@
+{
+  "trade_id": 6703,
+  "type": "ghost_exit",
+  "direction": "BUY",
+  "entry_price": 73364.9,
+  "exit_price": 73023.71857142856,
+  "pnl": -178.62235766648857,
+  "is_win": false,
+  "exit_reason": "SL_hit",
+  "veto_reason": "ghost_audit:sell_only_mode",
+  "session": "asian",
+  "confidence": 0.4166666666666667,
+  "regime": "unknown",
+  "duration_bars": 7,
+  "open_time": "2026-03-04 22:20:00",
+  "timestamp": "2026-04-12T17:22:53.248789+00:00"
+}

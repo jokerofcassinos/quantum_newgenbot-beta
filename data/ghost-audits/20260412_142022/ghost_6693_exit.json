@@ -1,0 +1,17 @@
+{
+  "trade_id": 6693,
+  "type": "ghost_exit",
+  "direction": "BUY",
+  "entry_price": 92567.3,
+  "exit_price": 92267.3,
+  "pnl": -300.0,
+  "is_win": false,
+  "exit_reason": "SL_hit",
+  "veto_reason": "ghost_audit:sell_only_mode",
+  "session": "london",
+  "confidence": 0.5,
+  "regime": "unknown",
+  "duration_bars": 207,
+  "open_time": "2026-01-19 07:40:00",
+  "timestamp": "2026-04-12T17:20:42.551575+00:00"
+}

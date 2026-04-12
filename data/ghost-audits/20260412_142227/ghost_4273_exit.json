@@ -1,0 +1,17 @@
+{
+  "trade_id": 4273,
+  "type": "ghost_exit",
+  "direction": "SELL",
+  "entry_price": 92677.28,
+  "exit_price": 92977.28,
+  "pnl": -300.0,
+  "is_win": false,
+  "exit_reason": "SL_hit",
+  "veto_reason": "advanced_veto:SELL vetoed - RSI 27.2 < 28",
+  "session": "ny_overlap",
+  "confidence": 0.4166666666666667,
+  "regime": "unknown",
+  "duration_bars": 13,
+  "open_time": "2026-01-05 15:35:00",
+  "timestamp": "2026-04-12T17:22:41.831654+00:00"
+}

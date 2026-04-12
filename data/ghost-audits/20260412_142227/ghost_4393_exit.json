@@ -1,0 +1,17 @@
+{
+  "trade_id": 4393,
+  "type": "ghost_exit",
+  "direction": "BUY",
+  "entry_price": 91036.41,
+  "exit_price": 90736.41,
+  "pnl": -271.9213869023297,
+  "is_win": false,
+  "exit_reason": "SL_hit",
+  "veto_reason": "ghost_audit:sell_only_mode",
+  "session": "asian",
+  "confidence": 0.4166666666666667,
+  "regime": "unknown",
+  "duration_bars": 7,
+  "open_time": "2026-01-08 21:25:00",
+  "timestamp": "2026-04-12T17:22:42.344508+00:00"
+}

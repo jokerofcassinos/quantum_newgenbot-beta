@@ -1,0 +1,17 @@
+{
+  "trade_id": 1822,
+  "type": "ghost_exit",
+  "direction": "BUY",
+  "entry_price": 93240.23,
+  "exit_price": 92940.23,
+  "pnl": -296.8616787011327,
+  "is_win": false,
+  "exit_reason": "SL_hit",
+  "veto_reason": "ghost_audit:sell_only_mode",
+  "session": "ny_overlap",
+  "confidence": 0.4166666666666667,
+  "regime": "unknown",
+  "duration_bars": 5,
+  "open_time": "2025-12-04 13:00:00",
+  "timestamp": "2026-04-12T17:22:36.000922+00:00"
+}

@@ -1,0 +1,17 @@
+{
+  "trade_id": 7305,
+  "type": "ghost_exit",
+  "direction": "SELL",
+  "entry_price": 68015.22,
+  "exit_price": 68315.22,
+  "pnl": -199.76167519704805,
+  "is_win": false,
+  "exit_reason": "SL_hit",
+  "veto_reason": "anti_metralhadora:session_limit",
+  "session": "asian",
+  "confidence": 0.4166666666666667,
+  "regime": "unknown",
+  "duration_bars": 12,
+  "open_time": "2026-03-23 04:40:00",
+  "timestamp": "2026-04-12T17:22:56.866456+00:00"
+}

@@ -1,0 +1,15 @@
+{
+  "trade_id": 6489,
+  "type": "ghost_entry",
+  "direction": "BUY",
+  "entry_price": 95123.48,
+  "stop_loss": 94823.48,
+  "take_profit": 96023.48,
+  "volume": 1.0,
+  "veto_reason": "session_veto:Trading disabled for Weekend session",
+  "session": "weekend",
+  "confidence": 0.4166666666666667,
+  "regime": "unknown",
+  "open_time": "2026-01-18 06:05:00",
+  "timestamp": "2026-04-12T17:20:41.951819+00:00"
+}

@@ -1,0 +1,17 @@
+{
+  "trade_id": 3595,
+  "type": "ghost_exit",
+  "direction": "BUY",
+  "entry_price": 88374.1,
+  "exit_price": 88074.1,
+  "pnl": -300.0,
+  "is_win": false,
+  "exit_reason": "SL_hit",
+  "veto_reason": "ghost_audit:sell_only_mode",
+  "session": "london",
+  "confidence": 0.4166666666666667,
+  "regime": "unknown",
+  "duration_bars": 120,
+  "open_time": "2025-12-31 07:10:00",
+  "timestamp": "2026-04-12T17:22:40.594908+00:00"
+}

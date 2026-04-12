@@ -1,0 +1,17 @@
+{
+  "trade_id": 4864,
+  "type": "ghost_exit",
+  "direction": "BUY",
+  "entry_price": 90612.91,
+  "exit_price": 90312.91,
+  "pnl": -264.3016913753413,
+  "is_win": false,
+  "exit_reason": "SL_hit",
+  "veto_reason": "ghost_audit:sell_only_mode",
+  "session": "ny_overlap",
+  "confidence": 0.4166666666666667,
+  "regime": "unknown",
+  "duration_bars": 8,
+  "open_time": "2026-01-12 15:40:00",
+  "timestamp": "2026-04-12T17:22:43.295558+00:00"
+}

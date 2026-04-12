@@ -1,0 +1,17 @@
+{
+  "trade_id": 1836,
+  "type": "ghost_exit",
+  "direction": "BUY",
+  "entry_price": 91287.36,
+  "exit_price": 92187.36,
+  "pnl": 726.35208171824,
+  "is_win": true,
+  "exit_reason": "TP_hit",
+  "veto_reason": "anti_metralhadora:low_quality",
+  "session": "ny_overlap",
+  "confidence": 0.4166666666666667,
+  "regime": "unknown",
+  "duration_bars": 49,
+  "open_time": "2025-11-19 13:00:00",
+  "timestamp": "2026-04-12T17:20:30.042700+00:00"
+}

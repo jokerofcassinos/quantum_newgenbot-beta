@@ -1,0 +1,17 @@
+{
+  "trade_id": 7069,
+  "type": "ghost_exit",
+  "direction": "BUY",
+  "entry_price": 73726.6,
+  "exit_price": 73426.6,
+  "pnl": -261.9861001762182,
+  "is_win": false,
+  "exit_reason": "SL_hit",
+  "veto_reason": "ghost_audit:sell_only_mode",
+  "session": "ny",
+  "confidence": 0.4166666666666667,
+  "regime": "unknown",
+  "duration_bars": 10,
+  "open_time": "2026-03-17 16:00:00",
+  "timestamp": "2026-04-12T17:22:55.577389+00:00"
+}

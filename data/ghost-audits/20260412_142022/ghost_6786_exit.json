@@ -1,0 +1,17 @@
+{
+  "trade_id": 6786,
+  "type": "ghost_exit",
+  "direction": "SELL",
+  "entry_price": 89677.55,
+  "exit_price": 88777.55,
+  "pnl": 561.7734048507274,
+  "is_win": true,
+  "exit_reason": "TP_hit",
+  "veto_reason": "advanced_veto:SELL vetoed - RSI 24.4 < 28",
+  "session": "ny",
+  "confidence": 0.4166666666666667,
+  "regime": "unknown",
+  "duration_bars": 55,
+  "open_time": "2026-01-20 19:45:00",
+  "timestamp": "2026-04-12T17:20:42.772131+00:00"
+}

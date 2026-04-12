@@ -1,0 +1,17 @@
+{
+  "trade_id": 2779,
+  "type": "ghost_exit",
+  "direction": "BUY",
+  "entry_price": 89982.31,
+  "exit_price": 89682.31,
+  "pnl": -220.16465540016546,
+  "is_win": false,
+  "exit_reason": "SL_hit",
+  "veto_reason": "ghost_audit:sell_only_mode",
+  "session": "ny_overlap",
+  "confidence": 0.4166666666666667,
+  "regime": "unknown",
+  "duration_bars": 14,
+  "open_time": "2025-12-22 15:20:00",
+  "timestamp": "2026-04-12T17:22:38.655722+00:00"
+}

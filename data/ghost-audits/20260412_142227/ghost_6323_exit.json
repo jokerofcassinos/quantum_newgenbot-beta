@@ -1,0 +1,17 @@
+{
+  "trade_id": 6323,
+  "type": "ghost_exit",
+  "direction": "BUY",
+  "entry_price": 67689.13,
+  "exit_price": 67389.13,
+  "pnl": -169.63712920565354,
+  "is_win": false,
+  "exit_reason": "SL_hit",
+  "veto_reason": "ghost_audit:sell_only_mode",
+  "session": "london",
+  "confidence": 0.4166666666666667,
+  "regime": "unknown",
+  "duration_bars": 64,
+  "open_time": "2026-02-20 08:25:00",
+  "timestamp": "2026-04-12T17:22:50.897335+00:00"
+}

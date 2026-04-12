@@ -1,0 +1,17 @@
+{
+  "trade_id": 7862,
+  "type": "ghost_exit",
+  "direction": "BUY",
+  "entry_price": 71293.95,
+  "exit_price": 70993.95,
+  "pnl": -300.0,
+  "is_win": false,
+  "exit_reason": "SL_hit",
+  "veto_reason": "ghost_audit:sell_only_mode",
+  "session": "ny_overlap",
+  "confidence": 0.5,
+  "regime": "unknown",
+  "duration_bars": 32,
+  "open_time": "2026-04-09 13:50:00",
+  "timestamp": "2026-04-12T17:23:00.722246+00:00"
+}

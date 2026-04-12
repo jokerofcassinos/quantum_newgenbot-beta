@@ -1,0 +1,17 @@
+{
+  "trade_id": 10017,
+  "type": "ghost_exit",
+  "direction": "BUY",
+  "entry_price": 70943.2,
+  "exit_price": 70643.2,
+  "pnl": -300.0,
+  "is_win": false,
+  "exit_reason": "SL_hit",
+  "veto_reason": "ghost_audit:sell_only_mode",
+  "session": "london",
+  "confidence": 0.5,
+  "regime": "unknown",
+  "duration_bars": 66,
+  "open_time": "2026-04-09 11:25:00",
+  "timestamp": "2026-04-12T17:21:00.969564+00:00"
+}

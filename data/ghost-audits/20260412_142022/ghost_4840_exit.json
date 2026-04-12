@@ -1,0 +1,17 @@
+{
+  "trade_id": 4840,
+  "type": "ghost_exit",
+  "direction": "BUY",
+  "entry_price": 88354.3,
+  "exit_price": 89254.3,
+  "pnl": 900.0,
+  "is_win": true,
+  "exit_reason": "TP_hit",
+  "veto_reason": "advanced_veto:BUY vetoed - RSI 79.6 > 72",
+  "session": "asian",
+  "confidence": 0.4166666666666667,
+  "regime": "unknown",
+  "duration_bars": 157,
+  "open_time": "2026-01-01 21:55:00",
+  "timestamp": "2026-04-12T17:20:38.205400+00:00"
+}

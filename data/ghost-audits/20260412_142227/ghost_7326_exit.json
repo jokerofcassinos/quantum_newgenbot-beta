@@ -1,0 +1,17 @@
+{
+  "trade_id": 7326,
+  "type": "ghost_exit",
+  "direction": "BUY",
+  "entry_price": 71115.87,
+  "exit_price": 70815.87,
+  "pnl": -266.204164031086,
+  "is_win": false,
+  "exit_reason": "SL_hit",
+  "veto_reason": "ghost_audit:sell_only_mode",
+  "session": "ny_overlap",
+  "confidence": 0.4166666666666667,
+  "regime": "unknown",
+  "duration_bars": 14,
+  "open_time": "2026-03-24 14:55:00",
+  "timestamp": "2026-04-12T17:22:57.162724+00:00"
+}

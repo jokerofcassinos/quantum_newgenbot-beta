@@ -1,0 +1,17 @@
+{
+  "trade_id": 2022,
+  "type": "ghost_exit",
+  "direction": "SELL",
+  "entry_price": 90499.5,
+  "exit_price": 90799.5,
+  "pnl": -123.70815558730759,
+  "is_win": false,
+  "exit_reason": "SL_hit",
+  "veto_reason": "advanced_veto:SELL vetoed - RSI 11.4 < 28",
+  "session": "ny_overlap",
+  "confidence": 0.4166666666666667,
+  "regime": "unknown",
+  "duration_bars": 3,
+  "open_time": "2025-11-27 15:20:00",
+  "timestamp": "2026-04-12T17:20:30.832549+00:00"
+}

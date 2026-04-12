@@ -1,0 +1,17 @@
+{
+  "trade_id": 6332,
+  "type": "ghost_exit",
+  "direction": "SELL",
+  "entry_price": 67358.97,
+  "exit_price": 66458.97,
+  "pnl": 567.5687048277312,
+  "is_win": true,
+  "exit_reason": "TP_hit",
+  "veto_reason": "advanced_veto:SELL vetoed - RSI 24.7 < 28",
+  "session": "ny_overlap",
+  "confidence": 0.4166666666666667,
+  "regime": "unknown",
+  "duration_bars": 20,
+  "open_time": "2026-02-20 14:00:00",
+  "timestamp": "2026-04-12T17:22:50.913577+00:00"
+}

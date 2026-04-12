@@ -1,0 +1,15 @@
+{
+  "trade_id": 6077,
+  "type": "ghost_entry",
+  "direction": "BUY",
+  "entry_price": 82720.55,
+  "stop_loss": 82417.01107142857,
+  "take_profit": 83631.16678571429,
+  "volume": 0.454773020151046,
+  "veto_reason": "ghost_audit:sell_only_mode",
+  "session": "ny_overlap",
+  "confidence": 0.4166666666666667,
+  "regime": "unknown",
+  "open_time": "2026-01-30 14:50:00",
+  "timestamp": "2026-04-12T17:22:47.401320+00:00"
+}

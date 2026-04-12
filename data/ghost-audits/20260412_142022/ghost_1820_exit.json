@@ -1,0 +1,17 @@
+{
+  "trade_id": 1820,
+  "type": "ghost_exit",
+  "direction": "SELL",
+  "entry_price": 91519.48,
+  "exit_price": 91819.48,
+  "pnl": -144.92563137156617,
+  "is_win": false,
+  "exit_reason": "SL_hit",
+  "veto_reason": "anti_metralhadora:low_quality",
+  "session": "ny_overlap",
+  "confidence": 0.4166666666666667,
+  "regime": "unknown",
+  "duration_bars": 12,
+  "open_time": "2025-11-18 13:40:00",
+  "timestamp": "2026-04-12T17:20:29.940268+00:00"
+}

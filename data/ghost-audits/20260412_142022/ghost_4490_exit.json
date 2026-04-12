@@ -1,0 +1,17 @@
+{
+  "trade_id": 4490,
+  "type": "ghost_exit",
+  "direction": "BUY",
+  "entry_price": 87361.08,
+  "exit_price": 88261.08,
+  "pnl": 900.0,
+  "is_win": true,
+  "exit_reason": "TP_hit",
+  "veto_reason": "anti_metralhadora:low_quality",
+  "session": "asian",
+  "confidence": 0.4166666666666667,
+  "regime": "unknown",
+  "duration_bars": 117,
+  "open_time": "2025-12-30 06:35:00",
+  "timestamp": "2026-04-12T17:20:37.429626+00:00"
+}

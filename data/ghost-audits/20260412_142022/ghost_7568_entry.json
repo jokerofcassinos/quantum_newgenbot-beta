@@ -1,0 +1,15 @@
+{
+  "trade_id": 7568,
+  "type": "ghost_entry",
+  "direction": "BUY",
+  "entry_price": 83123.25,
+  "stop_loss": 82823.25,
+  "take_profit": 84023.25,
+  "volume": 1.0,
+  "veto_reason": "advanced_veto:BUY vetoed - RSI 76.8 > 72",
+  "session": "asian",
+  "confidence": 0.4166666666666667,
+  "regime": "unknown",
+  "open_time": "2026-01-30 06:30:00",
+  "timestamp": "2026-04-12T17:20:45.094215+00:00"
+}

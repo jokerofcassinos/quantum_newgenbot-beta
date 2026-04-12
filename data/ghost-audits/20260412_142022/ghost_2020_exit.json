@@ -1,0 +1,17 @@
+{
+  "trade_id": 2020,
+  "type": "ghost_exit",
+  "direction": "SELL",
+  "entry_price": 90873.8,
+  "exit_price": 91173.8,
+  "pnl": -144.5874826643703,
+  "is_win": false,
+  "exit_reason": "SL_hit",
+  "veto_reason": "advanced_veto:SELL vetoed - RSI 22.4 < 28",
+  "session": "ny_overlap",
+  "confidence": 0.4166666666666667,
+  "regime": "unknown",
+  "duration_bars": 37,
+  "open_time": "2025-11-27 15:05:00",
+  "timestamp": "2026-04-12T17:20:30.849540+00:00"
+}

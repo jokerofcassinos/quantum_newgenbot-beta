@@ -1,0 +1,17 @@
+{
+  "trade_id": 3068,
+  "type": "ghost_exit",
+  "direction": "BUY",
+  "entry_price": 89814.34,
+  "exit_price": 89514.34,
+  "pnl": -300.0,
+  "is_win": false,
+  "exit_reason": "SL_hit",
+  "veto_reason": "ghost_audit:sell_only_mode",
+  "session": "london",
+  "confidence": 0.5,
+  "regime": "unknown",
+  "duration_bars": 19,
+  "open_time": "2025-12-15 12:25:00",
+  "timestamp": "2026-04-12T17:20:33.850403+00:00"
+}

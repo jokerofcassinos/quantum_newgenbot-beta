@@ -1,0 +1,17 @@
+{
+  "trade_id": 8250,
+  "type": "ghost_exit",
+  "direction": "BUY",
+  "entry_price": 64290.59,
+  "exit_price": 63990.59,
+  "pnl": -251.5732215461982,
+  "is_win": false,
+  "exit_reason": "SL_hit",
+  "veto_reason": "anti_metralhadora:low_quality",
+  "session": "asian",
+  "confidence": 0.4166666666666667,
+  "regime": "unknown",
+  "duration_bars": 14,
+  "open_time": "2026-02-24 22:05:00",
+  "timestamp": "2026-04-12T17:20:50.416380+00:00"
+}

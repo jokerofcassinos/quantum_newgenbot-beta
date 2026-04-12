@@ -1,0 +1,17 @@
+{
+  "trade_id": 7825,
+  "type": "ghost_exit",
+  "direction": "BUY",
+  "entry_price": 68423.23,
+  "exit_price": 69323.23,
+  "pnl": 900.0,
+  "is_win": true,
+  "exit_reason": "TP_hit",
+  "veto_reason": "ghost_audit:sell_only_mode",
+  "session": "london",
+  "confidence": 0.5,
+  "regime": "unknown",
+  "duration_bars": 84,
+  "open_time": "2026-02-16 07:25:00",
+  "timestamp": "2026-04-12T17:20:48.470409+00:00"
+}

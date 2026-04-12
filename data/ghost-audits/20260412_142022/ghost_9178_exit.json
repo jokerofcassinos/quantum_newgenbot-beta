@@ -1,0 +1,17 @@
+{
+  "trade_id": 9178,
+  "type": "ghost_exit",
+  "direction": "SELL",
+  "entry_price": 70839.43,
+  "exit_price": 69939.43,
+  "pnl": 900.0,
+  "is_win": true,
+  "exit_reason": "TP_hit",
+  "veto_reason": "advanced_veto:SELL vetoed - RSI 31.3 rising",
+  "session": "asian",
+  "confidence": 0.4166666666666667,
+  "regime": "unknown",
+  "duration_bars": 37,
+  "open_time": "2026-03-26 05:50:00",
+  "timestamp": "2026-04-12T17:20:57.049361+00:00"
+}

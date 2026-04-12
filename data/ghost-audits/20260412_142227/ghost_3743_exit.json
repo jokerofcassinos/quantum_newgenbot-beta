@@ -1,0 +1,17 @@
+{
+  "trade_id": 3743,
+  "type": "ghost_exit",
+  "direction": "BUY",
+  "entry_price": 87706.25,
+  "exit_price": 88606.25,
+  "pnl": 900.0,
+  "is_win": true,
+  "exit_reason": "TP_hit",
+  "veto_reason": "advanced_veto:BUY vetoed - price at upper BB",
+  "session": "london",
+  "confidence": 0.5,
+  "regime": "unknown",
+  "duration_bars": 172,
+  "open_time": "2026-01-01 10:20:00",
+  "timestamp": "2026-04-12T17:22:40.923993+00:00"
+}

@@ -1,0 +1,17 @@
+{
+  "trade_id": 3544,
+  "type": "ghost_exit",
+  "direction": "BUY",
+  "entry_price": 87786.36,
+  "exit_price": 88686.36,
+  "pnl": 376.09452657108284,
+  "is_win": true,
+  "exit_reason": "TP_hit",
+  "veto_reason": "ghost_audit:sell_only_mode",
+  "session": "london",
+  "confidence": 0.4166666666666667,
+  "regime": "unknown",
+  "duration_bars": 76,
+  "open_time": "2025-12-30 10:30:00",
+  "timestamp": "2026-04-12T17:22:40.391054+00:00"
+}

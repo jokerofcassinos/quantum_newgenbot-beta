@@ -1,0 +1,17 @@
+{
+  "trade_id": 8365,
+  "type": "ghost_exit",
+  "direction": "SELL",
+  "entry_price": 69089.1,
+  "exit_price": 69770.8167857143,
+  "pnl": -135.91091111286127,
+  "is_win": false,
+  "exit_reason": "SL_hit",
+  "veto_reason": "anti_metralhadora:low_quality",
+  "session": "ny",
+  "confidence": 0.4166666666666667,
+  "regime": "unknown",
+  "duration_bars": 9,
+  "open_time": "2026-03-02 17:55:00",
+  "timestamp": "2026-04-12T17:20:51.414234+00:00"
+}

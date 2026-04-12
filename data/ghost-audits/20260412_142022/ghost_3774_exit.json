@@ -1,0 +1,17 @@
+{
+  "trade_id": 3774,
+  "type": "ghost_exit",
+  "direction": "BUY",
+  "entry_price": 87745.55,
+  "exit_price": 87445.55,
+  "pnl": -300.0,
+  "is_win": false,
+  "exit_reason": "SL_hit",
+  "veto_reason": "ghost_audit:sell_only_mode",
+  "session": "asian",
+  "confidence": 0.5833333333333334,
+  "regime": "unknown",
+  "duration_bars": 50,
+  "open_time": "2025-12-25 06:10:00",
+  "timestamp": "2026-04-12T17:20:35.854069+00:00"
+}

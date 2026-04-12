@@ -1,0 +1,17 @@
+{
+  "trade_id": 7828,
+  "type": "ghost_exit",
+  "direction": "SELL",
+  "entry_price": 68589.19,
+  "exit_price": 68889.19,
+  "pnl": -110.0905850586501,
+  "is_win": false,
+  "exit_reason": "SL_hit",
+  "veto_reason": "advanced_veto:SELL vetoed - RSI 15.7 < 28",
+  "session": "asian",
+  "confidence": 0.4166666666666667,
+  "regime": "unknown",
+  "duration_bars": 8,
+  "open_time": "2026-04-07 02:20:00",
+  "timestamp": "2026-04-12T17:23:00.081201+00:00"
+}

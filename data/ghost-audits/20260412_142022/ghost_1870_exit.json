@@ -1,0 +1,17 @@
+{
+  "trade_id": 1870,
+  "type": "ghost_exit",
+  "direction": "SELL",
+  "entry_price": 85387.1,
+  "exit_price": 86151.97785714286,
+  "pnl": -141.68415239408827,
+  "is_win": false,
+  "exit_reason": "SL_hit",
+  "veto_reason": "anti_metralhadora:low_quality",
+  "session": "ny",
+  "confidence": 0.4166666666666667,
+  "regime": "unknown",
+  "duration_bars": 319,
+  "open_time": "2025-11-21 19:30:00",
+  "timestamp": "2026-04-12T17:20:30.369784+00:00"
+}

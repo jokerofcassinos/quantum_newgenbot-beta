@@ -1,0 +1,17 @@
+{
+  "trade_id": 2643,
+  "type": "ghost_exit",
+  "direction": "BUY",
+  "entry_price": 90077.78,
+  "exit_price": 89777.78,
+  "pnl": -291.3782204408594,
+  "is_win": false,
+  "exit_reason": "SL_hit",
+  "veto_reason": "ghost_audit:sell_only_mode",
+  "session": "london",
+  "confidence": 0.5,
+  "regime": "unknown",
+  "duration_bars": 73,
+  "open_time": "2025-12-11 10:25:00",
+  "timestamp": "2026-04-12T17:20:32.942658+00:00"
+}

@@ -1,0 +1,17 @@
+{
+  "trade_id": 2603,
+  "type": "ghost_exit",
+  "direction": "SELL",
+  "entry_price": 94418.97,
+  "exit_price": 92948.61428571428,
+  "pnl": 505.4792531021608,
+  "is_win": true,
+  "exit_reason": "TP_hit",
+  "veto_reason": "anti_metralhadora:low_quality",
+  "session": "ny",
+  "confidence": 0.4166666666666667,
+  "regime": "unknown",
+  "duration_bars": 39,
+  "open_time": "2025-12-09 19:05:00",
+  "timestamp": "2026-04-12T17:20:32.668064+00:00"
+}

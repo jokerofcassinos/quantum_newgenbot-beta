@@ -1,0 +1,17 @@
+{
+  "trade_id": 1817,
+  "type": "ghost_exit",
+  "direction": "BUY",
+  "entry_price": 90390.97,
+  "exit_price": 91389.02821428572,
+  "pnl": 386.9467774382181,
+  "is_win": true,
+  "exit_reason": "TP_hit",
+  "veto_reason": "anti_metralhadora:low_quality",
+  "session": "london",
+  "confidence": 0.4166666666666667,
+  "regime": "unknown",
+  "duration_bars": 17,
+  "open_time": "2025-11-18 09:50:00",
+  "timestamp": "2026-04-12T17:20:29.925335+00:00"
+}

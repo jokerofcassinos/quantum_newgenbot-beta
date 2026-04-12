@@ -1,0 +1,17 @@
+{
+  "trade_id": 640,
+  "type": "ghost_exit",
+  "direction": "BUY",
+  "entry_price": 110264.12,
+  "exit_price": 111164.12,
+  "pnl": 446.9875400006724,
+  "is_win": true,
+  "exit_reason": "TP_hit",
+  "veto_reason": "anti_metralhadora:low_quality",
+  "session": "asian",
+  "confidence": 0.4166666666666667,
+  "regime": "unknown",
+  "duration_bars": 12,
+  "open_time": "2025-10-24 06:30:00",
+  "timestamp": "2026-04-12T17:20:26.443544+00:00"
+}

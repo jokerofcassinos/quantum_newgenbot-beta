@@ -1,0 +1,17 @@
+{
+  "trade_id": 8354,
+  "type": "ghost_exit",
+  "direction": "SELL",
+  "entry_price": 66259.26,
+  "exit_price": 65359.259999999995,
+  "pnl": 673.7345716529215,
+  "is_win": true,
+  "exit_reason": "TP_hit",
+  "veto_reason": "anti_metralhadora:low_quality",
+  "session": "ny_overlap",
+  "confidence": 0.4166666666666667,
+  "regime": "unknown",
+  "duration_bars": 26,
+  "open_time": "2026-03-02 13:40:00",
+  "timestamp": "2026-04-12T17:20:51.381940+00:00"
+}

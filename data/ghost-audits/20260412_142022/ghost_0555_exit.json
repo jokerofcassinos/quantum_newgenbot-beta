@@ -1,0 +1,17 @@
+{
+  "trade_id": 555,
+  "type": "ghost_exit",
+  "direction": "SELL",
+  "entry_price": 108147.8,
+  "exit_price": 108501.23964285715,
+  "pnl": -71.95342015559018,
+  "is_win": false,
+  "exit_reason": "SL_hit",
+  "veto_reason": "advanced_veto:SELL vetoed - RSI 11.1 < 28",
+  "session": "london",
+  "confidence": 0.4166666666666667,
+  "regime": "unknown",
+  "duration_bars": 77,
+  "open_time": "2025-10-21 07:20:00",
+  "timestamp": "2026-04-12T17:20:26.192204+00:00"
+}

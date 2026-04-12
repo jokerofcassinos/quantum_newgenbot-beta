@@ -1,0 +1,15 @@
+{
+  "trade_id": 475,
+  "type": "ghost_entry",
+  "direction": "BUY",
+  "entry_price": 110260.02,
+  "stop_loss": 109883.18142857144,
+  "take_profit": 111390.53571428572,
+  "volume": 0.4870210589708804,
+  "veto_reason": "ghost_audit:sell_only_mode",
+  "session": "asian",
+  "confidence": 0.4166666666666667,
+  "regime": "unknown",
+  "open_time": "2025-10-23 22:05:00",
+  "timestamp": "2026-04-12T17:22:31.106801+00:00"
+}

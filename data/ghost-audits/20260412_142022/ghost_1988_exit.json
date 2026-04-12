@@ -1,0 +1,17 @@
+{
+  "trade_id": 1988,
+  "type": "ghost_exit",
+  "direction": "BUY",
+  "entry_price": 91065.6,
+  "exit_price": 90746.55428571429,
+  "pnl": -122.67077433974534,
+  "is_win": false,
+  "exit_reason": "SL_hit",
+  "veto_reason": "anti_metralhadora:low_quality",
+  "session": "asian",
+  "confidence": 0.4166666666666667,
+  "regime": "unknown",
+  "duration_bars": 113,
+  "open_time": "2025-11-27 05:45:00",
+  "timestamp": "2026-04-12T17:20:30.827662+00:00"
+}

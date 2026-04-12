@@ -1,0 +1,15 @@
+{
+  "trade_id": 6682,
+  "type": "ghost_entry",
+  "direction": "BUY",
+  "entry_price": 66602.02,
+  "stop_loss": 66302.02,
+  "take_profit": 67502.02,
+  "volume": 0.7824168342023209,
+  "veto_reason": "ghost_audit:sell_only_mode",
+  "session": "london",
+  "confidence": 0.4166666666666667,
+  "regime": "unknown",
+  "open_time": "2026-03-02 07:20:00",
+  "timestamp": "2026-04-12T17:22:52.698607+00:00"
+}

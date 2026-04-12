@@ -1,0 +1,17 @@
+{
+  "trade_id": 3908,
+  "type": "ghost_exit",
+  "direction": "BUY",
+  "entry_price": 89484.39,
+  "exit_price": 89184.39,
+  "pnl": -295.79622974232944,
+  "is_win": false,
+  "exit_reason": "SL_hit",
+  "veto_reason": "ghost_audit:sell_only_mode",
+  "session": "ny_overlap",
+  "confidence": 0.4166666666666667,
+  "regime": "unknown",
+  "duration_bars": 36,
+  "open_time": "2026-01-02 13:10:00",
+  "timestamp": "2026-04-12T17:22:41.106610+00:00"
+}

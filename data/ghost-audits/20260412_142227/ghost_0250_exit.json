@@ -1,0 +1,17 @@
+{
+  "trade_id": 250,
+  "type": "ghost_exit",
+  "direction": "BUY",
+  "entry_price": 105319.7,
+  "exit_price": 104913.15714285713,
+  "pnl": -200.72536585381044,
+  "is_win": false,
+  "exit_reason": "SL_hit",
+  "veto_reason": "ghost_audit:sell_only_mode",
+  "session": "ny",
+  "confidence": 0.4166666666666667,
+  "regime": "unknown",
+  "duration_bars": 2,
+  "open_time": "2025-10-17 16:00:00",
+  "timestamp": "2026-04-12T17:22:30.469752+00:00"
+}

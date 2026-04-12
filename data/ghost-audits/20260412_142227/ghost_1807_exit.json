@@ -1,0 +1,17 @@
+{
+  "trade_id": 1807,
+  "type": "ghost_exit",
+  "direction": "BUY",
+  "entry_price": 93345.11,
+  "exit_price": 93045.11,
+  "pnl": -232.28193228269328,
+  "is_win": false,
+  "exit_reason": "SL_hit",
+  "veto_reason": "ghost_audit:sell_only_mode",
+  "session": "asian",
+  "confidence": 0.4166666666666667,
+  "regime": "unknown",
+  "duration_bars": 14,
+  "open_time": "2025-12-04 06:00:00",
+  "timestamp": "2026-04-12T17:22:35.969504+00:00"
+}

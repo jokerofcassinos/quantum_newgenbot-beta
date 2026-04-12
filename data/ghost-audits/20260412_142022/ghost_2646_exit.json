@@ -1,0 +1,17 @@
+{
+  "trade_id": 2646,
+  "type": "ghost_exit",
+  "direction": "BUY",
+  "entry_price": 90223.44,
+  "exit_price": 89923.44,
+  "pnl": -239.96566288765726,
+  "is_win": false,
+  "exit_reason": "SL_hit",
+  "veto_reason": "anti_metralhadora:low_quality",
+  "session": "london",
+  "confidence": 0.4166666666666667,
+  "regime": "unknown",
+  "duration_bars": 37,
+  "open_time": "2025-12-11 12:25:00",
+  "timestamp": "2026-04-12T17:20:32.931460+00:00"
+}

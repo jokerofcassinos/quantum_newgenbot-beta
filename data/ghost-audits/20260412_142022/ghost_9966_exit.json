@@ -1,0 +1,17 @@
+{
+  "trade_id": 9966,
+  "type": "ghost_exit",
+  "direction": "SELL",
+  "entry_price": 71810.5,
+  "exit_price": 70910.5,
+  "pnl": 831.9741735483867,
+  "is_win": true,
+  "exit_reason": "TP_hit",
+  "veto_reason": "anti_metralhadora:low_quality",
+  "session": "ny",
+  "confidence": 0.4166666666666667,
+  "regime": "unknown",
+  "duration_bars": 62,
+  "open_time": "2026-04-08 20:40:00",
+  "timestamp": "2026-04-12T17:21:00.769723+00:00"
+}

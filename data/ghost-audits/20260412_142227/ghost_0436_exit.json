@@ -1,0 +1,17 @@
+{
+  "trade_id": 436,
+  "type": "ghost_exit",
+  "direction": "SELL",
+  "entry_price": 107711.33,
+  "exit_price": 108011.33,
+  "pnl": -258.7376883312833,
+  "is_win": false,
+  "exit_reason": "SL_hit",
+  "veto_reason": "ghost_audit:destructive_hours_12UTC",
+  "session": "london",
+  "confidence": 0.4166666666666667,
+  "regime": "unknown",
+  "duration_bars": 9,
+  "open_time": "2025-10-21 12:50:00",
+  "timestamp": "2026-04-12T17:22:30.898690+00:00"
+}

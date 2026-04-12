@@ -1,0 +1,17 @@
+{
+  "trade_id": 7929,
+  "type": "ghost_exit",
+  "direction": "SELL",
+  "entry_price": 66821.2,
+  "exit_price": 67121.2,
+  "pnl": -300.0,
+  "is_win": false,
+  "exit_reason": "SL_hit",
+  "veto_reason": "advanced_veto:SELL vetoed - RSI 17.7 < 28",
+  "session": "london",
+  "confidence": 0.4166666666666667,
+  "regime": "unknown",
+  "duration_bars": 10,
+  "open_time": "2026-02-19 10:30:00",
+  "timestamp": "2026-04-12T17:20:49.083815+00:00"
+}

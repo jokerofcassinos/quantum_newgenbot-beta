@@ -1,0 +1,17 @@
+{
+  "trade_id": 6842,
+  "type": "ghost_exit",
+  "direction": "SELL",
+  "entry_price": 90069.58,
+  "exit_price": 89169.58,
+  "pnl": 795.2925459432779,
+  "is_win": true,
+  "exit_reason": "TP_hit",
+  "veto_reason": "anti_metralhadora:low_quality",
+  "session": "asian",
+  "confidence": 0.4166666666666667,
+  "regime": "unknown",
+  "duration_bars": 152,
+  "open_time": "2026-01-22 03:55:00",
+  "timestamp": "2026-04-12T17:20:43.085005+00:00"
+}

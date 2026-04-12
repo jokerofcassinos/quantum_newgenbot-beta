@@ -1,0 +1,17 @@
+{
+  "trade_id": 1925,
+  "type": "ghost_exit",
+  "direction": "SELL",
+  "entry_price": 87183.95,
+  "exit_price": 87671.20571428571,
+  "pnl": -131.61679407238887,
+  "is_win": false,
+  "exit_reason": "SL_hit",
+  "veto_reason": "anti_metralhadora:low_quality",
+  "session": "ny",
+  "confidence": 0.4166666666666667,
+  "regime": "unknown",
+  "duration_bars": 5,
+  "open_time": "2025-11-24 18:20:00",
+  "timestamp": "2026-04-12T17:20:30.532065+00:00"
+}

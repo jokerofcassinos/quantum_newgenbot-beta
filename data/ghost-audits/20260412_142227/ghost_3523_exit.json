@@ -1,0 +1,17 @@
+{
+  "trade_id": 3523,
+  "type": "ghost_exit",
+  "direction": "SELL",
+  "entry_price": 89614.8,
+  "exit_price": 88714.8,
+  "pnl": 900.0,
+  "is_win": true,
+  "exit_reason": "TP_hit",
+  "veto_reason": "advanced_veto:SELL vetoed - RSI 22.7 < 28",
+  "session": "london",
+  "confidence": 0.4166666666666667,
+  "regime": "unknown",
+  "duration_bars": 28,
+  "open_time": "2025-12-29 09:10:00",
+  "timestamp": "2026-04-12T17:22:40.220192+00:00"
+}

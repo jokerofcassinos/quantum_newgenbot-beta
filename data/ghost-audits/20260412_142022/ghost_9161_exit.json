@@ -1,0 +1,17 @@
+{
+  "trade_id": 9161,
+  "type": "ghost_exit",
+  "direction": "BUY",
+  "entry_price": 71003.98,
+  "exit_price": 70703.98,
+  "pnl": -300.0,
+  "is_win": false,
+  "exit_reason": "SL_hit",
+  "veto_reason": "ghost_audit:sell_only_mode",
+  "session": "asian",
+  "confidence": 0.5833333333333334,
+  "regime": "unknown",
+  "duration_bars": 49,
+  "open_time": "2026-03-26 01:25:00",
+  "timestamp": "2026-04-12T17:20:57.020327+00:00"
+}

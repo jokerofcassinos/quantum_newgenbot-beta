@@ -1,0 +1,17 @@
+{
+  "trade_id": 3680,
+  "type": "ghost_exit",
+  "direction": "BUY",
+  "entry_price": 87736.45,
+  "exit_price": 88636.45,
+  "pnl": 900.0,
+  "is_win": true,
+  "exit_reason": "TP_hit",
+  "veto_reason": "advanced_veto:BUY vetoed - price at upper BB",
+  "session": "asian",
+  "confidence": 0.4166666666666667,
+  "regime": "unknown",
+  "duration_bars": 269,
+  "open_time": "2026-01-01 02:20:00",
+  "timestamp": "2026-04-12T17:22:40.927217+00:00"
+}

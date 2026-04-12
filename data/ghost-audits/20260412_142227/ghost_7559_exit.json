@@ -1,0 +1,17 @@
+{
+  "trade_id": 7559,
+  "type": "ghost_exit",
+  "direction": "BUY",
+  "entry_price": 67345.49,
+  "exit_price": 67045.49,
+  "pnl": -300.0,
+  "is_win": false,
+  "exit_reason": "SL_hit",
+  "veto_reason": "ghost_audit:sell_only_mode",
+  "session": "ny",
+  "confidence": 0.4166666666666667,
+  "regime": "unknown",
+  "duration_bars": 8,
+  "open_time": "2026-03-30 19:40:00",
+  "timestamp": "2026-04-12T17:22:58.451739+00:00"
+}

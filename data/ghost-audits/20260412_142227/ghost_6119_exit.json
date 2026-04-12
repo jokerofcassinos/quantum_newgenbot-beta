@@ -1,0 +1,17 @@
+{
+  "trade_id": 6119,
+  "type": "ghost_exit",
+  "direction": "SELL",
+  "entry_price": 76473.85,
+  "exit_price": 75573.85,
+  "pnl": 697.4868585074897,
+  "is_win": true,
+  "exit_reason": "TP_hit",
+  "veto_reason": "ghost_audit:destructive_hours_10UTC",
+  "session": "london",
+  "confidence": 0.4166666666666667,
+  "regime": "unknown",
+  "duration_bars": 57,
+  "open_time": "2026-02-04 10:50:00",
+  "timestamp": "2026-04-12T17:22:48.233088+00:00"
+}

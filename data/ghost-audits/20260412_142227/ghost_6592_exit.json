@@ -1,0 +1,17 @@
+{
+  "trade_id": 6592,
+  "type": "ghost_exit",
+  "direction": "SELL",
+  "entry_price": 65807.2,
+  "exit_price": 66107.2,
+  "pnl": -267.52842507091265,
+  "is_win": false,
+  "exit_reason": "SL_hit",
+  "veto_reason": "advanced_veto:SELL vetoed - RSI 22.8 < 28",
+  "session": "ny",
+  "confidence": 0.5,
+  "regime": "unknown",
+  "duration_bars": 7,
+  "open_time": "2026-02-23 16:40:00",
+  "timestamp": "2026-04-12T17:22:51.617714+00:00"
+}

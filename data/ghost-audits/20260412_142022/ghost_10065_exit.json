@@ -1,0 +1,17 @@
+{
+  "trade_id": 10065,
+  "type": "ghost_exit",
+  "direction": "BUY",
+  "entry_price": 72421.36,
+  "exit_price": 73321.36,
+  "pnl": 600.9964255597378,
+  "is_win": true,
+  "exit_reason": "TP_hit",
+  "veto_reason": "anti_metralhadora:low_quality",
+  "session": "ny",
+  "confidence": 0.4166666666666667,
+  "regime": "unknown",
+  "duration_bars": 55,
+  "open_time": "2026-04-10 18:55:00",
+  "timestamp": "2026-04-12T17:21:01.350710+00:00"
+}

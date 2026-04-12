@@ -1,0 +1,17 @@
+{
+  "trade_id": 5392,
+  "type": "ghost_exit",
+  "direction": "BUY",
+  "entry_price": 92641.34,
+  "exit_price": 92341.34,
+  "pnl": -300.0,
+  "is_win": false,
+  "exit_reason": "SL_hit",
+  "veto_reason": "ghost_audit:sell_only_mode",
+  "session": "asian",
+  "confidence": 0.4166666666666667,
+  "regime": "unknown",
+  "duration_bars": 220,
+  "open_time": "2026-01-19 06:35:00",
+  "timestamp": "2026-04-12T17:22:44.920217+00:00"
+}

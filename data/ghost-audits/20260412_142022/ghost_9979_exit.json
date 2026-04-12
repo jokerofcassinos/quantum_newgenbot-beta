@@ -1,0 +1,17 @@
+{
+  "trade_id": 9979,
+  "type": "ghost_exit",
+  "direction": "SELL",
+  "entry_price": 70914.77,
+  "exit_price": 71214.77,
+  "pnl": -193.5513686013751,
+  "is_win": false,
+  "exit_reason": "SL_hit",
+  "veto_reason": "anti_metralhadora:low_quality",
+  "session": "asian",
+  "confidence": 0.4166666666666667,
+  "regime": "unknown",
+  "duration_bars": 82,
+  "open_time": "2026-04-09 04:50:00",
+  "timestamp": "2026-04-12T17:21:00.883769+00:00"
+}

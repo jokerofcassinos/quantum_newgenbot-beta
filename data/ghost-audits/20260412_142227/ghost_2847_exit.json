@@ -1,0 +1,17 @@
+{
+  "trade_id": 2847,
+  "type": "ghost_exit",
+  "direction": "BUY",
+  "entry_price": 87671.48,
+  "exit_price": 87371.48,
+  "pnl": -300.0,
+  "is_win": false,
+  "exit_reason": "SL_hit",
+  "veto_reason": "ghost_audit:sell_only_mode",
+  "session": "asian",
+  "confidence": 0.5,
+  "regime": "unknown",
+  "duration_bars": 79,
+  "open_time": "2025-12-25 03:45:00",
+  "timestamp": "2026-04-12T17:22:39.089863+00:00"
+}

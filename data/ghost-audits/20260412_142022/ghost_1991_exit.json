@@ -1,0 +1,17 @@
+{
+  "trade_id": 1991,
+  "type": "ghost_exit",
+  "direction": "BUY",
+  "entry_price": 91159.46,
+  "exit_price": 90859.46,
+  "pnl": -225.25928148626738,
+  "is_win": false,
+  "exit_reason": "SL_hit",
+  "veto_reason": "ghost_audit:sell_only_mode",
+  "session": "asian",
+  "confidence": 0.5,
+  "regime": "unknown",
+  "duration_bars": 17,
+  "open_time": "2025-11-27 06:15:00",
+  "timestamp": "2026-04-12T17:20:30.779330+00:00"
+}

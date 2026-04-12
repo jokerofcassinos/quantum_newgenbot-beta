@@ -1,0 +1,17 @@
+{
+  "trade_id": 2316,
+  "type": "ghost_exit",
+  "direction": "SELL",
+  "entry_price": 90318.53,
+  "exit_price": 89418.53,
+  "pnl": 376.25135354747374,
+  "is_win": true,
+  "exit_reason": "TP_hit",
+  "veto_reason": "advanced_veto:SELL vetoed - RSI 20.2 < 28",
+  "session": "asian",
+  "confidence": 0.4166666666666667,
+  "regime": "unknown",
+  "duration_bars": 2,
+  "open_time": "2025-12-01 01:55:00",
+  "timestamp": "2026-04-12T17:20:31.552753+00:00"
+}

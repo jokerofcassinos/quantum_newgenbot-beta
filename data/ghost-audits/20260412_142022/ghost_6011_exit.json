@@ -1,0 +1,17 @@
+{
+  "trade_id": 6011,
+  "type": "ghost_exit",
+  "direction": "BUY",
+  "entry_price": 91251.71,
+  "exit_price": 92151.71,
+  "pnl": 900.0,
+  "is_win": true,
+  "exit_reason": "TP_hit",
+  "veto_reason": "ghost_audit:sell_only_mode",
+  "session": "asian",
+  "confidence": 0.5,
+  "regime": "unknown",
+  "duration_bars": 65,
+  "open_time": "2026-01-13 01:55:00",
+  "timestamp": "2026-04-12T17:20:40.916005+00:00"
+}

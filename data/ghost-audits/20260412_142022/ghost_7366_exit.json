@@ -1,0 +1,17 @@
+{
+  "trade_id": 7366,
+  "type": "ghost_exit",
+  "direction": "BUY",
+  "entry_price": 88226.65,
+  "exit_price": 87926.65,
+  "pnl": -300.0,
+  "is_win": false,
+  "exit_reason": "SL_hit",
+  "veto_reason": "ghost_audit:sell_only_mode",
+  "session": "asian",
+  "confidence": 0.5,
+  "regime": "unknown",
+  "duration_bars": 99,
+  "open_time": "2026-01-27 03:15:00",
+  "timestamp": "2026-04-12T17:20:44.390288+00:00"
+}

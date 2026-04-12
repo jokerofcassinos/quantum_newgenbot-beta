@@ -1,0 +1,17 @@
+{
+  "trade_id": 5303,
+  "type": "ghost_exit",
+  "direction": "SELL",
+  "entry_price": 93822.76,
+  "exit_price": 94122.76,
+  "pnl": -282.14908253623514,
+  "is_win": false,
+  "exit_reason": "SL_hit",
+  "veto_reason": "anti_metralhadora:low_quality",
+  "session": "asian",
+  "confidence": 0.4166666666666667,
+  "regime": "unknown",
+  "duration_bars": 4,
+  "open_time": "2026-01-06 03:05:00",
+  "timestamp": "2026-04-12T17:20:39.154550+00:00"
+}

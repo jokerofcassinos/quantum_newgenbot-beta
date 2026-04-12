@@ -1,0 +1,17 @@
+{
+  "trade_id": 9895,
+  "type": "ghost_exit",
+  "direction": "SELL",
+  "entry_price": 68817.34,
+  "exit_price": 69117.34,
+  "pnl": -166.25574449103672,
+  "is_win": false,
+  "exit_reason": "SL_hit",
+  "veto_reason": "anti_metralhadora:low_quality",
+  "session": "asian",
+  "confidence": 0.4166666666666667,
+  "regime": "unknown",
+  "duration_bars": 110,
+  "open_time": "2026-04-07 02:55:00",
+  "timestamp": "2026-04-12T17:21:00.322372+00:00"
+}

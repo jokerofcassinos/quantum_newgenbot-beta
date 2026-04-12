@@ -1,0 +1,17 @@
+{
+  "trade_id": 1979,
+  "type": "ghost_exit",
+  "direction": "SELL",
+  "entry_price": 89039.71,
+  "exit_price": 89431.11035714287,
+  "pnl": -122.67077433974492,
+  "is_win": false,
+  "exit_reason": "SL_hit",
+  "veto_reason": "anti_metralhadora:low_quality",
+  "session": "ny",
+  "confidence": 0.4166666666666667,
+  "regime": "unknown",
+  "duration_bars": 3,
+  "open_time": "2025-11-26 19:35:00",
+  "timestamp": "2026-04-12T17:20:30.730321+00:00"
+}

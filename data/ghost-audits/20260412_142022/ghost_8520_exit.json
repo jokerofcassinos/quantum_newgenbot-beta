@@ -1,0 +1,17 @@
+{
+  "trade_id": 8520,
+  "type": "ghost_exit",
+  "direction": "BUY",
+  "entry_price": 70739.87,
+  "exit_price": 70439.87,
+  "pnl": -290.0452360294638,
+  "is_win": false,
+  "exit_reason": "SL_hit",
+  "veto_reason": "anti_metralhadora:low_quality",
+  "session": "ny_overlap",
+  "confidence": 0.4166666666666667,
+  "regime": "unknown",
+  "duration_bars": 14,
+  "open_time": "2026-03-10 13:55:00",
+  "timestamp": "2026-04-12T17:20:53.026121+00:00"
+}

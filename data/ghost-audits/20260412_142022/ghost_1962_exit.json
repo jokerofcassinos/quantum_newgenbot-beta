@@ -1,0 +1,17 @@
+{
+  "trade_id": 1962,
+  "type": "ghost_exit",
+  "direction": "BUY",
+  "entry_price": 87666.14,
+  "exit_price": 87366.14,
+  "pnl": -288.2761486144399,
+  "is_win": false,
+  "exit_reason": "SL_hit",
+  "veto_reason": "ghost_audit:sell_only_mode",
+  "session": "asian",
+  "confidence": 0.5,
+  "regime": "unknown",
+  "duration_bars": 6,
+  "open_time": "2025-11-26 05:05:00",
+  "timestamp": "2026-04-12T17:20:30.661571+00:00"
+}

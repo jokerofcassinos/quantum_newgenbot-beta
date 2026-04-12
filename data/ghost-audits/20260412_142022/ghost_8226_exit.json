@@ -1,0 +1,17 @@
+{
+  "trade_id": 8226,
+  "type": "ghost_exit",
+  "direction": "SELL",
+  "entry_price": 65918.8,
+  "exit_price": 66219.23071428572,
+  "pnl": -133.5644910788862,
+  "is_win": false,
+  "exit_reason": "SL_hit",
+  "veto_reason": "anti_metralhadora:low_quality",
+  "session": "ny",
+  "confidence": 0.4166666666666667,
+  "regime": "unknown",
+  "duration_bars": 5,
+  "open_time": "2026-02-23 16:50:00",
+  "timestamp": "2026-04-12T17:20:50.199284+00:00"
+}

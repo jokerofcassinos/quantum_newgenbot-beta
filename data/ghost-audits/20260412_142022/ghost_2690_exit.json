@@ -1,0 +1,17 @@
+{
+  "trade_id": 2690,
+  "type": "ghost_exit",
+  "direction": "SELL",
+  "entry_price": 92188.12,
+  "exit_price": 92488.12,
+  "pnl": -264.65962479901873,
+  "is_win": false,
+  "exit_reason": "SL_hit",
+  "veto_reason": "advanced_veto:SELL vetoed - RSI 26.5 < 28",
+  "session": "london",
+  "confidence": 0.4166666666666667,
+  "regime": "unknown",
+  "duration_bars": 16,
+  "open_time": "2025-12-12 10:35:00",
+  "timestamp": "2026-04-12T17:20:33.062775+00:00"
+}

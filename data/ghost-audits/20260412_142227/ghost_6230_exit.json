@@ -1,0 +1,17 @@
+{
+  "trade_id": 6230,
+  "type": "ghost_exit",
+  "direction": "BUY",
+  "entry_price": 68342.19,
+  "exit_price": 69242.19,
+  "pnl": 900.0,
+  "is_win": true,
+  "exit_reason": "TP_hit",
+  "veto_reason": "ghost_audit:sell_only_mode",
+  "session": "london",
+  "confidence": 0.5,
+  "regime": "unknown",
+  "duration_bars": 80,
+  "open_time": "2026-02-16 07:45:00",
+  "timestamp": "2026-04-12T17:22:50.228531+00:00"
+}

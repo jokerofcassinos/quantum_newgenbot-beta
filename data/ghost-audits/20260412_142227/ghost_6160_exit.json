@@ -1,0 +1,17 @@
+{
+  "trade_id": 6160,
+  "type": "ghost_exit",
+  "direction": "BUY",
+  "entry_price": 66795.52,
+  "exit_price": 67695.52,
+  "pnl": 764.5151470564128,
+  "is_win": true,
+  "exit_reason": "TP_hit",
+  "veto_reason": "ghost_audit:sell_only_mode",
+  "session": "ny_overlap",
+  "confidence": 0.4166666666666667,
+  "regime": "unknown",
+  "duration_bars": 9,
+  "open_time": "2026-02-11 15:15:00",
+  "timestamp": "2026-04-12T17:22:49.362823+00:00"
+}

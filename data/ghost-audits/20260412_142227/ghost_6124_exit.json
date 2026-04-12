@@ -1,0 +1,17 @@
+{
+  "trade_id": 6124,
+  "type": "ghost_exit",
+  "direction": "BUY",
+  "entry_price": 70026.95,
+  "exit_price": 69605.12214285714,
+  "pnl": -139.75948828557944,
+  "is_win": false,
+  "exit_reason": "SL_hit",
+  "veto_reason": "ghost_audit:sell_only_mode",
+  "session": "ny_overlap",
+  "confidence": 0.4166666666666667,
+  "regime": "unknown",
+  "duration_bars": 10,
+  "open_time": "2026-02-05 13:25:00",
+  "timestamp": "2026-04-12T17:22:48.398481+00:00"
+}

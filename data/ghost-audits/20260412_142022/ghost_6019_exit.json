@@ -1,0 +1,17 @@
+{
+  "trade_id": 6019,
+  "type": "ghost_exit",
+  "direction": "BUY",
+  "entry_price": 91355.78,
+  "exit_price": 91055.78,
+  "pnl": -300.0,
+  "is_win": false,
+  "exit_reason": "SL_hit",
+  "veto_reason": "ghost_audit:sell_only_mode",
+  "session": "asian",
+  "confidence": 0.5,
+  "regime": "unknown",
+  "duration_bars": 4,
+  "open_time": "2026-01-13 03:15:00",
+  "timestamp": "2026-04-12T17:20:40.878987+00:00"
+}

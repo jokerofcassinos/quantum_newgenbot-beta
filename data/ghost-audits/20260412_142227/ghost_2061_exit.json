@@ -1,0 +1,17 @@
+{
+  "trade_id": 2061,
+  "type": "ghost_exit",
+  "direction": "BUY",
+  "entry_price": 89670.95,
+  "exit_price": 89050.71178571429,
+  "pnl": -92.28662893757578,
+  "is_win": false,
+  "exit_reason": "SL_hit",
+  "veto_reason": "ghost_audit:sell_only_mode",
+  "session": "ny",
+  "confidence": 0.4166666666666667,
+  "regime": "unknown",
+  "duration_bars": 460,
+  "open_time": "2025-12-12 18:00:00",
+  "timestamp": "2026-04-12T17:22:37.251860+00:00"
+}

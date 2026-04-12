@@ -1,0 +1,17 @@
+{
+  "trade_id": 1999,
+  "type": "ghost_exit",
+  "direction": "BUY",
+  "entry_price": 91204.07,
+  "exit_price": 90904.07,
+  "pnl": -260.7420942308865,
+  "is_win": false,
+  "exit_reason": "SL_hit",
+  "veto_reason": "anti_metralhadora:low_quality",
+  "session": "london",
+  "confidence": 0.4166666666666667,
+  "regime": "unknown",
+  "duration_bars": 59,
+  "open_time": "2025-11-27 10:10:00",
+  "timestamp": "2026-04-12T17:20:30.826455+00:00"
+}

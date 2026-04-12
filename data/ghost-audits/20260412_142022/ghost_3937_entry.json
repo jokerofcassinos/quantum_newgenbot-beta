@@ -1,0 +1,15 @@
+{
+  "trade_id": 3937,
+  "type": "ghost_entry",
+  "direction": "SELL",
+  "entry_price": 87201.07,
+  "stop_loss": 87546.2992857143,
+  "take_profit": 86165.38214285714,
+  "volume": 0.24547772111515448,
+  "veto_reason": "advanced_veto:SELL vetoed - RSI 5.1 < 28",
+  "session": "ny",
+  "confidence": 0.4166666666666667,
+  "regime": "unknown",
+  "open_time": "2025-12-26 17:00:00",
+  "timestamp": "2026-04-12T17:20:36.131849+00:00"
+}

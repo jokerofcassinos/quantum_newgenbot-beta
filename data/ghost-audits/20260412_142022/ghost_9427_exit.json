@@ -1,0 +1,17 @@
+{
+  "trade_id": 9427,
+  "type": "ghost_exit",
+  "direction": "SELL",
+  "entry_price": 68118.32,
+  "exit_price": 68418.32,
+  "pnl": -300.0,
+  "is_win": false,
+  "exit_reason": "SL_hit",
+  "veto_reason": "anti_metralhadora:low_quality",
+  "session": "london",
+  "confidence": 0.4166666666666667,
+  "regime": "unknown",
+  "duration_bars": 5,
+  "open_time": "2026-04-01 07:25:00",
+  "timestamp": "2026-04-12T17:20:58.506656+00:00"
+}

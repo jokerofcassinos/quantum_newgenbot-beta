@@ -1,0 +1,17 @@
+{
+  "trade_id": 431,
+  "type": "ghost_exit",
+  "direction": "BUY",
+  "entry_price": 110741.9,
+  "exit_price": 110441.9,
+  "pnl": -172.26833126026727,
+  "is_win": false,
+  "exit_reason": "SL_hit",
+  "veto_reason": "ghost_audit:sell_only_mode",
+  "session": "asian",
+  "confidence": 0.4166666666666667,
+  "regime": "unknown",
+  "duration_bars": 20,
+  "open_time": "2025-10-20 22:55:00",
+  "timestamp": "2026-04-12T17:22:30.852616+00:00"
+}

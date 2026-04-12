@@ -1,0 +1,15 @@
+{
+  "trade_id": 4636,
+  "type": "ghost_entry",
+  "direction": "SELL",
+  "entry_price": 87851.67,
+  "stop_loss": 88151.67,
+  "take_profit": 86951.67,
+  "volume": 1.0,
+  "veto_reason": "anti_metralhadora:low_quality",
+  "session": "ny",
+  "confidence": 0.4166666666666667,
+  "regime": "unknown",
+  "open_time": "2025-12-31 20:30:00",
+  "timestamp": "2026-04-12T17:20:37.721080+00:00"
+}

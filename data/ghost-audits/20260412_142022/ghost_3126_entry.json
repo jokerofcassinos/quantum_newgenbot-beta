@@ -1,0 +1,15 @@
+{
+  "trade_id": 3126,
+  "type": "ghost_entry",
+  "direction": "SELL",
+  "entry_price": 87192.33,
+  "stop_loss": 87492.33,
+  "take_profit": 86292.33,
+  "volume": 0.881040897247113,
+  "veto_reason": "anti_metralhadora:low_quality",
+  "session": "ny_overlap",
+  "confidence": 0.4166666666666667,
+  "regime": "unknown",
+  "open_time": "2025-12-16 14:10:00",
+  "timestamp": "2026-04-12T17:20:34.022121+00:00"
+}

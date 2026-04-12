@@ -1,0 +1,17 @@
+{
+  "trade_id": 4901,
+  "type": "ghost_exit",
+  "direction": "BUY",
+  "entry_price": 92153.65,
+  "exit_price": 91853.65,
+  "pnl": -133.42369673344632,
+  "is_win": false,
+  "exit_reason": "SL_hit",
+  "veto_reason": "advanced_veto:BUY vetoed - price at upper BB",
+  "session": "ny_overlap",
+  "confidence": 0.4166666666666667,
+  "regime": "unknown",
+  "duration_bars": 4,
+  "open_time": "2026-01-13 15:40:00",
+  "timestamp": "2026-04-12T17:22:43.458234+00:00"
+}

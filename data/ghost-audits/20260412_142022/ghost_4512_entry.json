@@ -1,0 +1,15 @@
+{
+  "trade_id": 4512,
+  "type": "ghost_entry",
+  "direction": "BUY",
+  "entry_price": 87467.09,
+  "stop_loss": 87167.09,
+  "take_profit": 88367.09,
+  "volume": 1.0,
+  "veto_reason": "advanced_veto:BUY vetoed - price at upper BB",
+  "session": "london",
+  "confidence": 0.5,
+  "regime": "unknown",
+  "open_time": "2025-12-30 09:45:00",
+  "timestamp": "2026-04-12T17:20:37.377102+00:00"
+}

@@ -1,0 +1,17 @@
+{
+  "trade_id": 4868,
+  "type": "ghost_exit",
+  "direction": "BUY",
+  "entry_price": 88667.81,
+  "exit_price": 88367.81,
+  "pnl": -272.07045452456225,
+  "is_win": false,
+  "exit_reason": "SL_hit",
+  "veto_reason": "ghost_audit:sell_only_mode",
+  "session": "asian",
+  "confidence": 0.5,
+  "regime": "unknown",
+  "duration_bars": 28,
+  "open_time": "2026-01-02 02:00:00",
+  "timestamp": "2026-04-12T17:20:38.102800+00:00"
+}

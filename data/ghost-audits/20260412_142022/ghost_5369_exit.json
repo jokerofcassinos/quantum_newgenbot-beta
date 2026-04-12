@@ -1,0 +1,17 @@
+{
+  "trade_id": 5369,
+  "type": "ghost_exit",
+  "direction": "SELL",
+  "entry_price": 92213.24,
+  "exit_price": 92513.24,
+  "pnl": -252.4369631352476,
+  "is_win": false,
+  "exit_reason": "SL_hit",
+  "veto_reason": "anti_metralhadora:low_quality",
+  "session": "asian",
+  "confidence": 0.4166666666666667,
+  "regime": "unknown",
+  "duration_bars": 11,
+  "open_time": "2026-01-06 21:25:00",
+  "timestamp": "2026-04-12T17:20:39.323605+00:00"
+}

@@ -1,0 +1,15 @@
+{
+  "trade_id": 1964,
+  "type": "ghost_entry",
+  "direction": "BUY",
+  "entry_price": 90398.49,
+  "stop_loss": 90098.49,
+  "take_profit": 91298.49,
+  "volume": 1.0,
+  "veto_reason": "ghost_audit:sell_only_mode",
+  "session": "london",
+  "confidence": 0.5,
+  "regime": "unknown",
+  "open_time": "2025-12-09 11:10:00",
+  "timestamp": "2026-04-12T17:22:36.492400+00:00"
+}

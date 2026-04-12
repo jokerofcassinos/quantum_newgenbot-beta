@@ -1,0 +1,17 @@
+{
+  "trade_id": 8393,
+  "type": "ghost_exit",
+  "direction": "SELL",
+  "entry_price": 72725.34,
+  "exit_price": 73025.34,
+  "pnl": -187.25070848913197,
+  "is_win": false,
+  "exit_reason": "SL_hit",
+  "veto_reason": "anti_metralhadora:low_quality",
+  "session": "asian",
+  "confidence": 0.4166666666666667,
+  "regime": "unknown",
+  "duration_bars": 17,
+  "open_time": "2026-03-05 01:40:00",
+  "timestamp": "2026-04-12T17:20:51.979001+00:00"
+}

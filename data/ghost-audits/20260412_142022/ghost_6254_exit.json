@@ -1,0 +1,17 @@
+{
+  "trade_id": 6254,
+  "type": "ghost_exit",
+  "direction": "SELL",
+  "entry_price": 95232.12,
+  "exit_price": 95532.12,
+  "pnl": -102.78607290643875,
+  "is_win": false,
+  "exit_reason": "SL_hit",
+  "veto_reason": "anti_metralhadora:low_quality",
+  "session": "ny",
+  "confidence": 0.4166666666666667,
+  "regime": "unknown",
+  "duration_bars": 4,
+  "open_time": "2026-01-16 16:45:00",
+  "timestamp": "2026-04-12T17:20:41.532660+00:00"
+}

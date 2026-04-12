@@ -1,0 +1,17 @@
+{
+  "trade_id": 8781,
+  "type": "ghost_exit",
+  "direction": "BUY",
+  "entry_price": 72902.74,
+  "exit_price": 72521.22464285715,
+  "pnl": -140.21811043518534,
+  "is_win": false,
+  "exit_reason": "SL_hit",
+  "veto_reason": "advanced_veto:BUY vetoed - RSI 87.6 > 72",
+  "session": "asian",
+  "confidence": 0.4166666666666667,
+  "regime": "unknown",
+  "duration_bars": 3,
+  "open_time": "2026-03-16 02:05:00",
+  "timestamp": "2026-04-12T17:20:54.430993+00:00"
+}

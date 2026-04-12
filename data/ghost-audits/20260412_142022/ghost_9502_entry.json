@@ -1,0 +1,15 @@
+{
+  "trade_id": 9502,
+  "type": "ghost_entry",
+  "direction": "BUY",
+  "entry_price": 66749.13,
+  "stop_loss": 66449.13,
+  "take_profit": 67649.13,
+  "volume": 1.0,
+  "veto_reason": "anti_metralhadora:low_quality",
+  "session": "ny_overlap",
+  "confidence": 0.4166666666666667,
+  "regime": "unknown",
+  "open_time": "2026-04-03 13:40:00",
+  "timestamp": "2026-04-12T17:20:58.980106+00:00"
+}

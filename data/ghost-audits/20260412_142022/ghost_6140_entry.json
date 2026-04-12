@@ -1,0 +1,15 @@
+{
+  "trade_id": 6140,
+  "type": "ghost_entry",
+  "direction": "BUY",
+  "entry_price": 96351.27,
+  "stop_loss": 96051.27,
+  "take_profit": 97251.27,
+  "volume": 0.9795898069660774,
+  "veto_reason": "anti_metralhadora:low_quality",
+  "session": "london",
+  "confidence": 0.4166666666666667,
+  "regime": "unknown",
+  "open_time": "2026-01-15 08:05:00",
+  "timestamp": "2026-04-12T17:20:41.271373+00:00"
+}

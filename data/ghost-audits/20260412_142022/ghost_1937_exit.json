@@ -1,0 +1,17 @@
+{
+  "trade_id": 1937,
+  "type": "ghost_exit",
+  "direction": "SELL",
+  "entry_price": 87176.99,
+  "exit_price": 87476.99,
+  "pnl": -154.8771258437514,
+  "is_win": false,
+  "exit_reason": "SL_hit",
+  "veto_reason": "anti_metralhadora:low_quality",
+  "session": "london",
+  "confidence": 0.4166666666666667,
+  "regime": "unknown",
+  "duration_bars": 14,
+  "open_time": "2025-11-25 12:25:00",
+  "timestamp": "2026-04-12T17:20:30.592438+00:00"
+}

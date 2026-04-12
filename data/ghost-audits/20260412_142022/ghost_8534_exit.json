@@ -1,0 +1,17 @@
+{
+  "trade_id": 8534,
+  "type": "ghost_exit",
+  "direction": "SELL",
+  "entry_price": 69879.3,
+  "exit_price": 70179.3,
+  "pnl": -300.0,
+  "is_win": false,
+  "exit_reason": "SL_hit",
+  "veto_reason": "anti_metralhadora:low_quality",
+  "session": "asian",
+  "confidence": 0.4166666666666667,
+  "regime": "unknown",
+  "duration_bars": 63,
+  "open_time": "2026-03-11 02:35:00",
+  "timestamp": "2026-04-12T17:20:53.190519+00:00"
+}

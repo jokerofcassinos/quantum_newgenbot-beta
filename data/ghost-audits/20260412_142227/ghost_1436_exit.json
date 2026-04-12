@@ -1,0 +1,17 @@
+{
+  "trade_id": 1436,
+  "type": "ghost_exit",
+  "direction": "BUY",
+  "entry_price": 103143.55,
+  "exit_price": 104043.55,
+  "pnl": 855.3158481871086,
+  "is_win": true,
+  "exit_reason": "TP_hit",
+  "veto_reason": "ghost_audit:sell_only_mode",
+  "session": "asian",
+  "confidence": 0.4166666666666667,
+  "regime": "unknown",
+  "duration_bars": 46,
+  "open_time": "2025-11-12 06:45:00",
+  "timestamp": "2026-04-12T17:22:33.685678+00:00"
+}

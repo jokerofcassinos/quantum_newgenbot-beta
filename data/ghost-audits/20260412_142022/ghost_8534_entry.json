@@ -1,0 +1,15 @@
+{
+  "trade_id": 8534,
+  "type": "ghost_entry",
+  "direction": "SELL",
+  "entry_price": 69879.3,
+  "stop_loss": 70179.3,
+  "take_profit": 68979.3,
+  "volume": 1.0,
+  "veto_reason": "anti_metralhadora:low_quality",
+  "session": "asian",
+  "confidence": 0.4166666666666667,
+  "regime": "unknown",
+  "open_time": "2026-03-11 02:35:00",
+  "timestamp": "2026-04-12T17:20:53.138938+00:00"
+}

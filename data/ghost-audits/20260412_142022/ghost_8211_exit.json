@@ -1,0 +1,17 @@
+{
+  "trade_id": 8211,
+  "type": "ghost_exit",
+  "direction": "SELL",
+  "entry_price": 67116.57,
+  "exit_price": 66216.57,
+  "pnl": 900.0,
+  "is_win": true,
+  "exit_reason": "TP_hit",
+  "veto_reason": "advanced_veto:SELL vetoed - RSI 23.2 < 28",
+  "session": "asian",
+  "confidence": 0.4166666666666667,
+  "regime": "unknown",
+  "duration_bars": 2,
+  "open_time": "2026-02-23 02:50:00",
+  "timestamp": "2026-04-12T17:20:50.067737+00:00"
+}

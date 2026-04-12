@@ -1,0 +1,17 @@
+{
+  "trade_id": 4509,
+  "type": "ghost_exit",
+  "direction": "BUY",
+  "entry_price": 87414.95,
+  "exit_price": 88314.95,
+  "pnl": 900.0,
+  "is_win": true,
+  "exit_reason": "TP_hit",
+  "veto_reason": "ghost_audit:sell_only_mode",
+  "session": "london",
+  "confidence": 0.5,
+  "regime": "unknown",
+  "duration_bars": 82,
+  "open_time": "2025-12-30 09:30:00",
+  "timestamp": "2026-04-12T17:20:37.433681+00:00"
+}

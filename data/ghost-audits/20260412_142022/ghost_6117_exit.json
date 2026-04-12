@@ -1,0 +1,17 @@
+{
+  "trade_id": 6117,
+  "type": "ghost_exit",
+  "direction": "BUY",
+  "entry_price": 97580.13,
+  "exit_price": 97204.73357142859,
+  "pnl": -181.2129189766415,
+  "is_win": false,
+  "exit_reason": "SL_hit",
+  "veto_reason": "anti_metralhadora:low_quality",
+  "session": "asian",
+  "confidence": 0.4166666666666667,
+  "regime": "unknown",
+  "duration_bars": 26,
+  "open_time": "2026-01-14 22:10:00",
+  "timestamp": "2026-04-12T17:20:41.208521+00:00"
+}

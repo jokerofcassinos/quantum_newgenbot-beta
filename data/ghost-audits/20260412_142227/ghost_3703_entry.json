@@ -1,0 +1,15 @@
+{
+  "trade_id": 3703,
+  "type": "ghost_entry",
+  "direction": "BUY",
+  "entry_price": 87927.96,
+  "stop_loss": 87627.96,
+  "take_profit": 88827.96,
+  "volume": 1.0,
+  "veto_reason": "ghost_audit:sell_only_mode",
+  "session": "asian",
+  "confidence": 0.5,
+  "regime": "unknown",
+  "open_time": "2026-01-01 04:40:00",
+  "timestamp": "2026-04-12T17:22:40.706439+00:00"
+}

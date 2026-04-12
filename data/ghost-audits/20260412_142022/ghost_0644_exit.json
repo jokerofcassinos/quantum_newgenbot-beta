@@ -1,0 +1,17 @@
+{
+  "trade_id": 644,
+  "type": "ghost_exit",
+  "direction": "BUY",
+  "entry_price": 110398.28,
+  "exit_price": 111298.28,
+  "pnl": 544.8326419872581,
+  "is_win": true,
+  "exit_reason": "TP_hit",
+  "veto_reason": "anti_metralhadora:low_quality",
+  "session": "london",
+  "confidence": 0.4166666666666667,
+  "regime": "unknown",
+  "duration_bars": 5,
+  "open_time": "2025-10-24 07:05:00",
+  "timestamp": "2026-04-12T17:20:26.445063+00:00"
+}

@@ -1,0 +1,15 @@
+{
+  "trade_id": 1870,
+  "type": "ghost_entry",
+  "direction": "SELL",
+  "entry_price": 85387.1,
+  "stop_loss": 86151.97785714286,
+  "take_profit": 83092.46642857144,
+  "volume": 0.18523761809936412,
+  "veto_reason": "anti_metralhadora:low_quality",
+  "session": "ny",
+  "confidence": 0.4166666666666667,
+  "regime": "unknown",
+  "open_time": "2025-11-21 19:30:00",
+  "timestamp": "2026-04-12T17:20:30.254830+00:00"
+}

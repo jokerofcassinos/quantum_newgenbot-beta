@@ -1,0 +1,17 @@
+{
+  "trade_id": 6047,
+  "type": "ghost_exit",
+  "direction": "BUY",
+  "entry_price": 85291.66,
+  "exit_price": 84793.87964285715,
+  "pnl": -92.14448040604489,
+  "is_win": false,
+  "exit_reason": "SL_hit",
+  "veto_reason": "ghost_audit:sell_only_mode",
+  "session": "ny",
+  "confidence": 0.4166666666666667,
+  "regime": "unknown",
+  "duration_bars": 6,
+  "open_time": "2026-01-29 17:10:00",
+  "timestamp": "2026-04-12T17:22:47.223066+00:00"
+}

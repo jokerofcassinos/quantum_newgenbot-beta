@@ -1,0 +1,17 @@
+{
+  "trade_id": 7974,
+  "type": "ghost_exit",
+  "direction": "BUY",
+  "entry_price": 67978.32,
+  "exit_price": 67678.32,
+  "pnl": -300.0,
+  "is_win": false,
+  "exit_reason": "SL_hit",
+  "veto_reason": "session_veto:Trading disabled for Weekend session",
+  "session": "weekend",
+  "confidence": 0.4166666666666667,
+  "regime": "unknown",
+  "duration_bars": 3,
+  "open_time": "2026-02-21 04:50:00",
+  "timestamp": "2026-04-12T17:20:49.505363+00:00"
+}

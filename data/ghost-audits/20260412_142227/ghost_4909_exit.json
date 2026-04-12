@@ -1,0 +1,17 @@
+{
+  "trade_id": 4909,
+  "type": "ghost_exit",
+  "direction": "BUY",
+  "entry_price": 95227.39,
+  "exit_price": 94927.39,
+  "pnl": -271.2318129336505,
+  "is_win": false,
+  "exit_reason": "SL_hit",
+  "veto_reason": "ghost_audit:sell_only_mode",
+  "session": "asian",
+  "confidence": 0.4166666666666667,
+  "regime": "unknown",
+  "duration_bars": 44,
+  "open_time": "2026-01-14 03:40:00",
+  "timestamp": "2026-04-12T17:22:43.578634+00:00"
+}

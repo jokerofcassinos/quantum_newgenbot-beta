@@ -1,0 +1,17 @@
+{
+  "trade_id": 2018,
+  "type": "ghost_exit",
+  "direction": "BUY",
+  "entry_price": 91461.87,
+  "exit_price": 91161.87,
+  "pnl": -211.08799773305918,
+  "is_win": false,
+  "exit_reason": "SL_hit",
+  "veto_reason": "anti_metralhadora:low_quality",
+  "session": "ny_overlap",
+  "confidence": 0.4166666666666667,
+  "regime": "unknown",
+  "duration_bars": 15,
+  "open_time": "2025-11-27 13:05:00",
+  "timestamp": "2026-04-12T17:20:30.818085+00:00"
+}

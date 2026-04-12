@@ -1,0 +1,17 @@
+{
+  "trade_id": 6163,
+  "type": "ghost_exit",
+  "direction": "BUY",
+  "entry_price": 67386.46,
+  "exit_price": 67086.46,
+  "pnl": -284.4748919558315,
+  "is_win": false,
+  "exit_reason": "SL_hit",
+  "veto_reason": "ghost_audit:sell_only_mode",
+  "session": "asian",
+  "confidence": 0.4166666666666667,
+  "regime": "unknown",
+  "duration_bars": 5,
+  "open_time": "2026-02-12 00:55:00",
+  "timestamp": "2026-04-12T17:22:49.436640+00:00"
+}

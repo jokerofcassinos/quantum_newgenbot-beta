@@ -1,0 +1,17 @@
+{
+  "trade_id": 6828,
+  "type": "ghost_exit",
+  "direction": "SELL",
+  "entry_price": 69859.79,
+  "exit_price": 68959.79,
+  "pnl": 900.0,
+  "is_win": true,
+  "exit_reason": "TP_hit",
+  "veto_reason": "ghost_audit:destructive_hours_10UTC",
+  "session": "london",
+  "confidence": 0.5,
+  "regime": "unknown",
+  "duration_bars": 59,
+  "open_time": "2026-03-11 10:10:00",
+  "timestamp": "2026-04-12T17:22:54.403505+00:00"
+}

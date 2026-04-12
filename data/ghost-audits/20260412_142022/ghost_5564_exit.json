@@ -1,0 +1,17 @@
+{
+  "trade_id": 5564,
+  "type": "ghost_exit",
+  "direction": "SELL",
+  "entry_price": 90662.89,
+  "exit_price": 90970.37071428572,
+  "pnl": -181.21291897664847,
+  "is_win": false,
+  "exit_reason": "SL_hit",
+  "veto_reason": "anti_metralhadora:low_quality",
+  "session": "ny",
+  "confidence": 0.4166666666666667,
+  "regime": "unknown",
+  "duration_bars": 451,
+  "open_time": "2026-01-09 20:35:00",
+  "timestamp": "2026-04-12T17:20:40.443580+00:00"
+}

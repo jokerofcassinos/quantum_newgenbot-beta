@@ -1,0 +1,17 @@
+{
+  "trade_id": 7060,
+  "type": "ghost_exit",
+  "direction": "SELL",
+  "entry_price": 74295.23,
+  "exit_price": 73395.23,
+  "pnl": 900.0,
+  "is_win": true,
+  "exit_reason": "TP_hit",
+  "veto_reason": "ghost_audit:destructive_hours_10UTC",
+  "session": "london",
+  "confidence": 0.4166666666666667,
+  "regime": "unknown",
+  "duration_bars": 75,
+  "open_time": "2026-03-17 10:35:00",
+  "timestamp": "2026-04-12T17:22:55.575802+00:00"
+}

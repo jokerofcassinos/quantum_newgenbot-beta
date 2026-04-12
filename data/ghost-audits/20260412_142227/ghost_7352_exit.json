@@ -1,0 +1,17 @@
+{
+  "trade_id": 7352,
+  "type": "ghost_exit",
+  "direction": "BUY",
+  "entry_price": 71307.2,
+  "exit_price": 71007.2,
+  "pnl": -225.85718072478517,
+  "is_win": false,
+  "exit_reason": "SL_hit",
+  "veto_reason": "advanced_veto:BUY vetoed - RSI 73.8 > 72",
+  "session": "asian",
+  "confidence": 0.4166666666666667,
+  "regime": "unknown",
+  "duration_bars": 41,
+  "open_time": "2026-03-26 01:50:00",
+  "timestamp": "2026-04-12T17:22:57.441286+00:00"
+}

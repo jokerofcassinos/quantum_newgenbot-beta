@@ -1,0 +1,15 @@
+{
+  "trade_id": 60,
+  "type": "ghost_entry",
+  "direction": "BUY",
+  "entry_price": 121024.61,
+  "stop_loss": 120724.61,
+  "take_profit": 121924.61,
+  "volume": 0.01,
+  "veto_reason": "advanced_veto:BUY vetoed - price at upper BB",
+  "session": "asian",
+  "confidence": 0.4166666666666667,
+  "regime": "unknown",
+  "open_time": "2025-10-10 00:05:00",
+  "timestamp": "2026-04-12T17:22:29.773041+00:00"
+}

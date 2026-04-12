@@ -1,0 +1,17 @@
+{
+  "trade_id": 6883,
+  "type": "ghost_exit",
+  "direction": "BUY",
+  "entry_price": 90073.86,
+  "exit_price": 89773.86,
+  "pnl": -300.0,
+  "is_win": false,
+  "exit_reason": "SL_hit",
+  "veto_reason": "advanced_veto:BUY vetoed - price at upper BB",
+  "session": "london",
+  "confidence": 0.4166666666666667,
+  "regime": "unknown",
+  "duration_bars": 33,
+  "open_time": "2026-01-22 12:50:00",
+  "timestamp": "2026-04-12T17:20:43.058704+00:00"
+}

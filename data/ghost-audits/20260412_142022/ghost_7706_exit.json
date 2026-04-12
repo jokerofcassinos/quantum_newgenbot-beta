@@ -1,0 +1,17 @@
+{
+  "trade_id": 7706,
+  "type": "ghost_exit",
+  "direction": "BUY",
+  "entry_price": 65912.13,
+  "exit_price": 68109.75964285714,
+  "pnl": 433.0555240619951,
+  "is_win": true,
+  "exit_reason": "TP_hit",
+  "veto_reason": "anti_metralhadora:low_quality",
+  "session": "ny",
+  "confidence": 0.4166666666666667,
+  "regime": "unknown",
+  "duration_bars": 76,
+  "open_time": "2026-02-11 17:05:00",
+  "timestamp": "2026-04-12T17:20:47.460902+00:00"
+}

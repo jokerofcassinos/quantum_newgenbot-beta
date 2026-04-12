@@ -1,0 +1,17 @@
+{
+  "trade_id": 9912,
+  "type": "ghost_exit",
+  "direction": "SELL",
+  "entry_price": 68697.87,
+  "exit_price": 67797.87,
+  "pnl": 900.0,
+  "is_win": true,
+  "exit_reason": "TP_hit",
+  "veto_reason": "advanced_veto:SELL vetoed - RSI 22.7 < 28",
+  "session": "ny_overlap",
+  "confidence": 0.4166666666666667,
+  "regime": "unknown",
+  "duration_bars": 43,
+  "open_time": "2026-04-07 13:30:00",
+  "timestamp": "2026-04-12T17:21:00.384581+00:00"
+}

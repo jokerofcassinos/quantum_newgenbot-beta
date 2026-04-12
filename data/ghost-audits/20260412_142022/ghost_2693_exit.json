@@ -1,0 +1,17 @@
+{
+  "trade_id": 2693,
+  "type": "ghost_exit",
+  "direction": "SELL",
+  "entry_price": 92341.94,
+  "exit_price": 91441.94,
+  "pnl": 865.8845642374977,
+  "is_win": true,
+  "exit_reason": "TP_hit",
+  "veto_reason": "anti_metralhadora:low_quality",
+  "session": "london",
+  "confidence": 0.4166666666666667,
+  "regime": "unknown",
+  "duration_bars": 74,
+  "open_time": "2025-12-12 11:15:00",
+  "timestamp": "2026-04-12T17:20:33.103265+00:00"
+}

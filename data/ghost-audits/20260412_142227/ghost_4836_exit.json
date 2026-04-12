@@ -1,0 +1,17 @@
+{
+  "trade_id": 4836,
+  "type": "ghost_exit",
+  "direction": "BUY",
+  "entry_price": 91714.1,
+  "exit_price": 91414.1,
+  "pnl": -208.98575860156163,
+  "is_win": false,
+  "exit_reason": "SL_hit",
+  "veto_reason": "advanced_veto:BUY vetoed - RSI 73.0 > 72",
+  "session": "asian",
+  "confidence": 0.4166666666666667,
+  "regime": "unknown",
+  "duration_bars": 66,
+  "open_time": "2026-01-12 04:15:00",
+  "timestamp": "2026-04-12T17:22:43.242215+00:00"
+}

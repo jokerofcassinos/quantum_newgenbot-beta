@@ -1,0 +1,17 @@
+{
+  "trade_id": 5524,
+  "type": "ghost_exit",
+  "direction": "BUY",
+  "entry_price": 89192.29,
+  "exit_price": 88892.29,
+  "pnl": -300.0,
+  "is_win": false,
+  "exit_reason": "SL_hit",
+  "veto_reason": "ghost_audit:sell_only_mode",
+  "session": "asian",
+  "confidence": 0.4166666666666667,
+  "regime": "unknown",
+  "duration_bars": 134,
+  "open_time": "2026-01-23 00:35:00",
+  "timestamp": "2026-04-12T17:22:45.600589+00:00"
+}

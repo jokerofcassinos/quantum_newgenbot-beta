@@ -1,0 +1,17 @@
+{
+  "trade_id": 820,
+  "type": "ghost_exit",
+  "direction": "SELL",
+  "entry_price": 115475.27,
+  "exit_price": 114575.27,
+  "pnl": 776.1552317916068,
+  "is_win": true,
+  "exit_reason": "TP_hit",
+  "veto_reason": "ghost_audit:destructive_hours_13UTC",
+  "session": "ny_overlap",
+  "confidence": 0.4166666666666667,
+  "regime": "unknown",
+  "duration_bars": 37,
+  "open_time": "2025-10-27 13:35:00",
+  "timestamp": "2026-04-12T17:22:31.695250+00:00"
+}

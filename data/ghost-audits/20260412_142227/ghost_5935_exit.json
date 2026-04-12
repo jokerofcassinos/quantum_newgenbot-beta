@@ -1,0 +1,17 @@
+{
+  "trade_id": 5935,
+  "type": "ghost_exit",
+  "direction": "BUY",
+  "entry_price": 87837.22,
+  "exit_price": 88737.22,
+  "pnl": 900.0,
+  "is_win": true,
+  "exit_reason": "TP_hit",
+  "veto_reason": "ghost_audit:sell_only_mode",
+  "session": "ny_overlap",
+  "confidence": 0.6666666666666666,
+  "regime": "unknown",
+  "duration_bars": 36,
+  "open_time": "2026-01-26 14:10:00",
+  "timestamp": "2026-04-12T17:22:46.583812+00:00"
+}

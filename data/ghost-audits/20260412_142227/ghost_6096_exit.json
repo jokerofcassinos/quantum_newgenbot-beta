@@ -1,0 +1,17 @@
+{
+  "trade_id": 6096,
+  "type": "ghost_exit",
+  "direction": "SELL",
+  "entry_price": 77924.96,
+  "exit_price": 78224.96,
+  "pnl": -226.5167911616068,
+  "is_win": false,
+  "exit_reason": "SL_hit",
+  "veto_reason": "ghost_audit:destructive_hours_14UTC",
+  "session": "ny_overlap",
+  "confidence": 0.4166666666666667,
+  "regime": "unknown",
+  "duration_bars": 3,
+  "open_time": "2026-02-02 14:10:00",
+  "timestamp": "2026-04-12T17:22:47.870634+00:00"
+}

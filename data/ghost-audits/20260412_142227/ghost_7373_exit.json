@@ -1,0 +1,17 @@
+{
+  "trade_id": 7373,
+  "type": "ghost_exit",
+  "direction": "SELL",
+  "entry_price": 68717.78,
+  "exit_price": 69017.78,
+  "pnl": -258.6954417892179,
+  "is_win": false,
+  "exit_reason": "SL_hit",
+  "veto_reason": "advanced_veto:SELL vetoed - price at lower BB",
+  "session": "asian",
+  "confidence": 0.4166666666666667,
+  "regime": "unknown",
+  "duration_bars": 42,
+  "open_time": "2026-03-27 01:25:00",
+  "timestamp": "2026-04-12T17:22:57.667136+00:00"
+}

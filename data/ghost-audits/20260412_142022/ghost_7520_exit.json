@@ -1,0 +1,17 @@
+{
+  "trade_id": 7520,
+  "type": "ghost_exit",
+  "direction": "SELL",
+  "entry_price": 87910.98,
+  "exit_price": 88210.98,
+  "pnl": -272.2102321924961,
+  "is_win": false,
+  "exit_reason": "SL_hit",
+  "veto_reason": "advanced_veto:SELL vetoed - RSI 18.9 < 28",
+  "session": "london",
+  "confidence": 0.4166666666666667,
+  "regime": "unknown",
+  "duration_bars": 3,
+  "open_time": "2026-01-29 10:10:00",
+  "timestamp": "2026-04-12T17:20:44.920883+00:00"
+}

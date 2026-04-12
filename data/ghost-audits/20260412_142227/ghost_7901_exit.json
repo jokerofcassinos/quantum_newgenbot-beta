@@ -1,0 +1,17 @@
+{
+  "trade_id": 7901,
+  "type": "ghost_exit",
+  "direction": "BUY",
+  "entry_price": 72931.25,
+  "exit_price": 72631.25,
+  "pnl": -275.81252449914075,
+  "is_win": false,
+  "exit_reason": "SL_hit",
+  "veto_reason": "ghost_audit:sell_only_mode",
+  "session": "asian",
+  "confidence": 0.4166666666666667,
+  "regime": "unknown",
+  "duration_bars": 70,
+  "open_time": "2026-04-10 21:15:00",
+  "timestamp": "2026-04-12T17:23:01.017374+00:00"
+}

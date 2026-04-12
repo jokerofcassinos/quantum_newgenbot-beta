@@ -1,0 +1,17 @@
+{
+  "trade_id": 6776,
+  "type": "ghost_exit",
+  "direction": "BUY",
+  "entry_price": 91197.9,
+  "exit_price": 90897.9,
+  "pnl": -300.0,
+  "is_win": false,
+  "exit_reason": "SL_hit",
+  "veto_reason": "ghost_audit:sell_only_mode",
+  "session": "ny_overlap",
+  "confidence": 0.5,
+  "regime": "unknown",
+  "duration_bars": 14,
+  "open_time": "2026-01-20 14:00:00",
+  "timestamp": "2026-04-12T17:20:42.682092+00:00"
+}

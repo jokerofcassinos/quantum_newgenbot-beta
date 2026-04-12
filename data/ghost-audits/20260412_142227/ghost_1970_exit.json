@@ -1,0 +1,17 @@
+{
+  "trade_id": 1970,
+  "type": "ghost_exit",
+  "direction": "SELL",
+  "entry_price": 90206.58,
+  "exit_price": 90506.58,
+  "pnl": -269.7475177541161,
+  "is_win": false,
+  "exit_reason": "SL_hit",
+  "veto_reason": "ghost_audit:destructive_hours_13UTC",
+  "session": "ny_overlap",
+  "confidence": 0.4166666666666667,
+  "regime": "unknown",
+  "duration_bars": 9,
+  "open_time": "2025-12-09 13:30:00",
+  "timestamp": "2026-04-12T17:22:36.509559+00:00"
+}

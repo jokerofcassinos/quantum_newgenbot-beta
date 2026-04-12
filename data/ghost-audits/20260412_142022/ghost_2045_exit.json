@@ -1,0 +1,17 @@
+{
+  "trade_id": 2045,
+  "type": "ghost_exit",
+  "direction": "BUY",
+  "entry_price": 91091.77,
+  "exit_price": 91991.77,
+  "pnl": 900.0,
+  "is_win": true,
+  "exit_reason": "TP_hit",
+  "veto_reason": "anti_metralhadora:low_quality",
+  "session": "asian",
+  "confidence": 0.4166666666666667,
+  "regime": "unknown",
+  "duration_bars": 121,
+  "open_time": "2025-11-28 05:40:00",
+  "timestamp": "2026-04-12T17:20:30.961612+00:00"
+}

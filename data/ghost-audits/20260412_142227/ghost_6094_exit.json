@@ -1,0 +1,17 @@
+{
+  "trade_id": 6094,
+  "type": "ghost_exit",
+  "direction": "BUY",
+  "entry_price": 74585.24,
+  "exit_price": 76260.55785714286,
+  "pnl": 555.3504079023747,
+  "is_win": true,
+  "exit_reason": "TP_hit",
+  "veto_reason": "ghost_audit:sell_only_mode",
+  "session": "asian",
+  "confidence": 0.4166666666666667,
+  "regime": "unknown",
+  "duration_bars": 4,
+  "open_time": "2026-02-02 05:35:00",
+  "timestamp": "2026-04-12T17:22:47.817799+00:00"
+}

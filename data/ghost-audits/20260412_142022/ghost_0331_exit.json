@@ -1,0 +1,17 @@
+{
+  "trade_id": 331,
+  "type": "ghost_exit",
+  "direction": "BUY",
+  "entry_price": 108256.79,
+  "exit_price": 107565.52571428572,
+  "pnl": -95.93789354078572,
+  "is_win": false,
+  "exit_reason": "SL_hit",
+  "veto_reason": "anti_metralhadora:low_quality",
+  "session": "ny",
+  "confidence": 0.4166666666666667,
+  "regime": "unknown",
+  "duration_bars": 6,
+  "open_time": "2025-10-16 19:00:00",
+  "timestamp": "2026-04-12T17:20:25.668156+00:00"
+}

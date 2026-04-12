@@ -1,0 +1,17 @@
+{
+  "trade_id": 9026,
+  "type": "ghost_exit",
+  "direction": "SELL",
+  "entry_price": 70160.79,
+  "exit_price": 69260.79,
+  "pnl": 900.0,
+  "is_win": true,
+  "exit_reason": "TP_hit",
+  "veto_reason": "session_veto:Trading disabled for Weekend session",
+  "session": "weekend",
+  "confidence": 0.5,
+  "regime": "unknown",
+  "duration_bars": 7,
+  "open_time": "2026-03-22 02:15:00",
+  "timestamp": "2026-04-12T17:20:55.968479+00:00"
+}

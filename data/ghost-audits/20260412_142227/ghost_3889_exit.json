@@ -1,0 +1,17 @@
+{
+  "trade_id": 3889,
+  "type": "ghost_exit",
+  "direction": "BUY",
+  "entry_price": 88928.3,
+  "exit_price": 89828.3,
+  "pnl": 900.0,
+  "is_win": true,
+  "exit_reason": "TP_hit",
+  "veto_reason": "ghost_audit:sell_only_mode",
+  "session": "london",
+  "confidence": 0.4166666666666667,
+  "regime": "unknown",
+  "duration_bars": 39,
+  "open_time": "2026-01-02 09:00:00",
+  "timestamp": "2026-04-12T17:22:41.073012+00:00"
+}

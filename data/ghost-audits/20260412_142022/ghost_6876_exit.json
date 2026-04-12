@@ -1,0 +1,17 @@
+{
+  "trade_id": 6876,
+  "type": "ghost_exit",
+  "direction": "BUY",
+  "entry_price": 89965.3,
+  "exit_price": 89665.3,
+  "pnl": -300.0,
+  "is_win": false,
+  "exit_reason": "SL_hit",
+  "veto_reason": "ghost_audit:sell_only_mode",
+  "session": "london",
+  "confidence": 0.5,
+  "regime": "unknown",
+  "duration_bars": 41,
+  "open_time": "2026-01-22 12:15:00",
+  "timestamp": "2026-04-12T17:20:43.071349+00:00"
+}

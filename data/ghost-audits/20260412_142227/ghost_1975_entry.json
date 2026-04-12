@@ -1,0 +1,15 @@
+{
+  "trade_id": 1975,
+  "type": "ghost_entry",
+  "direction": "BUY",
+  "entry_price": 90535.98,
+  "stop_loss": 90235.98,
+  "take_profit": 91435.98,
+  "volume": 1.0,
+  "veto_reason": "ghost_audit:sell_only_mode",
+  "session": "ny_overlap",
+  "confidence": 0.4166666666666667,
+  "regime": "unknown",
+  "open_time": "2025-12-09 15:15:00",
+  "timestamp": "2026-04-12T17:22:36.516100+00:00"
+}

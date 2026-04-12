@@ -1,0 +1,15 @@
+{
+  "trade_id": 8292,
+  "type": "ghost_entry",
+  "direction": "BUY",
+  "entry_price": 67766.76,
+  "stop_loss": 67466.76,
+  "take_profit": 68666.76,
+  "volume": 0.504982876807194,
+  "veto_reason": "anti_metralhadora:low_quality",
+  "session": "london",
+  "confidence": 0.4166666666666667,
+  "regime": "unknown",
+  "open_time": "2026-02-27 07:00:00",
+  "timestamp": "2026-04-12T17:20:50.853318+00:00"
+}

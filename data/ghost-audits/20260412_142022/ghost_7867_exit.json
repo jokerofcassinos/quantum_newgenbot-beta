@@ -1,0 +1,17 @@
+{
+  "trade_id": 7867,
+  "type": "ghost_exit",
+  "direction": "SELL",
+  "entry_price": 67055.55,
+  "exit_price": 67423.01785714286,
+  "pnl": -137.25918506411196,
+  "is_win": false,
+  "exit_reason": "SL_hit",
+  "veto_reason": "advanced_veto:SELL vetoed - RSI 15.2 < 28",
+  "session": "ny",
+  "confidence": 0.4166666666666667,
+  "regime": "unknown",
+  "duration_bars": 15,
+  "open_time": "2026-02-17 16:45:00",
+  "timestamp": "2026-04-12T17:20:48.694352+00:00"
+}

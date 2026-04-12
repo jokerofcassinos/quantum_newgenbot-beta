@@ -1,0 +1,17 @@
+{
+  "trade_id": 2446,
+  "type": "ghost_exit",
+  "direction": "BUY",
+  "entry_price": 91194.29,
+  "exit_price": 90894.29,
+  "pnl": -229.02039942399765,
+  "is_win": false,
+  "exit_reason": "SL_hit",
+  "veto_reason": "anti_metralhadora:low_quality",
+  "session": "ny_overlap",
+  "confidence": 0.4166666666666667,
+  "regime": "unknown",
+  "duration_bars": 5,
+  "open_time": "2025-12-05 14:55:00",
+  "timestamp": "2026-04-12T17:20:32.089722+00:00"
+}

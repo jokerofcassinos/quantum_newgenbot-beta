@@ -1,0 +1,17 @@
+{
+  "trade_id": 4828,
+  "type": "ghost_exit",
+  "direction": "BUY",
+  "entry_price": 88344.9,
+  "exit_price": 89244.9,
+  "pnl": 563.8927753940424,
+  "is_win": true,
+  "exit_reason": "TP_hit",
+  "veto_reason": "advanced_veto:BUY vetoed - RSI 75.0 > 72",
+  "session": "ny",
+  "confidence": 0.4166666666666667,
+  "regime": "unknown",
+  "duration_bars": 182,
+  "open_time": "2026-01-01 19:50:00",
+  "timestamp": "2026-04-12T17:20:38.204336+00:00"
+}

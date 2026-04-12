@@ -1,0 +1,15 @@
+{
+  "trade_id": 1093,
+  "type": "ghost_entry",
+  "direction": "BUY",
+  "entry_price": 113169.57,
+  "stop_loss": 112869.57,
+  "take_profit": 114069.57,
+  "volume": 0.9494132241025798,
+  "veto_reason": "advanced_veto:BUY vetoed - price at upper BB",
+  "session": "ny_overlap",
+  "confidence": 0.5,
+  "regime": "unknown",
+  "open_time": "2025-10-29 15:50:00",
+  "timestamp": "2026-04-12T17:20:27.413647+00:00"
+}

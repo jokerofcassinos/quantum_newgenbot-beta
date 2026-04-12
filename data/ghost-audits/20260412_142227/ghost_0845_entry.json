@@ -1,0 +1,15 @@
+{
+  "trade_id": 845,
+  "type": "ghost_entry",
+  "direction": "BUY",
+  "entry_price": 113840.72,
+  "stop_loss": 113540.72,
+  "take_profit": 114740.72,
+  "volume": 1.0,
+  "veto_reason": "ghost_audit:sell_only_mode",
+  "session": "london",
+  "confidence": 0.5,
+  "regime": "unknown",
+  "open_time": "2025-10-28 08:20:00",
+  "timestamp": "2026-04-12T17:22:31.759316+00:00"
+}

@@ -1,0 +1,17 @@
+{
+  "trade_id": 7733,
+  "type": "ghost_exit",
+  "direction": "SELL",
+  "entry_price": 68864.62,
+  "exit_price": 69445.66857142857,
+  "pnl": -96.23456090266642,
+  "is_win": false,
+  "exit_reason": "SL_hit",
+  "veto_reason": "anti_metralhadora:low_quality",
+  "session": "ny",
+  "confidence": 0.4166666666666667,
+  "regime": "unknown",
+  "duration_bars": 186,
+  "open_time": "2026-02-13 17:25:00",
+  "timestamp": "2026-04-12T17:20:48.017979+00:00"
+}

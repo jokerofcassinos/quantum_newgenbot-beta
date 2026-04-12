@@ -1,0 +1,17 @@
+{
+  "trade_id": 2797,
+  "type": "ghost_exit",
+  "direction": "SELL",
+  "entry_price": 88092.14,
+  "exit_price": 87192.14,
+  "pnl": 573.4691116053085,
+  "is_win": true,
+  "exit_reason": "TP_hit",
+  "veto_reason": "advanced_veto:SELL vetoed - RSI 31.8 rising",
+  "session": "asian",
+  "confidence": 0.5,
+  "regime": "unknown",
+  "duration_bars": 37,
+  "open_time": "2025-12-23 05:10:00",
+  "timestamp": "2026-04-12T17:22:38.757662+00:00"
+}

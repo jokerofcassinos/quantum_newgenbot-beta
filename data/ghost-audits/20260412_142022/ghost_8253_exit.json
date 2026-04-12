@@ -1,0 +1,17 @@
+{
+  "trade_id": 8253,
+  "type": "ghost_exit",
+  "direction": "SELL",
+  "entry_price": 64152.47,
+  "exit_price": 64452.47,
+  "pnl": -300.0,
+  "is_win": false,
+  "exit_reason": "SL_hit",
+  "veto_reason": "anti_metralhadora:low_quality",
+  "session": "asian",
+  "confidence": 0.4166666666666667,
+  "regime": "unknown",
+  "duration_bars": 21,
+  "open_time": "2026-02-25 01:25:00",
+  "timestamp": "2026-04-12T17:20:50.439310+00:00"
+}

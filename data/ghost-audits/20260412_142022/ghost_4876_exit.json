@@ -1,0 +1,17 @@
+{
+  "trade_id": 4876,
+  "type": "ghost_exit",
+  "direction": "BUY",
+  "entry_price": 88657.84,
+  "exit_price": 88357.84,
+  "pnl": -300.0,
+  "is_win": false,
+  "exit_reason": "SL_hit",
+  "veto_reason": "ghost_audit:sell_only_mode",
+  "session": "asian",
+  "confidence": 0.5,
+  "regime": "unknown",
+  "duration_bars": 12,
+  "open_time": "2026-01-02 03:20:00",
+  "timestamp": "2026-04-12T17:20:38.103713+00:00"
+}

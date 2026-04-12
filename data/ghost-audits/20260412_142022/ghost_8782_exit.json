@@ -1,0 +1,17 @@
+{
+  "trade_id": 8782,
+  "type": "ghost_exit",
+  "direction": "BUY",
+  "entry_price": 72505.41,
+  "exit_price": 73405.41,
+  "pnl": 861.8113075116859,
+  "is_win": true,
+  "exit_reason": "TP_hit",
+  "veto_reason": "anti_metralhadora:low_quality",
+  "session": "asian",
+  "confidence": 0.4166666666666667,
+  "regime": "unknown",
+  "duration_bars": 35,
+  "open_time": "2026-03-16 03:35:00",
+  "timestamp": "2026-04-12T17:20:54.451209+00:00"
+}

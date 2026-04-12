@@ -1,0 +1,17 @@
+{
+  "trade_id": 8826,
+  "type": "ghost_exit",
+  "direction": "SELL",
+  "entry_price": 74138.21,
+  "exit_price": 73238.21,
+  "pnl": 835.0991042715108,
+  "is_win": true,
+  "exit_reason": "TP_hit",
+  "veto_reason": "anti_metralhadora:low_quality",
+  "session": "london",
+  "confidence": 0.4166666666666667,
+  "regime": "unknown",
+  "duration_bars": 61,
+  "open_time": "2026-03-18 09:25:00",
+  "timestamp": "2026-04-12T17:20:55.063758+00:00"
+}

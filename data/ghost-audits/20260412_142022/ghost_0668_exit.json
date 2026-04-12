@@ -1,0 +1,17 @@
+{
+  "trade_id": 668,
+  "type": "ghost_exit",
+  "direction": "BUY",
+  "entry_price": 111125.05,
+  "exit_price": 110825.05,
+  "pnl": -200.61570583768417,
+  "is_win": false,
+  "exit_reason": "SL_hit",
+  "veto_reason": "anti_metralhadora:low_quality",
+  "session": "ny_overlap",
+  "confidence": 0.4166666666666667,
+  "regime": "unknown",
+  "duration_bars": 10,
+  "open_time": "2025-10-24 13:40:00",
+  "timestamp": "2026-04-12T17:20:26.494098+00:00"
+}

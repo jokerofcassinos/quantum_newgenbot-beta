@@ -1,0 +1,17 @@
+{
+  "trade_id": 5521,
+  "type": "ghost_exit",
+  "direction": "SELL",
+  "entry_price": 89449.44,
+  "exit_price": 89790.76285714286,
+  "pnl": -91.63288173038057,
+  "is_win": false,
+  "exit_reason": "SL_hit",
+  "veto_reason": "ghost_audit:destructive_hours_16UTC",
+  "session": "ny",
+  "confidence": 0.4166666666666667,
+  "regime": "unknown",
+  "duration_bars": 59,
+  "open_time": "2026-01-22 16:40:00",
+  "timestamp": "2026-04-12T17:22:45.475870+00:00"
+}

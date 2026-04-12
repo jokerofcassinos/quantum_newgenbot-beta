@@ -1,0 +1,17 @@
+{
+  "trade_id": 1875,
+  "type": "ghost_exit",
+  "direction": "SELL",
+  "entry_price": 85211.39,
+  "exit_price": 83808.10035714286,
+  "pnl": 425.0524571822661,
+  "is_win": true,
+  "exit_reason": "TP_hit",
+  "veto_reason": "anti_metralhadora:low_quality",
+  "session": "asian",
+  "confidence": 0.4166666666666667,
+  "regime": "unknown",
+  "duration_bars": 81,
+  "open_time": "2025-11-21 23:40:00",
+  "timestamp": "2026-04-12T17:20:30.302136+00:00"
+}

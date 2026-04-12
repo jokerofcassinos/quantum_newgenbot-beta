@@ -1,0 +1,17 @@
+{
+  "trade_id": 1824,
+  "type": "ghost_exit",
+  "direction": "SELL",
+  "entry_price": 93412.97,
+  "exit_price": 91561.34857142856,
+  "pnl": 386.9467774382178,
+  "is_win": true,
+  "exit_reason": "TP_hit",
+  "veto_reason": "anti_metralhadora:low_quality",
+  "session": "ny",
+  "confidence": 0.4166666666666667,
+  "regime": "unknown",
+  "duration_bars": 144,
+  "open_time": "2025-11-18 18:20:00",
+  "timestamp": "2026-04-12T17:20:29.997673+00:00"
+}

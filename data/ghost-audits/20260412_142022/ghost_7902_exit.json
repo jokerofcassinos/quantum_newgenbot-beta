@@ -1,0 +1,17 @@
+{
+  "trade_id": 7902,
+  "type": "ghost_exit",
+  "direction": "SELL",
+  "entry_price": 68081.7,
+  "exit_price": 66804.50035714285,
+  "pnl": 274.5183701282278,
+  "is_win": true,
+  "exit_reason": "TP_hit",
+  "veto_reason": "anti_metralhadora:low_quality",
+  "session": "ny",
+  "confidence": 0.4166666666666667,
+  "regime": "unknown",
+  "duration_bars": 33,
+  "open_time": "2026-02-18 17:35:00",
+  "timestamp": "2026-04-12T17:20:48.969687+00:00"
+}

@@ -1,0 +1,17 @@
+{
+  "trade_id": 6136,
+  "type": "ghost_exit",
+  "direction": "BUY",
+  "entry_price": 96200.0,
+  "exit_price": 97100.0,
+  "pnl": 792.5588458834845,
+  "is_win": true,
+  "exit_reason": "TP_hit",
+  "veto_reason": "anti_metralhadora:low_quality",
+  "session": "london",
+  "confidence": 0.4166666666666667,
+  "regime": "unknown",
+  "duration_bars": 54,
+  "open_time": "2026-01-15 07:25:00",
+  "timestamp": "2026-04-12T17:20:41.289571+00:00"
+}

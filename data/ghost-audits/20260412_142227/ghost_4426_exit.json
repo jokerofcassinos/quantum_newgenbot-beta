@@ -1,0 +1,17 @@
+{
+  "trade_id": 4426,
+  "type": "ghost_exit",
+  "direction": "SELL",
+  "entry_price": 90419.23,
+  "exit_price": 90719.23,
+  "pnl": -300.0,
+  "is_win": false,
+  "exit_reason": "SL_hit",
+  "veto_reason": "ghost_audit:destructive_hours_14UTC",
+  "session": "ny_overlap",
+  "confidence": 0.4166666666666667,
+  "regime": "unknown",
+  "duration_bars": 9,
+  "open_time": "2026-01-09 14:45:00",
+  "timestamp": "2026-04-12T17:22:42.464840+00:00"
+}

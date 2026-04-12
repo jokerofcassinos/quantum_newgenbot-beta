@@ -1,0 +1,17 @@
+{
+  "trade_id": 8286,
+  "type": "ghost_exit",
+  "direction": "SELL",
+  "entry_price": 68055.14,
+  "exit_price": 67155.14,
+  "pnl": 526.0252516469069,
+  "is_win": true,
+  "exit_reason": "TP_hit",
+  "veto_reason": "ghost_audit:destructive_hours_16UTC",
+  "session": "ny",
+  "confidence": 0.5,
+  "regime": "unknown",
+  "duration_bars": 9,
+  "open_time": "2026-02-26 16:30:00",
+  "timestamp": "2026-04-12T17:20:50.767198+00:00"
+}

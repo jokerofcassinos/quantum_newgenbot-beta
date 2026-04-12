@@ -1,0 +1,17 @@
+{
+  "trade_id": 3071,
+  "type": "ghost_exit",
+  "direction": "BUY",
+  "entry_price": 89775.08,
+  "exit_price": 89475.08,
+  "pnl": -247.89291847095265,
+  "is_win": false,
+  "exit_reason": "SL_hit",
+  "veto_reason": "ghost_audit:sell_only_mode",
+  "session": "london",
+  "confidence": 0.5,
+  "regime": "unknown",
+  "duration_bars": 16,
+  "open_time": "2025-12-15 12:40:00",
+  "timestamp": "2026-04-12T17:20:33.850996+00:00"
+}

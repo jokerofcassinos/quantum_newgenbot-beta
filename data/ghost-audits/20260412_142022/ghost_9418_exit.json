@@ -1,0 +1,17 @@
+{
+  "trade_id": 9418,
+  "type": "ghost_exit",
+  "direction": "SELL",
+  "entry_price": 66665.96,
+  "exit_price": 66965.96,
+  "pnl": -300.0,
+  "is_win": false,
+  "exit_reason": "SL_hit",
+  "veto_reason": "anti_metralhadora:low_quality",
+  "session": "asian",
+  "confidence": 0.4166666666666667,
+  "regime": "unknown",
+  "duration_bars": 5,
+  "open_time": "2026-03-31 03:20:00",
+  "timestamp": "2026-04-12T17:20:58.228309+00:00"
+}

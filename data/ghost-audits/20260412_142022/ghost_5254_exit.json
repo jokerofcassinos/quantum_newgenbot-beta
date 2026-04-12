@@ -1,0 +1,17 @@
+{
+  "trade_id": 5254,
+  "type": "ghost_exit",
+  "direction": "BUY",
+  "entry_price": 91386.02,
+  "exit_price": 92286.02,
+  "pnl": 757.0520419092328,
+  "is_win": true,
+  "exit_reason": "TP_hit",
+  "veto_reason": "advanced_veto:BUY vetoed - price at upper BB",
+  "session": "asian",
+  "confidence": 0.4166666666666667,
+  "regime": "unknown",
+  "duration_bars": 17,
+  "open_time": "2026-01-05 01:20:00",
+  "timestamp": "2026-04-12T17:20:38.978036+00:00"
+}

@@ -1,0 +1,17 @@
+{
+  "trade_id": 5540,
+  "type": "ghost_exit",
+  "direction": "SELL",
+  "entry_price": 90541.47,
+  "exit_price": 90841.47,
+  "pnl": -139.3401950707732,
+  "is_win": false,
+  "exit_reason": "SL_hit",
+  "veto_reason": "advanced_veto:SELL vetoed - RSI 29.9 rising",
+  "session": "london",
+  "confidence": 0.4166666666666667,
+  "regime": "unknown",
+  "duration_bars": 60,
+  "open_time": "2026-01-09 10:30:00",
+  "timestamp": "2026-04-12T17:20:39.906340+00:00"
+}

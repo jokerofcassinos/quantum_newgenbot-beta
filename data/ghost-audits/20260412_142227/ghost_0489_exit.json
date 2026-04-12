@@ -1,0 +1,17 @@
+{
+  "trade_id": 489,
+  "type": "ghost_exit",
+  "direction": "BUY",
+  "entry_price": 110453.5,
+  "exit_price": 111353.5,
+  "pnl": 839.2469440822573,
+  "is_win": true,
+  "exit_reason": "TP_hit",
+  "veto_reason": "ghost_audit:sell_only_mode",
+  "session": "asian",
+  "confidence": 0.4166666666666667,
+  "regime": "unknown",
+  "duration_bars": 15,
+  "open_time": "2025-10-24 06:15:00",
+  "timestamp": "2026-04-12T17:22:31.144259+00:00"
+}

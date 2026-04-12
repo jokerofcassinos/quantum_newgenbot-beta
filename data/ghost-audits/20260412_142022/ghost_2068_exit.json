@@ -1,0 +1,17 @@
+{
+  "trade_id": 2068,
+  "type": "ghost_exit",
+  "direction": "BUY",
+  "entry_price": 90216.55,
+  "exit_price": 91320.62178571428,
+  "pnl": 395.68921514097417,
+  "is_win": true,
+  "exit_reason": "TP_hit",
+  "veto_reason": "anti_metralhadora:low_quality",
+  "session": "ny",
+  "confidence": 0.4166666666666667,
+  "regime": "unknown",
+  "duration_bars": 448,
+  "open_time": "2025-11-28 19:40:00",
+  "timestamp": "2026-04-12T17:20:31.377891+00:00"
+}

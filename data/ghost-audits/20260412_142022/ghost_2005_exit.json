@@ -1,0 +1,17 @@
+{
+  "trade_id": 2005,
+  "type": "ghost_exit",
+  "direction": "BUY",
+  "entry_price": 91439.75,
+  "exit_price": 91139.75,
+  "pnl": -267.58555347476835,
+  "is_win": false,
+  "exit_reason": "SL_hit",
+  "veto_reason": "advanced_veto:BUY vetoed - price at upper BB",
+  "session": "london",
+  "confidence": 0.4166666666666667,
+  "regime": "unknown",
+  "duration_bars": 44,
+  "open_time": "2025-11-27 10:55:00",
+  "timestamp": "2026-04-12T17:20:30.819896+00:00"
+}

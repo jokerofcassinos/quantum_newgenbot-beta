@@ -1,0 +1,17 @@
+{
+  "trade_id": 7432,
+  "type": "ghost_exit",
+  "direction": "SELL",
+  "entry_price": 89401.75,
+  "exit_price": 89701.75,
+  "pnl": -300.0,
+  "is_win": false,
+  "exit_reason": "SL_hit",
+  "veto_reason": "anti_metralhadora:low_quality",
+  "session": "asian",
+  "confidence": 0.4166666666666667,
+  "regime": "unknown",
+  "duration_bars": 129,
+  "open_time": "2026-01-28 03:00:00",
+  "timestamp": "2026-04-12T17:20:44.731646+00:00"
+}

@@ -1,0 +1,17 @@
+{
+  "trade_id": 3080,
+  "type": "ghost_exit",
+  "direction": "SELL",
+  "entry_price": 89666.49,
+  "exit_price": 88766.49,
+  "pnl": 652.7582164453981,
+  "is_win": true,
+  "exit_reason": "TP_hit",
+  "veto_reason": "anti_metralhadora:low_quality",
+  "session": "ny_overlap",
+  "confidence": 0.4166666666666667,
+  "regime": "unknown",
+  "duration_bars": 23,
+  "open_time": "2025-12-15 14:50:00",
+  "timestamp": "2026-04-12T17:20:33.880220+00:00"
+}

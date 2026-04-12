@@ -1,0 +1,15 @@
+{
+  "trade_id": 1677,
+  "type": "ghost_entry",
+  "direction": "SELL",
+  "entry_price": 87171.12,
+  "stop_loss": 87471.12,
+  "take_profit": 86271.12,
+  "volume": 0.705172631534598,
+  "veto_reason": "ghost_audit:destructive_hours_16UTC",
+  "session": "ny",
+  "confidence": 0.4166666666666667,
+  "regime": "unknown",
+  "open_time": "2025-11-26 16:15:00",
+  "timestamp": "2026-04-12T17:22:35.144515+00:00"
+}

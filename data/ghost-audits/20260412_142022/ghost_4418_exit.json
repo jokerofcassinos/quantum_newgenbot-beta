@@ -1,0 +1,17 @@
+{
+  "trade_id": 4418,
+  "type": "ghost_exit",
+  "direction": "BUY",
+  "entry_price": 87629.1,
+  "exit_price": 88529.1,
+  "pnl": 900.0,
+  "is_win": true,
+  "exit_reason": "TP_hit",
+  "veto_reason": "advanced_veto:BUY vetoed - price at upper BB",
+  "session": "asian",
+  "confidence": 0.5,
+  "regime": "unknown",
+  "duration_bars": 41,
+  "open_time": "2025-12-29 00:35:00",
+  "timestamp": "2026-04-12T17:20:37.137570+00:00"
+}

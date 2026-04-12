@@ -1,0 +1,17 @@
+{
+  "trade_id": 1872,
+  "type": "ghost_exit",
+  "direction": "BUY",
+  "entry_price": 83421.61,
+  "exit_price": 85389.24464285714,
+  "pnl": 425.05245718226456,
+  "is_win": true,
+  "exit_reason": "TP_hit",
+  "veto_reason": "anti_metralhadora:low_quality",
+  "session": "ny",
+  "confidence": 0.4166666666666667,
+  "regime": "unknown",
+  "duration_bars": 68,
+  "open_time": "2025-11-21 20:15:00",
+  "timestamp": "2026-04-12T17:20:30.283074+00:00"
+}

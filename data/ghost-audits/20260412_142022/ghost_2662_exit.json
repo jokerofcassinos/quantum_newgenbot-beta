@@ -1,0 +1,17 @@
+{
+  "trade_id": 2662,
+  "type": "ghost_exit",
+  "direction": "SELL",
+  "entry_price": 90014.1,
+  "exit_price": 90314.1,
+  "pnl": -168.1749859623157,
+  "is_win": false,
+  "exit_reason": "SL_hit",
+  "veto_reason": "anti_metralhadora:low_quality",
+  "session": "ny",
+  "confidence": 0.4166666666666667,
+  "regime": "unknown",
+  "duration_bars": 6,
+  "open_time": "2025-12-11 16:05:00",
+  "timestamp": "2026-04-12T17:20:32.943916+00:00"
+}

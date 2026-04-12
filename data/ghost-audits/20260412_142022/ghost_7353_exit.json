@@ -1,0 +1,17 @@
+{
+  "trade_id": 7353,
+  "type": "ghost_exit",
+  "direction": "BUY",
+  "entry_price": 88211.13,
+  "exit_price": 87911.13,
+  "pnl": -196.4879503523153,
+  "is_win": false,
+  "exit_reason": "SL_hit",
+  "veto_reason": "advanced_veto:BUY vetoed - RSI 70.0 declining",
+  "session": "ny",
+  "confidence": 0.4166666666666667,
+  "regime": "unknown",
+  "duration_bars": 12,
+  "open_time": "2026-01-26 20:50:00",
+  "timestamp": "2026-04-12T17:20:44.266361+00:00"
+}

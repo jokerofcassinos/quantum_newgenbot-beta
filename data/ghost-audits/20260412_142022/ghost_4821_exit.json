@@ -1,0 +1,17 @@
+{
+  "trade_id": 4821,
+  "type": "ghost_exit",
+  "direction": "BUY",
+  "entry_price": 87939.94,
+  "exit_price": 88839.94,
+  "pnl": 900.0,
+  "is_win": true,
+  "exit_reason": "TP_hit",
+  "veto_reason": "ghost_audit:sell_only_mode",
+  "session": "ny",
+  "confidence": 0.5833333333333334,
+  "regime": "unknown",
+  "duration_bars": 80,
+  "open_time": "2026-01-01 18:50:00",
+  "timestamp": "2026-04-12T17:20:38.078056+00:00"
+}

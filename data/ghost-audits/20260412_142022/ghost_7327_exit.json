@@ -1,0 +1,17 @@
+{
+  "trade_id": 7327,
+  "type": "ghost_exit",
+  "direction": "SELL",
+  "entry_price": 87850.29,
+  "exit_price": 88150.29,
+  "pnl": -300.0,
+  "is_win": false,
+  "exit_reason": "SL_hit",
+  "veto_reason": "anti_metralhadora:low_quality",
+  "session": "london",
+  "confidence": 0.4166666666666667,
+  "regime": "unknown",
+  "duration_bars": 47,
+  "open_time": "2026-01-26 12:40:00",
+  "timestamp": "2026-04-12T17:20:44.206225+00:00"
+}

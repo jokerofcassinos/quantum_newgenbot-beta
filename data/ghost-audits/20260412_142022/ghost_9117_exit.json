@@ -1,0 +1,17 @@
+{
+  "trade_id": 9117,
+  "type": "ghost_exit",
+  "direction": "BUY",
+  "entry_price": 71115.87,
+  "exit_price": 70815.87,
+  "pnl": -281.0761738195975,
+  "is_win": false,
+  "exit_reason": "SL_hit",
+  "veto_reason": "anti_metralhadora:low_quality",
+  "session": "ny_overlap",
+  "confidence": 0.4166666666666667,
+  "regime": "unknown",
+  "duration_bars": 14,
+  "open_time": "2026-03-24 14:55:00",
+  "timestamp": "2026-04-12T17:20:56.638745+00:00"
+}

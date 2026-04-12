@@ -1,0 +1,17 @@
+{
+  "trade_id": 8597,
+  "type": "ghost_exit",
+  "direction": "SELL",
+  "entry_price": 71166.87,
+  "exit_price": 71466.87,
+  "pnl": -200.90764652196177,
+  "is_win": false,
+  "exit_reason": "SL_hit",
+  "veto_reason": "anti_metralhadora:low_quality",
+  "session": "asian",
+  "confidence": 0.4166666666666667,
+  "regime": "unknown",
+  "duration_bars": 339,
+  "open_time": "2026-03-13 22:05:00",
+  "timestamp": "2026-04-12T17:20:54.178709+00:00"
+}

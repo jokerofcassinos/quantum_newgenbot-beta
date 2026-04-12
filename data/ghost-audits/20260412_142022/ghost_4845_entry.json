@@ -1,0 +1,15 @@
+{
+  "trade_id": 4845,
+  "type": "ghost_entry",
+  "direction": "BUY",
+  "entry_price": 88242.53,
+  "stop_loss": 87942.53,
+  "take_profit": 89142.53,
+  "volume": 1.0,
+  "veto_reason": "anti_metralhadora:low_quality",
+  "session": "asian",
+  "confidence": 0.4166666666666667,
+  "regime": "unknown",
+  "open_time": "2026-01-01 22:35:00",
+  "timestamp": "2026-04-12T17:20:38.001681+00:00"
+}

@@ -1,0 +1,17 @@
+{
+  "trade_id": 1816,
+  "type": "ghost_exit",
+  "direction": "BUY",
+  "entry_price": 90029.4,
+  "exit_price": 89709.64285714286,
+  "pnl": -154.77871097528575,
+  "is_win": false,
+  "exit_reason": "SL_hit",
+  "veto_reason": "anti_metralhadora:low_quality",
+  "session": "london",
+  "confidence": 0.4166666666666667,
+  "regime": "unknown",
+  "duration_bars": 2,
+  "open_time": "2025-11-18 08:25:00",
+  "timestamp": "2026-04-12T17:20:29.913879+00:00"
+}

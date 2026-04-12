@@ -1,0 +1,17 @@
+{
+  "trade_id": 1028,
+  "type": "ghost_exit",
+  "direction": "BUY",
+  "entry_price": 114316.4,
+  "exit_price": 115216.4,
+  "pnl": 535.9346291451799,
+  "is_win": true,
+  "exit_reason": "TP_hit",
+  "veto_reason": "anti_metralhadora:low_quality",
+  "session": "london",
+  "confidence": 0.4166666666666667,
+  "regime": "unknown",
+  "duration_bars": 55,
+  "open_time": "2025-10-28 12:10:00",
+  "timestamp": "2026-04-12T17:20:27.297131+00:00"
+}

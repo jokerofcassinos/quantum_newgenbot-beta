@@ -1,0 +1,17 @@
+{
+  "trade_id": 6580,
+  "type": "ghost_exit",
+  "direction": "BUY",
+  "entry_price": 65077.5,
+  "exit_price": 64637.22642857143,
+  "pnl": -91.05919146796073,
+  "is_win": false,
+  "exit_reason": "SL_hit",
+  "veto_reason": "ghost_audit:sell_only_mode",
+  "session": "asian",
+  "confidence": 0.4166666666666667,
+  "regime": "unknown",
+  "duration_bars": 6,
+  "open_time": "2026-02-23 03:15:00",
+  "timestamp": "2026-04-12T17:22:51.528466+00:00"
+}

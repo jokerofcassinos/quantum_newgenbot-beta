@@ -1,0 +1,17 @@
+{
+  "trade_id": 6805,
+  "type": "ghost_exit",
+  "direction": "BUY",
+  "entry_price": 67100.1,
+  "exit_price": 68000.1,
+  "pnl": 893.6919691158934,
+  "is_win": true,
+  "exit_reason": "TP_hit",
+  "veto_reason": "ghost_audit:sell_only_mode",
+  "session": "london",
+  "confidence": 0.4166666666666667,
+  "regime": "unknown",
+  "duration_bars": 11,
+  "open_time": "2026-03-09 07:55:00",
+  "timestamp": "2026-04-12T17:22:54.013983+00:00"
+}

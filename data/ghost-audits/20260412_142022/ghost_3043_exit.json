@@ -1,0 +1,17 @@
+{
+  "trade_id": 3043,
+  "type": "ghost_exit",
+  "direction": "BUY",
+  "entry_price": 89582.27,
+  "exit_price": 89282.27,
+  "pnl": -300.0,
+  "is_win": false,
+  "exit_reason": "SL_hit",
+  "veto_reason": "ghost_audit:sell_only_mode",
+  "session": "london",
+  "confidence": 0.5,
+  "regime": "unknown",
+  "duration_bars": 79,
+  "open_time": "2025-12-15 09:00:00",
+  "timestamp": "2026-04-12T17:20:33.868071+00:00"
+}

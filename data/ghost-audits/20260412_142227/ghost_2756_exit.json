@@ -1,0 +1,17 @@
+{
+  "trade_id": 2756,
+  "type": "ghost_exit",
+  "direction": "BUY",
+  "entry_price": 88486.13,
+  "exit_price": 89386.13,
+  "pnl": 625.270744856776,
+  "is_win": true,
+  "exit_reason": "TP_hit",
+  "veto_reason": "ghost_audit:sell_only_mode",
+  "session": "asian",
+  "confidence": 0.4166666666666667,
+  "regime": "unknown",
+  "duration_bars": 5,
+  "open_time": "2025-12-22 01:45:00",
+  "timestamp": "2026-04-12T17:22:38.557783+00:00"
+}

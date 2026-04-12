@@ -1,0 +1,17 @@
+{
+  "trade_id": 7579,
+  "type": "ghost_exit",
+  "direction": "BUY",
+  "entry_price": 82550.59,
+  "exit_price": 82250.59,
+  "pnl": -209.30561346843265,
+  "is_win": false,
+  "exit_reason": "SL_hit",
+  "veto_reason": "anti_metralhadora:low_quality",
+  "session": "london",
+  "confidence": 0.4166666666666667,
+  "regime": "unknown",
+  "duration_bars": 9,
+  "open_time": "2026-01-30 10:40:00",
+  "timestamp": "2026-04-12T17:20:45.142386+00:00"
+}

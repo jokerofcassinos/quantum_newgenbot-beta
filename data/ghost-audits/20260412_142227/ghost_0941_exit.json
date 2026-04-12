@@ -1,0 +1,17 @@
+{
+  "trade_id": 941,
+  "type": "ghost_exit",
+  "direction": "SELL",
+  "entry_price": 110199.09,
+  "exit_price": 109299.09,
+  "pnl": 635.4830992947432,
+  "is_win": true,
+  "exit_reason": "TP_hit",
+  "veto_reason": "advanced_veto:SELL vetoed - RSI 31.1 rising",
+  "session": "london",
+  "confidence": 0.4166666666666667,
+  "regime": "unknown",
+  "duration_bars": 33,
+  "open_time": "2025-10-30 12:30:00",
+  "timestamp": "2026-04-12T17:22:32.091744+00:00"
+}

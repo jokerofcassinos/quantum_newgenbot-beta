@@ -1,0 +1,17 @@
+{
+  "trade_id": 3611,
+  "type": "ghost_exit",
+  "direction": "BUY",
+  "entry_price": 88084.26,
+  "exit_price": 87770.16214285714,
+  "pnl": -158.43106336297615,
+  "is_win": false,
+  "exit_reason": "SL_hit",
+  "veto_reason": "anti_metralhadora:low_quality",
+  "session": "asian",
+  "confidence": 0.4166666666666667,
+  "regime": "unknown",
+  "duration_bars": 85,
+  "open_time": "2025-12-22 21:50:00",
+  "timestamp": "2026-04-12T17:20:35.444478+00:00"
+}

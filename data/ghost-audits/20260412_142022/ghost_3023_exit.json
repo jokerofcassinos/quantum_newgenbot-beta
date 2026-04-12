@@ -1,0 +1,17 @@
+{
+  "trade_id": 3023,
+  "type": "ghost_exit",
+  "direction": "SELL",
+  "entry_price": 87999.46,
+  "exit_price": 88353.37000000001,
+  "pnl": -72.9400320049342,
+  "is_win": false,
+  "exit_reason": "SL_hit",
+  "veto_reason": "anti_metralhadora:low_quality",
+  "session": "asian",
+  "confidence": 0.4166666666666667,
+  "regime": "unknown",
+  "duration_bars": 4,
+  "open_time": "2025-12-15 01:40:00",
+  "timestamp": "2026-04-12T17:20:33.771698+00:00"
+}

@@ -1,0 +1,17 @@
+{
+  "trade_id": 2004,
+  "type": "ghost_exit",
+  "direction": "BUY",
+  "entry_price": 91337.16,
+  "exit_price": 91037.16,
+  "pnl": -300.0,
+  "is_win": false,
+  "exit_reason": "SL_hit",
+  "veto_reason": "ghost_audit:sell_only_mode",
+  "session": "london",
+  "confidence": 0.5,
+  "regime": "unknown",
+  "duration_bars": 49,
+  "open_time": "2025-11-27 10:45:00",
+  "timestamp": "2026-04-12T17:20:30.824082+00:00"
+}

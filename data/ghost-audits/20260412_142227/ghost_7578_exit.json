@@ -1,0 +1,17 @@
+{
+  "trade_id": 7578,
+  "type": "ghost_exit",
+  "direction": "SELL",
+  "entry_price": 68096.61,
+  "exit_price": 68424.01607142857,
+  "pnl": -136.4936073641405,
+  "is_win": false,
+  "exit_reason": "SL_hit",
+  "veto_reason": "ghost_audit:destructive_hours_16UTC",
+  "session": "ny",
+  "confidence": 0.4166666666666667,
+  "regime": "unknown",
+  "duration_bars": 6,
+  "open_time": "2026-04-01 16:50:00",
+  "timestamp": "2026-04-12T17:22:58.870587+00:00"
+}

@@ -1,0 +1,17 @@
+{
+  "trade_id": 4530,
+  "type": "ghost_exit",
+  "direction": "BUY",
+  "entry_price": 87918.85,
+  "exit_price": 88818.85,
+  "pnl": 900.0,
+  "is_win": true,
+  "exit_reason": "TP_hit",
+  "veto_reason": "ghost_audit:sell_only_mode",
+  "session": "ny_overlap",
+  "confidence": 0.5,
+  "regime": "unknown",
+  "duration_bars": 21,
+  "open_time": "2025-12-30 15:05:00",
+  "timestamp": "2026-04-12T17:20:37.445851+00:00"
+}

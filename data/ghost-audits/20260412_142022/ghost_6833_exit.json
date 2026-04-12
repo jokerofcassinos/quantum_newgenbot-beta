@@ -1,0 +1,17 @@
+{
+  "trade_id": 6833,
+  "type": "ghost_exit",
+  "direction": "BUY",
+  "entry_price": 87561.45,
+  "exit_price": 89357.57678571428,
+  "pnl": 427.54288195542836,
+  "is_win": true,
+  "exit_reason": "TP_hit",
+  "veto_reason": "anti_metralhadora:low_quality",
+  "session": "ny",
+  "confidence": 0.4166666666666667,
+  "regime": "unknown",
+  "duration_bars": 30,
+  "open_time": "2026-01-21 18:55:00",
+  "timestamp": "2026-04-12T17:20:42.914484+00:00"
+}

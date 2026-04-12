@@ -1,0 +1,17 @@
+{
+  "trade_id": 4853,
+  "type": "ghost_exit",
+  "direction": "SELL",
+  "entry_price": 90676.5,
+  "exit_price": 90976.5,
+  "pnl": -300.0,
+  "is_win": false,
+  "exit_reason": "SL_hit",
+  "veto_reason": "ghost_audit:destructive_hours_14UTC",
+  "session": "ny_overlap",
+  "confidence": 0.4166666666666667,
+  "regime": "unknown",
+  "duration_bars": 31,
+  "open_time": "2026-01-12 14:05:00",
+  "timestamp": "2026-04-12T17:22:43.303940+00:00"
+}

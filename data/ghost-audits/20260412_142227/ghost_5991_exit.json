@@ -1,0 +1,17 @@
+{
+  "trade_id": 5991,
+  "type": "ghost_exit",
+  "direction": "SELL",
+  "entry_price": 89577.44,
+  "exit_price": 89877.44,
+  "pnl": -216.8859430608395,
+  "is_win": false,
+  "exit_reason": "SL_hit",
+  "veto_reason": "advanced_veto:SELL vetoed - RSI 25.9 < 28",
+  "session": "ny",
+  "confidence": 0.4166666666666667,
+  "regime": "unknown",
+  "duration_bars": 33,
+  "open_time": "2026-01-28 16:55:00",
+  "timestamp": "2026-04-12T17:22:47.040705+00:00"
+}

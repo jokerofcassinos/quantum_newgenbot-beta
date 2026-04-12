@@ -1,0 +1,17 @@
+{
+  "trade_id": 9925,
+  "type": "ghost_exit",
+  "direction": "SELL",
+  "entry_price": 67858.03,
+  "exit_price": 68158.03,
+  "pnl": -215.82031471513778,
+  "is_win": false,
+  "exit_reason": "SL_hit",
+  "veto_reason": "anti_metralhadora:low_quality",
+  "session": "ny",
+  "confidence": 0.4166666666666667,
+  "regime": "unknown",
+  "duration_bars": 5,
+  "open_time": "2026-04-07 18:00:00",
+  "timestamp": "2026-04-12T17:21:00.405085+00:00"
+}

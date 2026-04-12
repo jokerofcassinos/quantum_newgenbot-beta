@@ -1,0 +1,17 @@
+{
+  "trade_id": 7647,
+  "type": "ghost_exit",
+  "direction": "SELL",
+  "entry_price": 76473.85,
+  "exit_price": 75573.85,
+  "pnl": 711.5812709546508,
+  "is_win": true,
+  "exit_reason": "TP_hit",
+  "veto_reason": "anti_metralhadora:low_quality",
+  "session": "london",
+  "confidence": 0.4166666666666667,
+  "regime": "unknown",
+  "duration_bars": 57,
+  "open_time": "2026-02-04 10:50:00",
+  "timestamp": "2026-04-12T17:20:46.042669+00:00"
+}

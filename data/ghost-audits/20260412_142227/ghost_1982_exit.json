@@ -1,0 +1,17 @@
+{
+  "trade_id": 1982,
+  "type": "ghost_exit",
+  "direction": "BUY",
+  "entry_price": 92652.17,
+  "exit_price": 92352.17,
+  "pnl": -173.12787301147412,
+  "is_win": false,
+  "exit_reason": "SL_hit",
+  "veto_reason": "ghost_audit:sell_only_mode",
+  "session": "london",
+  "confidence": 0.4166666666666667,
+  "regime": "unknown",
+  "duration_bars": 2,
+  "open_time": "2025-12-10 12:20:00",
+  "timestamp": "2026-04-12T17:22:36.605445+00:00"
+}

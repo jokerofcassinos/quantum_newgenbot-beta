@@ -1,0 +1,17 @@
+{
+  "trade_id": 1923,
+  "type": "ghost_exit",
+  "direction": "SELL",
+  "entry_price": 86302.88,
+  "exit_price": 86602.88,
+  "pnl": -144.17156269054453,
+  "is_win": false,
+  "exit_reason": "SL_hit",
+  "veto_reason": "anti_metralhadora:low_quality",
+  "session": "ny_overlap",
+  "confidence": 0.4166666666666667,
+  "regime": "unknown",
+  "duration_bars": 17,
+  "open_time": "2025-11-24 15:10:00",
+  "timestamp": "2026-04-12T17:20:30.524701+00:00"
+}

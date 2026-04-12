@@ -1,0 +1,17 @@
+{
+  "trade_id": 8524,
+  "type": "ghost_exit",
+  "direction": "SELL",
+  "entry_price": 71156.92,
+  "exit_price": 69489.8532142857,
+  "pnl": 552.4367305552038,
+  "is_win": true,
+  "exit_reason": "TP_hit",
+  "veto_reason": "anti_metralhadora:low_quality",
+  "session": "ny",
+  "confidence": 0.4166666666666667,
+  "regime": "unknown",
+  "duration_bars": 77,
+  "open_time": "2026-03-10 18:10:00",
+  "timestamp": "2026-04-12T17:20:53.119989+00:00"
+}

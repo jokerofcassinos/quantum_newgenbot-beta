@@ -1,0 +1,17 @@
+{
+  "trade_id": 3181,
+  "type": "ghost_exit",
+  "direction": "BUY",
+  "entry_price": 86498.41,
+  "exit_price": 87398.41,
+  "pnl": 900.0,
+  "is_win": true,
+  "exit_reason": "TP_hit",
+  "veto_reason": "anti_metralhadora:low_quality",
+  "session": "london",
+  "confidence": 0.4166666666666667,
+  "regime": "unknown",
+  "duration_bars": 60,
+  "open_time": "2025-12-18 07:30:00",
+  "timestamp": "2026-04-12T17:20:34.264283+00:00"
+}

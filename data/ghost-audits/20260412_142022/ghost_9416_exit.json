@@ -1,0 +1,17 @@
+{
+  "trade_id": 9416,
+  "type": "ghost_exit",
+  "direction": "BUY",
+  "entry_price": 66745.39,
+  "exit_price": 66445.39,
+  "pnl": -300.0,
+  "is_win": false,
+  "exit_reason": "SL_hit",
+  "veto_reason": "anti_metralhadora:low_quality",
+  "session": "asian",
+  "confidence": 0.4166666666666667,
+  "regime": "unknown",
+  "duration_bars": 1,
+  "open_time": "2026-03-31 01:55:00",
+  "timestamp": "2026-04-12T17:20:58.216584+00:00"
+}

@@ -1,0 +1,17 @@
+{
+  "trade_id": 6625,
+  "type": "ghost_exit",
+  "direction": "SELL",
+  "entry_price": 68086.71,
+  "exit_price": 67186.71,
+  "pnl": 497.3951838409353,
+  "is_win": true,
+  "exit_reason": "TP_hit",
+  "veto_reason": "ghost_audit:destructive_hours_16UTC",
+  "session": "ny",
+  "confidence": 0.4166666666666667,
+  "regime": "unknown",
+  "duration_bars": 11,
+  "open_time": "2026-02-26 16:20:00",
+  "timestamp": "2026-04-12T17:22:52.172495+00:00"
+}

@@ -1,0 +1,17 @@
+{
+  "trade_id": 4848,
+  "type": "ghost_exit",
+  "direction": "BUY",
+  "entry_price": 91451.41,
+  "exit_price": 91151.41,
+  "pnl": -205.420650914466,
+  "is_win": false,
+  "exit_reason": "SL_hit",
+  "veto_reason": "ghost_audit:sell_only_mode",
+  "session": "london",
+  "confidence": 0.4166666666666667,
+  "regime": "unknown",
+  "duration_bars": 2,
+  "open_time": "2026-01-12 10:20:00",
+  "timestamp": "2026-04-12T17:22:43.248184+00:00"
+}

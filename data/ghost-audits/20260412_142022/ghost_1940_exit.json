@@ -1,0 +1,17 @@
+{
+  "trade_id": 1940,
+  "type": "ghost_exit",
+  "direction": "SELL",
+  "entry_price": 87238.42,
+  "exit_price": 87538.42,
+  "pnl": -161.68004325893818,
+  "is_win": false,
+  "exit_reason": "SL_hit",
+  "veto_reason": "anti_metralhadora:low_quality",
+  "session": "london",
+  "confidence": 0.4166666666666667,
+  "regime": "unknown",
+  "duration_bars": 17,
+  "open_time": "2025-11-25 12:45:00",
+  "timestamp": "2026-04-12T17:20:30.596325+00:00"
+}

@@ -1,0 +1,17 @@
+{
+  "trade_id": 1843,
+  "type": "ghost_exit",
+  "direction": "BUY",
+  "entry_price": 88919.88,
+  "exit_price": 90086.325,
+  "pnl": 386.94677743821507,
+  "is_win": true,
+  "exit_reason": "TP_hit",
+  "veto_reason": "anti_metralhadora:low_quality",
+  "session": "asian",
+  "confidence": 0.4166666666666667,
+  "regime": "unknown",
+  "duration_bars": 23,
+  "open_time": "2025-11-19 21:25:00",
+  "timestamp": "2026-04-12T17:20:30.069214+00:00"
+}

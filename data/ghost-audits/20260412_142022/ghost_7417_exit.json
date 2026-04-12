@@ -1,0 +1,17 @@
+{
+  "trade_id": 7417,
+  "type": "ghost_exit",
+  "direction": "SELL",
+  "entry_price": 87809.71,
+  "exit_price": 88109.71,
+  "pnl": -98.33747184841303,
+  "is_win": false,
+  "exit_reason": "SL_hit",
+  "veto_reason": "anti_metralhadora:low_quality",
+  "session": "ny",
+  "confidence": 0.4166666666666667,
+  "regime": "unknown",
+  "duration_bars": 5,
+  "open_time": "2026-01-27 16:45:00",
+  "timestamp": "2026-04-12T17:20:44.452939+00:00"
+}

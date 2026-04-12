@@ -1,0 +1,17 @@
+{
+  "trade_id": 2394,
+  "type": "ghost_exit",
+  "direction": "BUY",
+  "entry_price": 85406.43,
+  "exit_price": 85106.43,
+  "pnl": -268.92427793001144,
+  "is_win": false,
+  "exit_reason": "SL_hit",
+  "veto_reason": "ghost_audit:sell_only_mode",
+  "session": "asian",
+  "confidence": 0.4166666666666667,
+  "regime": "unknown",
+  "duration_bars": 4,
+  "open_time": "2025-12-19 03:10:00",
+  "timestamp": "2026-04-12T17:22:37.882603+00:00"
+}

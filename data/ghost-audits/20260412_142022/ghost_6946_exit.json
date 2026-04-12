@@ -1,0 +1,17 @@
+{
+  "trade_id": 6946,
+  "type": "ghost_exit",
+  "direction": "SELL",
+  "entry_price": 89601.7,
+  "exit_price": 88701.7,
+  "pnl": 724.0622625839694,
+  "is_win": true,
+  "exit_reason": "TP_hit",
+  "veto_reason": "anti_metralhadora:low_quality",
+  "session": "london",
+  "confidence": 0.4166666666666667,
+  "regime": "unknown",
+  "duration_bars": 94,
+  "open_time": "2026-01-23 08:45:00",
+  "timestamp": "2026-04-12T17:20:43.274144+00:00"
+}

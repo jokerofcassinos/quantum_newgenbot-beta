@@ -1,0 +1,17 @@
+{
+  "trade_id": 6083,
+  "type": "ghost_exit",
+  "direction": "BUY",
+  "entry_price": 94993.29,
+  "exit_price": 95893.29,
+  "pnl": 900.0,
+  "is_win": true,
+  "exit_reason": "TP_hit",
+  "veto_reason": "anti_metralhadora:low_quality",
+  "session": "london",
+  "confidence": 0.4166666666666667,
+  "regime": "unknown",
+  "duration_bars": 73,
+  "open_time": "2026-01-14 10:35:00",
+  "timestamp": "2026-04-12T17:20:41.142151+00:00"
+}

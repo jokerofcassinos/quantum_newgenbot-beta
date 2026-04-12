@@ -1,0 +1,17 @@
+{
+  "trade_id": 9469,
+  "type": "ghost_exit",
+  "direction": "SELL",
+  "entry_price": 66089.94,
+  "exit_price": 66389.94,
+  "pnl": -179.93188120712784,
+  "is_win": false,
+  "exit_reason": "SL_hit",
+  "veto_reason": "anti_metralhadora:low_quality",
+  "session": "ny",
+  "confidence": 0.4166666666666667,
+  "regime": "unknown",
+  "duration_bars": 4,
+  "open_time": "2026-04-02 16:50:00",
+  "timestamp": "2026-04-12T17:20:58.818262+00:00"
+}

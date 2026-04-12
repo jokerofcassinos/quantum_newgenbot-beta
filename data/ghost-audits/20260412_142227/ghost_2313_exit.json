@@ -1,0 +1,17 @@
+{
+  "trade_id": 2313,
+  "type": "ghost_exit",
+  "direction": "BUY",
+  "entry_price": 86995.47,
+  "exit_price": 86322.83357142856,
+  "pnl": -91.27547164793116,
+  "is_win": false,
+  "exit_reason": "SL_hit",
+  "veto_reason": "ghost_audit:sell_only_mode",
+  "session": "ny",
+  "confidence": 0.4166666666666667,
+  "regime": "unknown",
+  "duration_bars": 16,
+  "open_time": "2025-12-15 17:15:00",
+  "timestamp": "2026-04-12T17:22:37.445959+00:00"
+}

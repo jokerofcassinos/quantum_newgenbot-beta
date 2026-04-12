@@ -1,0 +1,17 @@
+{
+  "trade_id": 9080,
+  "type": "ghost_exit",
+  "direction": "BUY",
+  "entry_price": 68653.91,
+  "exit_price": 68353.91,
+  "pnl": -207.21033066476883,
+  "is_win": false,
+  "exit_reason": "SL_hit",
+  "veto_reason": "anti_metralhadora:low_quality",
+  "session": "london",
+  "confidence": 0.4166666666666667,
+  "regime": "unknown",
+  "duration_bars": 6,
+  "open_time": "2026-03-23 09:05:00",
+  "timestamp": "2026-04-12T17:20:56.316868+00:00"
+}

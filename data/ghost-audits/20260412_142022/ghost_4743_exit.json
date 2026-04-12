@@ -1,0 +1,17 @@
+{
+  "trade_id": 4743,
+  "type": "ghost_exit",
+  "direction": "BUY",
+  "entry_price": 87830.41,
+  "exit_price": 88730.41,
+  "pnl": 900.0,
+  "is_win": true,
+  "exit_reason": "TP_hit",
+  "veto_reason": "ghost_audit:sell_only_mode",
+  "session": "london",
+  "confidence": 0.5,
+  "regime": "unknown",
+  "duration_bars": 161,
+  "open_time": "2026-01-01 11:45:00",
+  "timestamp": "2026-04-12T17:20:38.050400+00:00"
+}

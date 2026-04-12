@@ -1,0 +1,17 @@
+{
+  "trade_id": 7654,
+  "type": "ghost_exit",
+  "direction": "BUY",
+  "entry_price": 67968.64,
+  "exit_price": 67215.97214285714,
+  "pnl": -142.08753163955168,
+  "is_win": false,
+  "exit_reason": "SL_hit",
+  "veto_reason": "anti_metralhadora:low_quality",
+  "session": "ny",
+  "confidence": 0.4166666666666667,
+  "regime": "unknown",
+  "duration_bars": 2,
+  "open_time": "2026-02-05 17:10:00",
+  "timestamp": "2026-04-12T17:20:46.282544+00:00"
+}

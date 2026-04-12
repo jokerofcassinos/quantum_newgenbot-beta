@@ -1,0 +1,17 @@
+{
+  "trade_id": 7605,
+  "type": "ghost_exit",
+  "direction": "BUY",
+  "entry_price": 74602.21,
+  "exit_price": 76267.80464285715,
+  "pnl": 568.3501265582033,
+  "is_win": true,
+  "exit_reason": "TP_hit",
+  "veto_reason": "anti_metralhadora:low_quality",
+  "session": "asian",
+  "confidence": 0.4166666666666667,
+  "regime": "unknown",
+  "duration_bars": 3,
+  "open_time": "2026-02-02 05:40:00",
+  "timestamp": "2026-04-12T17:20:45.646710+00:00"
+}

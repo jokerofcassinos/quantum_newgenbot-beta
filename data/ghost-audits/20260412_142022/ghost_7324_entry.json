@@ -1,0 +1,15 @@
+{
+  "trade_id": 7324,
+  "type": "ghost_entry",
+  "direction": "BUY",
+  "entry_price": 87946.65,
+  "stop_loss": 87646.65,
+  "take_profit": 88846.65,
+  "volume": 0.8691028256506902,
+  "veto_reason": "anti_metralhadora:low_quality",
+  "session": "london",
+  "confidence": 0.4166666666666667,
+  "regime": "unknown",
+  "open_time": "2026-01-26 10:55:00",
+  "timestamp": "2026-04-12T17:20:44.151877+00:00"
+}

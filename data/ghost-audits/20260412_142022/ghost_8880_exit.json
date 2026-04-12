@@ -1,0 +1,17 @@
+{
+  "trade_id": 8880,
+  "type": "ghost_exit",
+  "direction": "SELL",
+  "entry_price": 70532.24,
+  "exit_price": 69632.24,
+  "pnl": 820.7268211600199,
+  "is_win": true,
+  "exit_reason": "TP_hit",
+  "veto_reason": "anti_metralhadora:low_quality",
+  "session": "ny_overlap",
+  "confidence": 0.4166666666666667,
+  "regime": "unknown",
+  "duration_bars": 44,
+  "open_time": "2026-03-20 13:35:00",
+  "timestamp": "2026-04-12T17:20:55.543099+00:00"
+}

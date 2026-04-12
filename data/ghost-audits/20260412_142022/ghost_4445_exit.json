@@ -1,0 +1,17 @@
+{
+  "trade_id": 4445,
+  "type": "ghost_exit",
+  "direction": "SELL",
+  "entry_price": 88029.89,
+  "exit_price": 87035.91071428572,
+  "pnl": 254.23829495806763,
+  "is_win": true,
+  "exit_reason": "TP_hit",
+  "veto_reason": "advanced_veto:SELL vetoed - RSI 6.9 < 28",
+  "session": "london",
+  "confidence": 0.4166666666666667,
+  "regime": "unknown",
+  "duration_bars": 28,
+  "open_time": "2025-12-29 11:45:00",
+  "timestamp": "2026-04-12T17:20:37.225514+00:00"
+}

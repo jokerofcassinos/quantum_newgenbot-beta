@@ -1,0 +1,17 @@
+{
+  "trade_id": 1951,
+  "type": "ghost_exit",
+  "direction": "BUY",
+  "entry_price": 91589.36,
+  "exit_price": 91289.36,
+  "pnl": -300.0,
+  "is_win": false,
+  "exit_reason": "SL_hit",
+  "veto_reason": "ghost_audit:sell_only_mode",
+  "session": "london",
+  "confidence": 0.5,
+  "regime": "unknown",
+  "duration_bars": 62,
+  "open_time": "2025-12-08 10:30:00",
+  "timestamp": "2026-04-12T17:22:36.425864+00:00"
+}

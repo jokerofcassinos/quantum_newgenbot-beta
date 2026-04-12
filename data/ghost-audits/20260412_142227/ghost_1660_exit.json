@@ -1,0 +1,17 @@
+{
+  "trade_id": 1660,
+  "type": "ghost_exit",
+  "direction": "BUY",
+  "entry_price": 86250.67,
+  "exit_price": 87288.32178571427,
+  "pnl": 525.9684656122945,
+  "is_win": true,
+  "exit_reason": "TP_hit",
+  "veto_reason": "ghost_audit:sell_only_mode",
+  "session": "asian",
+  "confidence": 0.4166666666666667,
+  "regime": "unknown",
+  "duration_bars": 13,
+  "open_time": "2025-11-25 21:25:00",
+  "timestamp": "2026-04-12T17:22:35.046974+00:00"
+}

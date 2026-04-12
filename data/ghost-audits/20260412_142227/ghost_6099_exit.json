@@ -1,0 +1,17 @@
+{
+  "trade_id": 6099,
+  "type": "ghost_exit",
+  "direction": "BUY",
+  "entry_price": 77777.45,
+  "exit_price": 78677.45,
+  "pnl": 662.9325173948954,
+  "is_win": true,
+  "exit_reason": "TP_hit",
+  "veto_reason": "ghost_audit:sell_only_mode",
+  "session": "ny_overlap",
+  "confidence": 0.4166666666666667,
+  "regime": "unknown",
+  "duration_bars": 18,
+  "open_time": "2026-02-02 15:05:00",
+  "timestamp": "2026-04-12T17:22:47.887305+00:00"
+}

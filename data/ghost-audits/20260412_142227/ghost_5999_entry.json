@@ -1,0 +1,15 @@
+{
+  "trade_id": 5999,
+  "type": "ghost_entry",
+  "direction": "BUY",
+  "entry_price": 88241.09,
+  "stop_loss": 87941.09,
+  "take_profit": 89141.09,
+  "volume": 1.0,
+  "veto_reason": "ghost_audit:sell_only_mode",
+  "session": "london",
+  "confidence": 0.5,
+  "regime": "unknown",
+  "open_time": "2026-01-29 08:00:00",
+  "timestamp": "2026-04-12T17:22:47.122087+00:00"
+}

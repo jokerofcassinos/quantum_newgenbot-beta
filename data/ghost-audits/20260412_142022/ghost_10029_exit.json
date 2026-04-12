@@ -1,0 +1,17 @@
+{
+  "trade_id": 10029,
+  "type": "ghost_exit",
+  "direction": "SELL",
+  "entry_price": 71811.15,
+  "exit_price": 72170.45892857142,
+  "pnl": -148.26206195792722,
+  "is_win": false,
+  "exit_reason": "SL_hit",
+  "veto_reason": "anti_metralhadora:low_quality",
+  "session": "asian",
+  "confidence": 0.4166666666666667,
+  "regime": "unknown",
+  "duration_bars": 28,
+  "open_time": "2026-04-10 02:15:00",
+  "timestamp": "2026-04-12T17:21:01.101030+00:00"
+}

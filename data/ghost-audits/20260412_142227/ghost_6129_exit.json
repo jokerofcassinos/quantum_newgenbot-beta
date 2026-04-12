@@ -1,0 +1,17 @@
+{
+  "trade_id": 6129,
+  "type": "ghost_exit",
+  "direction": "BUY",
+  "entry_price": 64903.86,
+  "exit_price": 66696.73714285715,
+  "pnl": 670.2668394401662,
+  "is_win": true,
+  "exit_reason": "TP_hit",
+  "veto_reason": "ghost_audit:sell_only_mode",
+  "session": "london",
+  "confidence": 0.5,
+  "regime": "unknown",
+  "duration_bars": 62,
+  "open_time": "2026-02-06 08:45:00",
+  "timestamp": "2026-04-12T17:22:48.590241+00:00"
+}

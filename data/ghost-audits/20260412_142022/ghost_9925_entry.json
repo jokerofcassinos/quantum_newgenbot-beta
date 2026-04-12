@@ -1,0 +1,15 @@
+{
+  "trade_id": 9925,
+  "type": "ghost_entry",
+  "direction": "SELL",
+  "entry_price": 67858.03,
+  "stop_loss": 68158.03,
+  "take_profit": 66958.03,
+  "volume": 0.7194010490504593,
+  "veto_reason": "anti_metralhadora:low_quality",
+  "session": "ny",
+  "confidence": 0.4166666666666667,
+  "regime": "unknown",
+  "open_time": "2026-04-07 18:00:00",
+  "timestamp": "2026-04-12T17:21:00.399685+00:00"
+}

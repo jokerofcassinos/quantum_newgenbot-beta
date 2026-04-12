@@ -1,0 +1,17 @@
+{
+  "trade_id": 4280,
+  "type": "ghost_exit",
+  "direction": "SELL",
+  "entry_price": 93322.32,
+  "exit_price": 93622.32,
+  "pnl": -300.0,
+  "is_win": false,
+  "exit_reason": "SL_hit",
+  "veto_reason": "ghost_audit:destructive_hours_11UTC",
+  "session": "london",
+  "confidence": 0.4166666666666667,
+  "regime": "unknown",
+  "duration_bars": 22,
+  "open_time": "2026-01-06 11:10:00",
+  "timestamp": "2026-04-12T17:22:41.947753+00:00"
+}

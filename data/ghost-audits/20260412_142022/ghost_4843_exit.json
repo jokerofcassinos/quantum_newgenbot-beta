@@ -1,0 +1,17 @@
+{
+  "trade_id": 4843,
+  "type": "ghost_exit",
+  "direction": "BUY",
+  "entry_price": 88298.76,
+  "exit_price": 89198.76,
+  "pnl": 900.0,
+  "is_win": true,
+  "exit_reason": "TP_hit",
+  "veto_reason": "anti_metralhadora:low_quality",
+  "session": "asian",
+  "confidence": 0.4166666666666667,
+  "regime": "unknown",
+  "duration_bars": 154,
+  "open_time": "2026-01-01 22:10:00",
+  "timestamp": "2026-04-12T17:20:38.206482+00:00"
+}

@@ -1,0 +1,17 @@
+{
+  "trade_id": 3070,
+  "type": "ghost_exit",
+  "direction": "SELL",
+  "entry_price": 89702.58,
+  "exit_price": 88802.58,
+  "pnl": 623.9438975003859,
+  "is_win": true,
+  "exit_reason": "TP_hit",
+  "veto_reason": "advanced_veto:SELL vetoed - price at lower BB",
+  "session": "london",
+  "confidence": 0.4166666666666667,
+  "regime": "unknown",
+  "duration_bars": 50,
+  "open_time": "2025-12-15 12:35:00",
+  "timestamp": "2026-04-12T17:20:33.879528+00:00"
+}

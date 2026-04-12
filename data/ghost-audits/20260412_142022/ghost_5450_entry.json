@@ -1,0 +1,15 @@
+{
+  "trade_id": 5450,
+  "type": "ghost_entry",
+  "direction": "SELL",
+  "entry_price": 91327.73,
+  "stop_loss": 91627.73,
+  "take_profit": 90427.73,
+  "volume": 0.787264913591997,
+  "veto_reason": "anti_metralhadora:low_quality",
+  "session": "asian",
+  "confidence": 0.4166666666666667,
+  "regime": "unknown",
+  "open_time": "2026-01-08 01:55:00",
+  "timestamp": "2026-04-12T17:20:39.585376+00:00"
+}

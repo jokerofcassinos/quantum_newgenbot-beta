@@ -1,0 +1,15 @@
+{
+  "trade_id": 8422,
+  "type": "ghost_entry",
+  "direction": "BUY",
+  "entry_price": 68100.15,
+  "stop_loss": 67800.15,
+  "take_profit": 69000.15,
+  "volume": 0.8205699904112237,
+  "veto_reason": "anti_metralhadora:low_quality",
+  "session": "asian",
+  "confidence": 0.4166666666666667,
+  "regime": "unknown",
+  "open_time": "2026-03-06 21:55:00",
+  "timestamp": "2026-04-12T17:20:52.248407+00:00"
+}

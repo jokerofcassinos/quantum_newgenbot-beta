@@ -1,0 +1,17 @@
+{
+  "trade_id": 9502,
+  "type": "ghost_exit",
+  "direction": "BUY",
+  "entry_price": 66749.13,
+  "exit_price": 67649.13,
+  "pnl": 900.0,
+  "is_win": true,
+  "exit_reason": "TP_hit",
+  "veto_reason": "anti_metralhadora:low_quality",
+  "session": "ny_overlap",
+  "confidence": 0.4166666666666667,
+  "regime": "unknown",
+  "duration_bars": 557,
+  "open_time": "2026-04-03 13:40:00",
+  "timestamp": "2026-04-12T17:20:59.770532+00:00"
+}

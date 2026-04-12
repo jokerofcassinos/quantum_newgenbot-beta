@@ -1,0 +1,17 @@
+{
+  "trade_id": 6065,
+  "type": "ghost_exit",
+  "direction": "SELL",
+  "entry_price": 82540.25,
+  "exit_price": 82840.25,
+  "pnl": -264.9345228054246,
+  "is_win": false,
+  "exit_reason": "SL_hit",
+  "veto_reason": "advanced_veto:SELL vetoed - RSI 19.8 < 28",
+  "session": "london",
+  "confidence": 0.4166666666666667,
+  "regime": "unknown",
+  "duration_bars": 10,
+  "open_time": "2026-01-30 08:20:00",
+  "timestamp": "2026-04-12T17:22:47.356484+00:00"
+}

@@ -1,0 +1,17 @@
+{
+  "trade_id": 1977,
+  "type": "ghost_exit",
+  "direction": "BUY",
+  "entry_price": 90240.62,
+  "exit_price": 91140.62,
+  "pnl": 886.7426189556624,
+  "is_win": true,
+  "exit_reason": "TP_hit",
+  "veto_reason": "ghost_audit:sell_only_mode",
+  "session": "ny_overlap",
+  "confidence": 0.4166666666666667,
+  "regime": "unknown",
+  "duration_bars": 15,
+  "open_time": "2025-12-09 15:45:00",
+  "timestamp": "2026-04-12T17:22:36.527312+00:00"
+}

@@ -1,0 +1,17 @@
+{
+  "trade_id": 6934,
+  "type": "ghost_exit",
+  "direction": "BUY",
+  "entry_price": 89931.46,
+  "exit_price": 89631.46,
+  "pnl": -300.0,
+  "is_win": false,
+  "exit_reason": "SL_hit",
+  "veto_reason": "ghost_audit:sell_only_mode",
+  "session": "asian",
+  "confidence": 0.5833333333333334,
+  "regime": "unknown",
+  "duration_bars": 13,
+  "open_time": "2026-01-23 06:15:00",
+  "timestamp": "2026-04-12T17:20:43.170411+00:00"
+}

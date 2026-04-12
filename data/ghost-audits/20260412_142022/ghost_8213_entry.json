@@ -1,0 +1,15 @@
+{
+  "trade_id": 8213,
+  "type": "ghost_entry",
+  "direction": "BUY",
+  "entry_price": 65077.5,
+  "stop_loss": 64637.22642857143,
+  "take_profit": 66398.32071428571,
+  "volume": 0.20224469473302512,
+  "veto_reason": "anti_metralhadora:low_quality",
+  "session": "asian",
+  "confidence": 0.4166666666666667,
+  "regime": "unknown",
+  "open_time": "2026-02-23 03:15:00",
+  "timestamp": "2026-04-12T17:20:50.070397+00:00"
+}

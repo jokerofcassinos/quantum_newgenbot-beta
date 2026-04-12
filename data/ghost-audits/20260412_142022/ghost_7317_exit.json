@@ -1,0 +1,17 @@
+{
+  "trade_id": 7317,
+  "type": "ghost_exit",
+  "direction": "BUY",
+  "entry_price": 87708.73,
+  "exit_price": 88608.73,
+  "pnl": 900.0,
+  "is_win": true,
+  "exit_reason": "TP_hit",
+  "veto_reason": "ghost_audit:sell_only_mode",
+  "session": "london",
+  "confidence": 0.5,
+  "regime": "unknown",
+  "duration_bars": 108,
+  "open_time": "2026-01-26 08:10:00",
+  "timestamp": "2026-04-12T17:20:44.214346+00:00"
+}

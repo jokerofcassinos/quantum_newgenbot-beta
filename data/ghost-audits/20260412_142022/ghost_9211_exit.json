@@ -1,0 +1,17 @@
+{
+  "trade_id": 9211,
+  "type": "ghost_exit",
+  "direction": "SELL",
+  "entry_price": 65887.41,
+  "exit_price": 66187.41,
+  "pnl": -262.4282674740824,
+  "is_win": false,
+  "exit_reason": "SL_hit",
+  "veto_reason": "anti_metralhadora:low_quality",
+  "session": "asian",
+  "confidence": 0.4166666666666667,
+  "regime": "unknown",
+  "duration_bars": 50,
+  "open_time": "2026-03-27 22:15:00",
+  "timestamp": "2026-04-12T17:20:57.396902+00:00"
+}

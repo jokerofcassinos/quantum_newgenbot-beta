@@ -1,0 +1,17 @@
+{
+  "trade_id": 2426,
+  "type": "ghost_exit",
+  "direction": "BUY",
+  "entry_price": 92498.35,
+  "exit_price": 92198.35,
+  "pnl": -275.6905313222179,
+  "is_win": false,
+  "exit_reason": "SL_hit",
+  "veto_reason": "advanced_veto:BUY vetoed - price at upper BB",
+  "session": "asian",
+  "confidence": 0.5,
+  "regime": "unknown",
+  "duration_bars": 20,
+  "open_time": "2025-12-05 04:15:00",
+  "timestamp": "2026-04-12T17:20:32.032573+00:00"
+}

@@ -1,0 +1,17 @@
+{
+  "trade_id": 7627,
+  "type": "ghost_exit",
+  "direction": "SELL",
+  "entry_price": 78793.48,
+  "exit_price": 77893.48,
+  "pnl": 771.8477986802616,
+  "is_win": true,
+  "exit_reason": "TP_hit",
+  "veto_reason": "anti_metralhadora:low_quality",
+  "session": "london",
+  "confidence": 0.4166666666666667,
+  "regime": "unknown",
+  "duration_bars": 82,
+  "open_time": "2026-02-03 09:45:00",
+  "timestamp": "2026-04-12T17:20:45.905392+00:00"
+}

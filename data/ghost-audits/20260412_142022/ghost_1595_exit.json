@@ -1,0 +1,17 @@
+{
+  "trade_id": 1595,
+  "type": "ghost_exit",
+  "direction": "BUY",
+  "entry_price": 105805.81,
+  "exit_price": 105369.00571428571,
+  "pnl": -142.35027212497727,
+  "is_win": false,
+  "exit_reason": "SL_hit",
+  "veto_reason": "anti_metralhadora:low_quality",
+  "session": "asian",
+  "confidence": 0.4166666666666667,
+  "regime": "unknown",
+  "duration_bars": 158,
+  "open_time": "2025-11-10 03:35:00",
+  "timestamp": "2026-04-12T17:20:28.937176+00:00"
+}

@@ -1,0 +1,17 @@
+{
+  "trade_id": 4636,
+  "type": "ghost_exit",
+  "direction": "SELL",
+  "entry_price": 87851.67,
+  "exit_price": 88151.67,
+  "pnl": -300.0,
+  "is_win": false,
+  "exit_reason": "SL_hit",
+  "veto_reason": "anti_metralhadora:low_quality",
+  "session": "ny",
+  "confidence": 0.4166666666666667,
+  "regime": "unknown",
+  "duration_bars": 272,
+  "open_time": "2025-12-31 20:30:00",
+  "timestamp": "2026-04-12T17:20:37.973984+00:00"
+}

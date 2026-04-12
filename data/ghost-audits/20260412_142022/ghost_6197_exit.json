@@ -1,0 +1,17 @@
+{
+  "trade_id": 6197,
+  "type": "ghost_exit",
+  "direction": "BUY",
+  "entry_price": 95224.49,
+  "exit_price": 94924.49,
+  "pnl": -300.0,
+  "is_win": false,
+  "exit_reason": "SL_hit",
+  "veto_reason": "anti_metralhadora:low_quality",
+  "session": "asian",
+  "confidence": 0.4166666666666667,
+  "regime": "unknown",
+  "duration_bars": 128,
+  "open_time": "2026-01-16 06:35:00",
+  "timestamp": "2026-04-12T17:20:41.534447+00:00"
+}

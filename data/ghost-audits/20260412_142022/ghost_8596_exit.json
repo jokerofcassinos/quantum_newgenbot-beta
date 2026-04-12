@@ -1,0 +1,17 @@
+{
+  "trade_id": 8596,
+  "type": "ghost_exit",
+  "direction": "BUY",
+  "entry_price": 71889.28,
+  "exit_price": 71589.28,
+  "pnl": -246.91565677931635,
+  "is_win": false,
+  "exit_reason": "SL_hit",
+  "veto_reason": "advanced_veto:BUY vetoed - RSI 72.0 > 72",
+  "session": "london",
+  "confidence": 0.4166666666666667,
+  "regime": "unknown",
+  "duration_bars": 7,
+  "open_time": "2026-03-13 11:40:00",
+  "timestamp": "2026-04-12T17:20:53.723960+00:00"
+}

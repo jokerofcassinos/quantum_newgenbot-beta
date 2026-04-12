@@ -1,0 +1,17 @@
+{
+  "trade_id": 1796,
+  "type": "ghost_exit",
+  "direction": "SELL",
+  "entry_price": 93043.04,
+  "exit_price": 92143.04,
+  "pnl": 754.8014615651948,
+  "is_win": true,
+  "exit_reason": "TP_hit",
+  "veto_reason": "ghost_audit:destructive_hours_12UTC",
+  "session": "london",
+  "confidence": 0.4166666666666667,
+  "regime": "unknown",
+  "duration_bars": 46,
+  "open_time": "2025-12-03 12:05:00",
+  "timestamp": "2026-04-12T17:22:35.894004+00:00"
+}

@@ -1,0 +1,17 @@
+{
+  "trade_id": 8239,
+  "type": "ghost_exit",
+  "direction": "SELL",
+  "entry_price": 63214.81,
+  "exit_price": 63514.81,
+  "pnl": -213.50767369930165,
+  "is_win": false,
+  "exit_reason": "SL_hit",
+  "veto_reason": "anti_metralhadora:low_quality",
+  "session": "london",
+  "confidence": 0.4166666666666667,
+  "regime": "unknown",
+  "duration_bars": 89,
+  "open_time": "2026-02-24 09:20:00",
+  "timestamp": "2026-04-12T17:20:50.367724+00:00"
+}

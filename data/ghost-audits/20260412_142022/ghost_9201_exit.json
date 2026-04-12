@@ -1,0 +1,17 @@
+{
+  "trade_id": 9201,
+  "type": "ghost_exit",
+  "direction": "BUY",
+  "entry_price": 68647.94,
+  "exit_price": 68347.94,
+  "pnl": -300.0,
+  "is_win": false,
+  "exit_reason": "SL_hit",
+  "veto_reason": "anti_metralhadora:low_quality",
+  "session": "london",
+  "confidence": 0.4166666666666667,
+  "regime": "unknown",
+  "duration_bars": 15,
+  "open_time": "2026-03-27 10:00:00",
+  "timestamp": "2026-04-12T17:20:57.229796+00:00"
+}

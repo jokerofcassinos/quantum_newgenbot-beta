@@ -1,0 +1,15 @@
+{
+  "trade_id": 6590,
+  "type": "ghost_entry",
+  "direction": "BUY",
+  "entry_price": 66148.69,
+  "stop_loss": 65848.69,
+  "take_profit": 67048.69,
+  "volume": 1.0,
+  "veto_reason": "ghost_audit:sell_only_mode",
+  "session": "ny_overlap",
+  "confidence": 0.4166666666666667,
+  "regime": "unknown",
+  "open_time": "2026-02-23 13:35:00",
+  "timestamp": "2026-04-12T17:22:51.583162+00:00"
+}

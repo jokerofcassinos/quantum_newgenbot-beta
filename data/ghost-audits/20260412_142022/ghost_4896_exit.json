@@ -1,0 +1,17 @@
+{
+  "trade_id": 4896,
+  "type": "ghost_exit",
+  "direction": "BUY",
+  "entry_price": 88856.8,
+  "exit_price": 89756.8,
+  "pnl": 900.0,
+  "is_win": true,
+  "exit_reason": "TP_hit",
+  "veto_reason": "anti_metralhadora:low_quality",
+  "session": "london",
+  "confidence": 0.4166666666666667,
+  "regime": "unknown",
+  "duration_bars": 32,
+  "open_time": "2026-01-02 09:25:00",
+  "timestamp": "2026-04-12T17:20:38.225471+00:00"
+}

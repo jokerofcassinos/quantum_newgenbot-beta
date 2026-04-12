@@ -1,0 +1,17 @@
+{
+  "trade_id": 1846,
+  "type": "ghost_exit",
+  "direction": "SELL",
+  "entry_price": 91405.49,
+  "exit_price": 91760.03535714286,
+  "pnl": -128.98225914607076,
+  "is_win": false,
+  "exit_reason": "SL_hit",
+  "veto_reason": "anti_metralhadora:low_quality",
+  "session": "asian",
+  "confidence": 0.4166666666666667,
+  "regime": "unknown",
+  "duration_bars": 12,
+  "open_time": "2025-11-20 01:20:00",
+  "timestamp": "2026-04-12T17:20:30.083194+00:00"
+}

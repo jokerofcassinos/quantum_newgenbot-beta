@@ -1,0 +1,17 @@
+{
+  "trade_id": 854,
+  "type": "ghost_exit",
+  "direction": "BUY",
+  "entry_price": 114369.76,
+  "exit_price": 115269.76,
+  "pnl": 900.0,
+  "is_win": true,
+  "exit_reason": "TP_hit",
+  "veto_reason": "advanced_veto:BUY vetoed - price at upper BB",
+  "session": "london",
+  "confidence": 0.4166666666666667,
+  "regime": "unknown",
+  "duration_bars": 62,
+  "open_time": "2025-10-28 11:35:00",
+  "timestamp": "2026-04-12T17:22:31.818056+00:00"
+}

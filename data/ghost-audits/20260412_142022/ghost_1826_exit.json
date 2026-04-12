@@ -1,0 +1,17 @@
+{
+  "trade_id": 1826,
+  "type": "ghost_exit",
+  "direction": "SELL",
+  "entry_price": 93567.64,
+  "exit_price": 92661.96035714287,
+  "pnl": 386.94677743821495,
+  "is_win": true,
+  "exit_reason": "TP_hit",
+  "veto_reason": "anti_metralhadora:low_quality",
+  "session": "ny",
+  "confidence": 0.4166666666666667,
+  "regime": "unknown",
+  "duration_bars": 24,
+  "open_time": "2025-11-18 20:45:00",
+  "timestamp": "2026-04-12T17:20:29.969430+00:00"
+}

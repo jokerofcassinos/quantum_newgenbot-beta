@@ -1,0 +1,17 @@
+{
+  "trade_id": 5517,
+  "type": "ghost_exit",
+  "direction": "BUY",
+  "entry_price": 90081.23,
+  "exit_price": 89781.23,
+  "pnl": -284.0981817218031,
+  "is_win": false,
+  "exit_reason": "SL_hit",
+  "veto_reason": "ghost_audit:sell_only_mode",
+  "session": "asian",
+  "confidence": 0.4166666666666667,
+  "regime": "unknown",
+  "duration_bars": 5,
+  "open_time": "2026-01-22 05:05:00",
+  "timestamp": "2026-04-12T17:22:45.362571+00:00"
+}

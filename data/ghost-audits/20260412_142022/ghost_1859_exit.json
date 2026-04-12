@@ -1,0 +1,17 @@
+{
+  "trade_id": 1859,
+  "type": "ghost_exit",
+  "direction": "SELL",
+  "entry_price": 91842.83,
+  "exit_price": 92142.83,
+  "pnl": -176.52135000171347,
+  "is_win": false,
+  "exit_reason": "SL_hit",
+  "veto_reason": "anti_metralhadora:low_quality",
+  "session": "ny_overlap",
+  "confidence": 0.4166666666666667,
+  "regime": "unknown",
+  "duration_bars": 12,
+  "open_time": "2025-11-20 14:30:00",
+  "timestamp": "2026-04-12T17:20:30.134039+00:00"
+}

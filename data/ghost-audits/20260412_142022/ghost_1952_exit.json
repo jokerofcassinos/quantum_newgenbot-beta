@@ -1,0 +1,17 @@
+{
+  "trade_id": 1952,
+  "type": "ghost_exit",
+  "direction": "SELL",
+  "entry_price": 86834.65,
+  "exit_price": 87232.57535714285,
+  "pnl": -98.71259555429243,
+  "is_win": false,
+  "exit_reason": "SL_hit",
+  "veto_reason": "anti_metralhadora:low_quality",
+  "session": "asian",
+  "confidence": 0.4166666666666667,
+  "regime": "unknown",
+  "duration_bars": 7,
+  "open_time": "2025-11-25 21:55:00",
+  "timestamp": "2026-04-12T17:20:30.627071+00:00"
+}

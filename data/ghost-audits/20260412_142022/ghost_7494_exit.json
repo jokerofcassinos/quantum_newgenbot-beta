@@ -1,0 +1,17 @@
+{
+  "trade_id": 7494,
+  "type": "ghost_exit",
+  "direction": "SELL",
+  "entry_price": 88799.66,
+  "exit_price": 87899.66,
+  "pnl": 546.403930951469,
+  "is_win": true,
+  "exit_reason": "TP_hit",
+  "veto_reason": "advanced_veto:SELL vetoed - price at lower BB",
+  "session": "asian",
+  "confidence": 0.4166666666666667,
+  "regime": "unknown",
+  "duration_bars": 14,
+  "open_time": "2026-01-29 03:35:00",
+  "timestamp": "2026-04-12T17:20:44.867987+00:00"
+}

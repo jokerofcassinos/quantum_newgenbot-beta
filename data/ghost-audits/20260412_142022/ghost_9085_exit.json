@@ -1,0 +1,17 @@
+{
+  "trade_id": 9085,
+  "type": "ghost_exit",
+  "direction": "SELL",
+  "entry_price": 71172.27,
+  "exit_price": 69771.8475,
+  "pnl": 287.9986784433824,
+  "is_win": true,
+  "exit_reason": "TP_hit",
+  "veto_reason": "anti_metralhadora:low_quality",
+  "session": "ny_overlap",
+  "confidence": 0.4166666666666667,
+  "regime": "unknown",
+  "duration_bars": 11,
+  "open_time": "2026-03-23 14:05:00",
+  "timestamp": "2026-04-12T17:20:56.377296+00:00"
+}

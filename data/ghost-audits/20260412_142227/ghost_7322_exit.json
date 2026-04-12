@@ -1,0 +1,17 @@
+{
+  "trade_id": 7322,
+  "type": "ghost_exit",
+  "direction": "BUY",
+  "entry_price": 70932.89,
+  "exit_price": 70632.89,
+  "pnl": -247.14952298064082,
+  "is_win": false,
+  "exit_reason": "SL_hit",
+  "veto_reason": "ghost_audit:sell_only_mode",
+  "session": "london",
+  "confidence": 0.4166666666666667,
+  "regime": "unknown",
+  "duration_bars": 50,
+  "open_time": "2026-03-24 11:55:00",
+  "timestamp": "2026-04-12T17:22:57.161628+00:00"
+}

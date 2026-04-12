@@ -1,0 +1,17 @@
+{
+  "trade_id": 6157,
+  "type": "ghost_exit",
+  "direction": "SELL",
+  "entry_price": 96672.51,
+  "exit_price": 96972.51,
+  "pnl": -226.93219107110878,
+  "is_win": false,
+  "exit_reason": "SL_hit",
+  "veto_reason": "anti_metralhadora:low_quality",
+  "session": "ny_overlap",
+  "confidence": 0.4166666666666667,
+  "regime": "unknown",
+  "duration_bars": 5,
+  "open_time": "2026-01-15 15:35:00",
+  "timestamp": "2026-04-12T17:20:41.326285+00:00"
+}

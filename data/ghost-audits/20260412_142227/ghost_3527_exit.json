@@ -1,0 +1,17 @@
+{
+  "trade_id": 3527,
+  "type": "ghost_exit",
+  "direction": "SELL",
+  "entry_price": 89686.98,
+  "exit_price": 88786.98,
+  "pnl": 900.0,
+  "is_win": true,
+  "exit_reason": "TP_hit",
+  "veto_reason": "ghost_audit:destructive_hours_10UTC",
+  "session": "london",
+  "confidence": 0.4166666666666667,
+  "regime": "unknown",
+  "duration_bars": 15,
+  "open_time": "2025-12-29 10:15:00",
+  "timestamp": "2026-04-12T17:22:40.221361+00:00"
+}

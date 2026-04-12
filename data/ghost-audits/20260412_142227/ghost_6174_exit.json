@@ -1,0 +1,17 @@
+{
+  "trade_id": 6174,
+  "type": "ghost_exit",
+  "direction": "BUY",
+  "entry_price": 66000.09,
+  "exit_price": 66900.09,
+  "pnl": 774.0458821316638,
+  "is_win": true,
+  "exit_reason": "TP_hit",
+  "veto_reason": "ghost_audit:sell_only_mode",
+  "session": "asian",
+  "confidence": 0.4166666666666667,
+  "regime": "unknown",
+  "duration_bars": 110,
+  "open_time": "2026-02-13 02:25:00",
+  "timestamp": "2026-04-12T17:22:49.697658+00:00"
+}

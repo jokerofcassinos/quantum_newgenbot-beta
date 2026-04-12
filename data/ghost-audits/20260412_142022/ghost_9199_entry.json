@@ -1,0 +1,15 @@
+{
+  "trade_id": 9199,
+  "type": "ghost_entry",
+  "direction": "BUY",
+  "entry_price": 68870.09,
+  "stop_loss": 68570.09,
+  "take_profit": 69770.09,
+  "volume": 1.0,
+  "veto_reason": "anti_metralhadora:low_quality",
+  "session": "asian",
+  "confidence": 0.4166666666666667,
+  "regime": "unknown",
+  "open_time": "2026-03-27 05:55:00",
+  "timestamp": "2026-04-12T17:20:57.166816+00:00"
+}

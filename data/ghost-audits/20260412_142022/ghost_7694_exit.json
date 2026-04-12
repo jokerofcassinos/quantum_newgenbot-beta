@@ -1,0 +1,17 @@
+{
+  "trade_id": 7694,
+  "type": "ghost_exit",
+  "direction": "SELL",
+  "entry_price": 69244.27,
+  "exit_price": 68344.27,
+  "pnl": 764.3079578143808,
+  "is_win": true,
+  "exit_reason": "TP_hit",
+  "veto_reason": "advanced_veto:SELL vetoed - RSI 24.1 < 28",
+  "session": "london",
+  "confidence": 0.4166666666666667,
+  "regime": "unknown",
+  "duration_bars": 88,
+  "open_time": "2026-02-10 07:45:00",
+  "timestamp": "2026-04-12T17:20:47.161472+00:00"
+}

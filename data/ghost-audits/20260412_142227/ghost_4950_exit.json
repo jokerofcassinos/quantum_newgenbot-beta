@@ -1,0 +1,17 @@
+{
+  "trade_id": 4950,
+  "type": "ghost_exit",
+  "direction": "BUY",
+  "entry_price": 96867.3,
+  "exit_price": 96567.3,
+  "pnl": -194.7341701351472,
+  "is_win": false,
+  "exit_reason": "SL_hit",
+  "veto_reason": "ghost_audit:sell_only_mode",
+  "session": "ny_overlap",
+  "confidence": 0.4166666666666667,
+  "regime": "unknown",
+  "duration_bars": 8,
+  "open_time": "2026-01-15 15:50:00",
+  "timestamp": "2026-04-12T17:22:43.788467+00:00"
+}

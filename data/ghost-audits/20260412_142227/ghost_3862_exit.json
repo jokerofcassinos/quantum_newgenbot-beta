@@ -1,0 +1,17 @@
+{
+  "trade_id": 3862,
+  "type": "ghost_exit",
+  "direction": "BUY",
+  "entry_price": 88235.77,
+  "exit_price": 89135.77,
+  "pnl": 900.0,
+  "is_win": true,
+  "exit_reason": "TP_hit",
+  "veto_reason": "ghost_audit:sell_only_mode",
+  "session": "asian",
+  "confidence": 0.5,
+  "regime": "unknown",
+  "duration_bars": 144,
+  "open_time": "2026-01-01 22:45:00",
+  "timestamp": "2026-04-12T17:22:41.044057+00:00"
+}

@@ -1,0 +1,17 @@
+{
+  "trade_id": 3894,
+  "type": "ghost_exit",
+  "direction": "SELL",
+  "entry_price": 87024.78,
+  "exit_price": 87324.78,
+  "pnl": -150.18929614806208,
+  "is_win": false,
+  "exit_reason": "SL_hit",
+  "veto_reason": "advanced_veto:SELL vetoed - RSI 28.5 rising",
+  "session": "asian",
+  "confidence": 0.4166666666666667,
+  "regime": "unknown",
+  "duration_bars": 18,
+  "open_time": "2025-12-26 02:05:00",
+  "timestamp": "2026-04-12T17:20:36.017524+00:00"
+}

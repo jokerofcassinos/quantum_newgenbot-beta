@@ -1,0 +1,17 @@
+{
+  "trade_id": 5304,
+  "type": "ghost_exit",
+  "direction": "SELL",
+  "entry_price": 93865.32,
+  "exit_price": 94165.32,
+  "pnl": -286.797959744221,
+  "is_win": false,
+  "exit_reason": "SL_hit",
+  "veto_reason": "anti_metralhadora:low_quality",
+  "session": "asian",
+  "confidence": 0.4166666666666667,
+  "regime": "unknown",
+  "duration_bars": 157,
+  "open_time": "2026-01-06 03:10:00",
+  "timestamp": "2026-04-12T17:20:39.274225+00:00"
+}

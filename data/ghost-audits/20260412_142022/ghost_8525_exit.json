@@ -1,0 +1,17 @@
+{
+  "trade_id": 8525,
+  "type": "ghost_exit",
+  "direction": "SELL",
+  "entry_price": 71166.06,
+  "exit_price": 69626.41392857142,
+  "pnl": 552.4367305552036,
+  "is_win": true,
+  "exit_reason": "TP_hit",
+  "veto_reason": "anti_metralhadora:low_quality",
+  "session": "ny",
+  "confidence": 0.4166666666666667,
+  "regime": "unknown",
+  "duration_bars": 75,
+  "open_time": "2026-03-10 18:15:00",
+  "timestamp": "2026-04-12T17:20:53.117348+00:00"
+}

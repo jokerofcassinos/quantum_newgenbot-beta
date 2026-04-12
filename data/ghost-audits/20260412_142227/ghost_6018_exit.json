@@ -1,0 +1,17 @@
+{
+  "trade_id": 6018,
+  "type": "ghost_exit",
+  "direction": "BUY",
+  "entry_price": 88221.01,
+  "exit_price": 87921.01,
+  "pnl": -300.0,
+  "is_win": false,
+  "exit_reason": "SL_hit",
+  "veto_reason": "ghost_audit:sell_only_mode",
+  "session": "london",
+  "confidence": 0.4166666666666667,
+  "regime": "unknown",
+  "duration_bars": 2,
+  "open_time": "2026-01-29 10:00:00",
+  "timestamp": "2026-04-12T17:22:47.148848+00:00"
+}

@@ -1,0 +1,17 @@
+{
+  "trade_id": 5517,
+  "type": "ghost_exit",
+  "direction": "BUY",
+  "entry_price": 90978.29,
+  "exit_price": 90678.29,
+  "pnl": -300.0,
+  "is_win": false,
+  "exit_reason": "SL_hit",
+  "veto_reason": "anti_metralhadora:low_quality",
+  "session": "asian",
+  "confidence": 0.4166666666666667,
+  "regime": "unknown",
+  "duration_bars": 37,
+  "open_time": "2026-01-09 06:55:00",
+  "timestamp": "2026-04-12T17:20:39.865130+00:00"
+}

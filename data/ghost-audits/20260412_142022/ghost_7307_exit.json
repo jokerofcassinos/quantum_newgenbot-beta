@@ -1,0 +1,17 @@
+{
+  "trade_id": 7307,
+  "type": "ghost_exit",
+  "direction": "BUY",
+  "entry_price": 87319.88,
+  "exit_price": 88229.67714285715,
+  "pnl": 551.3423817178776,
+  "is_win": true,
+  "exit_reason": "TP_hit",
+  "veto_reason": "advanced_veto:BUY vetoed - RSI 76.0 > 72",
+  "session": "asian",
+  "confidence": 0.4166666666666667,
+  "regime": "unknown",
+  "duration_bars": 85,
+  "open_time": "2026-01-26 03:15:00",
+  "timestamp": "2026-04-12T17:20:44.146473+00:00"
+}

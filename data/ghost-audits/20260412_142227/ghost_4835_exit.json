@@ -1,0 +1,17 @@
+{
+  "trade_id": 4835,
+  "type": "ghost_exit",
+  "direction": "BUY",
+  "entry_price": 90872.76,
+  "exit_price": 91772.76,
+  "pnl": 709.68734489156,
+  "is_win": true,
+  "exit_reason": "TP_hit",
+  "veto_reason": "ghost_audit:sell_only_mode",
+  "session": "asian",
+  "confidence": 0.4166666666666667,
+  "regime": "unknown",
+  "duration_bars": 20,
+  "open_time": "2026-01-12 02:35:00",
+  "timestamp": "2026-04-12T17:22:43.190660+00:00"
+}

@@ -1,0 +1,17 @@
+{
+  "trade_id": 4547,
+  "type": "ghost_exit",
+  "direction": "SELL",
+  "entry_price": 88487.89,
+  "exit_price": 88787.89,
+  "pnl": -272.6468242910008,
+  "is_win": false,
+  "exit_reason": "SL_hit",
+  "veto_reason": "anti_metralhadora:low_quality",
+  "session": "ny",
+  "confidence": 0.4166666666666667,
+  "regime": "unknown",
+  "duration_bars": 196,
+  "open_time": "2025-12-30 19:40:00",
+  "timestamp": "2026-04-12T17:20:37.607871+00:00"
+}

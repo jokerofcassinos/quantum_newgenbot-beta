@@ -1,0 +1,17 @@
+{
+  "trade_id": 8287,
+  "type": "ghost_exit",
+  "direction": "SELL",
+  "entry_price": 67449.3,
+  "exit_price": 67818.88714285714,
+  "pnl": -89.04299405258975,
+  "is_win": false,
+  "exit_reason": "SL_hit",
+  "veto_reason": "advanced_veto:SELL vetoed - price at lower BB",
+  "session": "ny",
+  "confidence": 0.4166666666666667,
+  "regime": "unknown",
+  "duration_bars": 50,
+  "open_time": "2026-02-26 16:50:00",
+  "timestamp": "2026-04-12T17:20:50.803019+00:00"
+}

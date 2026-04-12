@@ -1,0 +1,17 @@
+{
+  "trade_id": 1666,
+  "type": "ghost_exit",
+  "direction": "SELL",
+  "entry_price": 104296.96,
+  "exit_price": 103396.96,
+  "pnl": 482.41675341408103,
+  "is_win": true,
+  "exit_reason": "TP_hit",
+  "veto_reason": "advanced_veto:SELL vetoed - RSI 23.7 < 28",
+  "session": "ny_overlap",
+  "confidence": 0.4166666666666667,
+  "regime": "unknown",
+  "duration_bars": 25,
+  "open_time": "2025-11-11 15:25:00",
+  "timestamp": "2026-04-12T17:20:29.112647+00:00"
+}

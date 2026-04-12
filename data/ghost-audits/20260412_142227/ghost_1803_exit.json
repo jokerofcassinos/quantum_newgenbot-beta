@@ -1,0 +1,17 @@
+{
+  "trade_id": 1803,
+  "type": "ghost_exit",
+  "direction": "BUY",
+  "entry_price": 93002.45,
+  "exit_price": 93902.45,
+  "pnl": 573.0795343781446,
+  "is_win": true,
+  "exit_reason": "TP_hit",
+  "veto_reason": "ghost_audit:sell_only_mode",
+  "session": "asian",
+  "confidence": 0.4166666666666667,
+  "regime": "unknown",
+  "duration_bars": 17,
+  "open_time": "2025-12-03 23:10:00",
+  "timestamp": "2026-04-12T17:22:35.938461+00:00"
+}

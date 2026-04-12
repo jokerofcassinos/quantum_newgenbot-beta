@@ -1,0 +1,17 @@
+{
+  "trade_id": 7884,
+  "type": "ghost_exit",
+  "direction": "BUY",
+  "entry_price": 68097.36,
+  "exit_price": 67797.36,
+  "pnl": -300.0,
+  "is_win": false,
+  "exit_reason": "SL_hit",
+  "veto_reason": "advanced_veto:BUY vetoed - RSI 72.3 > 72",
+  "session": "london",
+  "confidence": 0.4166666666666667,
+  "regime": "unknown",
+  "duration_bars": 32,
+  "open_time": "2026-02-18 10:00:00",
+  "timestamp": "2026-04-12T17:20:48.885949+00:00"
+}
