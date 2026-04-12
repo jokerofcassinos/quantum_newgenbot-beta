@@ -60,7 +60,7 @@ class MLSignalQualityPredictor:
         logger.info(f"   Historical trades loaded: {len(self.historical_trades)}")
         
         # Train model if enough data
-        if len(self.historical_trades) >= self.min_trades:
+        if self.historical_trades and len(self.historical_trades) >= self.min_trades:
             self._train_model()
 
     def _load_trade_audits(self) -> List[Dict[str, Any]]:
@@ -90,6 +90,8 @@ class MLSignalQualityPredictor:
         
         # Session encoding (one-hot)
         session = trade.get('session', trade.get('session_name', 'unknown'))
+        if session is None:
+            session = 'unknown'
         features['session_asian'] = 1.0 if session == 'asian' else 0.0
         features['session_london'] = 1.0 if session == 'london' else 0.0
         features['session_ny'] = 1.0 if session == 'ny' else 0.0
@@ -97,29 +99,47 @@ class MLSignalQualityPredictor:
         
         # Direction
         direction = trade.get('direction', 'BUY')
+        if direction is None:
+            direction = 'BUY'
         features['direction_buy'] = 1.0 if direction == 'BUY' else 0.0
         
         # Confidence
-        features['confidence'] = trade.get('confidence', 0.5)
+        confidence = trade.get('confidence', 0.5)
+        if confidence is None:
+            confidence = 0.5
+        features['confidence'] = confidence
         
         # Regime encoding
         regime = trade.get('regime_name', trade.get('regime', 'unknown'))
-        features['regime_ranging'] = 1.0 if 'ranging' in str(regime) else 0.0
-        features['regime_trending_bullish'] = 1.0 if 'trending_bullish' in str(regime) else 0.0
-        features['regime_trending_bearish'] = 1.0 if 'trending_bearish' in str(regime) else 0.0
+        if regime is None:
+            regime = 'unknown'
+        regime_str = str(regime)
+        features['regime_ranging'] = 1.0 if 'ranging' in regime_str else 0.0
+        features['regime_trending_bullish'] = 1.0 if 'trending_bullish' in regime_str else 0.0
+        features['regime_trending_bearish'] = 1.0 if 'trending_bearish' in regime_str else 0.0
         
         # Volume (if available)
-        features['volume'] = trade.get('volume', 0.01)
+        volume = trade.get('volume', 0.01)
+        if volume is None:
+            volume = 0.01
+        features['volume'] = volume
         
         # Duration (if available)
         duration = trade.get('duration_minutes', 0)
+        if duration is None:
+            duration = 0
         features['duration_minutes'] = min(duration, 120) / 120.0  # Normalize to 0-1
         
         # Strategy votes (if available)
-        features['votes'] = trade.get('votes', trade.get('strategy_votes', 5)) / 12.0
+        votes = trade.get('votes', trade.get('strategy_votes', 5))
+        if votes is None:
+            votes = 5
+        features['votes'] = votes / 12.0
         
         # Hour of day
         hour = trade.get('hour', trade.get('open_hour', 12))
+        if hour is None:
+            hour = 12
         features['hour'] = hour / 24.0
         
         return features
@@ -137,6 +157,8 @@ class MLSignalQualityPredictor:
         for trade in self.historical_trades:
             # Determine label (win = 1, loss = 0)
             pnl = trade.get('net_pnl', trade.get('gross_pnl', 0))
+            if pnl is None:
+                pnl = 0
             label = 1 if pnl > 0 else 0
             
             features = self._extract_features(trade)

@@ -1,6 +1,6 @@
 {
   "ticket": 1047,
-  "timestamp": "2026-04-12T15:09:05.644048+00:00",
+  "timestamp": "2026-04-12T15:55:07.261780+00:00",
   "symbol": "BTCUSD",
   "direction": "SELL",
   "entry_price": 107972.12,
@@ -122,7 +122,7 @@
     "risk_percent": 1.0,
     "min_rr_ratio": 1.5,
     "confidence_threshold": 0.65,
-    "last_mutation_time": "2026-04-12T15:09:05.644034+00:00",
+    "last_mutation_time": "2026-04-12T15:55:07.261768+00:00",
     "mutation_count": 0,
     "dna_memory_regimes": 0
   },

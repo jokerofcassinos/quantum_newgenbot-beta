@@ -1,12 +1,12 @@
 {
   "ticket": 1145,
-  "timestamp": "2026-04-12T15:09:10.618305+00:00",
+  "timestamp": "2026-04-12T15:55:09.511513+00:00",
   "symbol": "BTCUSD",
   "direction": "SELL",
-  "entry_price": 87748.17,
-  "stop_loss": 87448.17,
-  "take_profit": 88648.17,
-  "volume": 0.03,
+  "entry_price": 87423.5,
+  "stop_loss": 87123.5,
+  "take_profit": 88323.5,
+  "volume": 0.1,
   "strategy_name": "complete_system_v2",
   "signal_confidence": 0.4166666666666667,
   "market_regime": {
@@ -15,11 +15,11 @@
     "trend_strength": 0.5,
     "trend_direction": "sell",
     "volatility_regime": "medium",
-    "volatility_value": 49.32428571428838,
+    "volatility_value": 142.66571428571478,
     "volume_regime": "normal",
     "volume_ratio": 1.0,
     "market_phase": "unknown",
-    "session": "asian",
+    "session": "london",
     "session_volume_profile": 0.8
   },
   "multi_timeframe": {
@@ -34,16 +34,16 @@
     "conflict_detected": false
   },
   "indicators": {
-    "ema_9": 87762.33856462601,
-    "ema_21": 87721.71790214414,
-    "ema_50": 87716.91011195279,
-    "ema_200": 87748.17,
-    "sma_20": 87734.3245,
-    "sma_50": 87748.17,
-    "ema_9_21_cross": "bullish",
+    "ema_9": 87472.39119744142,
+    "ema_21": 87594.69272420739,
+    "ema_50": 87766.81841129974,
+    "ema_200": 87423.5,
+    "sma_20": 87616.282,
+    "sma_50": 87423.5,
+    "ema_9_21_cross": "bearish",
     "ema_21_50_cross": "neutral",
     "price_vs_ema_200": "above",
-    "rsi_14": 50.45312143551399,
+    "rsi_14": 36.772504920232294,
     "rsi_regime": "neutral",
     "macd_line": 0,
     "macd_signal": 0,
@@ -51,26 +51,26 @@
     "macd_cross": "neutral",
     "stochastic_k": 50,
     "stochastic_d": 50,
-    "atr_14": 49.32428571428838,
+    "atr_14": 142.66571428571478,
     "atr_percentile": 50.0,
-    "bollinger_upper": 87881.58919372868,
-    "bollinger_middle": 87734.3245,
-    "bollinger_lower": 87587.05980627133,
-    "bollinger_width": 294.52938745735446,
+    "bollinger_upper": 88040.7677772694,
+    "bollinger_middle": 87616.282,
+    "bollinger_lower": 87191.79622273061,
+    "bollinger_width": 848.971554538788,
     "price_vs_bollinger": "inside",
-    "volume_current": 565.0,
-    "volume_avg_20": 680.2,
+    "volume_current": 1179.0,
+    "volume_avg_20": 1085.15,
     "volume_ratio": 1.0,
     "volume_trend": "stable",
     "obv_trend": "neutral"
   },
   "price_action": {
-    "current_price": 87748.17,
+    "current_price": 87423.5,
     "price_change_1h": 0.5,
     "price_change_4h": 1.0,
     "price_change_24h": 2.0,
-    "nearest_support": 87248.17,
-    "nearest_resistance": 88248.17,
+    "nearest_support": 86923.5,
+    "nearest_resistance": 87923.5,
     "distance_to_support_pct": 0.68,
     "distance_to_resistance_pct": 0.68,
     "current_candle_type": "bearish",
@@ -95,18 +95,18 @@
     "exhaustion_signals": []
   },
   "risk_context": {
-    "capital": 100609.1448067891,
-    "equity": 100609.1448067891,
+    "capital": 101153.54151824709,
+    "equity": 101153.54151824709,
     "daily_pnl": 0,
     "daily_pnl_percent": 0,
-    "total_pnl": 609.1448067891033,
-    "total_pnl_percent": 0.6091448067891081,
-    "current_drawdown": 0.009691087580683246,
-    "max_drawdown": 0.009691087580683246,
-    "consecutive_wins": 1,
+    "total_pnl": 1153.5415182470897,
+    "total_pnl_percent": 1.153541518247092,
+    "current_drawdown": 0.01755815064698208,
+    "max_drawdown": 0.01755815064698208,
+    "consecutive_wins": 3,
     "consecutive_losses": 0,
     "daily_loss_used_percent": 0,
-    "total_loss_used_percent": 0.009691087580683246,
+    "total_loss_used_percent": 0.01755815064698208,
     "ftmo_daily_remaining": 5000,
     "ftmo_total_remaining": 10000
   },
@@ -122,17 +122,17 @@
     "risk_percent": 1.0,
     "min_rr_ratio": 1.5,
     "confidence_threshold": 0.65,
-    "last_mutation_time": "2026-04-12T15:09:10.618290+00:00",
+    "last_mutation_time": "2026-04-12T15:55:09.511498+00:00",
     "mutation_count": 0,
     "dna_memory_regimes": 0
   },
   "smart_order_manager": {
-    "virtual_tp_original": 88648.17,
-    "virtual_tp_current": 88648.17,
+    "virtual_tp_original": 88323.5,
+    "virtual_tp_current": 88323.5,
     "virtual_tp_adjustment_factor": 1.0,
     "virtual_tp_difficulty": "moderate",
-    "dynamic_sl_original": 87448.17,
-    "dynamic_sl_current": 87448.17,
+    "dynamic_sl_original": 87123.5,
+    "dynamic_sl_current": 87123.5,
     "breakeven_activated": false,
     "profit_targets_reached": [],
     "momentum_at_entry": {
@@ -168,12 +168,12 @@
       },
       {
         "strategy_name": "fvg",
-        "vote": "SELL",
+        "vote": "BUY",
         "confidence": 0.62
       },
       {
         "strategy_name": "msnr",
-        "vote": "BUY",
+        "vote": "SELL",
         "confidence": 0.68
       },
       {
@@ -188,18 +188,18 @@
       },
       {
         "strategy_name": "order_flow",
-        "vote": "NEUTRAL",
-        "confidence": 0.5
+        "vote": "SELL",
+        "confidence": 0.6700411721966577
       },
       {
         "strategy_name": "supply_demand",
-        "vote": "SELL",
+        "vote": "BUY",
         "confidence": 0.65
       },
       {
         "strategy_name": "fibonacci",
-        "vote": "BUY",
-        "confidence": 0.68
+        "vote": "NEUTRAL",
+        "confidence": 0.5
       }
     ],
     "buy_votes": 5,
@@ -210,15 +210,15 @@
     "consensus_confidence": 0.4166666666666667
   },
   "session_veto": {
-    "session_name": "asian",
+    "session_name": "london",
     "trading_allowed": true,
     "min_confidence_threshold": 0.4,
-    "max_position_size": 0.03,
-    "risk_multiplier": 0.3,
+    "max_position_size": 0.1,
+    "risk_multiplier": 1.0,
     "min_strategy_votes": 5,
     "min_coherence": 0.4,
     "veto_applied": false,
-    "veto_reason": "Session Asian - approved with adjusted volume"
+    "veto_reason": "Session London - approved with adjusted volume"
   },
   "advanced_veto_v2": {
     "rsi_extremes_veto": false,

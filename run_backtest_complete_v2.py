@@ -545,35 +545,35 @@ class CompleteBacktestEngineV2:
                                 
                                 # FIX #2: Black Swan - disabled until properly tuned (was vetoing too aggressively)
 
-                                # Phase 3.2: ExpectancyEngine - validate trade has positive expected value
-                                # Only activate after 50 trades for reliable statistics
-                                if self.total_trades > 50:
+                                # Phase 3.2: ExpectancyEngine - DISABLED (was filtering too many good trades)
+                                # Phase 3.2 re-enabled with relaxed threshold: only veto severely negative expectancy
+                                # Only activate after 100 trades for reliable statistics
+                                if self.total_trades > 100:
                                     stats = self.expectancy.get_current_stats()
                                     
-                                    # Use adaptive avg_win/avg_loss from history or defaults
-                                    avg_win = stats['avg_win'] if stats['total_trades'] > 10 else 15.0
-                                    avg_loss = stats['avg_loss'] if stats['total_trades'] > 10 else 8.0
-                                    win_rate = stats['win_rate'] if stats['total_trades'] > 10 else 0.55
-                                    
-                                    # Estimate position volume for cost calculation
-                                    est_volume = session_veto.get('adjusted_volume', 0.01)
-                                    
-                                    expectancy_result = self.expectancy.calculate_expectancy(
-                                        win_rate=win_rate,
-                                        avg_win=avg_win,
-                                        avg_loss=avg_loss,
-                                        position_volume=est_volume,
-                                    )
-                                    
-                                    signal['expectancy'] = expectancy_result
-                                    
-                                    # Veto only if severely negative expectancy
-                                    if expectancy_result['net_expectancy'] < -5.0:
-                                        self.total_vetoes += 1
-                                        continue  # Skip trade - severely negative expectancy
+                                    if stats['total_trades'] > 20:
+                                        avg_win = stats['avg_win']
+                                        avg_loss = stats['avg_loss']
+                                        win_rate = stats['win_rate']
+                                        
+                                        est_volume = session_veto.get('adjusted_volume', 0.01)
+                                        
+                                        expectancy_result = self.expectancy.calculate_expectancy(
+                                            win_rate=win_rate,
+                                            avg_win=avg_win,
+                                            avg_loss=avg_loss,
+                                            position_volume=est_volume,
+                                        )
+                                        
+                                        signal['expectancy'] = expectancy_result
+                                        
+                                        # Only veto if EXTREMELY negative expectancy
+                                        if expectancy_result['net_expectancy'] < -20.0:
+                                            self.total_vetoes += 1
+                                            continue
 
-                                # Phase 4.1: ML Signal Quality Prediction
-                                # Use historical trade audits to predict win probability
+                                # Phase 4.1: ML Signal Quality - DISABLED for now (needs 500+ trades to train properly)
+                                # Currently storing ML predictions for audit, but not vetoing
                                 ml_trade_data = {
                                     'session': session,
                                     'direction': signal['direction'],
@@ -586,16 +586,13 @@ class CompleteBacktestEngineV2:
                                 
                                 ml_allowed, ml_reason, ml_win_prob = self.ml_predictor.should_trade(
                                     trade_data=ml_trade_data,
-                                    min_win_probability=0.40,  # Relaxed threshold
+                                    min_win_probability=0.40,
                                 )
                                 
                                 signal['ml_win_probability'] = ml_win_prob
                                 signal['ml_reason'] = ml_reason
                                 
-                                # Only veto if ML is very confident it's a bad trade (<35% win prob)
-                                if ml_win_prob < 0.35 and self.ml_predictor.is_trained:
-                                    self.total_vetoes += 1
-                                    continue  # Skip trade - ML predicts low win probability
+                                # ML veto DISABLED - needs more training data to be reliable
 
                                 signal['volume'] = session_veto['adjusted_volume']
                                 signal['session_veto_data'] = {
