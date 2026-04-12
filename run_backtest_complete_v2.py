@@ -61,6 +61,9 @@ from src.analysis.multi_timeframe_alignment import MultiTimeframeAlignment  # Cr
 from src.risk.session_based_risk_profiles import SessionBasedRiskProfiles  # Session risk adjustment
 from src.risk.volatility_regime_adaptation import VolatilityRegimeAdaptation  # Volatility adaptation
 
+# Phase 4: ML-Based Signal Quality
+from src.ml.ml_signal_quality_predictor import MLSignalQualityPredictor  # ML win probability
+
 
 def setup_logging():
     logger.remove()
@@ -205,6 +208,13 @@ class CompleteBacktestEngineV2:
         self.multi_tf = MultiTimeframeAlignment()
         self.session_risk = SessionBasedRiskProfiles()
         self.volatility_regime = VolatilityRegimeAdaptation()
+        
+        # Phase 4: ML-Based Signal Quality
+        self.ml_predictor = MLSignalQualityPredictor(
+            audit_dir="data/trade-audits",
+            model_type="logistic",
+            min_trades_for_training=100,
+        )
 
         # State
         self.equity = 100000.0
@@ -561,6 +571,31 @@ class CompleteBacktestEngineV2:
                                     if expectancy_result['net_expectancy'] < -5.0:
                                         self.total_vetoes += 1
                                         continue  # Skip trade - severely negative expectancy
+
+                                # Phase 4.1: ML Signal Quality Prediction
+                                # Use historical trade audits to predict win probability
+                                ml_trade_data = {
+                                    'session': session,
+                                    'direction': signal['direction'],
+                                    'confidence': signal.get('confidence', 0.5),
+                                    'regime_name': regime.get('regime_name', 'unknown'),
+                                    'volume': session_veto.get('adjusted_volume', 0.01),
+                                    'votes': signal.get('votes', 5),
+                                    'hour': cur_time.hour if hasattr(cur_time, 'hour') else 12,
+                                }
+                                
+                                ml_allowed, ml_reason, ml_win_prob = self.ml_predictor.should_trade(
+                                    trade_data=ml_trade_data,
+                                    min_win_probability=0.40,  # Relaxed threshold
+                                )
+                                
+                                signal['ml_win_probability'] = ml_win_prob
+                                signal['ml_reason'] = ml_reason
+                                
+                                # Only veto if ML is very confident it's a bad trade (<35% win prob)
+                                if ml_win_prob < 0.35 and self.ml_predictor.is_trained:
+                                    self.total_vetoes += 1
+                                    continue  # Skip trade - ML predicts low win probability
 
                                 signal['volume'] = session_veto['adjusted_volume']
                                 signal['session_veto_data'] = {
