@@ -1,0 +1,17 @@
+{
+  "trade_id": 351,
+  "type": "ghost_exit",
+  "direction": "SELL",
+  "entry_price": 107088.31,
+  "exit_price": 107442.61428571428,
+  "pnl": -169.93039266347353,
+  "is_win": false,
+  "exit_reason": "SL_hit",
+  "veto_reason": "advanced_veto:SELL vetoed - RSI 19.9 < 28",
+  "session": "asian",
+  "confidence": 0.4166666666666667,
+  "regime": "unknown",
+  "duration_bars": 10,
+  "open_time": "2025-10-23 00:10:00",
+  "timestamp": "2026-04-12T17:43:11.471480+00:00"
+}

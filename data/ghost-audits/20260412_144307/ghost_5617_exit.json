@@ -1,0 +1,17 @@
+{
+  "trade_id": 5617,
+  "type": "ghost_exit",
+  "direction": "BUY",
+  "entry_price": 69069.67,
+  "exit_price": 68769.67,
+  "pnl": -300.0,
+  "is_win": false,
+  "exit_reason": "SL_hit",
+  "veto_reason": "advanced_veto:BUY vetoed - RSI 69.1 declining",
+  "session": "london",
+  "confidence": 0.4166666666666667,
+  "regime": "unknown",
+  "duration_bars": 15,
+  "open_time": "2026-04-07 12:10:00",
+  "timestamp": "2026-04-12T17:43:37.160016+00:00"
+}

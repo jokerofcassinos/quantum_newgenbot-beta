@@ -1,0 +1,17 @@
+{
+  "trade_id": 3608,
+  "type": "ghost_exit",
+  "direction": "BUY",
+  "entry_price": 91321.56,
+  "exit_price": 92221.56,
+  "pnl": 900.0,
+  "is_win": true,
+  "exit_reason": "TP_hit",
+  "veto_reason": "anti_metralhadora:session_limit",
+  "session": "asian",
+  "confidence": 0.4166666666666667,
+  "regime": "unknown",
+  "duration_bars": 26,
+  "open_time": "2026-01-13 06:45:00",
+  "timestamp": "2026-04-12T17:43:23.073622+00:00"
+}

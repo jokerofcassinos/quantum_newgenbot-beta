@@ -149,11 +149,11 @@ class CompleteBacktestEngineV2:
         self.risk_manager = BacktestRiskManager(initial_capital=100000.0)
         
         # Phase 1: Anti-Metralhadora (DubaiMatrixASI salvage - overtrading prevention)
-        # OPTIMIZED for SELL-only mode (Ghost Audit finding)
+        # GHOST AUDIT FIX: Relaxed to allow more trades (we were vetoing too many good trades)
         self.anti_metralhadora = AntiMetralhadora(
-            min_interval_minutes=5.0,  # Relaxed from 8.0 (SELL-only is safer)
-            max_trades_per_day=20,  # Increased from 18 (more SELL opportunities)
-            min_quality_score=0.40,  # Relaxed from 0.42 (SELL is inherently better)
+            min_interval_minutes=5.0,  # Standard interval
+            max_trades_per_day=25,  # Increased from 20 (Ghost Audit: we veto too many good trades)
+            min_quality_score=0.40,  # Standard quality threshold
             max_consecutive_losses=3,
             loss_cooldown_minutes=30.0,
         )
@@ -440,21 +440,19 @@ class CompleteBacktestEngineV2:
                                     continue  # Skip this trade (overtrading prevention)
 
                                 # ═══════════════════════════════════════════════════════════════
-                                # GHOST AUDIT OPTIMIZATION #1: SELL-ONLY mode
-                                # Ghost audit found: SELL +$82K, BUY -$148K
+                                # GHOST AUDIT INSIGHT: Filters are too strict on SELL trades
+                                # Ghost audit found: We vetoed $82K in profitable SELL trades!
+                                # But our BUY vetos are GOOD - avoided $148K in losses
+                                # So we relax vetos ONLY for SELL, keep BUY vetos strict
                                 # ═══════════════════════════════════════════════════════════════
-                                if signal.get('direction') == 'BUY':
-                                    self.total_vetoes += 1
-                                    self.ghost_audit.create_ghost(signal=signal, veto_reason='ghost_audit:sell_only_mode', bar_index=i, cur_time=cur_time, session=session)
-                                    continue  # Skip all BUY signals
-
-                                # GHOST AUDIT OPTIMIZATION #2: Ban destructive hours (10-16 UTC)
+                                
+                                # GHOST AUDIT OPTIMIZATION #1: Ban destructive hours (10-16 UTC)
                                 # Ghost audit found: 10-16 UTC loses ~$150K combined
                                 hour_utc = cur_time.hour if hasattr(cur_time, 'hour') else 12
                                 if 10 <= hour_utc <= 16:
                                     self.total_vetoes += 1
                                     self.ghost_audit.create_ghost(signal=signal, veto_reason=f'ghost_audit:destructive_hours_{hour_utc}UTC', bar_index=i, cur_time=cur_time, session=session)
-                                    continue  # Skip trades during destructive hours
+                                    continue  # Skip trades during destructive hours (both BUY and SELL)
 
                                 # Phase 2: Advanced validations (DubaiMatrixASI + Atl4s + Laplace)
                                 

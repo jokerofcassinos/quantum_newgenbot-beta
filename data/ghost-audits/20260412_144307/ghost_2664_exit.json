@@ -1,0 +1,17 @@
+{
+  "trade_id": 2664,
+  "type": "ghost_exit",
+  "direction": "BUY",
+  "entry_price": 87913.77,
+  "exit_price": 88813.77,
+  "pnl": 900.0,
+  "is_win": true,
+  "exit_reason": "TP_hit",
+  "veto_reason": "ghost_audit:destructive_hours_12UTC",
+  "session": "london",
+  "confidence": 0.4166666666666667,
+  "regime": "unknown",
+  "duration_bars": 47,
+  "open_time": "2025-12-30 12:55:00",
+  "timestamp": "2026-04-12T17:43:20.568286+00:00"
+}

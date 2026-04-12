@@ -1,0 +1,17 @@
+{
+  "trade_id": 4182,
+  "type": "ghost_exit",
+  "direction": "SELL",
+  "entry_price": 66939.99,
+  "exit_price": 67239.99,
+  "pnl": -300.0,
+  "is_win": false,
+  "exit_reason": "SL_hit",
+  "veto_reason": "ghost_audit:destructive_hours_12UTC",
+  "session": "london",
+  "confidence": 0.4166666666666667,
+  "regime": "unknown",
+  "duration_bars": 34,
+  "open_time": "2026-02-13 12:30:00",
+  "timestamp": "2026-04-12T17:43:27.970688+00:00"
+}

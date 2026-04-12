@@ -1,0 +1,17 @@
+{
+  "trade_id": 1932,
+  "type": "ghost_exit",
+  "direction": "SELL",
+  "entry_price": 89631.89,
+  "exit_price": 90241.3775,
+  "pnl": -113.96547381108148,
+  "is_win": false,
+  "exit_reason": "SL_hit",
+  "veto_reason": "ghost_audit:destructive_hours_16UTC",
+  "session": "ny",
+  "confidence": 0.4166666666666667,
+  "regime": "unknown",
+  "duration_bars": 2,
+  "open_time": "2025-12-17 16:55:00",
+  "timestamp": "2026-04-12T17:43:18.472608+00:00"
+}

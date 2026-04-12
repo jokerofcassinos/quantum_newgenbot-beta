@@ -1,0 +1,17 @@
+{
+  "trade_id": 5669,
+  "type": "ghost_exit",
+  "direction": "SELL",
+  "entry_price": 72635.9,
+  "exit_price": 72935.9,
+  "pnl": -300.0,
+  "is_win": false,
+  "exit_reason": "SL_hit",
+  "veto_reason": "session_veto:Trading disabled for Weekend session",
+  "session": "weekend",
+  "confidence": 0.5,
+  "regime": "unknown",
+  "duration_bars": 67,
+  "open_time": "2026-04-11 09:10:00",
+  "timestamp": "2026-04-12T17:43:38.013382+00:00"
+}

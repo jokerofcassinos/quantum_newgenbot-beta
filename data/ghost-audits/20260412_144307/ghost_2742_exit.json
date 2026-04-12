@@ -1,0 +1,17 @@
+{
+  "trade_id": 2742,
+  "type": "ghost_exit",
+  "direction": "BUY",
+  "entry_price": 89421.09,
+  "exit_price": 89121.09,
+  "pnl": -300.0,
+  "is_win": false,
+  "exit_reason": "SL_hit",
+  "veto_reason": "ghost_audit:destructive_hours_15UTC",
+  "session": "ny_overlap",
+  "confidence": 0.5,
+  "regime": "unknown",
+  "duration_bars": 12,
+  "open_time": "2026-01-02 15:10:00",
+  "timestamp": "2026-04-12T17:43:21.012358+00:00"
+}

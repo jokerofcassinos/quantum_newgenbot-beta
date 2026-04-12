@@ -1,0 +1,17 @@
+{
+  "trade_id": 4938,
+  "type": "ghost_exit",
+  "direction": "BUY",
+  "entry_price": 74046.09,
+  "exit_price": 73746.09,
+  "pnl": -172.74317417629825,
+  "is_win": false,
+  "exit_reason": "SL_hit",
+  "veto_reason": "ghost_audit:destructive_hours_16UTC",
+  "session": "ny",
+  "confidence": 0.4166666666666667,
+  "regime": "unknown",
+  "duration_bars": 9,
+  "open_time": "2026-03-16 16:40:00",
+  "timestamp": "2026-04-12T17:43:32.961044+00:00"
+}

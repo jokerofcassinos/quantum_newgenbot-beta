@@ -1,0 +1,15 @@
+{
+  "trade_id": 5195,
+  "type": "ghost_entry",
+  "direction": "BUY",
+  "entry_price": 71864.57,
+  "stop_loss": 71564.57,
+  "take_profit": 72764.57,
+  "volume": 1.0,
+  "veto_reason": "advanced_veto:BUY vetoed - RSI 81.7 > 72",
+  "session": "ny_overlap",
+  "confidence": 0.4166666666666667,
+  "regime": "unknown",
+  "open_time": "2026-03-25 14:35:00",
+  "timestamp": "2026-04-12T17:43:34.720627+00:00"
+}

@@ -1,0 +1,17 @@
+{
+  "trade_id": 4079,
+  "type": "ghost_exit",
+  "direction": "BUY",
+  "entry_price": 87989.36,
+  "exit_price": 87689.36,
+  "pnl": -149.18834319759492,
+  "is_win": false,
+  "exit_reason": "SL_hit",
+  "veto_reason": "ghost_audit:destructive_hours_10UTC",
+  "session": "london",
+  "confidence": 0.4166666666666667,
+  "regime": "unknown",
+  "duration_bars": 69,
+  "open_time": "2026-01-29 10:45:00",
+  "timestamp": "2026-04-12T17:43:25.676769+00:00"
+}

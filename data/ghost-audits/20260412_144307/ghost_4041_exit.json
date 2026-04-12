@@ -1,0 +1,17 @@
+{
+  "trade_id": 4041,
+  "type": "ghost_exit",
+  "direction": "BUY",
+  "entry_price": 87238.21,
+  "exit_price": 88196.6167857143,
+  "pnl": 691.3215628982198,
+  "is_win": true,
+  "exit_reason": "TP_hit",
+  "veto_reason": "advanced_veto:BUY vetoed - RSI 73.3 > 72",
+  "session": "asian",
+  "confidence": 0.4166666666666667,
+  "regime": "unknown",
+  "duration_bars": 86,
+  "open_time": "2026-01-26 03:10:00",
+  "timestamp": "2026-04-12T17:43:25.080909+00:00"
+}

@@ -1,0 +1,17 @@
+{
+  "trade_id": 5368,
+  "type": "ghost_exit",
+  "direction": "SELL",
+  "entry_price": 67361.29,
+  "exit_price": 67661.29,
+  "pnl": -300.0,
+  "is_win": false,
+  "exit_reason": "SL_hit",
+  "veto_reason": "ghost_audit:destructive_hours_10UTC",
+  "session": "london",
+  "confidence": 0.4166666666666667,
+  "regime": "unknown",
+  "duration_bars": 11,
+  "open_time": "2026-03-30 10:05:00",
+  "timestamp": "2026-04-12T17:43:35.613661+00:00"
+}

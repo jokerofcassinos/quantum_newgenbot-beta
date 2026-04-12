@@ -1,0 +1,17 @@
+{
+  "trade_id": 3583,
+  "type": "ghost_exit",
+  "direction": "SELL",
+  "entry_price": 91369.05,
+  "exit_price": 90469.05,
+  "pnl": 836.0703141118332,
+  "is_win": true,
+  "exit_reason": "TP_hit",
+  "veto_reason": "advanced_veto:SELL vetoed - RSI 19.6 < 28",
+  "session": "london",
+  "confidence": 0.4166666666666667,
+  "regime": "unknown",
+  "duration_bars": 9,
+  "open_time": "2026-01-12 09:55:00",
+  "timestamp": "2026-04-12T17:43:22.935389+00:00"
+}

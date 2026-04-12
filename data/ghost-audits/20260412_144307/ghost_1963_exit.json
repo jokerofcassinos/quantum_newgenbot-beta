@@ -1,0 +1,17 @@
+{
+  "trade_id": 1963,
+  "type": "ghost_exit",
+  "direction": "BUY",
+  "entry_price": 88016.73,
+  "exit_price": 87716.73,
+  "pnl": -300.0,
+  "is_win": false,
+  "exit_reason": "SL_hit",
+  "veto_reason": "ghost_audit:destructive_hours_14UTC",
+  "session": "ny_overlap",
+  "confidence": 0.4166666666666667,
+  "regime": "unknown",
+  "duration_bars": 22,
+  "open_time": "2025-12-19 14:40:00",
+  "timestamp": "2026-04-12T17:43:18.740650+00:00"
+}

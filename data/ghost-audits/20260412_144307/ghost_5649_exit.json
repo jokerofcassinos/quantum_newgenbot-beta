@@ -1,0 +1,17 @@
+{
+  "trade_id": 5649,
+  "type": "ghost_exit",
+  "direction": "SELL",
+  "entry_price": 71610.59,
+  "exit_price": 71910.59,
+  "pnl": -300.0,
+  "is_win": false,
+  "exit_reason": "SL_hit",
+  "veto_reason": "ghost_audit:destructive_hours_11UTC",
+  "session": "london",
+  "confidence": 0.4166666666666667,
+  "regime": "unknown",
+  "duration_bars": 31,
+  "open_time": "2026-04-10 11:25:00",
+  "timestamp": "2026-04-12T17:43:37.828312+00:00"
+}

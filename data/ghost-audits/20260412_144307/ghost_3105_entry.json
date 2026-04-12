@@ -1,0 +1,15 @@
+{
+  "trade_id": 3105,
+  "type": "ghost_entry",
+  "direction": "SELL",
+  "entry_price": 92770.28,
+  "stop_loss": 93070.28,
+  "take_profit": 91870.28,
+  "volume": 0.7330127840145155,
+  "veto_reason": "advanced_veto:SELL vetoed - RSI 24.6 < 28",
+  "session": "asian",
+  "confidence": 0.4166666666666667,
+  "regime": "unknown",
+  "open_time": "2026-01-07 03:05:00",
+  "timestamp": "2026-04-12T17:43:21.844465+00:00"
+}

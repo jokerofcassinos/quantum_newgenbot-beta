@@ -1,0 +1,17 @@
+{
+  "trade_id": 4109,
+  "type": "ghost_exit",
+  "direction": "BUY",
+  "entry_price": 83099.37,
+  "exit_price": 82799.37,
+  "pnl": -300.0,
+  "is_win": false,
+  "exit_reason": "SL_hit",
+  "veto_reason": "advanced_veto:BUY vetoed - RSI 84.0 > 72",
+  "session": "asian",
+  "confidence": 0.4166666666666667,
+  "regime": "unknown",
+  "duration_bars": 20,
+  "open_time": "2026-01-30 06:20:00",
+  "timestamp": "2026-04-12T17:43:25.810644+00:00"
+}

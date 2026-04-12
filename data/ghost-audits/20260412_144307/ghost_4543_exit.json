@@ -1,0 +1,17 @@
+{
+  "trade_id": 4543,
+  "type": "ghost_exit",
+  "direction": "SELL",
+  "entry_price": 67680.6,
+  "exit_price": 68061.14785714286,
+  "pnl": -231.31788978960338,
+  "is_win": false,
+  "exit_reason": "SL_hit",
+  "veto_reason": "advanced_veto:SELL vetoed - RSI 19.5 < 28",
+  "session": "asian",
+  "confidence": 0.4166666666666667,
+  "regime": "unknown",
+  "duration_bars": 4,
+  "open_time": "2026-02-26 01:45:00",
+  "timestamp": "2026-04-12T17:43:30.081579+00:00"
+}

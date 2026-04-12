@@ -1,0 +1,17 @@
+{
+  "trade_id": 5382,
+  "type": "ghost_exit",
+  "direction": "BUY",
+  "entry_price": 67837.58,
+  "exit_price": 67537.58,
+  "pnl": -300.0,
+  "is_win": false,
+  "exit_reason": "SL_hit",
+  "veto_reason": "ghost_audit:destructive_hours_16UTC",
+  "session": "ny",
+  "confidence": 0.4166666666666667,
+  "regime": "unknown",
+  "duration_bars": 6,
+  "open_time": "2026-03-30 16:25:00",
+  "timestamp": "2026-04-12T17:43:35.642578+00:00"
+}

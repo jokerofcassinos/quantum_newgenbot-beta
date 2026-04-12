@@ -1,0 +1,17 @@
+{
+  "trade_id": 2034,
+  "type": "ghost_exit",
+  "direction": "SELL",
+  "entry_price": 87574.34,
+  "exit_price": 86674.34,
+  "pnl": 539.3518009464307,
+  "is_win": true,
+  "exit_reason": "TP_hit",
+  "veto_reason": "anti_metralhadora:session_limit",
+  "session": "asian",
+  "confidence": 0.4166666666666667,
+  "regime": "unknown",
+  "duration_bars": 209,
+  "open_time": "2025-12-23 23:00:00",
+  "timestamp": "2026-04-12T17:43:19.361222+00:00"
+}

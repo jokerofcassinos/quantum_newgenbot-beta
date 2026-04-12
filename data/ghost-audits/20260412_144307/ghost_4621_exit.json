@@ -1,0 +1,17 @@
+{
+  "trade_id": 4621,
+  "type": "ghost_exit",
+  "direction": "SELL",
+  "entry_price": 70538.9,
+  "exit_price": 69638.9,
+  "pnl": 900.0,
+  "is_win": true,
+  "exit_reason": "TP_hit",
+  "veto_reason": "advanced_veto:SELL vetoed - RSI 17.0 < 28",
+  "session": "london",
+  "confidence": 0.4166666666666667,
+  "regime": "unknown",
+  "duration_bars": 43,
+  "open_time": "2026-03-06 11:10:00",
+  "timestamp": "2026-04-12T17:43:31.383865+00:00"
+}

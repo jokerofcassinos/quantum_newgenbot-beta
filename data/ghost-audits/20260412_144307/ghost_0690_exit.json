@@ -1,0 +1,17 @@
+{
+  "trade_id": 690,
+  "type": "ghost_exit",
+  "direction": "BUY",
+  "entry_price": 114374.24,
+  "exit_price": 115274.24,
+  "pnl": 900.0,
+  "is_win": true,
+  "exit_reason": "TP_hit",
+  "veto_reason": "advanced_veto:BUY vetoed - price at upper BB",
+  "session": "london",
+  "confidence": 0.4166666666666667,
+  "regime": "unknown",
+  "duration_bars": 63,
+  "open_time": "2025-10-28 11:30:00",
+  "timestamp": "2026-04-12T17:43:12.390228+00:00"
+}

@@ -1,0 +1,17 @@
+{
+  "trade_id": 4107,
+  "type": "ghost_exit",
+  "direction": "SELL",
+  "entry_price": 82286.72,
+  "exit_price": 83016.75071428572,
+  "pnl": -115.57810479925062,
+  "is_win": false,
+  "exit_reason": "SL_hit",
+  "veto_reason": "advanced_veto:SELL vetoed - RSI 23.4 < 28",
+  "session": "asian",
+  "confidence": 0.4166666666666667,
+  "regime": "unknown",
+  "duration_bars": 27,
+  "open_time": "2026-01-30 04:00:00",
+  "timestamp": "2026-04-12T17:43:25.798022+00:00"
+}

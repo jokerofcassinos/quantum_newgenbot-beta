@@ -1,0 +1,17 @@
+{
+  "trade_id": 5198,
+  "type": "ghost_exit",
+  "direction": "SELL",
+  "entry_price": 70760.88,
+  "exit_price": 69860.88,
+  "pnl": 900.0,
+  "is_win": true,
+  "exit_reason": "TP_hit",
+  "veto_reason": "advanced_veto:SELL vetoed - RSI 11.9 < 28",
+  "session": "asian",
+  "confidence": 0.4166666666666667,
+  "regime": "unknown",
+  "duration_bars": 41,
+  "open_time": "2026-03-26 05:35:00",
+  "timestamp": "2026-04-12T17:43:34.815598+00:00"
+}

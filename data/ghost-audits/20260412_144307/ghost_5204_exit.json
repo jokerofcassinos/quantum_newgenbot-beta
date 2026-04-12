@@ -1,0 +1,17 @@
+{
+  "trade_id": 5204,
+  "type": "ghost_exit",
+  "direction": "SELL",
+  "entry_price": 67709.96,
+  "exit_price": 66809.96,
+  "pnl": 573.6591608629944,
+  "is_win": true,
+  "exit_reason": "TP_hit",
+  "veto_reason": "advanced_veto:SELL vetoed - RSI 29.7 rising",
+  "session": "london",
+  "confidence": 0.4166666666666667,
+  "regime": "unknown",
+  "duration_bars": 17,
+  "open_time": "2026-03-27 12:10:00",
+  "timestamp": "2026-04-12T17:43:35.021669+00:00"
+}

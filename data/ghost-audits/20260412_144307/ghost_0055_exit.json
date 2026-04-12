@@ -1,0 +1,17 @@
+{
+  "trade_id": 55,
+  "type": "ghost_exit",
+  "direction": "BUY",
+  "entry_price": 121403.61,
+  "exit_price": 122303.61,
+  "pnl": 900.0,
+  "is_win": true,
+  "exit_reason": "TP_hit",
+  "veto_reason": "ghost_audit:destructive_hours_15UTC",
+  "session": "ny_overlap",
+  "confidence": 0.5,
+  "regime": "unknown",
+  "duration_bars": 11,
+  "open_time": "2025-10-10 15:40:00",
+  "timestamp": "2026-04-12T17:43:10.149034+00:00"
+}
