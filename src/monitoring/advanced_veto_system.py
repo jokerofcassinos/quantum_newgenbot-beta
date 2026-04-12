@@ -553,13 +553,13 @@ class AdvancedVetoSystem:
         predicted_max_move_up = avg_up_move * vol_ratio * 2  # 2 sigma move
         predicted_max_move_down = avg_down_move * vol_ratio * 2
         
-        # Calculate probabilities
+        # Calculate probabilities (closer target = higher probability)
         if direction == 'BUY':
-            prob_tp = min(0.9, tp_distance / max(1, predicted_max_move_up))
-            prob_sl = min(0.9, sl_distance / max(1, predicted_max_move_down))
+            prob_tp = min(0.9, predicted_max_move_up / max(1, tp_distance))
+            prob_sl = min(0.9, predicted_max_move_down / max(1, sl_distance))
         else:
-            prob_tp = min(0.9, tp_distance / max(1, predicted_max_move_down))
-            prob_sl = min(0.9, sl_distance / max(1, predicted_max_move_up))
+            prob_tp = min(0.9, predicted_max_move_down / max(1, tp_distance))
+            prob_sl = min(0.9, predicted_max_move_up / max(1, sl_distance))
         
         # Estimate duration
         velocity = abs(recent_prices[-1] - recent_prices[-10]) / 10  # points per bar

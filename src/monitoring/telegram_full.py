@@ -16,7 +16,7 @@ from datetime import datetime, timezone
 from loguru import logger
 
 
-class TelegramNotifier:
+class TelegramFullNotifier:
     """
     Complete Telegram notification system
     

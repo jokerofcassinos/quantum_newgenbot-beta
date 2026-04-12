@@ -124,9 +124,6 @@ class WalkForwardOptimizer:
             logger.info(f"\n📊 Split {split+1} Results:")
             logger.info(f"   In-Sample:  Net PnL=${train_result['net_pnl']:+,.2f} | WR={train_result['win_rate']*100:.1f}% | PF={train_result['profit_factor']:.2f}")
             logger.info(f"   Out-of-Sample: Net PnL=${test_result['net_pnl']:+,.2f} | WR={test_result['win_rate']*100:.1f}% | PF={test_result['profit_factor']:.2f}")
-            
-            # Update start for next split
-            start_idx = train_start
         
         # Aggregate results
         summary = self._aggregate_results(all_results)

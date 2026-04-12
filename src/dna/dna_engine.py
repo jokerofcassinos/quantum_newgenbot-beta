@@ -133,69 +133,213 @@ class DNAEngine:
             logger.error(f"❌ Error in DNA adaptation: {e}", exc_info=True)
             return self.current_dna
     
-    async def detect_regime(self) -> Dict[str, Any]:
+    async def detect_regime(self, candles=None) -> Dict[str, Any]:
         """
         Detect current market regime through large-scale analysis
         
         Returns dict with:
-        - regime_type: trending_bullish, trending_bearish, ranging_bullish, ranging_bearish, ranging_neutral
+        - regime_type: trending_bullish, trending_bearish, ranging, high_volatility, crashing, chop
         - confidence: 0.0 to 1.0
         - volatility: low, medium, high, extreme
         - momentum: strong, moderate, weak
-        - liquidity: tight, normal, wide
         - atr_current: current ATR value
         - trend_strength: 0.0 to 1.0
         """
-        # TODO: Implement actual regime detection
-        # This should analyze:
-        # - Moving average alignment (EMA 9/21/50/200)
-        # - ADX for trend strength
-        # - ATR for volatility
-        # - Volume analysis
-        # - Price action patterns
-        # - Higher timeframe context
+        # If no candles provided, return unknown (live mode will pass candles)
+        if candles is None or len(candles) < 100:
+            logger.warning("⚠️ Insufficient candle data for regime detection")
+            return {
+                "regime_type": "unknown_initial",
+                "confidence": 0.3,
+                "volatility": "unknown",
+                "momentum": "unknown",
+                "atr_current": 0.0,
+                "trend_strength": 0.5,
+                "analysis_timestamp": datetime.now(timezone.utc).isoformat()
+            }
         
-        logger.warning("⚠️ Regime detection not yet implemented - returning placeholder")
+        import numpy as np
+        
+        close = candles['close'].values
+        high = candles['high'].values
+        low = candles['low'].values
+        
+        # --- EMA Alignment ---
+        def ema(data, span):
+            alpha = 2.0 / (span + 1)
+            result = np.empty_like(data, dtype=float)
+            result[0] = data[0]
+            for i in range(1, len(data)):
+                result[i] = alpha * data[i] + (1 - alpha) * result[i - 1]
+            return result
+        
+        ema_9 = ema(close, 9)
+        ema_21 = ema(close, 21)
+        ema_50 = ema(close, 50)
+        
+        e9 = ema_9[-1]
+        e21 = ema_21[-1]
+        e50 = ema_50[-1]
+        current_price = close[-1]
+        
+        # Trend strength based on EMA alignment
+        if e9 > e21 > e50:
+            trend_strength = 1.0
+            trend_dir = "bullish"
+        elif e9 < e21 < e50:
+            trend_strength = 1.0
+            trend_dir = "bearish"
+        elif e9 > e21:
+            trend_strength = 0.6
+            trend_dir = "bullish"
+        elif e9 < e21:
+            trend_strength = 0.6
+            trend_dir = "bearish"
+        else:
+            trend_strength = 0.2
+            trend_dir = "neutral"
+        
+        # --- ATR-based volatility ---
+        tr = np.maximum(high[1:] - low[1:],
+                        np.maximum(np.abs(high[1:] - close[:-1]),
+                                   np.abs(low[1:] - close[:-1])))
+        atr_14 = np.mean(tr[-14:]) if len(tr) >= 14 else np.mean(tr)
+        atr_pct = atr_14 / current_price * 100
+        
+        if atr_pct > 3.0:
+            volatility = "extreme"
+        elif atr_pct > 2.0:
+            volatility = "high"
+        elif atr_pct > 0.5:
+            volatility = "medium"
+        else:
+            volatility = "low"
+        
+        # --- Momentum ---
+        returns_5 = (close[-1] - close[-6]) / close[-6] * 100 if len(close) > 5 else 0
+        returns_20 = (close[-1] - close[-21]) / close[-21] * 100 if len(close) > 20 else 0
+        
+        if abs(returns_5) > 2.0:
+            momentum = "strong"
+        elif abs(returns_5) > 0.5:
+            momentum = "moderate"
+        else:
+            momentum = "weak"
+        
+        # --- Regime Classification ---
+        if atr_pct > 3.0 and returns_20 < -5.0:
+            regime_type = "crashing"
+            confidence = 0.85
+        elif atr_pct > 2.0:
+            regime_type = "high_volatility"
+            confidence = 0.75
+        elif trend_strength >= 0.8:
+            regime_type = f"trending_{trend_dir}"
+            confidence = 0.80
+        elif trend_strength >= 0.5:
+            regime_type = f"trending_moderate_{trend_dir}"
+            confidence = 0.65
+        elif atr_pct < 0.3 and momentum == "weak":
+            regime_type = "chop"
+            confidence = 0.70
+        else:
+            regime_type = "ranging"
+            confidence = 0.60
+        
+        logger.info(f"🔍 Regime detected: {regime_type} (conf={confidence:.2f}, vol={volatility}, mom={momentum})")
         
         return {
-            "regime_type": "unknown_initial",
-            "confidence": 0.5,
-            "volatility": "unknown",
-            "momentum": "unknown",
-            "liquidity": "unknown",
-            "atr_current": 0.0,
-            "trend_strength": 0.5,
+            "regime_type": regime_type,
+            "confidence": confidence,
+            "volatility": volatility,
+            "momentum": momentum,
+            "atr_current": float(atr_14),
+            "trend_strength": trend_strength,
             "analysis_timestamp": datetime.now(timezone.utc).isoformat()
         }
     
-    async def analyze_recent_performance(self) -> Dict[str, Any]:
+    async def analyze_recent_performance(self, trade_history=None) -> Dict[str, Any]:
         """
         Analyze recent trading performance
         
-        Returns dict with:
-        - win_rate: percentage
-        - profit_factor: gross_profit / gross_loss
-        - total_trades: number of recent trades
-        - avg_win: average winning trade
-        - avg_loss: average losing trade
-        - max_drawdown: maximum recent drawdown
-        - consecutive_losses: current consecutive loss streak
-        """
-        # TODO: Implement actual performance analysis
-        # Query trade history from database
+        Args:
+            trade_history: list of trade dicts with keys: net_pnl, gross_pnl, etc.
         
-        logger.warning("⚠️ Performance analysis not yet implemented - returning placeholder")
+        Returns dict with:
+        - win_rate, profit_factor, total_trades, avg_win, avg_loss,
+          max_drawdown, consecutive_losses
+        """
+        # If not provided, use internally tracked history
+        if trade_history is None:
+            trade_history = getattr(self, '_trade_history', [])
+        
+        if not trade_history or len(trade_history) == 0:
+            logger.info("📊 No trade history available for performance analysis")
+            return {
+                "win_rate": 0.0,
+                "profit_factor": 0.0,
+                "total_trades": 0,
+                "avg_win": 0.0,
+                "avg_loss": 0.0,
+                "max_drawdown": 0.0,
+                "consecutive_losses": 0,
+                "analysis_period": "no_data"
+            }
+        
+        # Analyze last 50 trades (or all if fewer)
+        recent = trade_history[-50:]
+        
+        pnls = [t.get('net_pnl', 0) for t in recent]
+        wins = [p for p in pnls if p > 0]
+        losses = [p for p in pnls if p <= 0]
+        
+        total = len(pnls)
+        win_rate = len(wins) / total if total > 0 else 0
+        
+        gross_profit = sum(wins) if wins else 0
+        gross_loss = abs(sum(losses)) if losses else 0
+        profit_factor = gross_profit / gross_loss if gross_loss > 0 else 0
+        
+        avg_win = sum(wins) / len(wins) if wins else 0
+        avg_loss = abs(sum(losses)) / len(losses) if losses else 0
+        
+        # Consecutive losses (current streak from end)
+        consecutive_losses = 0
+        for p in reversed(pnls):
+            if p <= 0:
+                consecutive_losses += 1
+            else:
+                break
+        
+        # Max drawdown from equity curve
+        equity = 0.0
+        peak = 0.0
+        max_dd = 0.0
+        for p in pnls:
+            equity += p
+            peak = max(peak, equity)
+            dd = peak - equity
+            max_dd = max(max_dd, dd)
+        
+        logger.info(f"📊 Performance: WR={win_rate:.1%} PF={profit_factor:.2f} "
+                    f"trades={total} consec_L={consecutive_losses}")
         
         return {
-            "win_rate": 0.0,
-            "profit_factor": 0.0,
-            "total_trades": 0,
-            "avg_win": 0.0,
-            "avg_loss": 0.0,
-            "max_drawdown": 0.0,
-            "consecutive_losses": 0,
-            "analysis_period": "last_50_trades"
+            "win_rate": win_rate,
+            "profit_factor": profit_factor,
+            "total_trades": total,
+            "avg_win": avg_win,
+            "avg_loss": avg_loss,
+            "max_drawdown": max_dd,
+            "consecutive_losses": consecutive_losses,
+            "analysis_period": f"last_{len(recent)}_trades"
         }
+    
+    def record_trade(self, trade_result: Dict[str, Any]):
+        """Record a trade result for performance tracking"""
+        if not hasattr(self, '_trade_history'):
+            self._trade_history = []
+        self._trade_history.append(trade_result)
     
     def query_dna_memory(self, regime: Dict[str, Any]) -> Optional[Dict[str, Any]]:
         """

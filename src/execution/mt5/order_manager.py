@@ -12,7 +12,7 @@ Handles:
 
 import MetaTrader5 as mt5
 from typing import Optional, Dict, Any, List
-from datetime import datetime, timezone
+from datetime import datetime, timezone, timedelta
 from loguru import logger
 
 from src.core.config_manager import ConfigManager
@@ -417,9 +417,9 @@ class OrderManager:
         try:
             # Set default dates (last 7 days)
             if not from_date:
-                from_date = datetime.now() - timedelta(days=7)
+                from_date = datetime.now(timezone.utc) - timedelta(days=7)
             if not to_date:
-                to_date = datetime.now()
+                to_date = datetime.now(timezone.utc)
             
             # Get history
             history = mt5.history_orders_get(from_date, to_date, symbol or self.symbol)

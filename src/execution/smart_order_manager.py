@@ -524,19 +524,22 @@ class SmartOrderManager:
     def _activate_breakeven_sl(self, state: PositionState):
         """Activate breakeven SL (covers all costs)"""
         # Calculate breakeven price (entry + costs)
+        # BTCUSD: contract_size=100, so 0.10 lot = 10 contracts
+        contract_size = 100  # BTCUSD standard
         commission_per_side = state.volume * 45.0
         total_commission = commission_per_side * 2
-        spread_cost = 100 * state.volume
+        spread_cost = 100 * state.volume  # 100 points spread
         total_costs = total_commission + spread_cost
         
-        # Add small buffer
-        buffer = 5 * state.volume  # 5 points buffer
+        # Convert costs to price distance: cost / (volume * contract_size)
+        cost_as_price_distance = total_costs / (state.volume * contract_size)
+        buffer = 5.0  # $5 buffer in price
         
         if state.direction == 'BUY':
-            breakeven_sl = state.entry_price + (total_costs + buffer) / state.volume
+            breakeven_sl = state.entry_price + cost_as_price_distance + buffer
             state.dynamic_sl.current_sl = max(breakeven_sl, state.dynamic_sl.current_sl)
         else:
-            breakeven_sl = state.entry_price - (total_costs + buffer) / state.volume
+            breakeven_sl = state.entry_price - cost_as_price_distance - buffer
             state.dynamic_sl.current_sl = min(breakeven_sl, state.dynamic_sl.current_sl)
         
         state.dynamic_sl.profit_locked = 0.0  # Breakeven = no profit/loss
@@ -585,12 +588,13 @@ class SmartOrderManager:
         SL NEVER widens or moves against the position.
         Once a position is opened, the initial SL is SACRED and can only improve.
         """
+        # BTCUSD: 1 point = $1.00 in price
         if state.direction == 'BUY':
-            new_sl = state.current_price - (distance_points * 0.01)
+            new_sl = state.current_price - distance_points
             # SL can only move UP (closer to profit), never DOWN (wider)
             state.dynamic_sl.current_sl = max(new_sl, state.dynamic_sl.current_sl)
         else:
-            new_sl = state.current_price + (distance_points * 0.01)
+            new_sl = state.current_price + distance_points
             # SL can only move DOWN (closer to profit), never UP (wider)
             state.dynamic_sl.current_sl = min(new_sl, state.dynamic_sl.current_sl)
 

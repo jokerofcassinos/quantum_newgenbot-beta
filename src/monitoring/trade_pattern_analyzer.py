@@ -226,8 +226,9 @@ class TradePatternAnalyzer:
             loss = loser_regimes.get(regime[0], 0)
             total = wins + loss
             loss_rate = loss / total * 100 if total > 0 else 0
-            
-            logger.info(f"      {regime[0]}: {regime[1]} trades | WR: {wins/total*100:.1f}% | LR: {loss_rate:.1f}%")
+            win_rate = wins / total * 100 if total > 0 else 0
+
+            logger.info(f"      {regime[0]}: {regime[1]} trades | WR: {win_rate:.1f}% | LR: {loss_rate:.1f}%")
             
             # If loss rate > 70%, create veto pattern
             if loss_rate > 70 and total >= 5:
@@ -258,8 +259,9 @@ class TradePatternAnalyzer:
             loss = loser_sessions.get(session[0], 0)
             total = wins + loss
             loss_rate = loss / total * 100 if total > 0 else 0
-            
-            logger.info(f"      {session[0]}: {session[1]} trades | WR: {wins/total*100:.1f}% | LR: {loss_rate:.1f}%")
+            win_rate = wins / total * 100 if total > 0 else 0
+
+            logger.info(f"      {session[0]}: {session[1]} trades | WR: {win_rate:.1f}% | LR: {loss_rate:.1f}%")
     
     def _analyze_mtf_patterns(self, audits, winners, losers):
         """Find multi-timeframe conflict patterns"""
@@ -447,6 +449,10 @@ class TradePatternAnalyzer:
     
     def save_veto_rules(self, filepath: str = "config/veto_rules.json"):
         """Save veto rules to file"""
+        if not self.veto_rules.get("rules"):
+            logger.info("   No new rules generated. Preserving existing veto_rules.json.")
+            return
+            
         path = Path(filepath)
         path.parent.mkdir(parents=True, exist_ok=True)
         

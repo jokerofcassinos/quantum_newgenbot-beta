@@ -583,7 +583,18 @@ class NeuralTradeAuditor:
         return lessons
     
     def _save_audit(self, audit: TradeAuditLog):
-        """Save audit to JSON file"""
+        """Save audit to JSON file AND memory buffer in backtest mode"""
+        if getattr(self, '_backtest_mode', False):
+            if not hasattr(self, 'audits'):
+                self.audits = []
+            
+            existing = [i for i, a in enumerate(self.audits) if a.ticket == audit.ticket]
+            if existing:
+                self.audits[existing[0]] = audit
+            else:
+                self.audits.append(audit)
+            # Removed the `return` here so we ALSO write to physical disk during backtest!
+        
         filepath = self._get_audit_path(audit)
         filepath.parent.mkdir(parents=True, exist_ok=True)
         
@@ -600,7 +611,10 @@ class NeuralTradeAuditor:
         return self.base_path / date_str / f"trade_{audit.ticket}.json"
     
     def get_all_audits(self, start_date: Optional[str] = None, end_date: Optional[str] = None) -> List[TradeAuditLog]:
-        """Load all audits from disk"""
+        """Load all audits (from memory if in backtest mode, else disk)"""
+        if getattr(self, '_backtest_mode', False) and hasattr(self, 'audits') and self.audits:
+            return self.audits
+
         audits = []
         
         base = self.base_path

@@ -290,14 +290,7 @@ class BacktestEngine:
         rsi = self._calculate_rsi(candles['close']).iloc[-1]
         atr = self._calculate_atr(candles).iloc[-1]
         
-        # DEBUG
-        if hasattr(self, '_debug_count'):
-            self._debug_count += 1
-        else:
-            self._debug_count = 1
-        
-        if self._debug_count <= 5:
-            print(f"   [DEBUG #{self._debug_count}] ema_9={ema_9:.2f} ema_21={ema_21:.2f} rsi={rsi:.1f} atr={atr:.2f}")
+
         
         # Determine direction - MORE AGGRESSIVE for backtesting
         current_price = candles['close'].iloc[-1]
@@ -337,17 +330,16 @@ class BacktestEngine:
             stop_loss = current_price + sl_distance
             take_profit = current_price - tp_distance
         
-        # Mock signal object
-        class Signal:
-            def __init__(self):
-                self.direction = direction
-                self.entry_price = current_price
-                self.stop_loss = stop_loss
-                self.take_profit = take_profit
-                self.confidence = confidence
-                self.risk_reward_ratio = 2.0
-        
-        return Signal()
+        # Lightweight signal object
+        from types import SimpleNamespace
+        return SimpleNamespace(
+            direction=direction,
+            entry_price=current_price,
+            stop_loss=stop_loss,
+            take_profit=take_profit,
+            confidence=confidence,
+            risk_reward_ratio=2.0
+        )
     
     def _calculate_rsi(self, series, period=14):
         """Calculate RSI with NaN protection"""

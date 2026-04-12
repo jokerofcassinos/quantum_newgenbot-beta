@@ -283,7 +283,7 @@ class MT5Connector:
                     "commission": pos.commission,
                     "magic": pos.magic,
                     "comment": pos.comment,
-                    "time": datetime.fromtimestamp(pos.time)
+                    "time": datetime.fromtimestamp(pos.time, tz=timezone.utc)
                 })
             
             return result

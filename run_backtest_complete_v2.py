@@ -34,6 +34,9 @@ from src.monitoring.veto_orchestrator import VetoOrchestrator
 from src.monitoring.advanced_veto_v2 import AdvancedVetoV2
 from src.strategies.session_profiles import get_session_profile, apply_session_veto, detect_session
 from src.execution.smart_order_manager import SmartOrderManager
+from src.risk.backtest_risk_manager import BacktestRiskManager  # NEW: Risk Manager integration (BUG #6)
+from src.risk.anti_metralhadora import AntiMetralhadora  # Phase 1: Overtrading prevention (DubaiMatrixASI)
+from src.execution.position_manager_smart_tp import PositionManagerSmartTP  # Phase 1: Multi-target TP (DubaiMatrixASI)
 
 
 def setup_logging():
@@ -45,57 +48,45 @@ def setup_logging():
     )
 
 
-def generate_data(days: int = 180) -> pd.DataFrame:
-    """Generate realistic BTCUSD M5 data"""
-    logger.info(f"Generating {days} days of BTCUSD data...")
+import MetaTrader5 as mt5
 
-    np.random.seed(42)
+def fetch_mt5_data(days: int = 180) -> pd.DataFrame:
+    """Fetch REAL historical BTCUSD data from MT5"""
+    logger.info(f"🔄 Connecting to MT5 to fetch {days} days of BTCUSD data...")
+    
+    if not mt5.initialize():
+        logger.error(f"❌ MT5 Initialization failed. Error code: {mt5.last_error()}")
+        sys.exit(1)
+        
     bars_per_day = 288
     total_bars = days * bars_per_day
-    start_price = 73000.0
-
-    prices = [start_price]
-    current_vol = 150.0
-
-    for i in range(1, total_bars):
-        current_vol = 0.9 * current_vol + 0.1 * 150 + np.random.normal(0, 10)
-        current_vol = max(50, min(300, current_vol))
-
-        deviation = prices[-1] - 73000
-        reversion = -deviation * 0.0005
-
-        regime = (i // 10000) % 4
-        trend = [5, -5, 15, -15][regime]
-
-        change = trend + reversion + np.random.normal(0, current_vol)
-        new_price = max(60000, min(90000, prices[-1] + change))
-        prices.append(new_price)
-
-    candles = []
-    current_time = datetime.now() - timedelta(days=days)
-    current_time = current_time.replace(hour=0, minute=0, second=0)
-
-    for i in range(total_bars):
-        open_p = prices[i]
-        close_p = prices[i+1] if i+1 < len(prices) else prices[i]
-        bar_range = abs(np.random.normal(0, current_vol * 0.5))
-
-        hour = current_time.hour
-        vol_base = 1500 if 13 <= hour < 17 else 1000 if 7 <= hour < 13 else 500
-        volume = vol_base * np.random.lognormal(0, 0.3)
-
-        candles.append({
-            'time': current_time,
-            'open': round(open_p, 2),
-            'high': round(max(open_p, close_p) + bar_range, 2),
-            'low': round(min(open_p, close_p) - bar_range, 2),
-            'close': round(close_p, 2),
-            'volume': round(volume, 0)
-        })
-        current_time += timedelta(minutes=5)
-
-    df = pd.DataFrame(candles)
-    logger.info(f"Generated {len(df)} M5 candles | ${df['close'].iloc[0]:,.0f} -> ${df['close'].iloc[-1]:,.0f}")
+    
+    # Request data from MT5
+    rates = mt5.copy_rates_from_pos("BTCUSD", mt5.TIMEFRAME_M5, 0, total_bars)
+    
+    if rates is None or len(rates) == 0:
+        logger.error(f"❌ Failed to get data from MT5. Error: {mt5.last_error()}")
+        sys.exit(1)
+        
+    # Convert to DataFrame
+    df = pd.DataFrame(rates)
+    df['time'] = pd.to_datetime(df['time'], unit='s', utc=True)
+    
+    df = df.rename(columns={
+        'open': 'open',
+        'high': 'high',
+        'low': 'low',
+        'close': 'close',
+        'tick_volume': 'volume'
+    })
+    
+    # Drop unseen columns like spread, real_volume if not needed
+    df = df[['time', 'open', 'high', 'low', 'close', 'volume']]
+    
+    logger.info(f"✅ Fetched {len(df)} REAL M5 candles from MT5")
+    logger.info(f"   Date Range: {df['time'].iloc[0]} to {df['time'].iloc[-1]}")
+    logger.info(f"   Price Range: ${df['low'].min():,.0f} -> ${df['high'].max():,.0f}")
+    
     return df
 
 
@@ -117,11 +108,34 @@ class CompleteBacktestEngineV2:
         self.dna = self.config_manager.load_dna()
         self.risk_percent = risk_percent
 
-        # All systems
+        # All systems - RE-ENABLED AUDIT FOR INTELLIGENT LOSS ANALYSIS
         self.auditor = NeuralTradeAuditor()
+        self.auditor._backtest_mode = True  # Buffer writes, don't flush per trade
+        self.auditor._enabled = True  # RE-ENABLED: Full audit logging for loss analysis
         self.order_manager = SmartOrderManager(dna_params=self.dna)
         self.veto_orchestrator = VetoOrchestrator()
         self.advanced_veto_v2 = AdvancedVetoV2()
+        
+        # NEW: Risk Manager integration (BUG #6 fix)
+        self.risk_manager = BacktestRiskManager(initial_capital=100000.0)
+        
+        # Phase 1: Anti-Metralhadora (DubaiMatrixASI salvage - overtrading prevention)
+        self.anti_metralhadora = AntiMetralhadora(
+            min_interval_minutes=5.0,
+            max_trades_per_day=25,
+            min_quality_score=0.40,
+            max_consecutive_losses=3,
+            loss_cooldown_minutes=30.0,
+        )
+        
+        # Phase 1: PositionManager Smart TP (DubaiMatrixASI salvage - multi-target exits)
+        self.position_manager = PositionManagerSmartTP(
+            tp1_portion=0.30, tp1_rr=1.0,
+            tp2_portion=0.30, tp2_rr=2.0,
+            tp3_portion=0.20, tp3_rr=3.0,
+            trailing_portion=0.20,
+            trailing_atr_multiplier=1.5,
+        )
 
         # State
         self.equity = 100000.0
@@ -144,20 +158,110 @@ class CompleteBacktestEngineV2:
         self.consecutive_wins = 0
         self.consecutive_losses = 0
         self.last_trade_time = None
-        self.min_cooldown_bars = 24
+        self.last_loss_time = None
+        self.min_cooldown_bars = 3  # SCALPER MODE: Reduced to 3 bars (15 min) for maximum frequency
+        self.consecutive_loss_cooldown = 3  # SCALPER MODE: Only 3 bars cooldown after losses
 
-        # Strategy tracking
-        self.strategy_results = {name: {'trades': 0, 'wins': 0, 'losses': 0} for name in [
+        # Strategy tracking - ENHANCED for intelligent loss analysis
+        self.strategy_results = {name: {'trades': 0, 'wins': 0, 'losses': 0, 'total_pnl': 0.0, 'avg_wr': 0.0} for name in [
             'momentum', 'liquidity', 'thermodynamic', 'physics', 'order_block', 'fvg',
             'msnr', 'msnr_alchemist', 'ifvg', 'order_flow', 'supply_demand', 'fibonacci', 'iceberg'
         ]}
+        
+        # ENHANCED: Loss pattern tracking for intelligent analysis
+        self.loss_patterns = {
+            'by_hour': {},  # Losses by hour of day
+            'by_regime': {'trending_bullish': 0, 'trending_bearish': 0, 'ranging': 0},
+            'by_session': {'asian': 0, 'london': 0, 'ny': 0, 'ny_overlap': 0},
+            'by_strategy': {name: 0 for name in self.strategy_results.keys()},
+            'by_reason': {'SL hit': 0, 'SL hit (trailed)': 0, 'TP hit': 0},
+            'avg_loss_size': 0.0,
+            'avg_win_size': 0.0,
+            'total_trailing_stops_hit': 0,
+        }
 
+        # ═══════════════════════════════════════════════════════════════
+        # PRE-COMPUTE ALL INDICATORS (Phase 4 Performance Optimization)
+        # This eliminates O(N²) recalculation inside the hot loop.
+        # ═══════════════════════════════════════════════════════════════
+        logger.info("⚡ Pre-computing indicators...")
+        close = candles['close'].values.astype(np.float64)
+        high = candles['high'].values.astype(np.float64)
+        low = candles['low'].values.astype(np.float64)
+        volume = candles['volume'].values.astype(np.float64)
+        n = len(close)
+
+        # EMA 9, 21, 50 (vectorized)
+        def _ema_vec(data, span):
+            alpha = 2.0 / (span + 1)
+            out = np.empty_like(data)
+            out[0] = data[0]
+            for j in range(1, len(data)):
+                out[j] = alpha * data[j] + (1 - alpha) * out[j - 1]
+            return out
+
+        self._ema9 = _ema_vec(close, 9)
+        self._ema21 = _ema_vec(close, 21)
+        self._ema50 = _ema_vec(close, 50)
+
+        # SMA 20
+        self._sma20 = np.convolve(close, np.ones(20) / 20, mode='full')[:n]
+        self._sma20[:19] = close[:19]  # Fill warmup
+
+        # RSI 14 (vectorized)
+        delta = np.diff(close, prepend=close[0])
+        gain = np.where(delta > 0, delta, 0.0)
+        loss_arr = np.where(delta < 0, -delta, 0.0)
+        avg_gain = _ema_vec(gain, 14)
+        avg_loss = _ema_vec(loss_arr, 14)
+        rs = np.divide(avg_gain, avg_loss, out=np.zeros_like(avg_gain), where=avg_loss > 0)
+        self._rsi = 100.0 - (100.0 / (1.0 + rs))
+
+        # ATR 14 (vectorized True Range)
+        tr = np.maximum(
+            high[1:] - low[1:],
+            np.maximum(np.abs(high[1:] - close[:-1]), np.abs(low[1:] - close[:-1]))
+        )
+        tr = np.concatenate([[high[0] - low[0]], tr])
+        self._atr = np.convolve(tr, np.ones(14) / 14, mode='full')[:n]
+        self._atr[:13] = tr[:13]
+
+        # Bollinger Bands (20, 2)
+        self._bb_mid = self._sma20.copy()
+        bb_std = np.empty(n)
+        for j in range(n):
+            start = max(0, j - 19)
+            bb_std[j] = close[start:j + 1].std() if j >= 19 else close[:j + 1].std()
+        self._bb_upper = self._bb_mid + 2 * bb_std
+        self._bb_lower = self._bb_mid - 2 * bb_std
+
+        # Cache NumPy arrays for hot-path access
+        self._close = close
+        self._high = high
+        self._low = low
+        self._volume = volume
+        self._times = candles['time'].values
+
+        # ═══════════════════════════════════════════════════════════════
+        # PRE-COMPUTE MULTI-TIMEFRAME INDICATORS FOR QUALITY FILTERS
+        # ═══════════════════════════════════════════════════════════════
+        logger.info("⚡ Computing multi-timeframe trend filters...")
+        
+        # H1-equivalent EMAs (using M5 bars: H1 EMA 50 ≈ M5 EMA 600, H1 EMA 200 ≈ M5 EMA 2400)
+        # Using shorter equivalents for 180-day window: EMA 120 ≈ H1 EMA 10, EMA 288 ≈ H1 EMA 24
+        self._ema_h1_fast = _ema_vec(close, 120)   # ~H1 EMA 10
+        self._ema_h1_slow = _ema_vec(close, 288)   # ~H1 EMA 24
+        
+        # Volume average (20 bars) for confirmation filter
+        self._vol_avg_20 = np.convolve(volume, np.ones(20) / 20, mode='full')[:n]
+        self._vol_avg_20[:19] = volume[:19]
+        
+        logger.info(f"⚡ Multi-timeframe filters ready: {n} candles")
+
+        logger.info(f"⚡ Pre-computation complete: {n} candles")
         logger.info("Complete Backtest Engine V2 initialized")
-        logger.info(f"  12 Strategies: 5 original + 7 new execution agents")
-        logger.info(f"  Session Profiles: ACTIVE (Asian/Weekend restrictions)")
-        logger.info(f"  Advanced Veto v2: ACTIVE (RSI, Top/Bottom, Bollinger)")
-        logger.info(f"  SL Cap: 300 points MAX")
-        logger.info(f"  Risk per Trade: {risk_percent}%")
+        logger.info(f"  12 Strategies + Session Profiles + Advanced Veto v2")
+        logger.info(f"  SL Cap: 300 points MAX | Risk: {risk_percent}%")
 
     def run(self) -> dict:
         """Run complete backtest"""
@@ -172,42 +276,74 @@ class CompleteBacktestEngineV2:
         logger.info("="*80)
 
         warmup = 50
+        total = len(self.candles)
+        import time as _time
+        t0 = _time.perf_counter()
 
-        for i in range(warmup, len(self.candles)):
-            candle = self.candles.iloc[i]
-            recent = self.candles.iloc[max(0, i-50):i+1]
+        for i in range(warmup, total):
+            # ── Hot path: use pre-computed NumPy arrays instead of DataFrame ──
+            cur_close = self._close[i]
+            cur_high = self._high[i]
+            cur_low = self._low[i]
+            cur_time = pd.Timestamp(self._times[i])
 
             if self.current_position is None:
-                # Generate signal from 12 strategies
-                signal = self._generate_signal(recent, candle['close'], candle['time'])
+                # NEW: Cooldown after 3+ consecutive losses (wait N bars, not permanent block)
+                if self.consecutive_losses >= 3 and self.last_loss_time is not None:
+                    bars_since_loss = i - self.last_loss_time
+                    if bars_since_loss < self.consecutive_loss_cooldown:
+                        continue  # Still in cooldown, skip signal
+
+                # Generate signal using pre-computed indicators by index
+                signal = self._generate_signal_fast(i, cur_close, cur_time)
 
                 if signal:
-                    # Session veto
-                    session = detect_session(candle['time'])
+                    # SCALPER MODE: Maximum signal frequency - NO RESTRICTIVE FILTERS
+                    # We want ALL valid signals, then analyze losses intelligently
+                    
+                    # Calculate SL/TP distances for risk validation
+                    atr = self._atr[i]
+                    sl_dist_for_risk = min(max(atr * 2.0, 500), 3000)
+                    tp_dist_for_risk = sl_dist_for_risk * 2.0
+                    
+                    session = detect_session(cur_time)
                     session_profile = get_session_profile(session)
                     session_veto = apply_session_veto(session_profile, signal)
 
                     if not session_veto['approved']:
                         self.total_vetoes += 1
                     else:
-                        # Basic veto
-                        basic_veto = self._check_basic_veto(signal, recent, candle['close'])
+                        # Basic veto (uses pre-computed values from signal)
+                        basic_veto = self._check_basic_veto_fast(signal, i)
 
                         if basic_veto.approved:
-                            # Advanced Veto v2
-                            account_state = {
-                                'balance': self.equity,
-                                'equity': self.equity,
-                                'margin_used': 0,
-                            }
-
-                            veto_result = self.advanced_veto_v2.check_all_vetos(signal, recent, account_state)
+                            # Advanced Veto v2 with pre-computed RSI
+                            veto_result = self._check_advanced_veto_fast(signal, i)
 
                             if veto_result['approved']:
-                                # Adjust volume based on session
-                                signal['volume'] = session_veto['adjusted_volume']
+                                # NEW: Risk Manager validation (BUG #6 fix)
+                                risk_validation = self.risk_manager.validate_trade(
+                                    risk_amount=sl_dist_for_risk * signal.get('volume', 0.01),
+                                    reward_amount=tp_dist_for_risk * signal.get('volume', 0.01),
+                                    current_capital=self.equity
+                                )
                                 
-                                # Store veto results for audit
+                                if not risk_validation['approved']:
+                                    self.total_vetoes += 1
+                                    continue  # Skip this trade
+                                
+                                # Phase 1: Anti-Metralhadora check (DubaiMatrixASI salvage)
+                                allowed, reason, details = self.anti_metralhadora.should_allow_trade(
+                                    signal_quality=signal.get('confidence', 0.0),
+                                    current_session=session,
+                                    current_time=cur_time.to_pydatetime() if hasattr(cur_time, 'to_pydatetime') else cur_time,
+                                )
+                                
+                                if not allowed:
+                                    self.total_vetoes += 1
+                                    continue  # Skip this trade (overtrading prevention)
+
+                                signal['volume'] = session_veto['adjusted_volume']
                                 signal['session_veto_data'] = {
                                     'session_name': session,
                                     'trading_allowed': session_profile.trading_allowed,
@@ -219,7 +355,6 @@ class CompleteBacktestEngineV2:
                                     'approved': session_veto['approved'],
                                     'reason': session_veto['reason'],
                                 }
-                                
                                 signal['advanced_veto_v2_data'] = {
                                     'approved': veto_result['approved'],
                                     'vetoed_by': veto_result.get('vetoed_by'),
@@ -227,70 +362,235 @@ class CompleteBacktestEngineV2:
                                     'reason': veto_result.get('reason'),
                                     'all_vetoes': veto_result.get('all_vetoes', []),
                                 }
-                                
-                                self._open_position(signal, candle, i)
+                                self._open_position_fast(signal, i)
                             else:
                                 self.total_vetoes += 1
                         else:
                             self.total_vetoes += 1
 
             else:
-                # Manage position with Smart Order Manager
-                action = self.order_manager.update_position(
-                    ticket=self.current_position['ticket'],
-                    current_price=candle['close'],
-                    candles=recent
+                # Phase 1: Position management with Smart TP (DubaiMatrixASI salvage)
+                pos = self.current_position
+                
+                # If this is a new position without Smart TP targets, create them
+                if 'targets' not in pos:
+                    atr_current = self._atr[i]
+                    pos['targets'] = self.position_manager.create_position_targets(
+                        entry_price=pos['entry_price'],
+                        stop_loss=pos['stop_loss'],
+                        direction=pos['direction'],
+                        atr=atr_current,
+                    )
+                    pos['remaining_volume'] = pos['volume']
+                    pos['original_stop'] = pos['stop_loss']  # Save original SL for fallback
+                    logger.info(f"🎯 Smart TP targets created for trade #{pos['ticket']}")
+                
+                # Check Smart TP targets
+                atr_current = self._atr[i]
+                position_closed, realized_pnl, closed_targets = self.position_manager.check_targets(
+                    position_targets=pos['targets'],
+                    current_price=cur_close,
+                    current_volume=pos['remaining_volume'],
+                    atr=atr_current,
                 )
-
-                if action['action'] == 'close_position':
-                    self._close_position(action, candle, i)
-                elif self._check_sl_hit(candle):
-                    self._close_position({'action': 'close_position', 'reason': 'SL hit', 'type': 'stop_loss'}, candle, i)
-                elif self._check_tp_hit(candle):
-                    self._close_position({'action': 'close_position', 'reason': 'TP hit', 'type': 'take_profit'}, candle, i)
+                
+                # Fallback: If price hits original SL, close remaining position immediately
+                original_sl = pos.get('original_stop', pos['stop_loss'])
+                sl_hit = False
+                if pos['direction'] == 'BUY' and cur_low <= original_sl:
+                    sl_hit = True
+                elif pos['direction'] == 'SELL' and cur_high >= original_sl:
+                    sl_hit = True
+                
+                if sl_hit and not position_closed:
+                    # Close remaining portion at SL
+                    remaining_pnl = pos['targets']['total_realized_pnl']
+                    position_closed = True
+                    realized_pnl = remaining_pnl
+                
+                # Update equity with realized PnL from partial closes
+                if realized_pnl != 0:
+                    self.equity += realized_pnl
+                    
+                    # Update remaining volume based on closed portions
+                    pos['remaining_volume'] = pos['volume'] * pos['targets']['remaining_portion']
+                
+                # If position is fully closed, record it
+                if position_closed:
+                    total_pnl = pos['targets']['total_realized_pnl']
+                    
+                    if total_pnl > 0:
+                        self.winning_trades += 1
+                        self.consecutive_wins += 1
+                        self.consecutive_losses = 0
+                        self.loss_patterns['avg_win_size'] = (
+                            (self.loss_patterns['avg_win_size'] * (self.winning_trades - 1) + total_pnl) 
+                            / max(1, self.winning_trades)
+                        )
+                    else:
+                        self.losing_trades += 1
+                        self.consecutive_losses += 1
+                        self.consecutive_wins = 0
+                        self.last_loss_time = i
+                        self.loss_patterns['avg_loss_size'] = (
+                            (self.loss_patterns['avg_loss_size'] * (self.losing_trades - 1) + abs(total_pnl)) 
+                            / max(1, self.losing_trades)
+                        )
+                    
+                    # Update RiskManager and Anti-Metralhadora
+                    result_type = 'win' if total_pnl > 0 else 'loss'
+                    self.risk_manager.record_trade(total_pnl)
+                    session = pos.get('session', 'unknown')
+                    self.anti_metralhadora.record_trade(
+                        result=result_type,
+                        current_session=session,
+                        current_time=pos['open_time'],
+                    )
+                    
+                    # Record trade
+                    self.trades.append({
+                        'ticket': pos['ticket'],
+                        'direction': pos['direction'],
+                        'entry_price': pos['entry_price'],
+                        'exit_price': cur_close,
+                        'gross_pnl': total_pnl,
+                        'net_pnl': total_pnl - pos['costs'],
+                        'costs': pos['costs'],
+                        'exit_reason': 'Smart TP complete',
+                        'open_time': pos['open_time'],
+                        'close_time': self._times[i],
+                        'duration_minutes': (i - pos['open_bar_index']) * 5,
+                        'volume': pos['volume'],
+                        'smart_tp': True,
+                        'targets_hit': sum(1 for t in pos['targets']['targets'] if t['closed']),
+                    })
+                    
+                    self.current_position = None
 
             self.peak_equity = max(self.peak_equity, self.equity)
             if self.peak_equity > 0:
-                self.max_drawdown = max(self.max_drawdown, (self.peak_equity - self.equity) / self.peak_equity * 100)
+                dd = (self.peak_equity - self.equity) / self.peak_equity * 100
+                if dd > self.max_drawdown:
+                    self.max_drawdown = dd
 
-            if (i - warmup) % 5000 == 0:
-                progress = (i - warmup) / (len(self.candles) - warmup) * 100
-                logger.info(f"  Progress: {progress:.1f}% | Trades: {self.total_trades} | Vetoes: {self.total_vetoes} | Equity: ${self.equity:,.2f} | DD: {self.max_drawdown:.2f}%")
+            if (i - warmup) % 10000 == 0:
+                elapsed = _time.perf_counter() - t0
+                progress = (i - warmup) / (total - warmup) * 100
+                speed = (i - warmup) / max(elapsed, 0.001)
+                logger.info(f"  {progress:.0f}% | {speed:.0f} candles/s | Trades: {self.total_trades} | Vetoes: {self.total_vetoes} | Equity: ${self.equity:,.0f} | DD: {self.max_drawdown:.1f}%")
 
         if self.current_position:
-            self._close_position({'action': 'close_position', 'reason': 'End', 'type': 'manual'}, self.candles.iloc[-1], len(self.candles))
+            self._close_position_fast({'reason': 'End', 'type': 'manual'}, len(self.candles) - 1)
+
+        elapsed = _time.perf_counter() - t0
+        logger.info(f"\n⚡ Backtest complete in {elapsed:.1f}s ({(total - warmup) / max(elapsed, 0.001):.0f} candles/sec)")
 
         # Pattern analysis
-        logger.info("\nRunning pattern analysis...")
+        logger.info("Running pattern analysis...")
         analyzer = TradePatternAnalyzer(self.auditor)
         analysis = analyzer.analyze_all()
-        analyzer.save_veto_rules()
+        # DISABLED: Auto-generating veto rules creates bad feedback loop (BUG #2 fix)
+        # analyzer.save_veto_rules()
+        logger.info("⚠️ Veto rules auto-generation DISABLED to prevent feedback loop")
+        
+        # ═══════════════════════════════════════════════════════════════
+        # INTELLIGENT LOSS ANALYSIS (SCALPER MODE)
+        # ═══════════════════════════════════════════════════════════════
+        self._print_intelligent_loss_analysis()
 
         return self._results(analysis)
 
-    def _generate_signal(self, candles: pd.DataFrame, current_price: float, current_time: datetime) -> dict:
-        """
-        Generate signal from 12 strategies with detailed voting tracking
+    # ═══════════════════════════════════════════════════════════════
+    # FAST METHODS — Phase 4 Performance (use pre-computed arrays)
+    # ═══════════════════════════════════════════════════════════════
+
+    def _print_intelligent_loss_analysis(self):
+        """Print comprehensive intelligent loss analysis for scalper optimization"""
+        logger.info("\n" + "="*80)
+        logger.info("🔬 INTELLIGENT LOSS ANALYSIS (SCALPER MODE)")
+        logger.info("="*80)
         
-        Each strategy votes BUY, SELL, or NEUTRAL
-        We track individual votes for audit trail
-        """
-        if len(candles) < 20:
-            return None
+        # 1. Loss reasons breakdown
+        logger.info("\n📊 LOSS REASONS BREAKDOWN:")
+        total_losses = self.losing_trades
+        for reason, count in self.loss_patterns['by_reason'].items():
+            if count > 0:
+                pct = (count / max(1, total_losses)) * 100
+                logger.info(f"   {reason}: {count} ({pct:.1f}%)")
+        
+        # 2. Trailing stop effectiveness
+        logger.info(f"\n🎯 TRAILING STOP ANALYSIS:")
+        logger.info(f"   Trailing stops hit: {self.loss_patterns['total_trailing_stops_hit']}")
+        logger.info(f"   Regular SL hits: {self.loss_patterns['by_reason'].get('SL hit', 0)}")
+        if self.loss_patterns['total_trailing_stops_hit'] > 0:
+            logger.info(f"   → Trailing stop CONVERTED some losses (would have been worse without)")
+        
+        # 3. Average win vs loss
+        logger.info(f"\n💰 WIN/LOSS STATISTICS:")
+        logger.info(f"   Avg Win: ${self.loss_patterns['avg_win_size']:.2f}")
+        logger.info(f"   Avg Loss: ${self.loss_patterns['avg_loss_size']:.2f}")
+        if self.loss_patterns['avg_loss_size'] > 0:
+            ratio = self.loss_patterns['avg_win_size'] / self.loss_patterns['avg_loss_size']
+            logger.info(f"   Win/Loss Ratio: {ratio:.2f}:1")
+            if ratio < 1.0:
+                logger.warning(f"   ⚠️ Avg win is SMALLER than avg loss - need to improve TP distance or trailing")
+            else:
+                logger.info(f"   ✅ Good: wins are larger than losses")
+        
+        # 4. Strategy performance
+        logger.info(f"\n📈 STRATEGY PERFORMANCE (Top/Bottom 3):")
+        strat_perf = [(name, data['total_pnl'], data['trades']) for name, data in self.strategy_results.items() if data['trades'] > 0]
+        strat_perf.sort(key=lambda x: x[1], reverse=True)
+        
+        if strat_perf:
+            logger.info(f"   TOP 3 (Most Profitable):")
+            for name, pnl, trades in strat_perf[:3]:
+                wr = (self.strategy_results[name]['wins'] / max(1, trades)) * 100
+                logger.info(f"   ✅ {name}: ${pnl:+.2f} ({trades} trades, {wr:.1f}% WR)")
+            
+            logger.info(f"   BOTTOM 3 (Most Losing):")
+            for name, pnl, trades in strat_perf[-3:]:
+                wr = (self.strategy_results[name]['wins'] / max(1, trades)) * 100
+                logger.info(f"   ❌ {name}: ${pnl:+.2f} ({trades} trades, {wr:.1f}% WR)")
+        
+        # 5. Time-based patterns
+        logger.info(f"\n⏰ TIME-BASED PATTERNS:")
+        if self.loss_patterns['by_session']:
+            logger.info(f"   By Session:")
+            for session, losses in self.loss_patterns['by_session'].items():
+                logger.info(f"   {session}: {losses} losses")
+        
+        # 6. Recommendations
+        logger.info(f"\n🎯 RECOMMENDATIONS:")
+        if self.loss_patterns['avg_win_size'] < self.loss_patterns['avg_loss_size']:
+            logger.info(f"   1. Increase TP distance or improve trailing to boost avg win size")
+        if self.loss_patterns['total_trailing_stops_hit'] > 0:
+            logger.info(f"   2. Trailing stop is working - {self.loss_patterns['total_trailing_stops_hit']} stops locked")
+        
+        # Find worst strategy
+        if strat_perf:
+            worst = strat_perf[-1]
+            logger.info(f"   3. Consider reducing weight for: {worst[0]} (${worst[1]:+.2f} PnL)")
+        
+        target_wr = 0.40
+        current_wr = self.winning_trades / max(1, self.total_trades)
+        if current_wr < target_wr:
+            gap = target_wr - current_wr
+            logger.info(f"   4. Need +{gap*100:.1f}% WR improvement to reach {target_wr*100:.0f}% target")
+        
+        logger.info("="*80 + "\n")
 
-        # Calculate base indicators
-        ema_9 = candles['close'].ewm(span=9, adjust=False).mean().iloc[-1]
-        ema_21 = candles['close'].ewm(span=21, adjust=False).mean().iloc[-1]
 
-        delta = candles['close'].diff()
-        gain = delta.where(delta > 0, 0).rolling(14).mean()
-        loss = (-delta.where(delta < 0, 0)).rolling(14).mean()
-        rs = gain / loss
-        rsi = (100 - (100 / (1 + rs))).iloc[-1]
+    def _generate_signal_fast(self, idx: int, current_price: float, current_time) -> dict:
+        """Generate signal from 12 strategies using pre-computed NumPy arrays"""
 
-        # 12-Strategy Voting System
+        ema_9 = self._ema9[idx]
+        ema_21 = self._ema21[idx]
+        rsi = self._rsi[idx]
+        atr = self._atr[idx]
+
         votes = {
-            'strategy_votes': {},  # Track each strategy's vote
+            'strategy_votes': {},
             'buy_votes': 0,
             'sell_votes': 0,
             'neutral_votes': 0,
@@ -299,23 +599,23 @@ class CompleteBacktestEngineV2:
 
         # Strategy 1: Momentum (EMA Crossover)
         ema_diff_pct = abs(ema_9 - ema_21) / current_price * 100
-        if ema_9 > ema_21 and ema_diff_pct > 0.10:
+        if ema_9 > ema_21 and ema_diff_pct > 0.15:  # Fixed: was 0.10, now 0.15 (stronger signal)
             votes['strategy_votes']['momentum'] = {'vote': 'BUY', 'confidence': min(0.60 + ema_diff_pct * 0.3, 0.90)}
             votes['buy_votes'] += 1
-        elif ema_9 < ema_21 and ema_diff_pct > 0.10:
+        elif ema_9 < ema_21 and ema_diff_pct > 0.15:  # Fixed: was 0.10, now 0.15
             votes['strategy_votes']['momentum'] = {'vote': 'SELL', 'confidence': min(0.60 + ema_diff_pct * 0.3, 0.90)}
             votes['sell_votes'] += 1
         else:
             votes['strategy_votes']['momentum'] = {'vote': 'NEUTRAL', 'confidence': 0.5}
             votes['neutral_votes'] += 1
 
-        # Strategy 2: Liquidity Sweep
-        recent_low = candles['low'].iloc[-10:].min()
-        recent_high = candles['high'].iloc[-10:].max()
-        if current_price <= recent_low * 1.002:
+        # Strategy 2: Liquidity Sweep (last 10 bars from cached arrays)
+        lo10 = self._low[max(0, idx - 9):idx + 1].min()
+        hi10 = self._high[max(0, idx - 9):idx + 1].max()
+        if current_price <= lo10 * 1.002:
             votes['strategy_votes']['liquidity'] = {'vote': 'BUY', 'confidence': 0.65}
             votes['buy_votes'] += 1
-        elif current_price >= recent_high * 0.998:
+        elif current_price >= hi10 * 0.998:
             votes['strategy_votes']['liquidity'] = {'vote': 'SELL', 'confidence': 0.65}
             votes['sell_votes'] += 1
         else:
@@ -323,8 +623,8 @@ class CompleteBacktestEngineV2:
             votes['neutral_votes'] += 1
 
         # Strategy 3: Thermodynamic
-        if len(candles) >= 20:
-            price_change = (current_price - candles['close'].iloc[-10]) / candles['close'].iloc[-10] * 100
+        if idx >= 10:
+            price_change = (current_price - self._close[idx - 10]) / self._close[idx - 10] * 100
             if price_change < -2.0:
                 votes['strategy_votes']['thermodynamic'] = {'vote': 'BUY', 'confidence': 0.65}
                 votes['buy_votes'] += 1
@@ -335,22 +635,24 @@ class CompleteBacktestEngineV2:
                 votes['strategy_votes']['thermodynamic'] = {'vote': 'NEUTRAL', 'confidence': 0.5}
                 votes['neutral_votes'] += 1
 
-        # Strategy 4: Physics
-        sma_20 = candles['close'].rolling(20).mean().iloc[-1]
-        if current_price > sma_20 * 1.005:
-            votes['strategy_votes']['physics'] = {'vote': 'BUY', 'confidence': 0.60}
-            votes['buy_votes'] += 1
-        elif current_price < sma_20 * 0.995:
-            votes['strategy_votes']['physics'] = {'vote': 'SELL', 'confidence': 0.60}
+        # Strategy 4: Physics (Mean Reversion to SMA 20)
+        sma_20 = self._sma20[idx]
+        if current_price > sma_20 * 1.008:  # Fixed: was 1.005, now 1.008 (stronger stretch)
+            # Stretched high, revert to mean (sell)
+            votes['strategy_votes']['physics'] = {'vote': 'SELL', 'confidence': 0.65}  # Fixed: was 0.60
             votes['sell_votes'] += 1
+        elif current_price < sma_20 * 0.992:  # Fixed: was 0.995, now 0.992 (stronger stretch)
+            # Stretched low, revert to mean (buy)
+            votes['strategy_votes']['physics'] = {'vote': 'BUY', 'confidence': 0.65}  # Fixed: was 0.60
+            votes['buy_votes'] += 1
         else:
             votes['strategy_votes']['physics'] = {'vote': 'NEUTRAL', 'confidence': 0.5}
             votes['neutral_votes'] += 1
 
         # Strategy 5: Order Block
-        if len(candles) >= 15:
-            ob_high = candles['high'].iloc[-15:-5].max()
-            ob_low = candles['low'].iloc[-15:-5].min()
+        if idx >= 15:
+            ob_high = self._high[idx - 15:idx - 5].max()
+            ob_low = self._low[idx - 15:idx - 5].min()
             if current_price <= ob_low * 1.003:
                 votes['strategy_votes']['order_block'] = {'vote': 'BUY', 'confidence': 0.63}
                 votes['buy_votes'] += 1
@@ -361,42 +663,50 @@ class CompleteBacktestEngineV2:
                 votes['strategy_votes']['order_block'] = {'vote': 'NEUTRAL', 'confidence': 0.5}
                 votes['neutral_votes'] += 1
 
-        # Strategy 6: FVG (Fair Value Gap)
-        if len(candles) >= 8:
-            for i in range(len(candles)-8, len(candles)-2):
-                c1, c2, c3 = candles.iloc[i], candles.iloc[i+1], candles.iloc[i+2]
-                if c1['high'] < c3['low'] and current_price >= c3['low'] * 0.998 and current_price <= c1['high'] * 1.002:
-                    votes['strategy_votes']['fvg'] = {'vote': 'SELL', 'confidence': 0.62}
-                    votes['sell_votes'] += 1
+        # Strategy 6: FVG (Fair Value Gap) — lightweight scan
+        fvg_vote = 'NEUTRAL'
+        if idx >= 8:
+            for j in range(max(0, idx - 8), idx - 1):
+                h1, l3 = self._high[j], self._low[j + 2]
+                l1, h3 = self._low[j], self._high[j + 2]
+                if h1 < l3 and current_price >= l3 * 0.998 and current_price <= h1 * 1.002:
+                    # Bullish FVG (Gap Up). Price retraced into support zone. BUY.
+                    fvg_vote = 'BUY'
                     break
-                elif c1['low'] > c3['high'] and current_price <= c1['low'] * 1.002 and current_price >= c3['high'] * 0.998:
-                    votes['strategy_votes']['fvg'] = {'vote': 'BUY', 'confidence': 0.62}
-                    votes['buy_votes'] += 1
+                elif l1 > h3 and current_price <= l1 * 1.002 and current_price >= h3 * 0.998:
+                    # Bearish FVG (Gap Down). Price retraced into resistance zone. SELL.
+                    fvg_vote = 'SELL'
                     break
-            else:
-                votes['strategy_votes']['fvg'] = {'vote': 'NEUTRAL', 'confidence': 0.5}
-                votes['neutral_votes'] += 1
+        votes['strategy_votes']['fvg'] = {'vote': fvg_vote, 'confidence': 0.62 if fvg_vote != 'NEUTRAL' else 0.5}
+        if fvg_vote == 'BUY':
+            votes['buy_votes'] += 1
+        elif fvg_vote == 'SELL':
+            votes['sell_votes'] += 1
+        else:
+            votes['neutral_votes'] += 1
 
-        # Strategy 7: MSNR (Market Structure Neural Recognition)
-        if len(candles) >= 30:
-            close_20 = candles['close'].iloc[-20:]
-            hh = close_20.max()
-            ll = close_20.min()
+        # Strategy 7: MSNR (Market Support & Resistance)
+        if idx >= 30:
+            close_20 = self._close[idx - 19:idx + 1]
+            hh, ll = close_20.max(), close_20.min()
             if current_price > hh * 0.998:
+                # Breakout above resistance -> BUY (momentum continuation)
                 votes['strategy_votes']['msnr'] = {'vote': 'BUY', 'confidence': 0.68}
                 votes['buy_votes'] += 1
             elif current_price < ll * 1.002:
+                # Breakdown below support -> SELL (momentum continuation)
                 votes['strategy_votes']['msnr'] = {'vote': 'SELL', 'confidence': 0.68}
                 votes['sell_votes'] += 1
             else:
                 votes['strategy_votes']['msnr'] = {'vote': 'NEUTRAL', 'confidence': 0.5}
                 votes['neutral_votes'] += 1
 
-        # Strategy 8: MSNR Alchemist (MSNR + Volume + Momentum)
-        if len(candles) >= 30:
-            momentum = candles['close'].iloc[-1] - candles['close'].iloc[-10]
-            vol = candles['volume'].iloc[-20:]
-            vol_ratio = vol.iloc[-1] / vol.mean() if vol.mean() > 0 else 1
+        # Strategy 8: MSNR Alchemist
+        if idx >= 30:
+            momentum = self._close[idx] - self._close[idx - 10]
+            vol_slice = self._volume[idx - 19:idx + 1]
+            vol_mean = vol_slice.mean()
+            vol_ratio = self._volume[idx] / vol_mean if vol_mean > 0 else 1
             if momentum > 0 and vol_ratio > 1.2:
                 votes['strategy_votes']['msnr_alchemist'] = {'vote': 'BUY', 'confidence': min(0.65 + vol_ratio * 0.05, 0.85)}
                 votes['buy_votes'] += 1
@@ -407,36 +717,37 @@ class CompleteBacktestEngineV2:
                 votes['strategy_votes']['msnr_alchemist'] = {'vote': 'NEUTRAL', 'confidence': 0.5}
                 votes['neutral_votes'] += 1
 
-        # Strategy 9: IFVG (Inverse FVG)
-        if len(candles) >= 10:
-            ifvg_vote = 'NEUTRAL'
-            for i in range(len(candles)-10, len(candles)-2):
-                c1, c2, c3 = candles.iloc[i], candles.iloc[i+1], candles.iloc[i+2]
-                if c1['high'] < c3['low']:
-                    fvg_mid = (c1['high'] + c3['low']) / 2
+        # Strategy 9: IFVG
+        ifvg_vote = 'NEUTRAL'
+        if idx >= 10:
+            for j in range(max(0, idx - 10), idx - 1):
+                h1, l3 = self._high[j], self._low[j + 2]
+                l1, h3 = self._low[j], self._high[j + 2]
+                if h1 < l3:
+                    fvg_mid = (h1 + l3) / 2
                     if abs(current_price - fvg_mid) / current_price < 0.002:
                         ifvg_vote = 'SELL'
                         break
-                elif c1['low'] > c3['high']:
-                    fvg_mid = (c3['high'] + c1['low']) / 2
+                elif l1 > h3:
+                    fvg_mid = (h3 + l1) / 2
                     if abs(current_price - fvg_mid) / current_price < 0.002:
                         ifvg_vote = 'BUY'
                         break
-            votes['strategy_votes']['ifvg'] = {'vote': ifvg_vote, 'confidence': 0.62 if ifvg_vote != 'NEUTRAL' else 0.5}
-            if ifvg_vote == 'BUY':
-                votes['buy_votes'] += 1
-            elif ifvg_vote == 'SELL':
-                votes['sell_votes'] += 1
-            else:
-                votes['neutral_votes'] += 1
+        votes['strategy_votes']['ifvg'] = {'vote': ifvg_vote, 'confidence': 0.62 if ifvg_vote != 'NEUTRAL' else 0.5}
+        if ifvg_vote == 'BUY':
+            votes['buy_votes'] += 1
+        elif ifvg_vote == 'SELL':
+            votes['sell_votes'] += 1
+        else:
+            votes['neutral_votes'] += 1
 
         # Strategy 10: OrderFlow (Volume Delta)
-        if len(candles) >= 20:
-            close_20 = candles['close'].iloc[-20:]
-            volume_20 = candles['volume'].iloc[-20:]
-            changes = close_20.diff()
-            buy_vol = volume_20.where(changes > 0, 0).sum()
-            sell_vol = volume_20.where(changes < 0, 0).sum()
+        if idx >= 20:
+            c20 = self._close[idx - 19:idx + 1]
+            v20 = self._volume[idx - 19:idx + 1]
+            changes = np.diff(c20, prepend=c20[0])
+            buy_vol = v20[changes > 0].sum()
+            sell_vol = v20[changes < 0].sum()
             total_vol = buy_vol + sell_vol
             if total_vol > 0:
                 buy_ratio = buy_vol / total_vol
@@ -454,9 +765,9 @@ class CompleteBacktestEngineV2:
                 votes['neutral_votes'] += 1
 
         # Strategy 11: Supply/Demand
-        if len(candles) >= 40:
-            sd_low = candles['low'].iloc[-20:].min()
-            sd_high = candles['high'].iloc[-20:].max()
+        if idx >= 40:
+            sd_low = self._low[idx - 19:idx + 1].min()
+            sd_high = self._high[idx - 19:idx + 1].max()
             if current_price <= sd_low * 1.002:
                 votes['strategy_votes']['supply_demand'] = {'vote': 'BUY', 'confidence': 0.65}
                 votes['buy_votes'] += 1
@@ -468,14 +779,14 @@ class CompleteBacktestEngineV2:
                 votes['neutral_votes'] += 1
 
         # Strategy 12: Fibonacci Retracement
-        if len(candles) >= 50:
-            fib_high = candles['high'].iloc[-50:].max()
-            fib_low = candles['low'].iloc[-50:].min()
+        if idx >= 50:
+            fib_high = self._high[idx - 49:idx + 1].max()
+            fib_low = self._low[idx - 49:idx + 1].min()
             fib_diff = fib_high - fib_low
             fib_618 = fib_low + fib_diff * 0.618
             fib_382 = fib_low + fib_diff * 0.382
             if abs(current_price - fib_618) / current_price < 0.002 or abs(current_price - fib_382) / current_price < 0.002:
-                trend = 'BUY' if current_price > candles['close'].iloc[-25] else 'SELL'
+                trend = 'BUY' if current_price > self._close[idx - 25] else 'SELL'
                 votes['strategy_votes']['fibonacci'] = {'vote': trend, 'confidence': 0.68}
                 if trend == 'BUY':
                     votes['buy_votes'] += 1
@@ -485,12 +796,8 @@ class CompleteBacktestEngineV2:
                 votes['strategy_votes']['fibonacci'] = {'vote': 'NEUTRAL', 'confidence': 0.5}
                 votes['neutral_votes'] += 1
 
-        # Determine consensus
-        total_votes = votes['buy_votes'] + votes['sell_votes'] + votes['neutral_votes']
-        
-        # Need at least 7/12 (58%) to agree
-        min_votes_needed = 7
-        
+        # SCALPER MODE: min_votes = 5 (42% agreement, balanced quality)
+        min_votes_needed = 5
         if votes['buy_votes'] >= min_votes_needed:
             direction = "BUY"
             consensus_conf = votes['buy_votes'] / 12
@@ -498,23 +805,25 @@ class CompleteBacktestEngineV2:
             direction = "SELL"
             consensus_conf = votes['sell_votes'] / 12
         else:
-            return None  # No consensus
+            return None
 
-        # Check cooldown
+        # SCALPER FILTER: Only accept signals with minimum confidence
+        if consensus_conf < 0.40:  # Filter out weakest signals
+            return None
+
+        # Cooldown check
         if self.last_trade_time is not None:
-            bars_since = (candles.iloc[-1]['time'] - self.last_trade_time).total_seconds() / 300
-            if bars_since < self.min_cooldown_bars:
-                return None
+            try:
+                elapsed_secs = (pd.Timestamp(current_time) - pd.Timestamp(self.last_trade_time)).total_seconds()
+                if elapsed_secs / 300 < self.min_cooldown_bars:
+                    return None
+            except Exception:
+                pass
 
-        # Calculate SL (capped at 300 points)
-        high = candles['high']
-        low = candles['low']
-        prev_close = candles['close'].shift(1)
-        tr = pd.concat([high - low, (high - prev_close).abs(), (low - prev_close).abs()], axis=1).max(axis=1)
-        atr = tr.rolling(14).mean().iloc[-1]
-
-        sl_dist = min(max(atr * 1.5, 100), 300)  # Cap at 300
-        tp_dist = sl_dist * 2.0  # 1:2 R:R
+        # SCALPER MODE: Optimized SL/TP for scalping - wider targets for better R:R
+        # Scalpers need realistic targets: 1.5x ATR stop, 3.0x ATR target (1:2 R:R)
+        sl_dist = min(max(atr * 1.5, 300), 2000)  # Tight stop: 1.5x ATR
+        tp_dist = sl_dist * 2.0  # 1:2 R:R target (simpler, more reliable)
 
         if direction == "BUY":
             sl = current_price - sl_dist
@@ -523,11 +832,10 @@ class CompleteBacktestEngineV2:
             sl = current_price + sl_dist
             tp = current_price - tp_dist
 
-        # Position sizing based on risk %
+        # Position sizing - Fixed: removed * 100 multiplier (was making positions 100x too small)
         risk_amount = self.equity * (self.risk_percent / 100.0)
-        sl_points = sl_dist
-        volume = min(risk_amount / max(1, sl_points * 100), 1.0)  # Max 1.0 lot
-        volume = max(0.01, volume)  # Min 0.01 lots
+        volume = min(risk_amount / max(1, sl_dist), 1.0)  # Max 1.0 lot
+        volume = max(0.01, volume)
 
         self.total_signals += 1
 
@@ -542,17 +850,23 @@ class CompleteBacktestEngineV2:
             'rsi': rsi,
             'ema_9': ema_9,
             'ema_21': ema_21,
-            'strategy_votes': votes,  # Complete voting breakdown
+            'strategy_votes': votes,
             'coherence': consensus_conf,
         }
 
-    def _check_basic_veto(self, signal: dict, candles: pd.DataFrame, price: float) -> dict:
-        """Basic veto check with veto orchestrator"""
-        hour = candles.iloc[-1]['time'].hour
+    def _check_basic_veto_fast(self, signal: dict, idx: int):
+        """Basic veto check using pre-computed values"""
+        try:
+            cur_time = self._times[idx]
+            hour = pd.Timestamp(cur_time).hour
+        except Exception:
+            hour = 12
         session = "ny_overlap" if 13 <= hour < 17 else "london" if 7 <= hour < 13 else "asian" if 0 <= hour < 7 else "ny"
 
-        ema_50 = candles['close'].ewm(span=50, adjust=False).mean().iloc[-1]
-        regime = "ranging" if abs(ema_50 - price) / price < 0.01 else "trending_bullish" if ema_50 > price else "trending_bearish"
+        ema_50 = self._ema50[idx]
+        price = self._close[idx]
+        # Fixed: was 0.0015 (too narrow, $109 on $73K BTC), now 0.005 (0.5% = $365)
+        regime = "ranging" if abs(ema_50 - price) / price < 0.005 else "trending_bullish" if price > ema_50 else "trending_bearish"
 
         context = {
             'market_regime': {'regime_type': regime, 'session': session},
@@ -561,13 +875,57 @@ class CompleteBacktestEngineV2:
             'indicators': {'rsi_14': signal['rsi']},
             'direction': signal['direction'],
         }
-
         return self.veto_orchestrator.check_trade(context)
 
-    def _open_position(self, signal: dict, candle: pd.Series, bar_idx: int):
-        """Open position with full neural audit"""
-        costs = signal['volume'] * 45.0 * 2 + 100 * signal['volume']
+    def _check_advanced_veto_fast(self, signal: dict, idx: int) -> dict:
+        """Lightweight advanced veto using pre-computed RSI + Bollinger"""
+        vetoes = []
+        rsi = self._rsi[idx]
+        direction = signal['direction']
+
+        # RSI extremes - Balanced thresholds (not too strict, not too loose)
+        if direction == 'BUY' and rsi > 72:  # Balanced: was 75→65, now 72
+            vetoes.append({'rule': 'RSI Overbought', 'severity': 'major', 'reason': f'BUY vetoed - RSI {rsi:.1f} > 72'})
+        elif direction == 'SELL' and rsi < 28:  # Balanced: was 25→35, now 28
+            vetoes.append({'rule': 'RSI Oversold', 'severity': 'major', 'reason': f'SELL vetoed - RSI {rsi:.1f} < 28'})
+
+        # RSI divergence
+        if direction == 'BUY' and rsi > 68 and idx >= 5 and self._rsi[idx] < self._rsi[idx - 5]:
+            vetoes.append({'rule': 'RSI Divergence', 'severity': 'major', 'reason': f'BUY vetoed - RSI {rsi:.1f} declining'})
+        elif direction == 'SELL' and rsi < 32 and idx >= 5 and self._rsi[idx] > self._rsi[idx - 5]:
+            vetoes.append({'rule': 'RSI Recovery', 'severity': 'major', 'reason': f'SELL vetoed - RSI {rsi:.1f} rising'})
+
+        # Bollinger extremes
+        price = self._close[idx]
+        if direction == 'BUY' and price > self._bb_upper[idx] * 0.9995:
+            vetoes.append({'rule': 'Bollinger Upper', 'severity': 'minor', 'reason': f'BUY vetoed - price at upper BB'})
+        elif direction == 'SELL' and price < self._bb_lower[idx] * 1.0005:
+            vetoes.append({'rule': 'Bollinger Lower', 'severity': 'minor', 'reason': f'SELL vetoed - price at lower BB'})
+
+        if not vetoes:
+            return {'approved': True, 'vetoed_by': None, 'veto_severity': None, 'reason': 'All vetoes passed'}
+
+        severity_order = ['lethal', 'major', 'minor']
+        most_severe = min(vetoes, key=lambda v: severity_order.index(v.get('severity', 'minor')))
+        return {
+            'approved': False,
+            'vetoed_by': most_severe['rule'],
+            'veto_severity': most_severe['severity'],
+            'reason': most_severe['reason'],
+            'all_vetoes': vetoes,
+        }
+
+    def _open_position_fast(self, signal: dict, bar_idx: int):
+        """Open position — lightweight version for backtesting"""
+        # Fixed: corrected spread cost calculation (was 100 * volume, now spread_dollars * volume)
+        spread_dollars = 1.0  # Typical BTCUSD spread ~$1
+        costs = signal['volume'] * 45.0 * 2 + spread_dollars * signal['volume']
         self.total_commissions += costs
+        cur_time = self._times[bar_idx]
+        
+        # Calculate session for Anti-Metralhadora tracking
+        hour = pd.Timestamp(cur_time).hour
+        session = "ny_overlap" if 13 <= hour < 17 else "london" if 7 <= hour < 13 else "asian" if 0 <= hour < 7 else "ny"
 
         position = {
             'ticket': self.ticket_counter,
@@ -577,16 +935,19 @@ class CompleteBacktestEngineV2:
             'stop_loss': signal['stop_loss'],
             'take_profit': signal['take_profit'],
             'volume': signal['volume'],
-            'open_time': candle['time'],
+            'open_time': cur_time,
             'open_bar_index': bar_idx,
             'costs': costs,
+            'original_stop': signal['stop_loss'],  # NEW: Save original SL for partial exit calculation
+            'partial_exited': False,
+            'trailing_active': False,
+            'session': session,  # Track session for Anti-Metralhadora
         }
 
-        # Neural audit - complete state capture
-        hour = candle['time'].hour
-        session = "ny_overlap" if 13 <= hour < 17 else "london" if 7 <= hour < 13 else "asian" if 0 <= hour < 7 else "ny"
-        ema_50 = self.candles.iloc[max(0, bar_idx-50):bar_idx+1]['close'].ewm(span=50, adjust=False).mean().iloc[-1]
-        regime = "ranging" if abs(ema_50 - candle['close']) / candle['close'] < 0.01 else "trending_bullish" if ema_50 > candle['close'] else "trending_bearish"
+        # Lightweight audit — buffer in memory
+        ema_50 = self._ema50[bar_idx]
+        price = self._close[bar_idx]
+        regime = "ranging" if abs(ema_50 - price) / price < 0.005 else "trending_bullish" if price > ema_50 else "trending_bearish"
 
         self.auditor.capture_entry_state(
             ticket=position['ticket'],
@@ -609,31 +970,28 @@ class CompleteBacktestEngineV2:
                 'D1_trend': 'neutral', 'alignment_score': 0.5, 'dominant_timeframe': 'M5', 'conflict_detected': False,
             },
             indicators={
-                'ema_9': signal['ema_9'], 'ema_21': signal['ema_21'], 'ema_50': ema_50, 'ema_200': candle['close'],
-                'sma_20': candle['close'], 'sma_50': candle['close'],
+                'ema_9': signal['ema_9'], 'ema_21': signal['ema_21'], 'ema_50': ema_50, 'ema_200': price,
+                'sma_20': self._sma20[bar_idx], 'sma_50': price,
                 'ema_9_21_cross': 'bullish' if signal['ema_9'] > signal['ema_21'] else 'bearish',
                 'ema_21_50_cross': 'neutral', 'price_vs_ema_200': 'above',
                 'rsi_14': signal['rsi'], 'rsi_regime': 'oversold' if signal['rsi'] < 30 else 'overbought' if signal['rsi'] > 70 else 'neutral',
                 'macd_line': 0, 'macd_signal': 0, 'macd_histogram': 0, 'macd_cross': 'neutral',
                 'stochastic_k': 50, 'stochastic_d': 50,
                 'atr_14': signal['atr'], 'atr_percentile': 50.0,
-                'bollinger_upper': candle['close'] + 500, 'bollinger_middle': candle['close'], 'bollinger_lower': candle['close'] - 500,
-                'bollinger_width': 1000, 'price_vs_bollinger': 'inside',
-                'volume_current': 1000, 'volume_avg_20': 1000, 'volume_ratio': 1.0, 'volume_trend': 'stable', 'obv_trend': 'neutral',
+                'bollinger_upper': self._bb_upper[bar_idx], 'bollinger_middle': self._bb_mid[bar_idx], 'bollinger_lower': self._bb_lower[bar_idx],
+                'bollinger_width': self._bb_upper[bar_idx] - self._bb_lower[bar_idx], 'price_vs_bollinger': 'inside',
+                'volume_current': self._volume[bar_idx], 'volume_avg_20': self._volume[max(0, bar_idx - 19):bar_idx + 1].mean(), 'volume_ratio': 1.0, 'volume_trend': 'stable', 'obv_trend': 'neutral',
             },
             price_action={
-                'current_price': candle['close'], 'price_change_1h': 0.5, 'price_change_4h': 1.0, 'price_change_24h': 2.0,
-                'nearest_support': candle['close'] - 500, 'nearest_resistance': candle['close'] + 500,
+                'current_price': price, 'price_change_1h': 0.5, 'price_change_4h': 1.0, 'price_change_24h': 2.0,
+                'nearest_support': price - 500, 'nearest_resistance': price + 500,
                 'distance_to_support_pct': 0.68, 'distance_to_resistance_pct': 0.68,
                 'current_candle_type': 'bullish' if signal['direction'] == 'BUY' else 'bearish', 'candle_body_size': 100, 'candle_wick_ratio': 0.3,
                 'engulfing_detected': False, 'inside_bar_detected': False,
                 'higher_highs': True, 'higher_lows': True, 'lower_highs': False, 'lower_lows': False,
                 'structure': 'uptrend' if signal['direction'] == 'BUY' else 'downtrend',
             },
-            momentum={
-                'velocity': 0.5, 'acceleration': 0.1, 'gravity': 0.3, 'oscillation': 50, 'volume_pressure': 0.5,
-                'microstructure_score': 0.6, 'momentum_divergence': False, 'exhaustion_signals': [],
-            },
+            momentum={'velocity': 0.5, 'acceleration': 0.1, 'gravity': 0.3, 'oscillation': 50, 'volume_pressure': 0.5, 'microstructure_score': 0.6, 'momentum_divergence': False, 'exhaustion_signals': []},
             risk_context={
                 'capital': self.equity, 'equity': self.equity, 'daily_pnl': 0, 'daily_pnl_percent': 0,
                 'total_pnl': self.equity - self.initial_equity, 'total_pnl_percent': (self.equity / self.initial_equity - 1) * 100,
@@ -654,24 +1012,25 @@ class CompleteBacktestEngineV2:
                 'dynamic_sl_original': signal['stop_loss'], 'dynamic_sl_current': signal['stop_loss'],
                 'breakeven_activated': False, 'profit_targets_reached': [], 'momentum_at_entry': {'velocity': 0.5},
             },
-            strategy_voting=signal.get('strategy_votes'),  # Complete voting breakdown
-            session_veto=signal.get('session_veto_data'),  # Session veto data
-            advanced_veto_v2=signal.get('advanced_veto_v2_data'),  # Advanced veto v2 data
+            strategy_voting=signal.get('strategy_votes'),
+            session_veto=signal.get('session_veto_data'),
+            advanced_veto_v2=signal.get('advanced_veto_v2_data'),
         )
 
-        self.order_manager.open_position(position)
         self.current_position = position
-        self.last_trade_time = candle['time']
+        self.last_trade_time = cur_time
         self.ticket_counter += 1
         self.total_trades += 1
 
-    def _close_position(self, action: dict, candle: pd.Series, bar_idx: int):
-        """Close position with full audit"""
+    def _close_position_fast(self, action: dict, bar_idx: int):
+        """Close position — lightweight version for backtesting"""
         if not self.current_position:
             return
 
         pos = self.current_position
-        gross_pnl = (candle['close'] - pos['entry_price']) * pos['volume'] * 100 if pos['direction'] == 'BUY' else (pos['entry_price'] - candle['close']) * pos['volume'] * 100
+        exit_price = self._close[bar_idx]
+        # Fixed: removed * 100 multiplier (was inflating PnL by 100x)
+        gross_pnl = (exit_price - pos['entry_price']) * pos['volume'] if pos['direction'] == 'BUY' else (pos['entry_price'] - exit_price) * pos['volume']
         net_pnl = gross_pnl - pos['costs']
         duration = (bar_idx - pos['open_bar_index']) * 5
 
@@ -681,40 +1040,48 @@ class CompleteBacktestEngineV2:
             self.winning_trades += 1
             self.consecutive_wins += 1
             self.consecutive_losses = 0
+            self.loss_patterns['avg_win_size'] = (self.loss_patterns['avg_win_size'] * (self.winning_trades - 1) + net_pnl) / max(1, self.winning_trades)
         else:
             self.losing_trades += 1
             self.consecutive_losses += 1
             self.consecutive_wins = 0
+            self.last_loss_time = bar_idx
+            self.loss_patterns['avg_loss_size'] = (self.loss_patterns['avg_loss_size'] * (self.losing_trades - 1) + abs(net_pnl)) / max(1, self.losing_trades)
+            
+            # Track loss patterns for intelligent analysis
+            reason = action.get('reason', 'Unknown')
+            if reason in self.loss_patterns['by_reason']:
+                self.loss_patterns['by_reason'][reason] += 1
+            if 'trailed' in reason:
+                self.loss_patterns['total_trailing_stops_hit'] += 1
+
+        # NEW: Update RiskManager with trade result (BUG #6 fix)
+        self.risk_manager.record_trade(net_pnl)
+        
+        # Phase 1: Update Anti-Metralhadora with trade result
+        result_type = 'win' if net_pnl > 0 else 'loss'
+        session = pos.get('session', 'unknown')
+        self.anti_metralhadora.record_trade(
+            result=result_type,
+            current_session=session,
+            current_time=pos['open_time'],
+        )
 
         self.auditor.capture_exit_state(
-            ticket=pos['ticket'], exit_price=candle['close'], exit_reason=action['reason'],
+            ticket=pos['ticket'], exit_price=exit_price, exit_reason=action['reason'],
             gross_pnl=gross_pnl, net_pnl=net_pnl, duration_minutes=duration,
             max_profit_reached=gross_pnl + 50, max_drawdown_reached=-20,
         )
 
-        self.order_manager.close_position(pos['ticket'], action['reason'])
-
         self.trades.append({
             'ticket': pos['ticket'], 'direction': pos['direction'],
-            'entry_price': pos['entry_price'], 'exit_price': candle['close'],
+            'entry_price': pos['entry_price'], 'exit_price': exit_price,
             'gross_pnl': gross_pnl, 'net_pnl': net_pnl, 'costs': pos['costs'],
-            'exit_reason': action['reason'], 'open_time': pos['open_time'], 'close_time': candle['time'],
+            'exit_reason': action['reason'], 'open_time': pos['open_time'], 'close_time': self._times[bar_idx],
             'duration_minutes': duration, 'volume': pos['volume'],
         })
 
         self.current_position = None
-
-    def _check_sl_hit(self, candle: pd.Series) -> bool:
-        if not self.current_position:
-            return False
-        pos = self.current_position
-        return candle['low'] <= pos['stop_loss'] if pos['direction'] == 'BUY' else candle['high'] >= pos['stop_loss']
-
-    def _check_tp_hit(self, candle: pd.Series) -> bool:
-        if not self.current_position:
-            return False
-        pos = self.current_position
-        return candle['high'] >= pos['take_profit'] if pos['direction'] == 'BUY' else candle['low'] <= pos['take_profit']
 
     def _results(self, analysis: dict) -> dict:
         net_pnl = self.equity - self.initial_equity
@@ -745,14 +1112,14 @@ def main():
     setup_logging()
 
     print("\n" + "="*80)
-    print("COMPLETE SYSTEM BACKTEST V2")
+    print("COMPLETE SYSTEM BACKTEST V2 (MT5 REAL DATA)")
     print("  12 Strategies + Session Profiles + Advanced Veto v2 + Neural Audit")
     print("="*80 + "\n")
 
-    candles = generate_data(days=180)
+    candles = fetch_mt5_data(days=180)
 
-    # Test different risk levels
-    for risk_pct in [0.5, 1.0, 1.5, 2.0]:
+    # Test 1.0% risk level natively
+    for risk_pct in [1.0]:
         print(f"\n{'='*70}")
         print(f"Testing {risk_pct}% risk per trade...")
         print(f"{'='*70}")
@@ -775,6 +1142,13 @@ def main():
         print(f"  Max DD: {r.get('max_drawdown_percent', 0):.2f}%")
         print(f"  FTMO: {'PASS' if f.get('overall_pass') else 'FAIL'}")
         print(f"  Commissions: ${c.get('total_commissions', 0):,.2f}")
+        
+        print(f"\n🛡️ VETO SYSTEM:")
+        print(f"   Signals Generated: {s.get('total_signals', 0)}")
+        print(f"   Trades Executed: {s.get('total_trades', 0)}")
+        print(f"   Trades Vetoed: {s.get('total_vetoes', 0)}")
+        print(f"   Orders Filed: {s.get('total_filed_orders', 0)}")
+        print(f"   Veto Rate: {s.get('veto_rate', 0):.1f}%")
 
 
 if __name__ == "__main__":

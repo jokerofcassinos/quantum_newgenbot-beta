@@ -384,10 +384,10 @@ class NeuralRegimeProfiler:
             regime = f"trending_strong_{trend_dir}"
         elif trend_strength > 0.5:
             regime = f"trending_moderate_{trend_dir}"
-        elif atr_pct > 2.0:
-            regime = "high_volatility"
         elif atr_pct > 3.0:
             regime = "crashing"
+        elif atr_pct > 2.0:
+            regime = "high_volatility"
         elif trend_strength < 0.4 and atr_pct < 0.5:
             regime = "chop"
         else:
@@ -438,7 +438,7 @@ class NeuralRegimeProfiler:
         elif 17 <= hour < 22:
             session = "ny"
         else:
-            session = "weekend"
+            session = "late_ny"  # 22-23 UTC — BTCUSD trades 24/7, no 'weekend' concept
         
         return {
             'current_session': session,

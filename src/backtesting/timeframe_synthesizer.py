@@ -185,16 +185,8 @@ class TimeframeSynthesizer:
         sigma = volatility * 0.1
         path = start + (end - start) * t + sigma * B_t
         
-        # Apply constraints
-        for _ in range(10):  # Iterative adjustment
-            path_max = path.max()
-            path_min = path.min()
-            
-            if path_max > high_constraint:
-                path = path * (high_constraint / path_max) * 0.99
-            if path_min < low_constraint:
-                shift = low_constraint - path_min
-                path = path + shift * 0.5
+        # Apply constraints via clamping (preserves endpoints better than scaling)
+        path = np.clip(path, low_constraint, high_constraint)
         
         # Ensure exact endpoints
         path[0] = start

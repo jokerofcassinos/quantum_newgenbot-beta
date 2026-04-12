@@ -64,7 +64,11 @@ class ConfigManager:
     
     def load_dna_memory(self) -> Dict[str, Any]:
         """Load DNA memory (regime history)"""
-        return self.load_json(self.dna_memory_path)
+        if self.dna_memory_path.exists():
+            return self.load_json(self.dna_memory_path)
+        else:
+            logger.info("📝 DNA memory file not found — initializing empty memory")
+            return {"regimes": {}, "version": "1.0"}
     
     def save_dna_memory(self, memory: Dict[str, Any]) -> None:
         """Save updated DNA memory"""

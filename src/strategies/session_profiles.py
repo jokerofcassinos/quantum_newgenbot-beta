@@ -32,51 +32,51 @@ SESSION_PROFILES = {
     # Asian Session (00:00 - 07:00 UTC) - LOW LIQUIDITY
     "asian": SessionProfile(
         session_name="Asian",
-        min_confidence_threshold=0.75,  # Very high threshold
-        max_position_size=0.03,  # Small positions only
-        risk_multiplier=0.3,  # 30% of normal risk
-        min_strategy_votes=4,  # Need 4/5 strategies to agree
-        min_coherence=0.70,  # High coherence required
-        trading_allowed=True,  # Allow but restricted
+        min_confidence_threshold=0.40,  # Fixed: was 0.75 (aligned with 5/12 = 41.7%)
+        max_position_size=0.03,
+        risk_multiplier=0.3,
+        min_strategy_votes=5,  # Need 5/12 strategies
+        min_coherence=0.40,  # Fixed: was 0.60 (aligned with signal generation)
+        trading_allowed=True,
         description="Low liquidity - require strong consensus"
     ),
-    
+
     # London Session (07:00 - 13:00 UTC) - HIGH LIQUIDITY
     "london": SessionProfile(
         session_name="London",
-        min_confidence_threshold=0.60,  # Normal threshold
-        max_position_size=0.10,  # Normal positions
-        risk_multiplier=1.0,  # 100% risk
-        min_strategy_votes=3,  # Need 3/5 strategies
-        min_coherence=0.55,  # Normal coherence
+        min_confidence_threshold=0.40,  # Fixed: was 0.60 (aligned with 5/12 = 41.7%)
+        max_position_size=0.10,
+        risk_multiplier=1.0,
+        min_strategy_votes=5,  # Fixed: was 4 (aligned with signal gen minimum)
+        min_coherence=0.40,  # Fixed: was 0.55
         trading_allowed=True,
         description="High liquidity - normal trading"
     ),
-    
+
     # NY Session (13:00 - 17:00 UTC) - HIGH LIQUIDITY
     "ny": SessionProfile(
         session_name="New York",
-        min_confidence_threshold=0.60,  # Normal threshold
-        max_position_size=0.10,  # Normal positions
-        risk_multiplier=1.0,  # 100% risk
-        min_strategy_votes=3,  # Need 3/5 strategies
-        min_coherence=0.55,  # Normal coherence
+        min_confidence_threshold=0.40,  # Fixed: was 0.60 (aligned with 5/12 = 41.7%)
+        max_position_size=0.10,
+        risk_multiplier=1.0,
+        min_strategy_votes=5,  # Fixed: was 4 (aligned with signal gen minimum)
+        min_coherence=0.40,  # Fixed: was 0.55
         trading_allowed=True,
         description="High liquidity - normal trading"
     ),
-    
+
     # NY/London Overlap (13:00 - 16:00 UTC) - HIGHEST LIQUIDITY
     "ny_overlap": SessionProfile(
         session_name="NY/London Overlap",
-        min_confidence_threshold=0.55,  # Slightly lower threshold
-        max_position_size=0.12,  # Can take slightly larger positions
-        risk_multiplier=1.2,  # 120% risk (best conditions)
-        min_strategy_votes=3,  # Need 3/5 strategies
-        min_coherence=0.50,  # Lower coherence needed
+        min_confidence_threshold=0.40,  # Fixed: was 0.55 (aligned with 5/12 = 41.7%)
+        max_position_size=0.12,
+        risk_multiplier=1.2,
+        min_strategy_votes=5,  # Fixed: was 3 (aligned with signal gen minimum)
+        min_coherence=0.40,  # Fixed: was 0.50
         trading_allowed=True,
         description="Highest liquidity - optimal conditions"
     ),
-    
+
     # Weekend (Saturday/Sunday) - EXTREME LOW LIQUIDITY
     "weekend": SessionProfile(
         session_name="Weekend",
@@ -138,15 +138,6 @@ def get_session_profile(session: str = None) -> SessionProfile:
     
     profile = SESSION_PROFILES.get(session, SESSION_PROFILES["asian"])
     
-    logger.info(f"🕐 Session: {profile.session_name}")
-    logger.info(f"   Confidence Threshold: {profile.min_confidence_threshold:.2f}")
-    logger.info(f"   Max Position Size: {profile.max_position_size}")
-    logger.info(f"   Risk Multiplier: {profile.risk_multiplier:.1f}x")
-    logger.info(f"   Min Strategy Votes: {profile.min_strategy_votes}/5")
-    logger.info(f"   Min Coherence: {profile.min_coherence:.2f}")
-    logger.info(f"   Trading Allowed: {'✅ YES' if profile.trading_allowed else '❌ NO'}")
-    logger.info(f"   {profile.description}")
-    
     return profile
 
 
@@ -177,11 +168,25 @@ def apply_session_veto(session_profile: SessionProfile, signal: Dict[str, Any]) 
         result['reason'] = f"Confidence {confidence:.2f} < {session_profile.min_confidence_threshold:.2f} ({session_profile.session_name} threshold)"
         return result
     
-    # Check strategy votes
-    strategy_votes = signal.get('strategy_votes', 0)
+    # Check strategy votes - handle both old int format and new dict format
+    strategy_votes_raw = signal.get('strategy_votes', 0)
+    
+    if isinstance(strategy_votes_raw, dict):
+        # New format: dict with vote breakdown
+        direction = signal.get('direction', '')
+        if direction == 'BUY':
+            strategy_votes = strategy_votes_raw.get('buy_votes', 0)
+        elif direction == 'SELL':
+            strategy_votes = strategy_votes_raw.get('sell_votes', 0)
+        else:
+            strategy_votes = 0
+    else:
+        # Old format: plain int
+        strategy_votes = strategy_votes_raw
+    
     if strategy_votes < session_profile.min_strategy_votes:
         result['approved'] = False
-        result['reason'] = f"Only {strategy_votes}/5 strategies agree (need {session_profile.min_strategy_votes} for {session_profile.session_name})"
+        result['reason'] = f"Only {strategy_votes}/12 strategies agree (need {session_profile.min_strategy_votes} for {session_profile.session_name})"
         return result
     
     # Check coherence

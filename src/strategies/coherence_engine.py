@@ -114,7 +114,7 @@ class CoherenceEngine:
         
         # Determine if should trade (lowered threshold)
         threshold = self.dna_params.get('trading_params', {}).get('entry_threshold', 0.65)
-        should_trade = confidence_score > (threshold * 0.7)  # 70% of threshold for more trades
+        should_trade = confidence_score > threshold
         
         # Recommended action
         if directional_coherence > 0.5:

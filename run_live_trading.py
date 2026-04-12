@@ -37,7 +37,7 @@ from src.strategies.strategy_orchestrator import StrategyOrchestrator
 from src.strategies.coherence_engine import CoherenceEngine
 from src.dna.realtime_dna import RealTimeDNAEngine
 from src.monitoring.neural_trade_auditor import NeuralTradeAuditor
-from src.monitoring.telegram_full import TelegramNotifier
+from src.monitoring.telegram_full import TelegramFullNotifier as TelegramNotifier
 
 # C++ Integration
 cpp_path = project_root / "cpp-quantum-systems" / "python_integration"
