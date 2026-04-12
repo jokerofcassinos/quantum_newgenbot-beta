@@ -37,6 +37,7 @@ from src.execution.smart_order_manager import SmartOrderManager
 from src.risk.backtest_risk_manager import BacktestRiskManager  # NEW: Risk Manager integration (BUG #6)
 from src.risk.anti_metralhadora import AntiMetralhadora  # Phase 1: Overtrading prevention (DubaiMatrixASI)
 from src.execution.position_manager_smart_tp import PositionManagerSmartTP  # Phase 1: Multi-target TP (DubaiMatrixASI)
+from src.execution.commission_floor import CommissionFloor  # A2: Prevent premature closure
 from src.risk.risk_quantum_engine import RiskQuantumEngine  # Phase 1: 5-factor position sizing (DubaiMatrixASI)
 from src.risk.profit_erosion_tiers import ProfitErosionTiers  # Phase 1: Multi-level profit protection (Atl4s)
 from src.risk.execution_validator import ExecutionValidator  # Phase 1: Pre-trade validation (DubaiMatrixASI)
@@ -151,6 +152,13 @@ class CompleteBacktestEngineV2:
             tp3_portion=0.20, tp3_rr=3.0,
             trailing_portion=0.20,
             trailing_atr_multiplier=2.0,  # Increased from 1.5 to match higher R:R
+        )
+        
+        # A2: CommissionFloor - prevent premature closure before covering commissions
+        self.commission_floor = CommissionFloor(
+            commission_per_lot_per_side=45.0,
+            spread_cost_per_lot=1.0,
+            safety_margin_percent=0.20,  # 20% extra above commission cost
         )
         
         # Phase 1: RiskQuantumEngine (DubaiMatrixASI salvage - 5-factor position sizing)
@@ -528,6 +536,19 @@ class CompleteBacktestEngineV2:
                     atr=atr_current,
                 )
                 
+                # A2: CommissionFloor - check if we can allow closure from Smart TP
+                if position_closed and realized_pnl > 0:
+                    floor_allowed_tp, floor_reason = self.commission_floor.should_allow_closure(
+                        current_pnl=realized_pnl,
+                        position_volume=pos['volume'],
+                        closure_reason='smart_tp',
+                    )
+                    
+                    if not floor_allowed_tp:
+                        # Don't close yet - wait for commission floor
+                        position_closed = False
+                        realized_pnl = 0
+                
                 # Phase 2: Thermodynamic Exit - 5-sensor profit management (Laplace v3.0)
                 # Calculate sensors for remaining position
                 if pos.get('thermo_sensors') is None:
@@ -550,11 +571,22 @@ class CompleteBacktestEngineV2:
                         current_tp_distance=abs(pos['take_profit'] - cur_close),
                         current_sl_distance=abs(pos['stop_loss'] - cur_close),
                     )
-                    
-                    if thermo_should_exit and pos['thermo_sensors']['current_pnl'] > 10:
+
+                    # A2: CommissionFloor - don't close until commissions are covered
+                    current_pnl_for_floor = pos['targets']['total_realized_pnl'] + pos['thermo_sensors']['current_pnl'] * pos['remaining_volume']
+                    floor_allowed, floor_reason = self.commission_floor.should_allow_closure(
+                        current_pnl=current_pnl_for_floor,
+                        position_volume=pos['remaining_volume'],
+                        closure_reason='thermodynamic',
+                    )
+
+                    if thermo_should_exit and floor_allowed and pos['thermo_sensors']['current_pnl'] > 10:
                         logger.info(f"🌡️ Thermodynamic exit: {thermo_reason}")
                         position_closed = True
                         realized_pnl = pos['targets']['total_realized_pnl'] + pos['thermo_sensors']['current_pnl'] * pos['remaining_volume']
+                    elif thermo_should_exit and not floor_allowed:
+                        # Log that we're waiting for commission floor
+                        pass  # Silent - waiting for floor
                 
                 # Fallback: If price hits original SL, close remaining position immediately
                 # Calculate current unrealized PnL for remaining position
@@ -573,8 +605,16 @@ class CompleteBacktestEngineV2:
                     current_pnl=current_unrealized_pnl,
                     peak_pnl=pos['peak_pnl'],
                 )
-                
-                if should_exit and pos['peak_pnl'] > 30:  # Only exit if we have meaningful profit
+
+                # A2: CommissionFloor - don't exit via erosion until commissions are covered
+                total_current_pnl = pos['targets']['total_realized_pnl'] + current_unrealized_pnl
+                floor_allowed_erosion, _ = self.commission_floor.should_allow_closure(
+                    current_pnl=total_current_pnl,
+                    position_volume=pos['remaining_volume'],
+                    closure_reason='erosion',
+                )
+
+                if should_exit and floor_allowed_erosion and pos['peak_pnl'] > 30:
                     logger.info(f"🛡️ Profit erosion triggered: {erosion_reason}")
                     position_closed = True
                     realized_pnl = pos['targets']['total_realized_pnl'] + current_unrealized_pnl
