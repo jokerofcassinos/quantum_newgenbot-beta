@@ -31,3 +31,8 @@ desktop.ini
 
 # Large data files (optional)
 data/market-data/*.csv
+data/trade-audits/  
+data/market-data/  
+logs/  
+__pycache__/  
+.qwen/ 
