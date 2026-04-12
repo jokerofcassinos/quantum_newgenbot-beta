@@ -345,16 +345,28 @@ void OnTradeTransaction(const MqlTradeTransaction& trans,
    {
       if(trans.deal_type == DEAL_TYPE_SELL || trans.deal_type == DEAL_TYPE_BUY)
       {
-         //--- Position closed
-         if(trans.profit > 0)
-            winning_trades++;
-         else
-            losing_trades++;
+         //--- Position closed - get profit from deal history
+         HistorySelect(0, TimeCurrent());
+         ulong deal_ticket = trans.deal;
          
-         if(InEnableLogging)
+         if(HistoryDealSelect(deal_ticket))
          {
-            Print("📊 Deal closed: PnL=$", trans.profit, 
-                  " | Total: W=", winning_trades, " L=", losing_trades);
+            double profit = HistoryDealGetDouble(deal_ticket, DEAL_PROFIT);
+            double commission = HistoryDealGetDouble(deal_ticket, DEAL_COMMISSION);
+            double swap = HistoryDealGetDouble(deal_ticket, DEAL_SWAP);
+            double total_profit = profit + commission + swap;
+            
+            if(total_profit > 0)
+               winning_trades++;
+            else
+               losing_trades++;
+            
+            if(InEnableLogging)
+            {
+               Print("📊 Deal closed: PnL=$", DoubleToString(total_profit, 2), 
+                     " | Commission=$", DoubleToString(commission, 2),
+                     " | Total: W=", winning_trades, " L=", losing_trades);
+            }
          }
       }
    }
