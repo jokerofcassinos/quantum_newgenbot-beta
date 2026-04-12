@@ -1,0 +1,17 @@
+{
+  "trade_id": 3902,
+  "type": "ghost_exit",
+  "direction": "BUY",
+  "entry_price": 89344.6,
+  "exit_price": 89044.6,
+  "pnl": -300.0,
+  "is_win": false,
+  "exit_reason": "SL_hit",
+  "veto_reason": "ghost_audit:weekday_destructive_hours_16UTC",
+  "session": "ny",
+  "confidence": 0.58,
+  "regime": "unknown",
+  "duration_bars": 7,
+  "open_time": "2026-01-23 16:00:00",
+  "timestamp": "2026-04-12T18:24:19.673522+00:00"
+}

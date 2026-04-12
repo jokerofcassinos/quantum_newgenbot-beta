@@ -1,0 +1,17 @@
+{
+  "trade_id": 4361,
+  "type": "ghost_exit",
+  "direction": "BUY",
+  "entry_price": 78278.16,
+  "exit_price": 77978.16,
+  "pnl": -300.0,
+  "is_win": false,
+  "exit_reason": "SL_hit",
+  "veto_reason": "ghost_audit:weekday_destructive_hours_16UTC",
+  "session": "ny",
+  "confidence": 0.4966666666666667,
+  "regime": "unknown",
+  "duration_bars": 6,
+  "open_time": "2026-02-03 16:00:00",
+  "timestamp": "2026-04-12T18:24:21.681953+00:00"
+}

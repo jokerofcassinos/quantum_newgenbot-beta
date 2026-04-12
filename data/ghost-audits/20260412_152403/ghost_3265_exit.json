@@ -1,0 +1,17 @@
+{
+  "trade_id": 3265,
+  "type": "ghost_exit",
+  "direction": "SELL",
+  "entry_price": 92809.43,
+  "exit_price": 91909.43,
+  "pnl": 795.2156589447206,
+  "is_win": true,
+  "exit_reason": "TP_hit",
+  "veto_reason": "advanced_veto:SELL vetoed - RSI 26.0 < 28",
+  "session": "asian",
+  "confidence": 0.63,
+  "regime": "unknown",
+  "duration_bars": 100,
+  "open_time": "2026-01-07 03:00:00",
+  "timestamp": "2026-04-12T18:24:16.868834+00:00"
+}

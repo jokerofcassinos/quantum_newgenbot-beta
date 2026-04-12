@@ -1,0 +1,17 @@
+{
+  "trade_id": 5767,
+  "type": "ghost_exit",
+  "direction": "BUY",
+  "entry_price": 68876.23,
+  "exit_price": 68576.23,
+  "pnl": -300.0,
+  "is_win": false,
+  "exit_reason": "SL_hit",
+  "veto_reason": "ghost_audit:weekday_destructive_hours_13UTC",
+  "session": "ny_overlap",
+  "confidence": 0.4966666666666667,
+  "regime": "unknown",
+  "duration_bars": 5,
+  "open_time": "2026-04-07 13:10:00",
+  "timestamp": "2026-04-12T18:24:32.519904+00:00"
+}

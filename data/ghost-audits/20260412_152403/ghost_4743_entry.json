@@ -1,0 +1,15 @@
+{
+  "trade_id": 4743,
+  "type": "ghost_entry",
+  "direction": "SELL",
+  "entry_price": 69852.68,
+  "stop_loss": 70152.68,
+  "take_profit": 68952.68,
+  "volume": 0.7049732547025886,
+  "veto_reason": "advanced_veto:SELL vetoed - RSI 31.3 rising",
+  "session": "ny_overlap",
+  "confidence": 0.5466666666666667,
+  "regime": "unknown",
+  "open_time": "2026-03-06 14:30:00",
+  "timestamp": "2026-04-12T18:24:26.653051+00:00"
+}

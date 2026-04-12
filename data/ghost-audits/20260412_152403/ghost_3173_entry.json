@@ -1,0 +1,15 @@
+{
+  "trade_id": 3173,
+  "type": "ghost_entry",
+  "direction": "BUY",
+  "entry_price": 91323.11,
+  "stop_loss": 91023.11,
+  "take_profit": 92223.11,
+  "volume": 1.0,
+  "veto_reason": "anti_metralhadora:session_blocked",
+  "session": "weekend_profitable",
+  "confidence": 0.58,
+  "regime": "unknown",
+  "open_time": "2026-01-04 19:15:00",
+  "timestamp": "2026-04-12T18:24:16.379348+00:00"
+}

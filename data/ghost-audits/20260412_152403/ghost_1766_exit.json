@@ -1,0 +1,17 @@
+{
+  "trade_id": 1766,
+  "type": "ghost_exit",
+  "direction": "SELL",
+  "entry_price": 92217.78,
+  "exit_price": 92517.78,
+  "pnl": -300.0,
+  "is_win": false,
+  "exit_reason": "SL_hit",
+  "veto_reason": "advanced_veto:SELL vetoed - price at lower BB",
+  "session": "london",
+  "confidence": 0.5466666666666667,
+  "regime": "unknown",
+  "duration_bars": 18,
+  "open_time": "2025-12-12 10:30:00",
+  "timestamp": "2026-04-12T18:24:12.616479+00:00"
+}

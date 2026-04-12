@@ -1,0 +1,15 @@
+{
+  "trade_id": 2820,
+  "type": "ghost_entry",
+  "direction": "BUY",
+  "entry_price": 87386.39,
+  "stop_loss": 87086.39,
+  "take_profit": 88286.39,
+  "volume": 1.0,
+  "veto_reason": "ghost_audit:weekday_destructive_hours_16UTC",
+  "session": "ny",
+  "confidence": 0.4966666666666667,
+  "regime": "unknown",
+  "open_time": "2025-12-29 16:15:00",
+  "timestamp": "2026-04-12T18:24:15.433367+00:00"
+}

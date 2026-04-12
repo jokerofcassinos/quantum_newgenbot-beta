@@ -1,0 +1,17 @@
+{
+  "trade_id": 3269,
+  "type": "ghost_exit",
+  "direction": "SELL",
+  "entry_price": 91921.4,
+  "exit_price": 92221.4,
+  "pnl": -169.89684081432915,
+  "is_win": false,
+  "exit_reason": "SL_hit",
+  "veto_reason": "advanced_veto:SELL vetoed - RSI 7.3 < 28",
+  "session": "london",
+  "confidence": 0.5466666666666667,
+  "regime": "unknown",
+  "duration_bars": 48,
+  "open_time": "2026-01-07 11:25:00",
+  "timestamp": "2026-04-12T18:24:16.896836+00:00"
+}

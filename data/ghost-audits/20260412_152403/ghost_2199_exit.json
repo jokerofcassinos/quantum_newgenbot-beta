@@ -1,0 +1,17 @@
+{
+  "trade_id": 2199,
+  "type": "ghost_exit",
+  "direction": "BUY",
+  "entry_price": 87524.3,
+  "exit_price": 87224.3,
+  "pnl": -300.0,
+  "is_win": false,
+  "exit_reason": "SL_hit",
+  "veto_reason": "ghost_audit:weekday_destructive_hours_11UTC",
+  "session": "london",
+  "confidence": 0.58,
+  "regime": "unknown",
+  "duration_bars": 66,
+  "open_time": "2025-12-23 11:10:00",
+  "timestamp": "2026-04-12T18:24:14.170180+00:00"
+}

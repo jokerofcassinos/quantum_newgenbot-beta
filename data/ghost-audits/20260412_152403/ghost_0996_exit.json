@@ -1,0 +1,17 @@
+{
+  "trade_id": 996,
+  "type": "ghost_exit",
+  "direction": "SELL",
+  "entry_price": 106859.38,
+  "exit_price": 105459.04107142858,
+  "pnl": 873.0380268375035,
+  "is_win": true,
+  "exit_reason": "TP_hit",
+  "veto_reason": "anti_metralhadora:session_limit",
+  "session": "asian",
+  "confidence": 0.63,
+  "regime": "unknown",
+  "duration_bars": 90,
+  "open_time": "2025-11-03 23:45:00",
+  "timestamp": "2026-04-12T18:24:08.462819+00:00"
+}

@@ -1,0 +1,17 @@
+{
+  "trade_id": 622,
+  "type": "ghost_exit",
+  "direction": "BUY",
+  "entry_price": 113517.88,
+  "exit_price": 113217.88,
+  "pnl": -300.0,
+  "is_win": false,
+  "exit_reason": "SL_hit",
+  "veto_reason": "anti_metralhadora:session_blocked",
+  "session": "weekend_profitable",
+  "confidence": 0.58,
+  "regime": "unknown",
+  "duration_bars": 51,
+  "open_time": "2025-10-26 20:00:00",
+  "timestamp": "2026-04-12T18:24:07.404649+00:00"
+}

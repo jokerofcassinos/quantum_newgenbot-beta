@@ -1,0 +1,17 @@
+{
+  "trade_id": 2114,
+  "type": "ghost_exit",
+  "direction": "SELL",
+  "entry_price": 86809.7,
+  "exit_price": 87109.7,
+  "pnl": -299.58531185479205,
+  "is_win": false,
+  "exit_reason": "SL_hit",
+  "veto_reason": "ghost_audit:weekday_destructive_hours_13UTC",
+  "session": "ny_overlap",
+  "confidence": 0.5466666666666667,
+  "regime": "unknown",
+  "duration_bars": 10,
+  "open_time": "2025-12-17 13:10:00",
+  "timestamp": "2026-04-12T18:24:13.435361+00:00"
+}

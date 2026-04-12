@@ -1,0 +1,17 @@
+{
+  "trade_id": 4923,
+  "type": "ghost_exit",
+  "direction": "SELL",
+  "entry_price": 70901.35,
+  "exit_price": 71201.35,
+  "pnl": -300.0,
+  "is_win": false,
+  "exit_reason": "SL_hit",
+  "veto_reason": "session_veto:Confidence 0.42 < 0.45 (Weekend Profitable Hours threshold)",
+  "session": "weekend_profitable",
+  "confidence": 0.4166666666666667,
+  "regime": "unknown",
+  "duration_bars": 104,
+  "open_time": "2026-03-14 17:00:00",
+  "timestamp": "2026-04-12T18:24:28.032938+00:00"
+}

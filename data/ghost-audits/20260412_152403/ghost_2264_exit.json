@@ -1,0 +1,17 @@
+{
+  "trade_id": 2264,
+  "type": "ghost_exit",
+  "direction": "BUY",
+  "entry_price": 87783.79,
+  "exit_price": 87483.79,
+  "pnl": -300.0,
+  "is_win": false,
+  "exit_reason": "SL_hit",
+  "veto_reason": "anti_metralhadora:session_limit",
+  "session": "asian",
+  "confidence": 0.5633333333333334,
+  "regime": "unknown",
+  "duration_bars": 49,
+  "open_time": "2025-12-25 06:15:00",
+  "timestamp": "2026-04-12T18:24:14.436986+00:00"
+}

@@ -1,0 +1,17 @@
+{
+  "trade_id": 58,
+  "type": "ghost_exit",
+  "direction": "BUY",
+  "entry_price": 122177.99,
+  "exit_price": 121869.40357142859,
+  "pnl": -63.37860650365314,
+  "is_win": false,
+  "exit_reason": "SL_hit",
+  "veto_reason": "advanced_veto:BUY vetoed - RSI 70.2 declining",
+  "session": "ny",
+  "confidence": 0.4966666666666667,
+  "regime": "unknown",
+  "duration_bars": 2,
+  "open_time": "2025-10-10 16:40:00",
+  "timestamp": "2026-04-12T18:24:05.773485+00:00"
+}

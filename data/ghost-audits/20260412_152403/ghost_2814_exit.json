@@ -1,0 +1,17 @@
+{
+  "trade_id": 2814,
+  "type": "ghost_exit",
+  "direction": "SELL",
+  "entry_price": 87942.59,
+  "exit_price": 86873.50571428573,
+  "pnl": 352.80554661201074,
+  "is_win": true,
+  "exit_reason": "TP_hit",
+  "veto_reason": "advanced_veto:SELL vetoed - RSI 6.4 < 28",
+  "session": "london",
+  "confidence": 0.5466666666666667,
+  "regime": "unknown",
+  "duration_bars": 28,
+  "open_time": "2025-12-29 11:50:00",
+  "timestamp": "2026-04-12T18:24:15.419914+00:00"
+}

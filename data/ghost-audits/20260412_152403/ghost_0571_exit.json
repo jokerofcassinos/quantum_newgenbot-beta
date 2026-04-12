@@ -1,0 +1,17 @@
+{
+  "trade_id": 571,
+  "type": "ghost_exit",
+  "direction": "BUY",
+  "entry_price": 111518.29,
+  "exit_price": 112418.29,
+  "pnl": 900.0,
+  "is_win": true,
+  "exit_reason": "TP_hit",
+  "veto_reason": "anti_metralhadora:session_blocked",
+  "session": "weekend_profitable",
+  "confidence": 0.5633333333333334,
+  "regime": "unknown",
+  "duration_bars": 39,
+  "open_time": "2025-10-26 09:10:00",
+  "timestamp": "2026-04-12T18:24:07.331159+00:00"
+}

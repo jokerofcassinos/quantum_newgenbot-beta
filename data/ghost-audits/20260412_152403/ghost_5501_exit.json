@@ -1,0 +1,17 @@
+{
+  "trade_id": 5501,
+  "type": "ghost_exit",
+  "direction": "SELL",
+  "entry_price": 67448.08,
+  "exit_price": 67748.08,
+  "pnl": -300.0,
+  "is_win": false,
+  "exit_reason": "SL_hit",
+  "veto_reason": "ghost_audit:weekday_destructive_hours_10UTC",
+  "session": "london",
+  "confidence": 0.5466666666666667,
+  "regime": "unknown",
+  "duration_bars": 2,
+  "open_time": "2026-03-30 10:50:00",
+  "timestamp": "2026-04-12T18:24:30.846233+00:00"
+}

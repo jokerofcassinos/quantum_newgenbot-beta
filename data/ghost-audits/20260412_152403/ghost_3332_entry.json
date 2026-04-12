@@ -1,0 +1,15 @@
+{
+  "trade_id": 3332,
+  "type": "ghost_entry",
+  "direction": "SELL",
+  "entry_price": 90587.56,
+  "stop_loss": 90887.56,
+  "take_profit": 89687.56,
+  "volume": 0.9579615580034716,
+  "veto_reason": "advanced_veto:SELL vetoed - RSI 23.5 < 28",
+  "session": "ny",
+  "confidence": 0.63,
+  "regime": "unknown",
+  "open_time": "2026-01-09 20:30:00",
+  "timestamp": "2026-04-12T18:24:17.215333+00:00"
+}

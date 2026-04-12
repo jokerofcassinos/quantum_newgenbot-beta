@@ -1,0 +1,15 @@
+{
+  "trade_id": 3312,
+  "type": "ghost_entry",
+  "direction": "SELL",
+  "entry_price": 90141.53,
+  "stop_loss": 90481.08714285714,
+  "take_profit": 89122.85857142857,
+  "volume": 0.3438132379814896,
+  "veto_reason": "ghost_audit:weekday_destructive_hours_11UTC",
+  "session": "london",
+  "confidence": 0.5466666666666667,
+  "regime": "unknown",
+  "open_time": "2026-01-09 11:00:00",
+  "timestamp": "2026-04-12T18:24:17.156852+00:00"
+}

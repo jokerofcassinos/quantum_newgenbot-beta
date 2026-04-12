@@ -1,0 +1,17 @@
+{
+  "trade_id": 2047,
+  "type": "ghost_exit",
+  "direction": "BUY",
+  "entry_price": 90176.92,
+  "exit_price": 89876.92,
+  "pnl": -300.0,
+  "is_win": false,
+  "exit_reason": "SL_hit",
+  "veto_reason": "advanced_veto:BUY vetoed - RSI 72.3 > 72",
+  "session": "weekend_profitable",
+  "confidence": 0.58,
+  "regime": "unknown",
+  "duration_bars": 29,
+  "open_time": "2025-12-14 09:45:00",
+  "timestamp": "2026-04-12T18:24:13.032862+00:00"
+}

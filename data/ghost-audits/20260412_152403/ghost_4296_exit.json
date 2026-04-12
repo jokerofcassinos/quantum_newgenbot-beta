@@ -1,0 +1,17 @@
+{
+  "trade_id": 4296,
+  "type": "ghost_exit",
+  "direction": "BUY",
+  "entry_price": 89271.27,
+  "exit_price": 88971.27,
+  "pnl": -300.0,
+  "is_win": false,
+  "exit_reason": "SL_hit",
+  "veto_reason": "ghost_audit:low_volatility_chop",
+  "session": "asian",
+  "confidence": 0.4966666666666667,
+  "regime": "unknown",
+  "duration_bars": 8,
+  "open_time": "2026-01-29 01:45:00",
+  "timestamp": "2026-04-12T18:24:20.837021+00:00"
+}

@@ -1,0 +1,15 @@
+{
+  "trade_id": 2520,
+  "type": "ghost_entry",
+  "direction": "BUY",
+  "entry_price": 87477.16,
+  "stop_loss": 87177.16,
+  "take_profit": 88377.16,
+  "volume": 1.0,
+  "veto_reason": "anti_metralhadora:session_blocked",
+  "session": "weekend_profitable",
+  "confidence": 0.58,
+  "regime": "unknown",
+  "open_time": "2025-12-27 18:15:00",
+  "timestamp": "2026-04-12T18:24:14.860950+00:00"
+}

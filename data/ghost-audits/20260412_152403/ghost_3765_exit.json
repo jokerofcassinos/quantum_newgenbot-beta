@@ -1,0 +1,17 @@
+{
+  "trade_id": 3765,
+  "type": "ghost_exit",
+  "direction": "BUY",
+  "entry_price": 92652.33,
+  "exit_price": 92326.7325,
+  "pnl": -173.5093855121168,
+  "is_win": false,
+  "exit_reason": "SL_hit",
+  "veto_reason": "advanced_veto:BUY vetoed - RSI 76.8 > 72",
+  "session": "ny",
+  "confidence": 0.4966666666666667,
+  "regime": "unknown",
+  "duration_bars": 4,
+  "open_time": "2026-01-13 16:40:00",
+  "timestamp": "2026-04-12T18:24:18.082945+00:00"
+}

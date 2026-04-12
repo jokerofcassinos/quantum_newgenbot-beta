@@ -1,6 +1,6 @@
 {
   "ticket": 1002,
-  "timestamp": "2026-04-12T18:17:33.161016+00:00",
+  "timestamp": "2026-04-12T18:24:05.584903+00:00",
   "symbol": "BTCUSD",
   "direction": "BUY",
   "entry_price": 123862.05,
@@ -8,7 +8,7 @@
   "take_profit": 124919.055,
   "volume": 0.03,
   "strategy_name": "complete_system_v2",
-  "signal_confidence": 0.5166666666666666,
+  "signal_confidence": 0.4966666666666667,
   "market_regime": {
     "regime_type": "trending_bullish",
     "regime_confidence": 0.7,
@@ -35,8 +35,8 @@
   },
   "indicators": {
     "ema_9": 123790.19624196047,
-    "ema_21": 123442.20811707512,
-    "ema_50": 123017.89242462318,
+    "ema_21": 123442.20811707516,
+    "ema_50": 123017.8938320368,
     "ema_200": 123862.05,
     "sma_20": 123392.55600000001,
     "sma_50": 123862.05,
@@ -122,7 +122,7 @@
     "risk_percent": 1.0,
     "min_rr_ratio": 1.5,
     "confidence_threshold": 0.65,
-    "last_mutation_time": "2026-04-12T18:17:33.161001+00:00",
+    "last_mutation_time": "2026-04-12T18:24:05.584888+00:00",
     "mutation_count": 0,
     "dna_memory_regimes": 0
   },
@@ -144,7 +144,7 @@
       {
         "strategy_name": "momentum",
         "vote": "BUY",
-        "confidence": 0.6842844418170091
+        "confidence": 0.6842844418169984
       },
       {
         "strategy_name": "liquidity",
@@ -207,7 +207,7 @@
     "neutral_votes": 5,
     "total_strategies": 12,
     "consensus_direction": "BUY",
-    "consensus_confidence": 0.5166666666666666
+    "consensus_confidence": 0.4966666666666667
   },
   "session_veto": {
     "session_name": "asian",

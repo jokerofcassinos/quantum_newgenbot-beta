@@ -1,0 +1,15 @@
+{
+  "trade_id": 5056,
+  "type": "ghost_entry",
+  "direction": "SELL",
+  "entry_price": 73867.71,
+  "stop_loss": 74167.71,
+  "take_profit": 72967.71,
+  "volume": 0.8170614729101848,
+  "veto_reason": "advanced_veto:SELL vetoed - price at lower BB",
+  "session": "asian",
+  "confidence": 0.5466666666666667,
+  "regime": "unknown",
+  "open_time": "2026-03-16 22:50:00",
+  "timestamp": "2026-04-12T18:24:28.391215+00:00"
+}

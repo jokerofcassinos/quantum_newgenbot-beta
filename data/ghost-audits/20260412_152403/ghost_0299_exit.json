@@ -1,0 +1,17 @@
+{
+  "trade_id": 299,
+  "type": "ghost_exit",
+  "direction": "BUY",
+  "entry_price": 108290.18,
+  "exit_price": 109190.18,
+  "pnl": 900.0,
+  "is_win": true,
+  "exit_reason": "TP_hit",
+  "veto_reason": "session_veto:Confidence 0.42 < 0.45 (Weekend Profitable Hours threshold)",
+  "session": "weekend_profitable",
+  "confidence": 0.4166666666666667,
+  "regime": "unknown",
+  "duration_bars": 10,
+  "open_time": "2025-10-19 19:25:00",
+  "timestamp": "2026-04-12T18:24:06.557463+00:00"
+}

@@ -1,0 +1,17 @@
+{
+  "trade_id": 2095,
+  "type": "ghost_exit",
+  "direction": "SELL",
+  "entry_price": 86171.8,
+  "exit_price": 86471.8,
+  "pnl": -300.0,
+  "is_win": false,
+  "exit_reason": "SL_hit",
+  "veto_reason": "ghost_audit:weekday_destructive_hours_10UTC",
+  "session": "london",
+  "confidence": 0.5466666666666667,
+  "regime": "unknown",
+  "duration_bars": 25,
+  "open_time": "2025-12-16 10:30:00",
+  "timestamp": "2026-04-12T18:24:13.290285+00:00"
+}

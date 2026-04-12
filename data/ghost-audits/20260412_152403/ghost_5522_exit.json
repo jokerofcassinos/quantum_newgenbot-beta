@@ -1,0 +1,17 @@
+{
+  "trade_id": 5522,
+  "type": "ghost_exit",
+  "direction": "BUY",
+  "entry_price": 68541.62,
+  "exit_price": 68241.62,
+  "pnl": -300.0,
+  "is_win": false,
+  "exit_reason": "SL_hit",
+  "veto_reason": "ghost_audit:weekday_destructive_hours_15UTC",
+  "session": "ny_overlap",
+  "confidence": 0.4966666666666667,
+  "regime": "unknown",
+  "duration_bars": 6,
+  "open_time": "2026-04-01 15:10:00",
+  "timestamp": "2026-04-12T18:24:31.244057+00:00"
+}

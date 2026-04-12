@@ -1,0 +1,17 @@
+{
+  "trade_id": 3030,
+  "type": "ghost_exit",
+  "direction": "BUY",
+  "entry_price": 90020.17,
+  "exit_price": 90920.17,
+  "pnl": 900.0,
+  "is_win": true,
+  "exit_reason": "TP_hit",
+  "veto_reason": "anti_metralhadora:session_blocked",
+  "session": "weekend_profitable",
+  "confidence": 0.58,
+  "regime": "unknown",
+  "duration_bars": 87,
+  "open_time": "2026-01-03 17:35:00",
+  "timestamp": "2026-04-12T18:24:16.226502+00:00"
+}

@@ -1,0 +1,15 @@
+{
+  "trade_id": 3226,
+  "type": "ghost_entry",
+  "direction": "SELL",
+  "entry_price": 92772.82,
+  "stop_loss": 93072.82,
+  "take_profit": 91872.82,
+  "volume": 1.0,
+  "veto_reason": "advanced_veto:SELL vetoed - price at lower BB",
+  "session": "ny_overlap",
+  "confidence": 0.5466666666666667,
+  "regime": "unknown",
+  "open_time": "2026-01-05 14:40:00",
+  "timestamp": "2026-04-12T18:24:16.556577+00:00"
+}

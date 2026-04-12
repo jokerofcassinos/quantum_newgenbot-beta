@@ -1,0 +1,17 @@
+{
+  "trade_id": 5821,
+  "type": "ghost_exit",
+  "direction": "SELL",
+  "entry_price": 72635.9,
+  "exit_price": 72935.9,
+  "pnl": -300.0,
+  "is_win": false,
+  "exit_reason": "SL_hit",
+  "veto_reason": "advanced_veto:SELL vetoed - price at lower BB",
+  "session": "weekend_profitable",
+  "confidence": 0.63,
+  "regime": "unknown",
+  "duration_bars": 67,
+  "open_time": "2026-04-11 09:10:00",
+  "timestamp": "2026-04-12T18:24:33.328162+00:00"
+}

@@ -1,0 +1,17 @@
+{
+  "trade_id": 4479,
+  "type": "ghost_exit",
+  "direction": "SELL",
+  "entry_price": 67177.05,
+  "exit_price": 67506.48964285714,
+  "pnl": -114.4557632558789,
+  "is_win": false,
+  "exit_reason": "SL_hit",
+  "veto_reason": "ghost_audit:weekday_destructive_hours_16UTC",
+  "session": "ny",
+  "confidence": 0.5466666666666667,
+  "regime": "unknown",
+  "duration_bars": 3,
+  "open_time": "2026-02-18 16:50:00",
+  "timestamp": "2026-04-12T18:24:23.936626+00:00"
+}

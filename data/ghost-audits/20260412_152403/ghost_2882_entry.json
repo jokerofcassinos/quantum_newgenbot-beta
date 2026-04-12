@@ -1,0 +1,15 @@
+{
+  "trade_id": 2882,
+  "type": "ghost_entry",
+  "direction": "BUY",
+  "entry_price": 89830.5,
+  "stop_loss": 89530.5,
+  "take_profit": 90730.5,
+  "volume": 0.8067119234727991,
+  "veto_reason": "advanced_veto:BUY vetoed - RSI 89.5 > 72",
+  "session": "london",
+  "confidence": 0.4966666666666667,
+  "regime": "unknown",
+  "open_time": "2026-01-02 12:15:00",
+  "timestamp": "2026-04-12T18:24:15.933181+00:00"
+}

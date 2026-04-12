@@ -411,37 +411,37 @@ class CompleteBacktestEngineV2:
                         )
                     else:
                         # ═══════════════════════════════════════════════════════════════
-                        # GHOST AUDIT #1: Confidence Inversion
+                        # GHOST AUDIT #1: Confidence Inversion (ADJUSTED - less aggressive)
                         # Ghost audit found: 0.4-0.5 confidence outperforms 0.6-0.7
-                        # Lower confidence signals have more edge (less obvious = more alpha)
+                        # ADJUSTMENT: Reduced BUY penalty from -0.10 to -0.03
                         # ═══════════════════════════════════════════════════════════════
                         original_confidence = signal.get('confidence', 0.5)
                         
-                        # Invert confidence: boost medium, reduce high
+                        # Invert confidence: boost medium, slightly reduce high
                         if 0.35 <= original_confidence <= 0.50:
                             # Medium confidence - boost it (these have edge)
-                            signal['confidence'] = min(0.70, original_confidence + 0.15)
+                            signal['confidence'] = min(0.70, original_confidence + 0.10)  # Reduced from +0.15
                             signal['confidence_inverted'] = True
                         elif original_confidence > 0.65:
-                            # High confidence - reduce it (already priced in)
-                            signal['confidence'] = max(0.40, original_confidence - 0.10)
+                            # High confidence - slightly reduce it (less aggressive)
+                            signal['confidence'] = max(0.50, original_confidence - 0.05)  # Reduced from -0.10
                             signal['confidence_inverted'] = True
                         else:
                             signal['confidence_inverted'] = False
 
                         # ═══════════════════════════════════════════════════════════════
-                        # GHOST AUDIT #2: SELL vs BUY Asymmetry
+                        # GHOST AUDIT #2: SELL vs BUY Asymmetry (ADJUSTED - less aggressive)
                         # Ghost audit found: SELL outperforms BUY significantly
-                        # SELL: +$82K, BUY: -$148K (in vetoed trades)
+                        # ADJUSTMENT: Reduced BUY penalty from -0.05 to -0.02
                         # ═══════════════════════════════════════════════════════════════
                         direction = signal.get('direction', '')
                         if direction == 'SELL':
                             # SELL gets confidence boost (better performance)
-                            signal['confidence'] = min(0.95, signal.get('confidence', 0.5) + 0.05)
+                            signal['confidence'] = min(0.95, signal.get('confidence', 0.5) + 0.03)  # Reduced from +0.05
                             signal['sell_boosted'] = True
                         elif direction == 'BUY':
-                            # BUY gets confidence penalty (worse performance)
-                            signal['confidence'] = max(0.30, signal.get('confidence', 0.5) - 0.05)
+                            # BUY gets slight confidence penalty (worse performance)
+                            signal['confidence'] = max(0.30, signal.get('confidence', 0.5) - 0.02)  # Reduced from -0.05
                             signal['buy_penalized'] = True
 
                         # Basic veto (uses pre-computed values from signal)

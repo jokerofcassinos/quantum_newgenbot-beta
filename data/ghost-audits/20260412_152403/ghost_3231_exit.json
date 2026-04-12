@@ -1,0 +1,17 @@
+{
+  "trade_id": 3231,
+  "type": "ghost_exit",
+  "direction": "SELL",
+  "entry_price": 92671.66,
+  "exit_price": 92971.66,
+  "pnl": -300.0,
+  "is_win": false,
+  "exit_reason": "SL_hit",
+  "veto_reason": "advanced_veto:SELL vetoed - RSI 25.8 < 28",
+  "session": "ny_overlap",
+  "confidence": 0.5466666666666667,
+  "regime": "unknown",
+  "duration_bars": 14,
+  "open_time": "2026-01-05 15:30:00",
+  "timestamp": "2026-04-12T18:24:16.579338+00:00"
+}

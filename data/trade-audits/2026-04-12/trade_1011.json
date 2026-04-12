@@ -1,6 +1,6 @@
 {
   "ticket": 1011,
-  "timestamp": "2026-04-12T18:17:33.302502+00:00",
+  "timestamp": "2026-04-12T18:24:05.721416+00:00",
   "symbol": "BTCUSD",
   "direction": "BUY",
   "entry_price": 121526.16,
@@ -8,7 +8,7 @@
   "take_profit": 122426.16,
   "volume": 0.1,
   "strategy_name": "complete_system_v2",
-  "signal_confidence": 0.5666666666666667,
+  "signal_confidence": 0.5466666666666667,
   "market_regime": {
     "regime_type": "ranging",
     "regime_confidence": 0.7,
@@ -36,7 +36,7 @@
   "indicators": {
     "ema_9": 121512.81846554893,
     "ema_21": 121423.44051855414,
-    "ema_50": 121351.46996763062,
+    "ema_50": 121351.46996763065,
     "ema_200": 121526.16,
     "sma_20": 121380.05950000002,
     "sma_50": 121526.16,
@@ -122,7 +122,7 @@
     "risk_percent": 1.0,
     "min_rr_ratio": 1.5,
     "confidence_threshold": 0.65,
-    "last_mutation_time": "2026-04-12T18:17:33.302485+00:00",
+    "last_mutation_time": "2026-04-12T18:24:05.721401+00:00",
     "mutation_count": 0,
     "dna_memory_regimes": 0
   },
@@ -207,7 +207,7 @@
     "neutral_votes": 4,
     "total_strategies": 12,
     "consensus_direction": "BUY",
-    "consensus_confidence": 0.5666666666666667
+    "consensus_confidence": 0.5466666666666667
   },
   "session_veto": {
     "session_name": "london",

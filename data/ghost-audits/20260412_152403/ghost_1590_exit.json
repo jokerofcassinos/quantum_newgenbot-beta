@@ -1,0 +1,17 @@
+{
+  "trade_id": 1590,
+  "type": "ghost_exit",
+  "direction": "BUY",
+  "entry_price": 90808.22,
+  "exit_price": 90170.75,
+  "pnl": -233.86196272023423,
+  "is_win": false,
+  "exit_reason": "SL_hit",
+  "veto_reason": "advanced_veto:BUY vetoed - RSI 73.2 > 72",
+  "session": "ny",
+  "confidence": 0.4966666666666667,
+  "regime": "unknown",
+  "duration_bars": 6,
+  "open_time": "2025-12-02 17:55:00",
+  "timestamp": "2026-04-12T18:24:11.561876+00:00"
+}
