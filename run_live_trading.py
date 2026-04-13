@@ -1,16 +1,17 @@
 """
-Forex Quantum Bot - Live Trading System v3.0
+Forex Quantum Bot - Live Trading System v4.0
 PRODUCTION SYSTEM | CEO: Forex Quantum Bot | Created: 2026-04-12
 
 Features:
 - Direct MT5 command execution
-- Real-time neural logging (1-to-1 machine state)
-- Cycle audits (per-session tracking, auto-clean on restart)
+- REAL-TIME neural logging (EVERY bar, complete state)
+- Per-cycle JSON audit files (like backtest trade audits)
 - Test modes: --selltest, --buytest
-- Telegram dashboard with interactive buttons
+- Telegram dashboard with EDITING (no spam) + callback handlers
 - Real-time order tracking with PnL monitoring
 - Smart TP + Trailing position management
 - FTMO compliance monitoring
+- Balance/equity tracking on EVERY bar
 
 Usage:
     python run_live_trading.py              # Normal live trading
@@ -49,13 +50,14 @@ from src.monitoring.telegram_dashboard_v2 import TelegramDashboardV2
 
 
 # ============================================================================
-# CYCLE AUDIT SYSTEM
+# CYCLE AUDIT SYSTEM - PER-CYCLE JSON FILES (like backtest trade audits)
 # ============================================================================
 
 class CycleAudit:
     """
     Ultra-detailed cycle audit system.
-    Tracks everything per session, auto-cleans on restart.
+    Creates ONE JSON file per cycle: cycle_000001.json, cycle_000002.json, etc.
+    Auto-cleans on restart.
     """
 
     def __init__(self, audit_dir: str = "data/cycle-audits"):
@@ -68,7 +70,6 @@ class CycleAudit:
         self.session_dir.mkdir(parents=True, exist_ok=True)
 
         # Real-time tracking
-        self.cycles = []
         self.current_cycle = 0
         self.start_time = datetime.now(timezone.utc)
 
@@ -81,12 +82,7 @@ class CycleAudit:
         self.total_orders_rejected = 0
         self.total_errors = 0
 
-        # Market state tracking
-        self.price_history = []
-        self.regime_history = []
-        self.confidence_history = []
-
-        logger.info(f"📋 CycleAudit initialized: {self.session_dir}")
+        logger.info(f"CycleAudit initialized (per-cycle JSON): {self.session_dir}")
 
     def _cleanup_old_sessions(self):
         """Remove all old sessions - start fresh."""
@@ -95,44 +91,30 @@ class CycleAudit:
             for old_session in self.audit_dir.iterdir():
                 if old_session.is_dir():
                     shutil.rmtree(old_session, ignore_errors=True)
-            logger.info("🗑️ Cleaned all old cycle audits")
+            logger.info("Cleaned all old cycle audits")
 
-    def record_cycle(self, cycle_data: Dict[str, Any]):
-        """Record a complete cycle (candle processed)."""
+    def save_cycle_audit(self, cycle_data: Dict[str, Any]):
+        """
+        Save a COMPLETE cycle audit as its OWN JSON file.
+        File naming: cycle_000001.json, cycle_000002.json, etc.
+        Structure matches backtest trade audits with ultra-complex data.
+        """
         self.current_cycle += 1
+        self.total_candles_processed += 1
+
+        # Enrich with metadata
         cycle_data['cycle_number'] = self.current_cycle
         cycle_data['timestamp'] = datetime.now(timezone.utc).isoformat()
         cycle_data['uptime_seconds'] = (datetime.now(timezone.utc) - self.start_time).total_seconds()
+        cycle_data['session_id'] = self.session_id
 
-        self.cycles.append(cycle_data)
-        self.total_candles_processed += 1
+        # Write individual cycle file
+        cycle_filename = f"cycle_{self.current_cycle:06d}.json"
+        cycle_filepath = self.session_dir / cycle_filename
+        with open(cycle_filepath, 'w') as f:
+            json.dump(cycle_data, f, indent=2, default=str)
 
-        # Save every 60 cycles
-        if self.current_cycle % 60 == 0:
-            self._save_cycle_audit()
-
-    def _save_cycle_audit(self):
-        """Save complete cycle audit to JSON."""
-        audit_data = {
-            'session_id': self.session_id,
-            'start_time': self.start_time.isoformat(),
-            'end_time': datetime.now(timezone.utc).isoformat(),
-            'total_cycles': self.current_cycle,
-            'metrics': {
-                'total_candles_processed': self.total_candles_processed,
-                'total_signals_generated': self.total_signals_generated,
-                'total_signals_vetoed': self.total_signals_vetoed,
-                'total_orders_sent': self.total_orders_sent,
-                'total_orders_filled': self.total_orders_filled,
-                'total_orders_rejected': self.total_orders_rejected,
-                'total_errors': self.total_errors,
-            },
-            'last_100_cycles': self.cycles[-100:],
-        }
-
-        filepath = self.session_dir / "cycle_audit.json"
-        with open(filepath, 'w') as f:
-            json.dump(audit_data, f, indent=2, default=str)
+        return cycle_filepath
 
     def generate_real_time_report(self, engine) -> str:
         """Generate ultra-detailed real-time report."""
@@ -141,14 +123,14 @@ class CycleAudit:
         cycles_per_min = self.current_cycle / max(1, uptime / 60)
 
         report = (
-            f"📊 CYCLE AUDIT REPORT\n"
-            f"{'─' * 50}\n"
+            f"CYCLE AUDIT REPORT\n"
+            f"{'-' * 50}\n"
             f"Session: {self.session_id}\n"
             f"Uptime: {uptime_str}\n"
             f"Total Cycles: {self.current_cycle}\n"
             f"Cycles/min: {cycles_per_min:.1f}\n"
             f"\n"
-            f"📈 Metrics:\n"
+            f"Metrics:\n"
             f"   Candles: {self.total_candles_processed}\n"
             f"   Signals: {self.total_signals_generated}\n"
             f"   Vetoes: {self.total_signals_vetoed} ({self.total_signals_vetoed/max(1,self.total_signals_generated)*100:.1f}%)\n"
@@ -157,7 +139,7 @@ class CycleAudit:
             f"   Orders Rejected: {self.total_orders_rejected}\n"
             f"   Errors: {self.total_errors}\n"
             f"\n"
-            f"💹 Trading:\n"
+            f"Trading:\n"
             f"   Trades: {engine.total_trades}\n"
             f"   Wins: {engine.winning_trades}\n"
             f"   Losses: {engine.losing_trades}\n"
@@ -169,7 +151,7 @@ class CycleAudit:
 
 
 # ============================================================================
-# LIVE TRADING ENGINE V3.0
+# LIVE TRADING ENGINE V4.0 - ULTRA-COMPREHENSIVE LOGGING
 # ============================================================================
 
 class LiveTradingEngine:
@@ -177,12 +159,13 @@ class LiveTradingEngine:
     Production live trading engine with direct MT5 execution.
 
     Features:
-    - Real-time neural logging (1-to-1 machine state)
+    - REAL-TIME neural logging (EVERY bar, complete state)
     - Direct MT5 command execution
     - Smart TP + Trailing position management
-    - Cycle audit tracking
-    - Telegram dashboard
+    - Per-cycle JSON audit files
+    - Telegram dashboard with EDITING (no spam)
     - Test modes (--selltest, --buytest)
+    - Balance/equity tracking on every bar
     """
 
     def __init__(
@@ -233,6 +216,7 @@ class LiveTradingEngine:
         self.total_loss_used = 0.0
         self.ftmo_daily_remaining = 5000.0
         self.ftmo_total_remaining = 10000.0
+        self.daily_start_balance = 0.0
 
         # Session tracking
         self.current_session = "unknown"
@@ -252,8 +236,14 @@ class LiveTradingEngine:
         # Telegram
         self.telegram = TelegramDashboardV2()
 
+        # Last cycle audit data (for saving at end of cycle)
+        self._last_signal = None
+        self._last_votes = None
+        self._last_indicators = None
+        self._last_veto_results = None
+
         logger.info("=" * 80)
-        logger.info("🚀 FOREX QUANTUM BOT - LIVE TRADING ENGINE v3.0")
+        logger.info("FOREX QUANTUM BOT - LIVE TRADING ENGINE v4.0")
         logger.info("=" * 80)
         logger.info(f"   Symbol: {symbol}")
         logger.info(f"   Timeframe: M5")
@@ -295,26 +285,61 @@ class LiveTradingEngine:
         self.auditor = NeuralTradeAuditor(base_path="data/live-trade-audits")
         self.auditor._backtest_mode = True
 
-        logger.info("✅ All components initialized")
+        logger.info("All components initialized")
+
+    def _refresh_account_state(self) -> Dict[str, Any]:
+        """
+        Query mt5.account_info() and update internal balance/equity tracking.
+        Called on EVERY bar to ensure accurate state.
+        """
+        account_info = mt5.account_info()
+        if account_info is None:
+            return {'balance': self.balance, 'equity': self.equity, 'margin': 0.0, 'margin_free': 0.0, 'margin_level': 0.0}
+
+        old_balance = self.balance
+        self.balance = account_info.balance
+        self.equity = account_info.equity
+
+        # Track peak equity and drawdown
+        if self.equity > self.peak_equity:
+            self.peak_equity = self.equity
+        if self.peak_equity > 0:
+            current_dd = (self.peak_equity - self.equity) / self.peak_equity * 100
+            if current_dd > self.max_drawdown:
+                self.max_drawdown = current_dd
+
+        # Track daily PnL from actual MT5 balance
+        if self.daily_start_balance == 0.0:
+            self.daily_start_balance = self.balance
+        self.daily_pnl = self.balance - self.daily_start_balance
+
+        return {
+            'balance': account_info.balance,
+            'equity': account_info.equity,
+            'margin': account_info.margin,
+            'margin_free': account_info.margin_free,
+            'margin_level': account_info.margin_level,
+        }
 
     def connect_mt5(self) -> bool:
         """Connect to MetaTrader 5 with verification."""
-        logger.info("🔄 Connecting to MT5...")
+        logger.info("Connecting to MT5...")
 
         if not mt5.initialize():
-            logger.error(f"❌ MT5 initialization failed: {mt5.last_error()}")
+            logger.error(f"MT5 initialization failed: {mt5.last_error()}")
             return False
 
         account_info = mt5.account_info()
         if account_info is None:
-            logger.error("❌ Failed to get account info")
+            logger.error("Failed to get account info")
             return False
 
         self.balance = account_info.balance
         self.equity = account_info.equity
         self.peak_equity = self.equity
+        self.daily_start_balance = self.balance
 
-        logger.info(f"✅ MT5 Connected Successfully")
+        logger.info(f"MT5 Connected Successfully")
         logger.info(f"   Account: {account_info.login}")
         logger.info(f"   Server: {account_info.server}")
         logger.info(f"   Name: {account_info.name}")
@@ -324,13 +349,13 @@ class LiveTradingEngine:
 
         symbol_info = mt5.symbol_info(self.symbol)
         if symbol_info is None:
-            logger.error(f"❌ Symbol {self.symbol} not found")
+            logger.error(f"Symbol {self.symbol} not found")
             return False
 
         if not symbol_info.visible:
-            logger.warning(f"⚠️ Symbol not visible, enabling...")
+            logger.warning(f"Symbol not visible, enabling...")
             if not mt5.symbol_select(self.symbol, True):
-                logger.error(f"❌ Failed to select symbol")
+                logger.error(f"Failed to select symbol")
                 return False
 
         logger.info(f"   Symbol: {self.symbol}")
@@ -356,7 +381,7 @@ class LiveTradingEngine:
         """Fetch latest candles from MT5."""
         rates = mt5.copy_rates_from_pos(self.symbol, self.timeframe, 0, count)
         if rates is None or len(rates) == 0:
-            logger.error(f"❌ Failed to get candles: {mt5.last_error()}")
+            logger.error(f"Failed to get candles: {mt5.last_error()}")
             return None
 
         df = pd.DataFrame(rates)
@@ -398,7 +423,10 @@ class LiveTradingEngine:
         return series.ewm(span=span, adjust=False).mean()
 
     def generate_signal(self, df: pd.DataFrame, indicators: Dict[str, Any]) -> Optional[Dict[str, Any]]:
-        """Generate trading signal using 12-strategy voting system."""
+        """
+        Generate trading signal using 12-strategy voting system.
+        LOGS every strategy vote, vote totals, and consensus.
+        """
         if len(df) < 50:
             return None
 
@@ -421,55 +449,119 @@ class LiveTradingEngine:
         ema_9 = indicators['ema_9'].iloc[-1]
         ema_21 = indicators['ema_21'].iloc[-1]
         atr = indicators['atr_14'].iloc[-1]
+        rsi = indicators['rsi_14'].iloc[-1]
+        ema_50 = indicators['ema_50'].iloc[-1]
+        sma_20 = indicators['sma_20'].iloc[-1]
+        volume_avg = indicators['volume_avg_20'].iloc[-1]
+        current_volume = df['tick_volume'].iloc[-1]
+
+        # Build complete market state for audit
+        market_state = {
+            'symbol': self.symbol,
+            'timeframe': 'M5',
+            'open': float(df['open'].iloc[-1]),
+            'high': float(df['high'].iloc[-1]),
+            'low': float(df['low'].iloc[-1]),
+            'close': float(current_price),
+            'volume': int(current_volume),
+            'spread': self._get_spread(),
+        }
+
+        indicator_state = {
+            'ema_9': float(ema_9) if not pd.isna(ema_9) else None,
+            'ema_21': float(ema_21) if not pd.isna(ema_21) else None,
+            'ema_50': float(ema_50) if not pd.isna(ema_50) else None,
+            'sma_20': float(sma_20) if not pd.isna(sma_20) else None,
+            'rsi_14': float(rsi) if not pd.isna(rsi) else None,
+            'atr_14': float(atr) if not pd.isna(atr) else None,
+            'volume_avg_20': float(volume_avg) if not pd.isna(volume_avg) else None,
+        }
 
         # Strategy 1: Momentum
         ema_diff_pct = abs(ema_9 - ema_21) / current_price * 100
         if ema_9 > ema_21 and ema_diff_pct > 0.15:
-            votes['strategy_votes']['momentum'] = {'vote': 'BUY', 'confidence': min(0.60 + ema_diff_pct * 0.3, 0.90)}
+            conf = min(0.60 + ema_diff_pct * 0.3, 0.90)
+            votes['strategy_votes']['momentum'] = {
+                'vote': 'BUY', 'confidence': conf,
+                'reason': f"EMA9>EMA21, diff={ema_diff_pct:.3f}%"
+            }
             votes['buy_votes'] += 1
         elif ema_9 < ema_21 and ema_diff_pct > 0.15:
-            votes['strategy_votes']['momentum'] = {'vote': 'SELL', 'confidence': min(0.60 + ema_diff_pct * 0.3, 0.90)}
+            conf = min(0.60 + ema_diff_pct * 0.3, 0.90)
+            votes['strategy_votes']['momentum'] = {
+                'vote': 'SELL', 'confidence': conf,
+                'reason': f"EMA9<EMA21, diff={ema_diff_pct:.3f}%"
+            }
             votes['sell_votes'] += 1
         else:
-            votes['strategy_votes']['momentum'] = {'vote': 'NEUTRAL', 'confidence': 0.5}
+            votes['strategy_votes']['momentum'] = {
+                'vote': 'NEUTRAL', 'confidence': 0.5,
+                'reason': f"EMA diff too small: {ema_diff_pct:.3f}%"
+            }
             votes['neutral_votes'] += 1
 
         # Strategy 2: Liquidity Sweep
         lo10 = low[max(0, idx - 9):idx + 1].min()
         hi10 = high[max(0, idx - 9):idx + 1].max()
         if current_price <= lo10 * 1.002:
-            votes['strategy_votes']['liquidity'] = {'vote': 'BUY', 'confidence': 0.65}
+            votes['strategy_votes']['liquidity'] = {
+                'vote': 'BUY', 'confidence': 0.65,
+                'reason': f"Price near 10-bar low: {current_price:.2f} <= {lo10 * 1.002:.2f}"
+            }
             votes['buy_votes'] += 1
         elif current_price >= hi10 * 0.998:
-            votes['strategy_votes']['liquidity'] = {'vote': 'SELL', 'confidence': 0.65}
+            votes['strategy_votes']['liquidity'] = {
+                'vote': 'SELL', 'confidence': 0.65,
+                'reason': f"Price near 10-bar high: {current_price:.2f} >= {hi10 * 0.998:.2f}"
+            }
             votes['sell_votes'] += 1
         else:
-            votes['strategy_votes']['liquidity'] = {'vote': 'NEUTRAL', 'confidence': 0.5}
+            votes['strategy_votes']['liquidity'] = {
+                'vote': 'NEUTRAL', 'confidence': 0.5,
+                'reason': f"Price within range [{lo10:.2f}, {hi10:.2f}]"
+            }
             votes['neutral_votes'] += 1
 
         # Strategy 3: Thermodynamic
         if idx >= 10:
             price_change = (current_price - close[idx - 10]) / close[idx - 10] * 100
             if price_change < -2.0:
-                votes['strategy_votes']['thermodynamic'] = {'vote': 'BUY', 'confidence': 0.65}
+                votes['strategy_votes']['thermodynamic'] = {
+                    'vote': 'BUY', 'confidence': 0.65,
+                    'reason': f"Oversold: {price_change:.2f}% drop in 10 bars"
+                }
                 votes['buy_votes'] += 1
             elif price_change > 2.0:
-                votes['strategy_votes']['thermodynamic'] = {'vote': 'SELL', 'confidence': 0.65}
+                votes['strategy_votes']['thermodynamic'] = {
+                    'vote': 'SELL', 'confidence': 0.65,
+                    'reason': f"Overbought: {price_change:.2f}% rise in 10 bars"
+                }
                 votes['sell_votes'] += 1
             else:
-                votes['strategy_votes']['thermodynamic'] = {'vote': 'NEUTRAL', 'confidence': 0.5}
+                votes['strategy_votes']['thermodynamic'] = {
+                    'vote': 'NEUTRAL', 'confidence': 0.5,
+                    'reason': f"Price change normal: {price_change:.2f}%"
+                }
                 votes['neutral_votes'] += 1
 
-        # Strategy 4: Physics
-        sma_20 = indicators['sma_20'].iloc[-1]
+        # Strategy 4: Physics (Mean Reversion)
         if current_price > sma_20 * 1.008:
-            votes['strategy_votes']['physics'] = {'vote': 'SELL', 'confidence': 0.65}
+            votes['strategy_votes']['physics'] = {
+                'vote': 'SELL', 'confidence': 0.65,
+                'reason': f"Price above SMA20 by {(current_price/sma_20-1)*100:.2f}%"
+            }
             votes['sell_votes'] += 1
         elif current_price < sma_20 * 0.992:
-            votes['strategy_votes']['physics'] = {'vote': 'BUY', 'confidence': 0.65}
+            votes['strategy_votes']['physics'] = {
+                'vote': 'BUY', 'confidence': 0.65,
+                'reason': f"Price below SMA20 by {(1-current_price/sma_20)*100:.2f}%"
+            }
             votes['buy_votes'] += 1
         else:
-            votes['strategy_votes']['physics'] = {'vote': 'NEUTRAL', 'confidence': 0.5}
+            votes['strategy_votes']['physics'] = {
+                'vote': 'NEUTRAL', 'confidence': 0.5,
+                'reason': f"Price near SMA20"
+            }
             votes['neutral_votes'] += 1
 
         # Strategy 5: Order Block
@@ -477,28 +569,43 @@ class LiveTradingEngine:
             ob_high = high[idx - 15:idx - 5].max()
             ob_low = low[idx - 15:idx - 5].min()
             if current_price <= ob_low * 1.003:
-                votes['strategy_votes']['order_block'] = {'vote': 'BUY', 'confidence': 0.63}
+                votes['strategy_votes']['order_block'] = {
+                    'vote': 'BUY', 'confidence': 0.63,
+                    'reason': f"Price at order block low: {current_price:.2f} <= {ob_low * 1.003:.2f}"
+                }
                 votes['buy_votes'] += 1
             elif current_price >= ob_high * 0.997:
-                votes['strategy_votes']['order_block'] = {'vote': 'SELL', 'confidence': 0.63}
+                votes['strategy_votes']['order_block'] = {
+                    'vote': 'SELL', 'confidence': 0.63,
+                    'reason': f"Price at order block high: {current_price:.2f} >= {ob_high * 0.997:.2f}"
+                }
                 votes['sell_votes'] += 1
             else:
-                votes['strategy_votes']['order_block'] = {'vote': 'NEUTRAL', 'confidence': 0.5}
+                votes['strategy_votes']['order_block'] = {
+                    'vote': 'NEUTRAL', 'confidence': 0.5,
+                    'reason': f"Price outside OB range [{ob_low:.2f}, {ob_high:.2f}]"
+                }
                 votes['neutral_votes'] += 1
 
         # Strategy 6: FVG
         fvg_vote = 'NEUTRAL'
+        fvg_reason = "No FVG detected"
         if idx >= 8:
             for j in range(max(0, idx - 8), idx - 1):
                 h1, l3 = high[j], low[j + 2]
                 l1, h3 = low[j], high[j + 2]
                 if h1 < l3 and current_price >= l3 * 0.998 and current_price <= h1 * 1.002:
                     fvg_vote = 'BUY'
+                    fvg_reason = f"Bullish FVG found at bar {j}"
                     break
                 elif l1 > h3 and current_price <= l1 * 1.002 and current_price >= h3 * 0.998:
                     fvg_vote = 'SELL'
+                    fvg_reason = f"Bearish FVG found at bar {j}"
                     break
-        votes['strategy_votes']['fvg'] = {'vote': fvg_vote, 'confidence': 0.62 if fvg_vote != 'NEUTRAL' else 0.5}
+        votes['strategy_votes']['fvg'] = {
+            'vote': fvg_vote, 'confidence': 0.62 if fvg_vote != 'NEUTRAL' else 0.5,
+            'reason': fvg_reason
+        }
         if fvg_vote == 'BUY':
             votes['buy_votes'] += 1
         elif fvg_vote == 'SELL':
@@ -506,19 +613,30 @@ class LiveTradingEngine:
         else:
             votes['neutral_votes'] += 1
 
-        # Strategies 7-12
+        # Strategies 7-12 (placeholders - NEUTRAL)
         for name in ['msnr', 'msnr_alchemist', 'ifvg', 'order_flow', 'supply_demand', 'fibonacci']:
-            votes['strategy_votes'][name] = {'vote': 'NEUTRAL', 'confidence': 0.5}
+            votes['strategy_votes'][name] = {
+                'vote': 'NEUTRAL', 'confidence': 0.5,
+                'reason': "Strategy not yet implemented"
+            }
             votes['neutral_votes'] += 1
 
         # Determine consensus
         if votes['buy_votes'] > votes['sell_votes'] and votes['buy_votes'] >= 5:
             direction = 'BUY'
-            consensus_conf = sum(v['confidence'] for v in votes['strategy_votes'].values() if v['vote'] == 'BUY') / max(1, votes['buy_votes'])
+            buy_confs = [v['confidence'] for v in votes['strategy_votes'].values() if v['vote'] == 'BUY']
+            consensus_conf = sum(buy_confs) / max(1, len(buy_confs))
         elif votes['sell_votes'] > votes['buy_votes'] and votes['sell_votes'] >= 5:
             direction = 'SELL'
-            consensus_conf = sum(v['confidence'] for v in votes['strategy_votes'].values() if v['vote'] == 'SELL') / max(1, votes['sell_votes'])
+            sell_confs = [v['confidence'] for v in votes['strategy_votes'].values() if v['vote'] == 'SELL']
+            consensus_conf = sum(sell_confs) / max(1, len(sell_confs))
         else:
+            # No consensus - log and return None
+            logger.debug(
+                f"No consensus: BUY={votes['buy_votes']}, SELL={votes['sell_votes']}, NEUTRAL={votes['neutral_votes']} (need > opposing and >= 5)"
+            )
+            # Still save cycle audit for no-signal cycles
+            self._save_no_signal_audit(market_state, indicator_state, votes, df)
             return None
 
         if pd.isna(atr) or atr == 0:
@@ -534,7 +652,7 @@ class LiveTradingEngine:
             sl = current_price + sl_dist
             tp = current_price - tp_dist
 
-        return {
+        signal = {
             'direction': direction,
             'entry_price': current_price,
             'stop_loss': sl,
@@ -547,30 +665,108 @@ class LiveTradingEngine:
             'sell_votes': votes['sell_votes'],
             'neutral_votes': votes['neutral_votes'],
             'time': current_time,
+            'market_state': market_state,
+            'indicator_state': indicator_state,
         }
 
+        # Store for cycle audit
+        self._last_signal = signal
+        self._last_votes = votes
+
+        return signal
+
+    def _save_no_signal_audit(self, market_state, indicator_state, votes, df):
+        """Save cycle audit even when no signal is generated."""
+        session = detect_session(df['time'].iloc[-1])
+        self.current_session = session
+
+        account_state = self._refresh_account_state()
+
+        cycle_data = {
+            'market_state': market_state,
+            'indicators': indicator_state,
+            'strategy_votes': {k: v for k, v in votes['strategy_votes'].items()},
+            'vote_totals': {
+                'buy_votes': votes['buy_votes'],
+                'sell_votes': votes['sell_votes'],
+                'neutral_votes': votes['neutral_votes'],
+                'consensus_direction': 'NONE',
+                'consensus_confidence': 0.0,
+            },
+            'signal_result': {
+                'generated': False,
+                'reason': f"No consensus: BUY={votes['buy_votes']}, SELL={votes['sell_votes']}, NEUTRAL={votes['neutral_votes']}",
+            },
+            'veto_results': {
+                'session_veto': {'approved': True, 'reason': 'No signal to veto', 'session': session},
+                'anti_metralhadora_veto': {'approved': True, 'reason': 'No signal to veto'},
+                'great_filter_veto': {'approved': True, 'reason': 'No signal to veto'},
+                'final_result': 'NO_SIGNAL',
+            },
+            'position_state': self._get_position_state(),
+            'account_state': account_state,
+            'metadata': {
+                'session': session,
+                'regime': 'unknown',
+                'cycle_count': self.cycle_count,
+                'total_signals_generated': self.total_signals,
+                'total_signals_vetoed': self.total_vetoes,
+                'total_trades': self.total_trades,
+                'uptime_seconds': (datetime.now(timezone.utc) - self.start_time).total_seconds(),
+            },
+        }
+
+        self.cycle_audit.save_cycle_audit(cycle_data)
+
     def validate_signal(self, signal: Dict[str, Any], df: pd.DataFrame) -> Tuple[bool, str]:
-        """Validate signal through all veto layers."""
+        """
+        Validate signal through all veto layers.
+        LOGS each veto check and result.
+        """
         current_time = signal['time']
         session = detect_session(current_time)
         self.current_session = session
         session_profile = get_session_profile(session)
 
-        # Session veto
-        session_veto = apply_session_veto(session_profile, signal)
-        if not session_veto['approved']:
-            return False, f"Session veto: {session_veto.get('reason', 'unknown')}"
+        veto_results = {}
 
-        # Anti-Metralhadora
-        allowed, reason, _ = self.anti_metralhadora.should_allow_trade(
+        # Veto 1: Session
+        session_veto = apply_session_veto(session_profile, signal)
+        veto_results['session_veto'] = {
+            'approved': session_veto['approved'],
+            'reason': session_veto.get('reason', 'unknown'),
+            'session': session,
+            'profile': {
+                'min_confidence': session_profile.min_confidence_threshold,
+                'max_position_size': session_profile.max_position_size,
+                'min_strategy_votes': session_profile.min_strategy_votes,
+                'trading_allowed': session_profile.trading_allowed,
+            },
+        }
+        if not session_veto['approved']:
+            logger.debug(f"  Veto 1 - Session: REJECTED ({session_veto.get('reason', 'unknown')})")
+            self._last_veto_results = veto_results
+            return False, f"Session veto: {session_veto.get('reason', 'unknown')}"
+        logger.debug(f"  Veto 1 - Session ({session}): APPROVED")
+
+        # Veto 2: Anti-Metralhadora
+        allowed, reason, details = self.anti_metralhadora.should_allow_trade(
             signal_quality=signal.get('confidence', 0.0),
             current_session=session,
             current_time=current_time,
         )
+        veto_results['anti_metralhadora_veto'] = {
+            'approved': allowed,
+            'reason': reason,
+            'details': details,
+        }
         if not allowed:
+            logger.debug(f"  Veto 2 - Anti-Metralhadora: REJECTED ({reason})")
+            self._last_veto_results = veto_results
             return False, f"Anti-Metralhadora: {reason}"
+        logger.debug(f"  Veto 2 - Anti-Metralhadora: APPROVED (quality={signal.get('confidence', 0.0):.2f} >= 0.40)")
 
-        # GreatFilter
+        # Veto 3: GreatFilter
         spread = self._get_spread()
         price_change = self._get_price_change_5min(df)
         great_allowed, great_reason = self.great_filter.validate_entry(
@@ -579,9 +775,20 @@ class LiveTradingEngine:
             price_change_5min=price_change,
             session_allowed=True,
         )
+        veto_results['great_filter_veto'] = {
+            'approved': great_allowed,
+            'reason': great_reason,
+            'spread_percent': spread,
+            'price_change_5min': price_change,
+        }
         if not great_allowed:
+            logger.debug(f"  Veto 3 - GreatFilter: REJECTED ({great_reason})")
+            self._last_veto_results = veto_results
             return False, f"GreatFilter: {great_reason}"
+        logger.debug(f"  Veto 3 - GreatFilter: APPROVED (spread={spread:.3f}% < 0.05%)")
 
+        veto_results['final_result'] = 'APPROVED'
+        self._last_veto_results = veto_results
         return True, "All vetoes passed"
 
     def _get_spread(self) -> float:
@@ -622,7 +829,7 @@ class LiveTradingEngine:
         return sizing['position_size']
 
     def execute_trade(self, signal: Dict[str, Any]) -> bool:
-        """Execute trade on MT5."""
+        """Execute trade on MT5. LOGS order details, ticket, result."""
         volume = signal.get('volume', 0.01)
         direction = signal['direction']
         sl = signal['stop_loss']
@@ -630,7 +837,7 @@ class LiveTradingEngine:
 
         tick = mt5.symbol_info_tick(self.symbol)
         if tick is None:
-            logger.error("❌ Failed to get tick data")
+            logger.error("Failed to get tick data")
             return False
 
         if direction == 'BUY':
@@ -658,16 +865,20 @@ class LiveTradingEngine:
         result = mt5.order_send(request)
 
         if result is None:
-            logger.error(f"❌ Order send failed: {mt5.last_error()}")
+            logger.error(f"Order send returned None: {mt5.last_error()}")
+            self.cycle_audit.total_errors += 1
             return False
 
         if result.retcode != mt5.TRADE_RETCODE_DONE:
-            logger.error(f"❌ Order failed: {result.retcode} - {result.comment}")
+            logger.error(f"Order failed: retcode={result.retcode}, comment={result.comment}")
+            self.cycle_audit.total_orders_rejected += 1
+            self.cycle_audit.total_errors += 1
             return False
 
-        logger.info(f"✅ Order executed: {direction} {volume} lots @ {price:.2f}")
-        logger.info(f"   SL: {sl:.2f}, TP: {tp:.2f}")
-        logger.info(f"   Ticket: {result.order}")
+        logger.info(
+            f"Order executed: {direction} {volume} lots @ {price:.2f} | "
+            f"SL: {sl:.2f}, TP: {tp:.2f} | Ticket: {result.order}"
+        )
 
         # Track position
         self.current_position = {
@@ -720,10 +931,16 @@ class LiveTradingEngine:
             strategy_voting=signal.get('votes', {}),
         )
 
+        self.cycle_audit.total_orders_sent += 1
+        self.cycle_audit.total_orders_filled += 1
+
         return True
 
     def manage_position(self, df: pd.DataFrame, indicators: Dict[str, Any]):
-        """Manage open position (check TP/SL, trailing, Smart TP)."""
+        """
+        Manage open position (check TP/SL, trailing, Smart TP).
+        LOGS PnL, Smart TP status, trailing on every bar.
+        """
         if self.current_position is None:
             return
 
@@ -754,12 +971,62 @@ class LiveTradingEngine:
             atr=atr,
         )
 
+        # Count Smart TP hits
+        self.position_smart_tp_hits = sum(1 for t in pos['targets']['targets'] if t.get('closed', False))
+
         if position_closed:
-            self.position_smart_tp_hits = sum(1 for t in pos['targets']['targets'] if t.get('closed', False))
+            duration_min = (datetime.now(timezone.utc) - pos['open_time']).total_seconds() / 60
+            logger.info(
+                f"Smart TP complete | PnL: ${realized_pnl:+,.2f} | "
+                f"Peak: ${self.position_peak_pnl:+,.2f} | "
+                f"TP hits: {self.position_smart_tp_hits}/4 | "
+                f"Duration: {duration_min:.0f}min"
+            )
             self._close_position(pos, realized_pnl, current_price, 'Smart TP complete')
 
+    def _get_position_state(self) -> Dict[str, Any]:
+        """Get current position state for audit."""
+        if self.current_position is None:
+            return {
+                'has_open_position': False,
+                'ticket': None,
+                'direction': None,
+                'entry_price': None,
+                'current_price': None,
+                'stop_loss': None,
+                'take_profit': None,
+                'volume': None,
+                'unrealized_pnl': 0.0,
+                'peak_pnl': 0.0,
+                'smart_tp_hits': 0,
+                'duration_minutes': 0,
+            }
+
+        pos = self.current_position
+        tick = mt5.symbol_info_tick(self.symbol)
+        current_price = tick.bid if tick else pos['entry_price']
+        duration_min = (datetime.now(timezone.utc) - pos['open_time']).total_seconds() / 60
+
+        return {
+            'has_open_position': True,
+            'ticket': pos['ticket'],
+            'direction': pos['direction'],
+            'entry_price': pos['entry_price'],
+            'current_price': current_price,
+            'stop_loss': pos['stop_loss'],
+            'take_profit': pos['take_profit'],
+            'volume': pos['volume'],
+            'unrealized_pnl': round(self.position_current_pnl, 2),
+            'peak_pnl': round(self.position_peak_pnl, 2),
+            'smart_tp_hits': self.position_smart_tp_hits,
+            'duration_minutes': round(duration_min, 1),
+        }
+
     def _close_position(self, pos: Dict, realized_pnl: float, exit_price: float, reason: str):
-        """Close position and record results."""
+        """
+        Close position and record results.
+        LOGS exit details, PnL, duration, commission accounting.
+        """
         # Close via MT5
         tick = mt5.symbol_info_tick(self.symbol)
         if tick is None:
@@ -788,10 +1055,12 @@ class LiveTradingEngine:
 
         result = mt5.order_send(request)
 
-        if result and result.retcode == mt5.TRADE_RETCODE_DONE:
-            duration = (datetime.now(timezone.utc) - pos['open_time']).total_seconds() / 60
-            commission = pos['volume'] * 90  # $90 round trip per lot
+        # Calculate commission: $90 round trip per lot
+        commission = pos['volume'] * 90
+        net_pnl = realized_pnl - commission
+        duration = (datetime.now(timezone.utc) - pos['open_time']).total_seconds() / 60
 
+        if result and result.retcode == mt5.TRADE_RETCODE_DONE:
             if realized_pnl > 0:
                 self.winning_trades += 1
                 self.consecutive_wins += 1
@@ -800,16 +1069,21 @@ class LiveTradingEngine:
                 self.losing_trades += 1
                 self.consecutive_losses += 1
                 self.consecutive_wins = 0
+                self.last_loss_time = datetime.now(timezone.utc)
 
             self.total_trades += 1
-            self.current_position = None
-            self.position_peak_pnl = 0.0
-            self.position_current_pnl = 0.0
-            self.position_smart_tp_hits = 0
 
-            logger.info(f"✅ Position closed: {reason}")
-            logger.info(f"   P/L: ${realized_pnl:+,.2f}")
-            logger.info(f"   Duration: {duration:.0f} min")
+            logger.info(
+                f"Position closed: {reason} | "
+                f"Ticket: {pos['ticket']} | "
+                f"PnL: ${realized_pnl:+,.2f} (gross) | "
+                f"Commission: ${commission:.2f} | "
+                f"Net: ${net_pnl:+,.2f} | "
+                f"Duration: {duration:.0f}min"
+            )
+
+            # Refresh account state immediately after close
+            self._refresh_account_state()
 
             # Telegram alert
             self.telegram.send_order_closed(
@@ -825,137 +1099,362 @@ class LiveTradingEngine:
                 smart_tp_hits=self.position_smart_tp_hits,
             )
 
-    def log_neural_state(self, df: pd.DataFrame, indicators: Dict[str, Any], signal: Optional[Dict]):
-        """Log complete neural machine state to terminal."""
+            # Record trade in anti-metralhadora
+            trade_result = 'win' if realized_pnl > 0 else 'loss'
+            self.anti_metralhadora.record_trade(trade_result, self.current_session)
+
+        # Reset position tracking
+        self.current_position = None
+        self.position_peak_pnl = 0.0
+        self.position_current_pnl = 0.0
+        self.position_smart_tp_hits = 0
+
+    def _log_complete_cycle(
+        self,
+        df: pd.DataFrame,
+        indicators: Dict[str, Any],
+        signal: Optional[Dict],
+        veto_approved: Optional[bool] = None,
+        veto_reason: Optional[str] = None,
+    ):
+        """
+        Log COMPLETE neural state to terminal EVERY bar.
+        This is the primary real-time logging function.
+        """
         if df is None or len(df) < 2:
             return
 
         current_price = df['close'].iloc[-1]
         ema_9 = indicators.get('ema_9', pd.Series([0])).iloc[-1]
         ema_21 = indicators.get('ema_21', pd.Series([0])).iloc[-1]
-        rsi = indicators.get('rsi_14', pd.Series([50])).iloc[-1]
+        rsi_val = indicators.get('rsi_14', pd.Series([50])).iloc[-1]
         atr = indicators.get('atr_14', pd.Series([0])).iloc[-1]
+        ema_50 = indicators.get('ema_50', pd.Series([0])).iloc[-1]
 
-        trend = "📈 BULLISH" if ema_9 > ema_21 else "📉 BEARISH"
-        rsi_status = "🔴 OB" if rsi > 70 else ("🟢 OS" if rsi < 30 else "⚪ N")
+        # Trend
+        trend = "BULLISH" if ema_9 > ema_21 else "BEARISH"
+        trend_icon = "BULL" if ema_9 > ema_21 else "SELL"
+        ema_diff_pct = abs(ema_9 - ema_21) / current_price * 100 if current_price > 0 else 0
 
-        signal_info = ""
-        if signal:
-            signal_info = f" | 🎯 Signal: {signal['direction']} ({signal['confidence']:.2f}) | Votes: {signal.get('buy_votes', 0)}B/{signal.get('sell_votes', 0)}S/{signal.get('neutral_votes', 0)}N"
-        else:
-            signal_info = " | 🎯 No Signal"
+        # RSI
+        if pd.isna(rsi_val):
+            rsi_val = 50
+        rsi_status = "OB" if rsi_val > 70 else ("OS" if rsi_val < 30 else "N")
+        rsi_icon = "OB" if rsi_val > 70 else ("OS" if rsi_val < 30 else "N")
 
-        pos_info = ""
-        if self.current_position:
-            pos_info = f" | 📦 Open: {self.current_position['direction']} ${self.position_current_pnl:+,.2f} (Peak: ${self.position_peak_pnl:+,.2f})"
+        # ATR
+        atr_val = atr if not pd.isna(atr) else 0
 
-        logger.info(
-            f"🧠 NEURAL | "
-            f"💰 {current_price:,.2f} | "
-            f"📊 {trend} | "
-            f"RSI: {rsi:.1f} {rsi_status} | "
-            f"ATR: {atr:.2f} | "
-            f"Cycle: {self.cycle_count}"
-            f"{signal_info}"
-            f"{pos_info}"
+        # Format timestamp
+        ts = df['time'].iloc[-1].strftime("%Y-%m-%d %H:%M:%S")
+
+        # Build trend line
+        trend_line = (
+            f"Trend: {trend} (EMA9: {ema_9:,.2f} > EMA21: {ema_21:,.2f}) | "
+            f"RSI: {rsi_val:.1f} {rsi_status} | "
+            f"ATR: {atr_val:,.2f}"
         )
 
+        # Build vote line
+        vote_line = ""
+        signal_line = ""
+        if signal:
+            votes = signal.get('votes', {})
+            buy_votes = signal.get('buy_votes', 0)
+            sell_votes = signal.get('sell_votes', 0)
+            neutral_votes = signal.get('neutral_votes', 0)
+
+            # Get individual confidences
+            buy_confs = [v['confidence'] for v in votes.get('strategy_votes', {}).values() if v.get('vote') == 'BUY']
+            sell_confs = [v['confidence'] for v in votes.get('strategy_votes', {}).values() if v.get('vote') == 'SELL']
+
+            buy_conf_str = ", ".join([f"{c:.2f}" for c in buy_confs]) if buy_confs else "none"
+            sell_conf_str = ", ".join([f"{c:.2f}" for c in sell_confs]) if sell_confs else "none"
+
+            vote_line = (
+                f"Votes: BUY: {buy_votes} ({buy_conf_str}) | "
+                f"SELL: {sell_votes} ({sell_conf_str}) | "
+                f"NEUTRAL: {neutral_votes}"
+            )
+
+            # Signal line
+            conf = signal.get('confidence', 0)
+            sl = signal.get('stop_loss', 0)
+            tp = signal.get('take_profit', 0)
+            vol = signal.get('volume', 0.01)
+            signal_line = (
+                f"Signal: {signal['direction']} @ {conf:.2f} conf | "
+                f"SL: {sl:,.2f} | TP: {tp:,.2f} | Vol: {vol:.2f} lots"
+            )
+        else:
+            vote_line = "No Signal - No consensus reached"
+            signal_line = "No Signal"
+
+        # Veto line
+        veto_line = ""
+        if veto_approved is True:
+            veto_line = "Vetoes: Session OK | Anti-Metralhadora OK | GreatFilter OK -> APPROVED"
+        elif veto_approved is False:
+            veto_line = f"Vetoes: REJECTED - {veto_reason}"
+
+        # Position line
+        pos_line = ""
+        if self.current_position:
+            pos = self.current_position
+            pos_line = (
+                f"Position: {pos['direction']} open | "
+                f"Entry: {pos['entry_price']:,.2f} | "
+                f"PnL: ${self.position_current_pnl:+,.2f} | "
+                f"Peak: ${self.position_peak_pnl:+,.2f} | "
+                f"Smart TP: {self.position_smart_tp_hits}/4"
+            )
+
+        # Account line
+        account_state = self._refresh_account_state()
+        bal = account_state['balance']
+        eq = account_state['equity']
+        margin = account_state['margin']
+        dd_pct = (self.peak_equity - eq) / self.peak_equity * 100 if self.peak_equity > 0 else 0
+        daily = self.daily_pnl
+
+        account_line = (
+            f"Account: Bal: ${bal:,.2f} | Eq: ${eq:,.2f} | "
+            f"Margin: ${margin:,.2f} | DD: {dd_pct:.2f}% | "
+            f"Daily: ${daily:+,.2f}"
+        )
+
+        # Log complete cycle
+        cycle_header = f"CYCLE #{self.cycle_count:05d} | {ts} UTC | {self.symbol}: ${current_price:,.2f}"
+
+        logger.info(f"{'='*80}")
+        logger.info(cycle_header)
+        logger.info(trend_line)
+        logger.info(vote_line)
+        if signal:
+            logger.info(signal_line)
+        if veto_line:
+            logger.info(veto_line)
+        if pos_line:
+            logger.info(pos_line)
+        logger.info(account_line)
+        logger.info(f"{'='*80}")
+
+    def _build_cycle_audit_data(
+        self,
+        df: pd.DataFrame,
+        indicators: Dict[str, Any],
+        signal: Optional[Dict],
+        veto_approved: Optional[bool] = None,
+        veto_reason: Optional[str] = None,
+    ) -> Dict[str, Any]:
+        """Build complete cycle audit data structure."""
+        current_price = df['close'].iloc[-1]
+        session = self.current_session
+
+        account_state = self._refresh_account_state()
+
+        # Market state
+        market_state = {
+            'symbol': self.symbol,
+            'timeframe': 'M5',
+            'open': float(df['open'].iloc[-1]),
+            'high': float(df['high'].iloc[-1]),
+            'low': float(df['low'].iloc[-1]),
+            'close': float(current_price),
+            'volume': int(df['tick_volume'].iloc[-1]),
+            'spread': self._get_spread(),
+        }
+
+        # Indicators
+        ind = indicators
+        indicator_state = {
+            'ema_9': float(ind['ema_9'].iloc[-1]) if not pd.isna(ind['ema_9'].iloc[-1]) else None,
+            'ema_21': float(ind['ema_21'].iloc[-1]) if not pd.isna(ind['ema_21'].iloc[-1]) else None,
+            'ema_50': float(ind['ema_50'].iloc[-1]) if not pd.isna(ind['ema_50'].iloc[-1]) else None,
+            'sma_20': float(ind['sma_20'].iloc[-1]) if not pd.isna(ind['sma_20'].iloc[-1]) else None,
+            'rsi_14': float(ind['rsi_14'].iloc[-1]) if not pd.isna(ind['rsi_14'].iloc[-1]) else None,
+            'atr_14': float(ind['atr_14'].iloc[-1]) if not pd.isna(ind['atr_14'].iloc[-1]) else None,
+            'volume_avg_20': float(ind['volume_avg_20'].iloc[-1]) if not pd.isna(ind['volume_avg_20'].iloc[-1]) else None,
+        }
+
+        # Strategy votes
+        if signal and self._last_votes:
+            votes = self._last_votes
+            strategy_votes = {k: v for k, v in votes['strategy_votes'].items()}
+            vote_totals = {
+                'buy_votes': votes['buy_votes'],
+                'sell_votes': votes['sell_votes'],
+                'neutral_votes': votes['neutral_votes'],
+                'consensus_direction': signal.get('direction', 'NONE'),
+                'consensus_confidence': signal.get('confidence', 0.0),
+            }
+            signal_result = {
+                'generated': True,
+                'direction': signal['direction'],
+                'confidence': signal['confidence'],
+                'entry_price': signal['entry_price'],
+                'stop_loss': signal['stop_loss'],
+                'take_profit': signal['take_profit'],
+                'volume': signal.get('volume', 0.01),
+            }
+        else:
+            strategy_votes = {}
+            vote_totals = {
+                'buy_votes': 0,
+                'sell_votes': 0,
+                'neutral_votes': 0,
+                'consensus_direction': 'NONE',
+                'consensus_confidence': 0.0,
+            }
+            signal_result = {
+                'generated': False,
+                'reason': 'No consensus or no signal generated',
+            }
+
+        # Veto results
+        if self._last_veto_results:
+            veto_results = self._last_veto_results
+        else:
+            veto_results = {
+                'session_veto': {'approved': True, 'reason': 'No signal to veto', 'session': session},
+                'anti_metralhadora_veto': {'approved': True, 'reason': 'No signal to veto'},
+                'great_filter_veto': {'approved': True, 'reason': 'No signal to veto'},
+                'final_result': 'NO_SIGNAL' if not signal else ('APPROVED' if veto_approved else 'REJECTED'),
+            }
+
+        cycle_data = {
+            'market_state': market_state,
+            'indicators': indicator_state,
+            'strategy_votes': strategy_votes,
+            'vote_totals': vote_totals,
+            'signal_result': signal_result,
+            'veto_results': veto_results,
+            'position_state': self._get_position_state(),
+            'account_state': account_state,
+            'metadata': {
+                'session': session,
+                'regime': 'unknown',
+                'cycle_count': self.cycle_count,
+                'total_signals_generated': self.total_signals,
+                'total_signals_vetoed': self.total_vetoes,
+                'total_trades': self.total_trades,
+                'uptime_seconds': (datetime.now(timezone.utc) - self.start_time).total_seconds(),
+            },
+        }
+
+        return cycle_data
+
     def run(self, max_bars: int = None):
-        """Main trading loop."""
+        """
+        Main trading loop.
+        EVERY bar: refreshes account, logs complete neural state, saves cycle audit JSON.
+        """
         logger.info("=" * 80)
-        logger.info("🚀 STARTING LIVE TRADING LOOP")
+        logger.info("STARTING LIVE TRADING LOOP")
         logger.info("=" * 80)
 
         if not self.connect_mt5():
-            logger.error("❌ Failed to connect to MT5. Aborting.")
+            logger.error("Failed to connect to MT5. Aborting.")
             return
 
         self.running = True
         bar_count = 0
+        last_dashboard_time = time.time()
 
         try:
             while self.running:
+                # 1. Fetch candles
                 df = self.get_candles(count=200)
                 if df is None or len(df) < 50:
-                    logger.warning("⚠️ Insufficient data, waiting...")
+                    logger.warning("Insufficient data, waiting...")
                     time.sleep(5)
                     continue
 
+                # 2. Calculate indicators
                 indicators = self.calculate_indicators(df)
+
+                # 3. Refresh account state on EVERY bar
+                self._refresh_account_state()
+
+                # 4. Increment cycle
                 self.cycle_count += 1
                 self.last_bar_time = df['time'].iloc[-1]
 
-                # Manage open position
+                # 5. Manage open position
                 self.manage_position(df, indicators)
 
-                # Check if we can open new position
+                # 6. Generate signal (if no open position)
+                signal = None
+                veto_approved = None
+                veto_reason_str = None
+
                 if self.current_position is None:
                     signal = self.generate_signal(df, indicators)
                     self.total_signals += 1
                     self.cycle_audit.total_signals_generated += 1
 
                     if signal:
-                        # Log neural state with signal
-                        self.log_neural_state(df, indicators, signal)
-
+                        # Log neural state WITH signal
                         approved, reason = self.validate_signal(signal, df)
+                        veto_approved = approved
+                        veto_reason_str = reason
 
                         if approved:
                             volume = self.calculate_position_size(signal)
                             signal['volume'] = max(0.01, min(5.0, volume))
-
-                            if self.execute_trade(signal):
-                                self.cycle_audit.total_orders_sent += 1
+                            self.execute_trade(signal)
                         else:
                             self.total_vetoes += 1
                             self.cycle_audit.total_signals_vetoed += 1
-                            logger.debug(f"🚫 Signal vetoed: {reason}")
-                    else:
-                        # Log neural state without signal
-                        self.log_neural_state(df, indicators, None)
 
-                # Log status periodically
-                if bar_count % 12 == 0:
-                    self.cycle_audit.generate_real_time_report(self)
-                    # Send Telegram dashboard
+                # 7. Log COMPLETE cycle to terminal
+                self._log_complete_cycle(df, indicators, signal, veto_approved, veto_reason_str)
+
+                # 8. Save cycle audit JSON file
+                cycle_audit_data = self._build_cycle_audit_data(
+                    df, indicators, signal, veto_approved, veto_reason_str
+                )
+                self.cycle_audit.save_cycle_audit(cycle_audit_data)
+
+                # 9. Telegram dashboard (every 5 minutes, not every bar)
+                now = time.time()
+                if now - last_dashboard_time >= 300:  # 5 minutes
                     self.telegram.send_dashboard(self)
+                    last_dashboard_time = now
 
                 bar_count += 1
 
                 if max_bars and bar_count >= max_bars:
-                    logger.info(f"✅ Reached max bars ({max_bars}). Stopping.")
+                    logger.info(f"Reached max bars ({max_bars}). Stopping.")
                     break
 
                 # Wait for next bar
                 time.sleep(5)
 
         except KeyboardInterrupt:
-            logger.info("⏹️ Stopped by user")
+            logger.info("Stopped by user")
         except Exception as e:
-            logger.error(f"❌ Trading loop error: {e}", exc_info=True)
+            logger.error(f"Trading loop error: {e}", exc_info=True)
         finally:
             self.shutdown()
 
     def shutdown(self):
         """Shutdown trading system."""
-        logger.info("🛑 Shutting down live trading system...")
+        logger.info("Shutting down live trading system...")
         self.running = False
 
         # Close any open positions
         if self.current_position:
-            logger.warning(f"⚠️ Closing open position: {self.current_position['ticket']}")
+            logger.warning(f"Closing open position: {self.current_position['ticket']}")
             tick = mt5.symbol_info_tick(self.symbol)
             if tick:
                 exit_price = tick.bid if self.current_position['direction'] == 'BUY' else tick.ask
                 self._close_position(self.current_position, 0.0, exit_price, 'Shutdown')
 
-        # Save cycle audit
-        self.cycle_audit._save_cycle_audit()
-
         # Shutdown MT5
         if self.mt5_connected:
             mt5.shutdown()
-            logger.info("✅ MT5 disconnected")
+            logger.info("MT5 disconnected")
 
         # Final status
         logger.info("=" * 80)
@@ -972,21 +1471,21 @@ class LiveTradingEngine:
 def run_test_mode(direction: str):
     """Run test mode to verify order execution."""
     logger.info("=" * 80)
-    logger.info(f"🧪 RUNNING {direction.upper()} TEST MODE")
+    logger.info(f"RUNNING {direction.upper()} TEST MODE")
     logger.info("=" * 80)
 
     if not mt5.initialize():
-        logger.error("❌ MT5 initialization failed")
+        logger.error("MT5 initialization failed")
         return
 
     account = mt5.account_info()
     if account:
-        logger.info(f"✅ Connected: {account.login} @ {account.server}")
+        logger.info(f"Connected: {account.login} @ {account.server}")
         logger.info(f"   Balance: ${account.balance:,.2f}")
 
     tick = mt5.symbol_info_tick("BTCUSD")
     if tick is None:
-        logger.error("❌ Failed to get BTCUSD tick")
+        logger.error("Failed to get BTCUSD tick")
         mt5.shutdown()
         return
 
@@ -1018,7 +1517,7 @@ def run_test_mode(direction: str):
         "type_filling": mt5.ORDER_FILLING_IOC,
     }
 
-    logger.info(f"📤 Sending {direction} order...")
+    logger.info(f"Sending {direction} order...")
     logger.info(f"   Price: {price:.2f}")
     logger.info(f"   SL: {sl:.2f}")
     logger.info(f"   TP: {tp:.2f}")
@@ -1033,11 +1532,11 @@ def run_test_mode(direction: str):
         logger.info(f"   Comment: {result.comment}")
 
         if result.retcode == mt5.TRADE_RETCODE_DONE:
-            logger.info(f"✅ {direction} TEST SUCCESSFUL!")
+            logger.info(f"{direction} TEST SUCCESSFUL!")
         else:
-            logger.error(f"❌ {direction} TEST FAILED: {result.comment}")
+            logger.error(f"{direction} TEST FAILED: {result.comment}")
     else:
-        logger.error(f"❌ Order send failed: {mt5.last_error()}")
+        logger.error(f"Order send failed: {mt5.last_error()}")
 
     mt5.shutdown()
 
