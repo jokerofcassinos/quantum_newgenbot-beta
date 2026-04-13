@@ -10,6 +10,7 @@
 #property description "Features: Smart TP, Trailing Stops, Breakeven, Real-time Logging"
 
 #include <Trade\Trade.mqh>
+#include <Trade\AccountInfo.mqh>
 
 //--- Input parameters
 input string   InPythonSignalFile   = "C:\\ForexQuantumBot\\signals\\trade_signal.json";   // Python signal file
@@ -66,8 +67,7 @@ int OnInit()
    trade.SetAsyncMode(false);
    
    //--- Initialize session balance
-   CAccountInfo account;
-   session_start_balance = account.Balance();
+   session_start_balance = AccountInfoDouble(ACCOUNT_BALANCE);
    
    //--- Log initialization
    if(InEnableLogging)

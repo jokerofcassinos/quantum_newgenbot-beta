@@ -613,12 +613,246 @@ class LiveTradingEngine:
         else:
             votes['neutral_votes'] += 1
 
-        # Strategies 7-12 (placeholders - NEUTRAL)
-        for name in ['msnr', 'msnr_alchemist', 'ifvg', 'order_flow', 'supply_demand', 'fibonacci']:
-            votes['strategy_votes'][name] = {
-                'vote': 'NEUTRAL', 'confidence': 0.5,
-                'reason': "Strategy not yet implemented"
+        # Strategy 7: MSNR (Market Structure Noise Ratio)
+        # Detects market structure shifts (HH/HL vs LH/LL)
+        if idx >= 20:
+            recent_highs = [high[j] for j in range(idx-19, idx+1) if j >= 0]
+            recent_lows = [low[j] for j in range(idx-19, idx+1) if j >= 0]
+            if len(recent_highs) >= 2 and len(recent_lows) >= 2:
+                hh_count = sum(1 for i in range(1, len(recent_highs)) if recent_highs[i] > recent_highs[i-1])
+                lh_count = len(recent_highs) - 1 - hh_count
+                hl_count = sum(1 for i in range(1, len(recent_lows)) if recent_lows[i] > recent_lows[i-1])
+                ll_count = len(recent_lows) - 1 - hl_count
+                
+                bullish_structure = (hh_count + hl_count) / max(1, hh_count + lh_count + hl_count + ll_count)
+                
+                if bullish_structure > 0.65:
+                    votes['strategy_votes']['msnr'] = {
+                        'vote': 'BUY', 'confidence': 0.60 + bullish_structure * 0.2,
+                        'reason': f"Bullish structure: HH/HL dominant ({bullish_structure:.2f})"
+                    }
+                    votes['buy_votes'] += 1
+                elif bullish_structure < 0.35:
+                    votes['strategy_votes']['msnr'] = {
+                        'vote': 'SELL', 'confidence': 0.60 + (1-bullish_structure) * 0.2,
+                        'reason': f"Bearish structure: LH/LL dominant ({1-bullish_structure:.2f})"
+                    }
+                    votes['sell_votes'] += 1
+                else:
+                    votes['strategy_votes']['msnr'] = {
+                        'vote': 'NEUTRAL', 'confidence': 0.5,
+                        'reason': f"Mixed structure: {bullish_structure:.2f}"
+                    }
+                    votes['neutral_votes'] += 1
+            else:
+                votes['strategy_votes']['msnr'] = {'vote': 'NEUTRAL', 'confidence': 0.5, 'reason': "Insufficient data"}
+                votes['neutral_votes'] += 1
+        else:
+            votes['strategy_votes']['msnr'] = {'vote': 'NEUTRAL', 'confidence': 0.5, 'reason': "Insufficient data"}
+            votes['neutral_votes'] += 1
+
+        # Strategy 8: MSNR Alchemist (Volume-Weighted Structure)
+        # Combines market structure with volume confirmation
+        if idx >= 20:
+            volume = df['tick_volume'].values
+            vol_avg = np.mean(volume[max(0, idx-19):idx+1])
+            vol_ratio = volume[idx] / max(1, vol_avg)
+            
+            price_change = (close[idx] - close[idx-10]) / close[idx-10] * 100 if idx >= 10 else 0
+            
+            if vol_ratio > 1.3 and price_change > 1.0:
+                votes['strategy_votes']['msnr_alchemist'] = {
+                    'vote': 'BUY', 'confidence': 0.55 + min(vol_ratio * 0.1, 0.2),
+                    'reason': f"High vol ({vol_ratio:.1f}x) + bullish move ({price_change:.2f}%)"
+                }
+                votes['buy_votes'] += 1
+            elif vol_ratio > 1.3 and price_change < -1.0:
+                votes['strategy_votes']['msnr_alchemist'] = {
+                    'vote': 'SELL', 'confidence': 0.55 + min(vol_ratio * 0.1, 0.2),
+                    'reason': f"High vol ({vol_ratio:.1f}x) + bearish move ({price_change:.2f}%)"
+                }
+                votes['sell_votes'] += 1
+            else:
+                votes['strategy_votes']['msnr_alchemist'] = {
+                    'vote': 'NEUTRAL', 'confidence': 0.5,
+                    'reason': f"Volume normal ({vol_ratio:.1f}x), change {price_change:.2f}%"
+                }
+                votes['neutral_votes'] += 1
+        else:
+            votes['strategy_votes']['msnr_alchemist'] = {'vote': 'NEUTRAL', 'confidence': 0.5, 'reason': "Insufficient data"}
+            votes['neutral_votes'] += 1
+
+        # Strategy 9: IFVG (Inversion Fair Value Gap)
+        # Detects FVG inversions (bullish FVG that became resistance or vice versa)
+        if idx >= 15:
+            ifvg_vote = 'NEUTRAL'
+            ifvg_reason = "No IFVG found"
+            
+            # Check for bearish IFVG (old bullish FVG broken below)
+            for j in range(max(0, idx - 15), idx - 2):
+                # Old bullish FVG
+                bull_fvg_low = high[j]
+                bull_fvg_high = low[j + 2]
+                if bull_fvg_low < bull_fvg_high:  # Valid bullish FVG
+                    # Check if price has broken below it (inversion)
+                    if current_price < bull_fvg_low * 0.998:
+                        ifvg_vote = 'SELL'
+                        ifvg_reason = f"Bullish FVG inverted at bar {j}"
+                        break
+            
+            # Check for bullish IFVG (old bearish FVG broken above)
+            if ifvg_vote == 'NEUTRAL':
+                for j in range(max(0, idx - 15), idx - 2):
+                    bear_fvg_high = low[j]
+                    bear_fvg_low = high[j + 2]
+                    if bear_fvg_high > bear_fvg_low:  # Valid bearish FVG
+                        if current_price > bear_fvg_high * 1.002:
+                            ifvg_vote = 'BUY'
+                            ifvg_reason = f"Bearish FVG inverted at bar {j}"
+                            break
+            
+            votes['strategy_votes']['ifvg'] = {
+                'vote': ifvg_vote, 'confidence': 0.60 if ifvg_vote != 'NEUTRAL' else 0.5,
+                'reason': ifvg_reason
             }
+            if ifvg_vote == 'BUY':
+                votes['buy_votes'] += 1
+            elif ifvg_vote == 'SELL':
+                votes['sell_votes'] += 1
+            else:
+                votes['neutral_votes'] += 1
+
+        # Strategy 10: Order Flow (Tick Volume Analysis)
+        # Analyzes tick volume patterns for institutional activity
+        if idx >= 10:
+            volume = df['tick_volume'].values
+            vol_data = volume[max(0, idx-9):idx+1]
+            vol_mean = np.mean(vol_data)
+            vol_std = np.std(vol_data) if len(vol_data) > 1 else 0
+            
+            current_vol = volume[idx]
+            vol_zscore = (current_vol - vol_mean) / max(1, vol_std)
+            
+            price_direction = 1 if close[idx] > close[idx-1] else -1 if idx >= 1 else 0
+            
+            if vol_zscore > 1.5 and price_direction > 0:
+                votes['strategy_votes']['order_flow'] = {
+                    'vote': 'BUY', 'confidence': 0.55 + min(vol_zscore * 0.05, 0.15),
+                    'reason': f"High vol spike ({vol_zscore:.1f}σ) + bullish tick"
+                }
+                votes['buy_votes'] += 1
+            elif vol_zscore > 1.5 and price_direction < 0:
+                votes['strategy_votes']['order_flow'] = {
+                    'vote': 'SELL', 'confidence': 0.55 + min(vol_zscore * 0.05, 0.15),
+                    'reason': f"High vol spike ({vol_zscore:.1f}σ) + bearish tick"
+                }
+                votes['sell_votes'] += 1
+            else:
+                votes['strategy_votes']['order_flow'] = {
+                    'vote': 'NEUTRAL', 'confidence': 0.5,
+                    'reason': f"Volume normal (z={vol_zscore:.1f})"
+                }
+                votes['neutral_votes'] += 1
+        else:
+            votes['strategy_votes']['order_flow'] = {'vote': 'NEUTRAL', 'confidence': 0.5, 'reason': "Insufficient data"}
+            votes['neutral_votes'] += 1
+
+        # Strategy 11: Supply/Demand Zones
+        # Identifies potential supply/demand zones from recent price action
+        if idx >= 30:
+            # Find recent significant highs/lows
+            recent_highs = [high[j] for j in range(idx-29, idx+1) if j >= 0]
+            recent_lows = [low[j] for j in range(idx-29, idx+1) if j >= 0]
+            
+            if len(recent_highs) >= 3 and len(recent_lows) >= 3:
+                supply_zone = max(recent_highs[-10:])  # Recent high as supply
+                demand_zone = min(recent_lows[-10:])   # Recent low as demand
+                
+                dist_to_supply = (supply_zone - current_price) / current_price * 100
+                dist_to_demand = (current_price - demand_zone) / current_price * 100
+                
+                if dist_to_demand < 0.3:
+                    votes['strategy_votes']['supply_demand'] = {
+                        'vote': 'BUY', 'confidence': 0.58,
+                        'reason': f"Price at demand zone ({dist_to_demand:.2f}% away)"
+                    }
+                    votes['buy_votes'] += 1
+                elif dist_to_supply < 0.3:
+                    votes['strategy_votes']['supply_demand'] = {
+                        'vote': 'SELL', 'confidence': 0.58,
+                        'reason': f"Price at supply zone ({dist_to_supply:.2f}% away)"
+                    }
+                    votes['sell_votes'] += 1
+                else:
+                    votes['strategy_votes']['supply_demand'] = {
+                        'vote': 'NEUTRAL', 'confidence': 0.5,
+                        'reason': f"Mid-range (supply: {dist_to_supply:.2f}%, demand: {dist_to_demand:.2f}%)"
+                    }
+                    votes['neutral_votes'] += 1
+            else:
+                votes['strategy_votes']['supply_demand'] = {'vote': 'NEUTRAL', 'confidence': 0.5, 'reason': "Insufficient data"}
+                votes['neutral_votes'] += 1
+        else:
+            votes['strategy_votes']['supply_demand'] = {'vote': 'NEUTRAL', 'confidence': 0.5, 'reason': "Insufficient data"}
+            votes['neutral_votes'] += 1
+
+        # Strategy 12: Fibonacci Retracement Levels
+        # Checks if price is at key Fibonacci retracement levels
+        if idx >= 30:
+            swing_high = max(high[idx-29:idx+1])
+            swing_low = min(low[idx-29:idx+1])
+            swing_range = swing_high - swing_low
+            
+            if swing_range > 0:
+                fib_levels = {
+                    '0.236': swing_high - swing_range * 0.236,
+                    '0.382': swing_high - swing_range * 0.382,
+                    '0.500': swing_high - swing_range * 0.500,
+                    '0.618': swing_high - swing_range * 0.618,
+                    '0.786': swing_high - swing_range * 0.786,
+                }
+                
+                # Check if price is near a fib level
+                nearest_fib = None
+                min_dist = float('inf')
+                for level, price in fib_levels.items():
+                    dist = abs(current_price - price) / current_price * 100
+                    if dist < min_dist:
+                        min_dist = dist
+                        nearest_fib = level
+                
+                if min_dist < 0.2:
+                    # At 0.618 or 0.786 = potential reversal BUY
+                    if nearest_fib in ['0.618', '0.786']:
+                        votes['strategy_votes']['fibonacci'] = {
+                            'vote': 'BUY', 'confidence': 0.57,
+                            'reason': f"Price at Fib {nearest_fib} ({min_dist:.2f}% away)"
+                        }
+                        votes['buy_votes'] += 1
+                    # At 0.236 or 0.382 = potential reversal SELL
+                    elif nearest_fib in ['0.236', '0.382']:
+                        votes['strategy_votes']['fibonacci'] = {
+                            'vote': 'SELL', 'confidence': 0.57,
+                            'reason': f"Price at Fib {nearest_fib} ({min_dist:.2f}% away)"
+                        }
+                        votes['sell_votes'] += 1
+                    else:
+                        votes['strategy_votes']['fibonacci'] = {
+                            'vote': 'NEUTRAL', 'confidence': 0.5,
+                            'reason': f"Price at Fib {nearest_fib} ({min_dist:.2f}%)"
+                        }
+                        votes['neutral_votes'] += 1
+                else:
+                    votes['strategy_votes']['fibonacci'] = {
+                        'vote': 'NEUTRAL', 'confidence': 0.5,
+                        'reason': f"Not near fib level (nearest: {nearest_fib} at {min_dist:.2f}%)"
+                    }
+                    votes['neutral_votes'] += 1
+            else:
+                votes['strategy_votes']['fibonacci'] = {'vote': 'NEUTRAL', 'confidence': 0.5, 'reason': "No swing range"}
+                votes['neutral_votes'] += 1
+        else:
+            votes['strategy_votes']['fibonacci'] = {'vote': 'NEUTRAL', 'confidence': 0.5, 'reason': "Insufficient data"}
             votes['neutral_votes'] += 1
 
         # Determine consensus

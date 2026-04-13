@@ -10,6 +10,7 @@
 #property description "Receives signals from Python via files and executes trades"
 
 #include <Trade\Trade.mqh>
+#include <Trade\AccountInfo.mqh>
 
 //--- Input parameters
 input string   InPythonSignalFile = "C:\\ForexQuantumBot\\signals\\trade_signal.json";  // Python signal file
