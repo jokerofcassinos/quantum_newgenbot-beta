@@ -1,0 +1,83 @@
+{
+  "market_state": {
+    "symbol": "BTCUSD",
+    "timeframe": "M5",
+    "open": 71094.21,
+    "high": 71094.42,
+    "low": 71094.21,
+    "close": 71094.4,
+    "volume": 8,
+    "spread": 0.0014065607620183586
+  },
+  "indicators": {
+    "ema_9": 70980.2108972896,
+    "ema_21": 70888.65327644366,
+    "ema_50": 70895.85968689212,
+    "sma_20": 70803.49850000002,
+    "rsi_14": 69.97477470146707,
+    "atr_14": 126.09285714285839,
+    "volume_avg_20": 1159.8
+  },
+  "strategy_votes": {},
+  "vote_totals": {
+    "buy_votes": 0,
+    "sell_votes": 0,
+    "neutral_votes": 0,
+    "consensus_direction": "NONE",
+    "consensus_confidence": 0.0
+  },
+  "signal_result": {
+    "generated": false,
+    "reason": "No consensus or no signal generated"
+  },
+  "veto_results": {
+    "session_veto": {
+      "approved": true,
+      "reason": "No signal to veto",
+      "session": "asian"
+    },
+    "anti_metralhadora_veto": {
+      "approved": true,
+      "reason": "No signal to veto"
+    },
+    "great_filter_veto": {
+      "approved": true,
+      "reason": "No signal to veto"
+    },
+    "final_result": "NO_SIGNAL"
+  },
+  "position_state": {
+    "has_open_position": false,
+    "ticket": null,
+    "direction": null,
+    "entry_price": null,
+    "current_price": null,
+    "stop_loss": null,
+    "take_profit": null,
+    "volume": null,
+    "unrealized_pnl": 0.0,
+    "peak_pnl": 0.0,
+    "smart_tp_hits": 0,
+    "duration_minutes": 0
+  },
+  "account_state": {
+    "balance": 100000.18,
+    "equity": 100000.18,
+    "margin": 0.0,
+    "margin_free": 100000.18,
+    "margin_level": 0.0
+  },
+  "metadata": {
+    "session": "asian",
+    "regime": "unknown",
+    "cycle_count": 208,
+    "total_signals_generated": 208,
+    "total_signals_vetoed": 0,
+    "total_trades": 0,
+    "uptime_seconds": 1040.413316
+  },
+  "cycle_number": 416,
+  "timestamp": "2026-04-13T00:49:56.638308+00:00",
+  "uptime_seconds": 1040.375458,
+  "session_id": "20260412_213236"
+}

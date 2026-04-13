@@ -12,6 +12,8 @@
 #include <Trade\Trade.mqh>
 #include <Trade\AccountInfo.mqh>
 
+//--- Note: Use AccountInfoDouble() instead of CAccountInfo for compatibility
+
 //--- Input parameters
 input string   InPythonSignalFile = "C:\\ForexQuantumBot\\signals\\trade_signal.json";  // Python signal file
 input string   InPythonResponseFile = "C:\\ForexQuantumBot\\signals\\trade_response.json";  // Response file
