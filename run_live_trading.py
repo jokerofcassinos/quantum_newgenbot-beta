@@ -631,15 +631,22 @@ class LiveTradingEngine:
             sell_confs = [v['confidence'] for v in votes['strategy_votes'].values() if v['vote'] == 'SELL']
             consensus_conf = sum(sell_confs) / max(1, len(sell_confs))
         else:
-            # No consensus - log and return None
+            # No consensus - store votes for logging, then return None
             logger.debug(
                 f"No consensus: BUY={votes['buy_votes']}, SELL={votes['sell_votes']}, NEUTRAL={votes['neutral_votes']} (need > opposing and >= 5)"
             )
+            # IMPORTANT: Store votes so terminal logging can show them even without signal
+            self._last_votes = votes
+            self._last_signal = None
+            
             # Still save cycle audit for no-signal cycles
             self._save_no_signal_audit(market_state, indicator_state, votes, df)
             return None
 
         if pd.isna(atr) or atr == 0:
+            # Store votes even if ATR is invalid
+            self._last_votes = votes
+            self._last_signal = None
             return None
 
         sl_dist = min(max(atr * 1.5, 500), 3000)
@@ -1155,40 +1162,72 @@ class LiveTradingEngine:
             f"ATR: {atr_val:,.2f}"
         )
 
-        # Build vote line
+        # Build vote line - ALWAYS show votes even if no signal
         vote_line = ""
         signal_line = ""
-        if signal:
-            votes = signal.get('votes', {})
-            buy_votes = signal.get('buy_votes', 0)
-            sell_votes = signal.get('sell_votes', 0)
-            neutral_votes = signal.get('neutral_votes', 0)
+        
+        # Use stored votes from generate_signal() (always available)
+        votes = self._last_votes if hasattr(self, '_last_votes') and self._last_votes else None
+        
+        if votes:
+            buy_votes = votes.get('buy_votes', 0)
+            sell_votes = votes.get('sell_votes', 0)
+            neutral_votes = votes.get('neutral_votes', 0)
 
-            # Get individual confidences
-            buy_confs = [v['confidence'] for v in votes.get('strategy_votes', {}).values() if v.get('vote') == 'BUY']
-            sell_confs = [v['confidence'] for v in votes.get('strategy_votes', {}).values() if v.get('vote') == 'SELL']
-
-            buy_conf_str = ", ".join([f"{c:.2f}" for c in buy_confs]) if buy_confs else "none"
-            sell_conf_str = ", ".join([f"{c:.2f}" for c in sell_confs]) if sell_confs else "none"
-
+            # Get individual strategy votes with confidences
+            strategy_votes = votes.get('strategy_votes', {})
+            
+            # Build detailed vote breakdown
+            buy_details = []
+            sell_details = []
+            neutral_details = []
+            
+            for strategy_name, vote_info in strategy_votes.items():
+                vote_dir = vote_info.get('vote', 'NEUTRAL')
+                conf = vote_info.get('confidence', 0.5)
+                reason = vote_info.get('reason', '')
+                
+                if vote_dir == 'BUY':
+                    buy_details.append(f"{strategy_name}={conf:.2f}")
+                elif vote_dir == 'SELL':
+                    sell_details.append(f"{strategy_name}={conf:.2f}")
+                else:
+                    neutral_details.append(f"{strategy_name}={conf:.2f}")
+            
+            buy_str = ", ".join(buy_details) if buy_details else "none"
+            sell_str = ", ".join(sell_details) if sell_details else "none"
+            neutral_str = ", ".join(neutral_details) if neutral_details else "none"
+            
             vote_line = (
-                f"Votes: BUY: {buy_votes} ({buy_conf_str}) | "
-                f"SELL: {sell_votes} ({sell_conf_str}) | "
-                f"NEUTRAL: {neutral_votes}"
+                f"Votes [{buy_votes}B/{sell_votes}S/{neutral_votes}N] | "
+                f"BUY: {buy_str} | "
+                f"SELL: {sell_str} | "
+                f"NEUTRAL: {neutral_str}"
             )
-
-            # Signal line
-            conf = signal.get('confidence', 0)
-            sl = signal.get('stop_loss', 0)
-            tp = signal.get('take_profit', 0)
-            vol = signal.get('volume', 0.01)
-            signal_line = (
-                f"Signal: {signal['direction']} @ {conf:.2f} conf | "
-                f"SL: {sl:,.2f} | TP: {tp:,.2f} | Vol: {vol:.2f} lots"
-            )
+            
+            # Signal line (show if signal generated or why not)
+            if signal:
+                conf = signal.get('confidence', 0)
+                sl = signal.get('stop_loss', 0)
+                tp = signal.get('take_profit', 0)
+                vol = signal.get('volume', 0.01)
+                signal_line = (
+                    f"Signal: {signal['direction']} @ {conf:.2f} conf | "
+                    f"SL: {sl:,.2f} | TP: {tp:,.2f} | Vol: {vol:.2f} lots"
+                )
+            else:
+                # Show why no signal was generated
+                if buy_votes >= 5 or sell_votes >= 5:
+                    # Had consensus but failed other checks
+                    signal_line = f"No Signal - vetoed or no clear direction"
+                else:
+                    signal_line = (
+                        f"No Signal - insufficient votes "
+                        f"(need 5+, got {max(buy_votes, sell_votes)})"
+                    )
         else:
-            vote_line = "No Signal - No consensus reached"
-            signal_line = "No Signal"
+            vote_line = "Votes: No strategy votes recorded"
+            signal_line = "No Signal - insufficient data"
 
         # Veto line
         veto_line = ""
