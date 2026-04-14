@@ -387,8 +387,8 @@ void SendMarketData()
       consecutive_send_failures++;
       Print("WARNING: Failed to send tick, failure #", consecutive_send_failures);
       
-      // Only disconnect after 3+ consecutive failures
-      if(consecutive_send_failures >= 3)
+      // Only disconnect after 10+ consecutive failures (era 3)
+      if(consecutive_send_failures >= 10)
       {
          Print("ERROR: ", consecutive_send_failures, " consecutive failures, disconnecting");
          socket_connected = false;
@@ -462,13 +462,17 @@ void CheckForSignals()
    if(!socket_connected)
       return;
 
-   // Read from socket - DO NOT close on timeout
+   // Verificar SE há dados disponíveis ANTES de ler (como legacy)
+   if(SocketIsReadable(socket_handle) == 0)
+      return;  // Sem dados - sair silenciosamente
+
+   // Ler dados disponíveis
    uchar recv_data[];
-   int bytes_read = SocketRead(socket_handle, recv_data, 4096, 100);  // 100ms timeout
+   int bytes_read = SocketRead(socket_handle, recv_data, 4096, 200);  // 200ms timeout (era 100ms)
 
    if(bytes_read < 0)
    {
-      // Timeout or error - DO NOT disconnect
+      // Timeout ou erro - NÃO desconectar
       return;
    }
    
