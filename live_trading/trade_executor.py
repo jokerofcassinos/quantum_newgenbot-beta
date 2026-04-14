@@ -172,10 +172,8 @@ class TradeExecutor:
         self.monitor_thread = threading.Thread(target=self._monitor_loop, daemon=True)
         self.monitor_thread.start()
         
-        # Registrar callback no bridge para receber confirmações
-        self.bridge.register_callbacks(
-            on_tick=self._on_tick_received,
-        )
+        # Registrar callback no bridge
+        self.bridge.on_tick(self._on_tick_received)
         
         self.logger.info("[TRADE_EXEC] ✅ Trade executor started")
     

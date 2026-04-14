@@ -232,12 +232,10 @@ class LiveTradingSystem:
             buffer_size=1000
         )
         
-        # Registrar callbacks
-        self.data_engine.register_callbacks(
-            on_indicators_ready=self._on_indicators_ready,
-            on_market_state_updated=self._on_market_state_updated,
-            on_regime_change=self._on_regime_change
-        )
+        # Registrar callbacks (data_engine tem sua própria API)
+        self.data_engine.on_indicators_ready(self._on_indicators_ready)
+        self.data_engine.on_market_state_updated(self._on_market_state_updated)
+        self.data_engine.on_regime_change(self._on_regime_change)
         
         # Iniciar
         self.data_engine.start()
@@ -288,10 +286,8 @@ class LiveTradingSystem:
         )
         
         # Registrar callbacks
-        self.trade_executor.register_callbacks(
-            on_order_executed=self._on_order_executed,
-            on_position_closed=self._on_position_closed
-        )
+        self.trade_executor.on_order_executed(self._on_order_executed)
+        self.trade_executor.on_position_closed(self._on_position_closed)
         
         # Iniciar trade executor
         self.trade_executor.start()
