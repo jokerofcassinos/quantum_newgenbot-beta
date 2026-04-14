@@ -199,47 +199,50 @@ class LiveTradingSystem:
         self.logger.info("=" * 80)
     
     def _start_mt5_bridge(self):
-        """Inicia MT5 Bridge"""
+        """Inicia MT5 Bridge - APENAS criar, NÃO startar ainda"""
         socket_config = self.config['socket']
 
-        # Nova API simplificada (sem timeout/heartbeat params)
+        # Criar bridge sem iniciar (callbacks serão registrados antes do start)
         self.bridge = MT5Bridge(
             host=socket_config['host'],
             port=socket_config['port']
         )
 
-        # Registrar callbacks
-        self.bridge.on_tick(self._on_tick_received)
-        self.bridge.on_bar(self._on_bar_received)
-        self.bridge.on_account(self._on_account_received)
-        self.bridge.on_position(self._on_position_received)
-        self.bridge.on_connected(self._on_mt5_connected)
-        self.bridge.on_disconnected(self._on_mt5_disconnected)
-        self.bridge.on_error(self._on_mt5_error)
-        
-        # Iniciar
-        self.bridge.start()
-        
-        self.logger.info("[LIVE] ✅ MT5 Bridge started")
+        self.logger.info("[LIVE] ✅ MT5 Bridge created")
     
     def _start_data_engine(self):
-        """Inicia Data Engine"""
+        """Inicia Data Engine - registrar TODOS callbacks ANTES de start"""
         symbol = self.config['mt5']['symbol']
-        
+
         self.data_engine = DataEngine(
             bridge=self.bridge,
             symbol=symbol,
             buffer_size=1000
         )
-        
-        # Registrar callbacks (data_engine tem sua própria API)
+
+        # Registrar callbacks do data engine
         self.data_engine.on_indicators_ready(self._on_indicators_ready)
         self.data_engine.on_market_state_updated(self._on_market_state_updated)
         self.data_engine.on_regime_change(self._on_regime_change)
+
+        # =====================================================
+        # CRITICAL: Registrar TODOS callbacks no bridge ANTES de start
+        # =====================================================
+        # Data Engine (processa ticks)
+        self.bridge.on_tick(self.data_engine._on_tick_received)
+        self.bridge.on_account(self.data_engine._on_account_received)
+        self.bridge.on_position(self.data_engine._on_position_received)
         
-        # Iniciar
+        # Live Trading System (dashboard/stats)
+        self.bridge.on_connected(self._on_mt5_connected)
+        self.bridge.on_disconnected(self._on_mt5_disconnected)
+        self.bridge.on_error(self._on_mt5_error)
+        # =====================================================
+
+        # AGORA sim, iniciar bridge (todos callbacks já registrados)
+        self.bridge.start()
         self.data_engine.start()
-        
+
         self.logger.info("[LIVE] ✅ Data Engine started")
     
     def _start_dashboard(self):
