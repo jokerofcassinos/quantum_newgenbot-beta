@@ -201,26 +201,21 @@ class LiveTradingSystem:
     def _start_mt5_bridge(self):
         """Inicia MT5 Bridge"""
         socket_config = self.config['socket']
-        
+
+        # Nova API simplificada (sem timeout/heartbeat params)
         self.bridge = MT5Bridge(
             host=socket_config['host'],
-            port=socket_config['port'],
-            timeout=socket_config['timeout_ms'],
-            max_reconnect_attempts=socket_config['max_reconnect_attempts'],
-            reconnect_delay=socket_config['reconnect_delay_seconds'],
-            heartbeat_interval=socket_config['heartbeat_interval_seconds']
+            port=socket_config['port']
         )
-        
+
         # Registrar callbacks
-        self.bridge.register_callbacks(
-            on_tick=self._on_tick_received,
-            on_bar=self._on_bar_received,
-            on_account=self._on_account_received,
-            on_position=self._on_position_received,
-            on_connected=self._on_mt5_connected,
-            on_disconnected=self._on_mt5_disconnected,
-            on_error=self._on_mt5_error
-        )
+        self.bridge.on_tick(self._on_tick_received)
+        self.bridge.on_bar(self._on_bar_received)
+        self.bridge.on_account(self._on_account_received)
+        self.bridge.on_position(self._on_position_received)
+        self.bridge.on_connected(self._on_mt5_connected)
+        self.bridge.on_disconnected(self._on_mt5_disconnected)
+        self.bridge.on_error(self._on_mt5_error)
         
         # Iniciar
         self.bridge.start()
