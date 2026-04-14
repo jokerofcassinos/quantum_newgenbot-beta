@@ -434,6 +434,10 @@ class DataEngine:
     def _on_tick_received(self, tick: TickData):
         """Callback quando recebe tick do MT5"""
         try:
+            self.ticks_processed += 1
+            if self.ticks_processed % 10 == 0:
+                self.logger.info(f"[DATA_ENGINE] Tick #{self.ticks_processed} received: {tick.symbol} bid={tick.bid:.2f}")
+            
             # Atualizar calculadora
             self.calculator.update(tick)
             
