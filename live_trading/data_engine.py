@@ -393,15 +393,13 @@ class DataEngine:
     def start(self):
         """Inicia o data engine"""
         self.logger.info(f"[DATA_ENGINE] Starting data engine for {self.symbol}")
-        
-        # Registrar callback no bridge
-        self.bridge.register_callbacks(
-            on_tick=self._on_tick_received,
-            on_account=self._on_account_received,
-            on_position=self._on_position_received,
-            on_connected=self._on_mt5_connected,
-            on_disconnected=self._on_mt5_disconnected
-        )
+
+        # Registrar callbacks no bridge (nova API simplificada)
+        self.bridge.on_tick(self._on_tick_received)
+        self.bridge.on_account(self._on_account_received)
+        self.bridge.on_position(self._on_position_received)
+        self.bridge.on_connected(self._on_mt5_connected)
+        self.bridge.on_disconnected(self._on_mt5_disconnected)
         
         # Iniciar thread de processamento
         self._running = True
