@@ -468,8 +468,14 @@ class MT5Bridge:
             self.stats["ticks_received"] += 1
             self.stats["last_tick_time"] = datetime.now()
 
+            if self.stats["ticks_received"] % 5 == 0:
+                self.logger.info(f"[MT5_BRIDGE] Tick #{self.stats['ticks_received']} processed: {tick.symbol} bid={tick.bid:.2f}")
+
             if self.on_tick_callback:
                 self.on_tick_callback(tick)
+            else:
+                if self.stats["ticks_received"] % 5 == 0:
+                    self.logger.warning("[MT5_BRIDGE] on_tick_callback is None!")
 
         except Exception as e:
             self.stats["errors"] += 1
