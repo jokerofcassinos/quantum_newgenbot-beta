@@ -314,15 +314,9 @@ void ManageConnection()
       }
       return;
    }
-   
-   // Check heartbeat timeout (10 seconds without data = disconnected)
-   datetime now = TimeCurrent();
-   if(now - last_heartbeat > 15)
-   {
-      Print("WARNING: Heartbeat timeout, reconnecting...");
-      DisconnectFromPython();
-      return;
-   }
+
+   // Heartbeat check removido - legacy não usa heartbeat timeout
+   // Detecção de desconexão é feita via falhas de envio (consecutive_send_failures)
 }
 
 //+------------------------------------------------------------------+
