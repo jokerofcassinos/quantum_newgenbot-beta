@@ -382,13 +382,26 @@ class DataEngine:
         self.processing_thread: Optional[threading.Thread] = None
         self._running = False
         
-        # Callbacks
-        self.on_indicators_ready: Optional[Callable[[IndicatorData], None]] = None
-        self.on_market_state_updated: Optional[Callable[[MarketState], None]] = None
-        self.on_regime_change: Optional[Callable[[str], None]] = None
-        
+        # Callbacks - usar nomes com underscore para evitar conflito
+        self._on_indicators_ready: Optional[Callable[[IndicatorData], None]] = None
+        self._on_market_state_updated: Optional[Callable[[MarketState], None]] = None
+        self._on_regime_change: Optional[Callable[[str], None]] = None
+
         # Logger - usar sistema de logs do projeto
         self.logger = get_logger("DataEngine")
+
+    # Callback registration methods (chainable)
+    def on_indicators_ready(self, callback):
+        self._on_indicators_ready = callback
+        return self
+
+    def on_market_state_updated(self, callback):
+        self._on_market_state_updated = callback
+        return self
+
+    def on_regime_change(self, callback):
+        self._on_regime_change = callback
+        return self
     
     def start(self):
         """Inicia o data engine"""
@@ -480,11 +493,11 @@ class DataEngine:
                     self.market_state_history.append(self.market_state)
                     
                     # Callbacks
-                    if self.on_indicators_ready:
-                        self.on_indicators_ready(indicators)
-                    
-                    if self.on_market_state_updated:
-                        self.on_market_state_updated(self.market_state)
+                    if self._on_indicators_ready:
+                        self._on_indicators_ready(indicators)
+
+                    if self._on_market_state_updated:
+                        self._on_market_state_updated(self.market_state)
                 
                 # Dormir para não sobrecarregar CPU
                 # Processar a cada ~100ms (10x por segundo)
@@ -578,8 +591,21 @@ class DataEngine:
     ):
         """Registra callbacks para eventos do data engine"""
         if on_indicators_ready:
-            self.on_indicators_ready = on_indicators_ready
+            self._on_indicators_ready = on_indicators_ready
         if on_market_state_updated:
-            self.on_market_state_updated = on_market_state_updated
+            self._on_market_state_updated = on_market_state_updated
         if on_regime_change:
-            self.on_regime_change = on_regime_change
+            self._on_regime_change = on_regime_change
+
+    # Callback registration methods (chainable)
+    def on_indicators_ready(self, callback):
+        self._on_indicators_ready = callback
+        return self
+
+    def on_market_state_updated(self, callback):
+        self._on_market_state_updated = callback
+        return self
+
+    def on_regime_change(self, callback):
+        self._on_regime_change = callback
+        return self
