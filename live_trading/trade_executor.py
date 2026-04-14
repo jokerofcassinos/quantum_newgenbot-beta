@@ -148,8 +148,8 @@ class TradeExecutor:
         }
         
         # Callbacks
-        self.on_order_executed = None
-        self.on_position_closed = None
+        self._on_order_executed = None
+        self._on_position_closed = None
         
         # Advanced Position Manager
         self.position_manager = AdvancedPositionManager(
@@ -347,8 +347,8 @@ class TradeExecutor:
             self.logger.info(f"[TRADE_EXEC] ✅ Position opened: Ticket {order.ticket} (MT5: {mt5_ticket})")
             
             # Callback
-            if self.on_order_executed:
-                self.on_order_executed(position)
+            if self._on_order_executed:
+                self._on_order_executed(position)
     
     def _on_position_closed(self, mt5_ticket: int, close_price: float, close_reason: str, pnl: float):
         """Callback quando posição é fechada"""
@@ -382,8 +382,8 @@ class TradeExecutor:
             self.neural_chain.record_trade_result(position.ticket, pnl)
             
             # Callback
-            if self.on_position_closed:
-                self.on_position_closed(position)
+            if self._on_position_closed:
+                self._on_position_closed(position)
     
     def _monitor_loop(self):
         """Loop de monitoramento de posições"""
@@ -500,6 +500,15 @@ class TradeExecutor:
     ):
         """Registra callbacks"""
         if on_order_executed:
-            self.on_order_executed = on_order_executed
+            self._on_order_executed = on_order_executed
         if on_position_closed:
-            self.on_position_closed = on_position_closed
+            self._on_position_closed = on_position_closed
+
+    # Callback registration methods (chainable)
+    def on_order_executed(self, callback):
+        self._on_order_executed = callback
+        return self
+
+    def on_position_closed(self, callback):
+        self._on_position_closed = callback
+        return self
