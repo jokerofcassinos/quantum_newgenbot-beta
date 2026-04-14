@@ -593,3 +593,10 @@ class MT5Bridge:
             except Exception as e:
                 self.stats["errors"] += 1
                 self.logger.error(f"[MT5_BRIDGE] Send error: {e}")
+
+    def get_latest_tick(self):
+        """Retorna o tick mais recente do buffer"""
+        ticks = self.ticks_buffer.get_all()
+        if ticks:
+            return ticks[-1]
+        return None
