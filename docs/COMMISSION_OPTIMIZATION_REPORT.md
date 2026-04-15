@@ -662,3 +662,6 @@ The commission drain is the single biggest issue preventing this system from rea
 4. Run backtest and validate results
 
 These three changes alone should approximately **double the net profit** from $48K to ~$85-95K with minimal additional risk.
+
+
+

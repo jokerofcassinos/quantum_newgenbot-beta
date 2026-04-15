@@ -71,7 +71,7 @@ class PerformanceTracker:
         self.rolling_win_rates = []
         self.rolling_profit_factors = []
         
-        logger.info(f"📈 Performance Tracker initialized (${initial_capital:,.2f})")
+        logger.info(f" Performance Tracker initialized (${initial_capital:,.2f})")
     
     def record_trade(self, trade: TradeRecord):
         """Record a completed trade"""
@@ -107,7 +107,7 @@ class PerformanceTracker:
             win_rate = wins / len(recent)
             self.rolling_win_rates.append(win_rate)
         
-        logger.info(f"📊 Trade recorded: {trade.direction} #{trade.ticket} | "
+        logger.info(f" Trade recorded: {trade.direction} #{trade.ticket} | "
                    f"PnL: ${trade.net_pnl:+,.2f} | "
                    f"Equity: ${self.current_equity:,.2f}")
     
@@ -241,3 +241,7 @@ class PerformanceTracker:
                 max_losses = max(max_losses, current_losses)
         
         return max_wins, max_losses
+
+
+
+

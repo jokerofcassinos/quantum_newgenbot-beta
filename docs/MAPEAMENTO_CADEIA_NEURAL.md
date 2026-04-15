@@ -389,3 +389,6 @@ Para replicar esta cadeia neural no live trading:
 **Total de estratégias: 13**
 **Total de vetos/validações: 10+**
 **Total de indicadores: 10+**
+
+
+

@@ -39,17 +39,17 @@ class Orchestrator:
         # self.strategy_router = StrategyRouter(dna_engine=self.dna_engine)
         # self.telegram = TelegramNotifier(config=config)
         
-        logger.info("🎯 Orchestrator initialized")
+        logger.info(" Orchestrator initialized")
     
     async def run(self):
         """Main execution loop"""
         self.running = True
-        logger.info("🚀 Starting main orchestration loop...")
+        logger.info(" Starting main orchestration loop...")
         
         try:
             # Phase 1: Initialize MT5 connection
             # await self.mt5_connector.connect()
-            logger.info("✅ MT5 connection: PENDING (implementation needed)")
+            logger.info(" MT5 connection: PENDING (implementation needed)")
             
             # Phase 2: Load and validate DNA
             self.dna_engine.load_dna()
@@ -57,19 +57,19 @@ class Orchestrator:
             is_valid = self.config.validate_dna_against_limits(self.dna, limits)
             
             if not is_valid:
-                logger.error("❌ DNA validation failed - aborting startup")
+                logger.error(" DNA validation failed - aborting startup")
                 return
             
             # Phase 3: Initial market regime detection
-            logger.info("🔬 Detecting initial market regime...")
+            logger.info(" Detecting initial market regime...")
             # regime = await self.dna_engine.detect_regime()
-            # logger.info(f"📊 Regime detected: {regime}")
+            # logger.info(f" Regime detected: {regime}")
             
             # Phase 4: Start main trading loop
             await self.trading_loop()
             
         except Exception as e:
-            logger.error(f"💀 Critical error in run(): {e}", exc_info=True)
+            logger.error(f" Critical error in run(): {e}", exc_info=True)
             self.emergency_shutdown()
     
     async def trading_loop(self):
@@ -93,7 +93,7 @@ class Orchestrator:
                 
                 # DNA adaptation check (periodic)
                 if loop_count % dna_check_interval == 0:
-                    logger.info("🧬 Running DNA adaptation check...")
+                    logger.info(" Running DNA adaptation check...")
                     # await self.dna_engine.adapt()
                 
                 # Market analysis
@@ -116,38 +116,42 @@ class Orchestrator:
                 
                 # Logging
                 if loop_count % 10 == 0:
-                    logger.info(f"📊 Loop #{loop_count} - System operational")
+                    logger.info(f" Loop #{loop_count} - System operational")
                 
                 # Wait for next iteration
                 await asyncio.sleep(5)
                 
             except asyncio.CancelledError:
-                logger.info("⚠️ Trading loop cancelled")
+                logger.info(" Trading loop cancelled")
                 break
             except Exception as e:
-                logger.error(f"❌ Error in trading loop: {e}", exc_info=True)
+                logger.error(f" Error in trading loop: {e}", exc_info=True)
                 await asyncio.sleep(10)  # Wait before retry
     
     def shutdown(self):
         """Graceful shutdown"""
-        logger.info("🛑 Initiating graceful shutdown...")
+        logger.info(" Initiating graceful shutdown...")
         self.running = False
         
         # Close all connections
         # self.mt5_connector.disconnect()
-        # self.telegram.send_message("🛑 Bot shutdown initiated")
+        # self.telegram.send_message(" Bot shutdown initiated")
         
-        logger.info("✅ Graceful shutdown complete")
+        logger.info(" Graceful shutdown complete")
     
     def emergency_shutdown(self):
         """Emergency shutdown - close all positions"""
-        logger.critical("🚨 EMERGENCY SHUTDOWN INITIATED")
+        logger.critical(" EMERGENCY SHUTDOWN INITIATED")
         self.running = False
         
         # Close all positions
         # await self.mt5_connector.close_all_positions()
         
         # Send emergency notification
-        # self.telegram.send_message("🚨 EMERGENCY SHUTDOWN - All positions closed")
+        # self.telegram.send_message(" EMERGENCY SHUTDOWN - All positions closed")
         
-        logger.critical("💀 Emergency shutdown complete")
+        logger.critical(" Emergency shutdown complete")
+
+
+
+

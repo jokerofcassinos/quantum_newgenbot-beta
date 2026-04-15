@@ -577,3 +577,6 @@ FTMO daily tracking must reset at midnight. No scheduler exists. Manual interven
 ---
 
 *End of Bugs & Fatal Flaws Analysis Report*
+
+
+

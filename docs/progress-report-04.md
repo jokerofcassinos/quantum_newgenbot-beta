@@ -223,3 +223,6 @@ forex-project2k26/
 
 **Qwen Code, CEO** 🚀  
 **Relatório #4 - Sistema 50% completo**
+
+
+

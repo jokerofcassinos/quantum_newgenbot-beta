@@ -52,7 +52,7 @@ class TradePatternAnalyzer:
         self.error_patterns: List[ErrorPattern] = []
         self.veto_rules: Dict[str, Any] = {}
         
-        logger.info("🔬 Trade Pattern Analyzer initialized")
+        logger.info(" Trade Pattern Analyzer initialized")
     
     def analyze_all(self, start_date: Optional[str] = None, end_date: Optional[str] = None) -> Dict[str, Any]:
         """
@@ -62,17 +62,17 @@ class TradePatternAnalyzer:
             dict: Analysis results and veto rules
         """
         logger.info("="*80)
-        logger.info("🔬 STARTING TRADE PATTERN ANALYSIS")
+        logger.info(" STARTING TRADE PATTERN ANALYSIS")
         logger.info("="*80)
         
         # Load all audits
         audits = self.auditor.get_all_audits(start_date, end_date)
         
         if not audits:
-            logger.warning("⚠️ No trade audits found")
+            logger.warning(" No trade audits found")
             return {}
         
-        logger.info(f"📊 Loaded {len(audits)} trade audits")
+        logger.info(f" Loaded {len(audits)} trade audits")
         
         # Separate winners and losers
         winners = [a for a in audits if a.net_pnl and a.net_pnl > 0]
@@ -114,7 +114,7 @@ class TradePatternAnalyzer:
         results = self._generate_summary()
         
         logger.info(f"\n{'='*80}")
-        logger.info(f"📊 ANALYSIS COMPLETE")
+        logger.info(f" ANALYSIS COMPLETE")
         logger.info(f"{'='*80}")
         logger.info(f"   Total Trades Analyzed: {len(audits)}")
         logger.info(f"   Error Patterns Found: {len(self.error_patterns)}")
@@ -126,7 +126,7 @@ class TradePatternAnalyzer:
     
     def _analyze_error_types(self, audits: List[TradeAuditLog]):
         """Analyze frequency of each error type"""
-        logger.info(f"\n📋 Analysis 1: Error Types")
+        logger.info(f"\n Analysis 1: Error Types")
         
         error_counter = Counter()
         severity_counter = Counter()
@@ -214,7 +214,7 @@ class TradePatternAnalyzer:
     
     def _analyze_regime_patterns(self, audits, winners, losers):
         """Find regimes that correlate with losses"""
-        logger.info(f"\n📋 Analysis 2: Regime Patterns")
+        logger.info(f"\n Analysis 2: Regime Patterns")
         
         winner_regimes = Counter(self._get_regime(a) for a in winners)
         loser_regimes = Counter(self._get_regime(a) for a in losers)
@@ -247,7 +247,7 @@ class TradePatternAnalyzer:
     
     def _analyze_session_patterns(self, audits, winners, losers):
         """Find sessions that correlate with losses"""
-        logger.info(f"\n📋 Analysis 3: Session Patterns")
+        logger.info(f"\n Analysis 3: Session Patterns")
         
         winner_sessions = Counter(self._get_session(a) for a in winners)
         loser_sessions = Counter(self._get_session(a) for a in losers)
@@ -265,7 +265,7 @@ class TradePatternAnalyzer:
     
     def _analyze_mtf_patterns(self, audits, winners, losers):
         """Find multi-timeframe conflict patterns"""
-        logger.info(f"\n📋 Analysis 4: Multi-Timeframe Patterns")
+        logger.info(f"\n Analysis 4: Multi-Timeframe Patterns")
         
         aligned_wins = sum(1 for a in winners if abs(a.get('multi_timeframe', {}).get('alignment_score', 0) if isinstance(a, dict) else abs(getattr(a.multi_timeframe, 'alignment_score', 0))) > 0.5)
         aligned_losses = sum(1 for a in losers if abs(a.get('multi_timeframe', {}).get('alignment_score', 0) if isinstance(a, dict) else abs(getattr(a.multi_timeframe, 'alignment_score', 0))) > 0.5)
@@ -299,7 +299,7 @@ class TradePatternAnalyzer:
     
     def _analyze_indicator_patterns(self, audits, winners, losers):
         """Find indicator patterns that correlate with losses"""
-        logger.info(f"\n📋 Analysis 5: Indicator Patterns")
+        logger.info(f"\n Analysis 5: Indicator Patterns")
         
         rsi_oversold_losses = sum(1 for a in losers if self._get_rsi_regime(a) == 'oversold' and self._get_direction(a) == 'SELL')
         rsi_overbought_losses = sum(1 for a in losers if self._get_rsi_regime(a) == 'overbought' and self._get_direction(a) == 'BUY')
@@ -314,7 +314,7 @@ class TradePatternAnalyzer:
     
     def _analyze_risk_patterns(self, audits, winners, losers):
         """Find risk context patterns"""
-        logger.info(f"\n📋 Analysis 6: Risk Context Patterns")
+        logger.info(f"\n Analysis 6: Risk Context Patterns")
         
         consec_3_plus = [a for a in audits if self._get_consecutive_losses(a) >= 3]
         consec_losses_in_series = sum(1 for a in consec_3_plus if self._get_pnl(a) and self._get_pnl(a) < 0)
@@ -349,7 +349,7 @@ class TradePatternAnalyzer:
     
     def _analyze_momentum_patterns(self, audits, winners, losers):
         """Find momentum patterns at entry"""
-        logger.info(f"\n📋 Analysis 7: Momentum Patterns")
+        logger.info(f"\n Analysis 7: Momentum Patterns")
         
         high_vel = [a for a in audits if self._get_velocity(a) > 2.0]
         if high_vel:
@@ -359,7 +359,7 @@ class TradePatternAnalyzer:
     
     def _analyze_time_patterns(self, audits, winners, losers):
         """Find time-based patterns"""
-        logger.info(f"\n📋 Analysis 8: Time Patterns")
+        logger.info(f"\n Analysis 8: Time Patterns")
         
         hourly = defaultdict(lambda: {"wins": 0, "losses": 0})
         
@@ -386,7 +386,7 @@ class TradePatternAnalyzer:
     
     def _generate_veto_rules(self):
         """Generate veto rules from discovered patterns"""
-        logger.info(f"\n🚫 Generating veto rules...")
+        logger.info(f"\n Generating veto rules...")
         
         rules = []
         
@@ -459,4 +459,8 @@ class TradePatternAnalyzer:
         with open(path, 'w') as f:
             json.dump(self.veto_rules, f, indent=2, default=str)
         
-        logger.info(f"💾 Veto rules saved to {path}")
+        logger.info(f" Veto rules saved to {path}")
+
+
+
+

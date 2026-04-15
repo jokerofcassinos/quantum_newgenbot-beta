@@ -42,7 +42,7 @@ class DNAEngine:
         self.successful_mutations = 0
         self.rejected_mutations = 0
         
-        logger.info("🧬 DNA Engine initialized")
+        logger.info(" DNA Engine initialized")
     
     def load_dna(self) -> Dict[str, Any]:
         """Load current DNA configuration"""
@@ -50,8 +50,8 @@ class DNAEngine:
         self.dna_memory = self.config.load_dna_memory()
         self.absolute_limits = self.config.load_absolute_limits()
         
-        logger.info(f"🧬 DNA loaded with {len(self.current_dna)} top-level strands")
-        logger.info(f"🧠 DNA Memory contains {len(self.dna_memory.get('regimes', {}))} regimes")
+        logger.info(f" DNA loaded with {len(self.current_dna)} top-level strands")
+        logger.info(f" DNA Memory contains {len(self.dna_memory.get('regimes', {}))} regimes")
         
         return self.current_dna
     
@@ -68,31 +68,31 @@ class DNAEngine:
         6. Apply mutation if valid
         7. Log and notify
         """
-        logger.info("🧬 Starting DNA adaptation cycle...")
+        logger.info(" Starting DNA adaptation cycle...")
         
         try:
             # Step 1: Detect current market regime
             regime = await self.detect_regime()
-            logger.info(f"📊 Current regime: {regime.get('regime_type', 'unknown')} "
+            logger.info(f" Current regime: {regime.get('regime_type', 'unknown')} "
                        f"(confidence: {regime.get('confidence', 0):.2f})")
             
             # Step 2: Analyze recent performance
             performance = await self.analyze_recent_performance()
-            logger.info(f"📈 Recent performance: "
+            logger.info(f" Recent performance: "
                        f"Win Rate={performance.get('win_rate', 0):.1%}, "
                        f"Profit Factor={performance.get('profit_factor', 0):.2f}")
             
             # Step 3: Query DNA memory for similar regimes
             memory_match = self.query_dna_memory(regime)
             if memory_match:
-                logger.info(f"🧠 DNA Memory match found: {memory_match.get('regime_name')} "
+                logger.info(f" DNA Memory match found: {memory_match.get('regime_name')} "
                            f"(success rate: {memory_match.get('success_rate', 0):.1%})")
             
             # Step 4: Calculate mutations
             mutations = self.calculate_mutations(regime, performance, memory_match)
             
             if mutations:
-                logger.info(f"🔬 Calculated {len(mutations)} potential mutations")
+                logger.info(f" Calculated {len(mutations)} potential mutations")
                 
                 # Step 5: Validate mutations
                 valid_mutations = self.validate_mutations(mutations)
@@ -108,15 +108,15 @@ class DNAEngine:
                     self.mutation_count += len(valid_mutations)
                     self.successful_mutations += len(valid_mutations)
                     
-                    logger.info(f"✅ Applied {len(valid_mutations)} mutations successfully")
+                    logger.info(f" Applied {len(valid_mutations)} mutations successfully")
                     
                     # TODO: Send Telegram notification
                     # await self.notify_mutation(valid_mutations)
                 else:
-                    logger.warning("⚠️ All mutations rejected - DNA unchanged")
+                    logger.warning(" All mutations rejected - DNA unchanged")
                     self.rejected_mutations += len(mutations)
             else:
-                logger.info("ℹ️ No mutations needed - DNA optimal for current regime")
+                logger.info(" No mutations needed - DNA optimal for current regime")
             
             # Update regime info in DNA
             self.current_dna["market_regime"] = {
@@ -130,7 +130,7 @@ class DNAEngine:
             return self.current_dna
             
         except Exception as e:
-            logger.error(f"❌ Error in DNA adaptation: {e}", exc_info=True)
+            logger.error(f" Error in DNA adaptation: {e}", exc_info=True)
             return self.current_dna
     
     async def detect_regime(self, candles=None) -> Dict[str, Any]:
@@ -147,7 +147,7 @@ class DNAEngine:
         """
         # If no candles provided, return unknown (live mode will pass candles)
         if candles is None or len(candles) < 100:
-            logger.warning("⚠️ Insufficient candle data for regime detection")
+            logger.warning(" Insufficient candle data for regime detection")
             return {
                 "regime_type": "unknown_initial",
                 "confidence": 0.3,
@@ -246,7 +246,7 @@ class DNAEngine:
             regime_type = "ranging"
             confidence = 0.60
         
-        logger.info(f"🔍 Regime detected: {regime_type} (conf={confidence:.2f}, vol={volatility}, mom={momentum})")
+        logger.info(f" Regime detected: {regime_type} (conf={confidence:.2f}, vol={volatility}, mom={momentum})")
         
         return {
             "regime_type": regime_type,
@@ -274,7 +274,7 @@ class DNAEngine:
             trade_history = getattr(self, '_trade_history', [])
         
         if not trade_history or len(trade_history) == 0:
-            logger.info("📊 No trade history available for performance analysis")
+            logger.info(" No trade history available for performance analysis")
             return {
                 "win_rate": 0.0,
                 "profit_factor": 0.0,
@@ -321,7 +321,7 @@ class DNAEngine:
             dd = peak - equity
             max_dd = max(max_dd, dd)
         
-        logger.info(f"📊 Performance: WR={win_rate:.1%} PF={profit_factor:.2f} "
+        logger.info(f" Performance: WR={win_rate:.1%} PF={profit_factor:.2f} "
                     f"trades={total} consec_L={consecutive_losses}")
         
         return {
@@ -350,7 +350,7 @@ class DNAEngine:
         regimes = self.dna_memory.get("regimes", {})
         
         if not regimes:
-            logger.info("🧠 DNA Memory empty - no historical regimes")
+            logger.info(" DNA Memory empty - no historical regimes")
             return None
         
         # Find regime with highest similarity
@@ -420,7 +420,7 @@ class DNAEngine:
         
         # If we have a memory match, suggest using those parameters
         if memory_match:
-            logger.info("🧠 Suggesting parameters from DNA memory")
+            logger.info(" Suggesting parameters from DNA memory")
             # Merge memory parameters with current DNA
             if "best_params" in memory_match:
                 mutations.update(memory_match["best_params"])
@@ -435,7 +435,7 @@ class DNAEngine:
             if current_risk:
                 new_risk = max(current_risk * 0.75, 0.25)  # Reduce by 25%, min 0.25%
                 mutations["risk_params.base_risk_percent"] = new_risk
-                logger.info(f"🔬 Mutation: Reducing risk to {new_risk:.2f}% after {consecutive_losses} losses")
+                logger.info(f" Mutation: Reducing risk to {new_risk:.2f}% after {consecutive_losses} losses")
         
         elif win_rate > 0.65:
             # Can increase risk slightly with good performance
@@ -443,7 +443,7 @@ class DNAEngine:
             if current_risk and current_risk < 1.0:
                 new_risk = min(current_risk * 1.1, 1.0)  # Increase by 10%, max 1%
                 mutations["risk_params.base_risk_percent"] = new_risk
-                logger.info(f"🔬 Mutation: Increasing risk to {new_risk:.2f}% (win rate {win_rate:.1%})")
+                logger.info(f" Mutation: Increasing risk to {new_risk:.2f}% (win rate {win_rate:.1%})")
         
         # TODO: Add more sophisticated mutation logic
         # - Regime-specific adjustments
@@ -472,9 +472,9 @@ class DNAEngine:
                         # Value should be below limit
                         if new_value <= limit_value:
                             valid_mutations[param_path] = new_value
-                            logger.info(f"✅ Mutation valid: {param_path} = {new_value} (limit: {limit_value})")
+                            logger.info(f" Mutation valid: {param_path} = {new_value} (limit: {limit_value})")
                         else:
-                            logger.warning(f"❌ Mutation rejected: {param_path} = {new_value} exceeds limit {limit_value}")
+                            logger.warning(f" Mutation rejected: {param_path} = {new_value} exceeds limit {limit_value}")
                     else:
                         valid_mutations[param_path] = new_value
                 else:
@@ -494,8 +494,8 @@ class DNAEngine:
             old_value = self.config.get_param(self.current_dna, param_path)
             self.current_dna = self.config.set_param(self.current_dna, param_path, new_value)
             
-            logger.info(f"🧬 DNA mutated: {param_path}")
-            logger.info(f"   {old_value} → {new_value}")
+            logger.info(f" DNA mutated: {param_path}")
+            logger.info(f"   {old_value}  {new_value}")
     
     def save_regime_to_memory(self, regime: Dict[str, Any], performance: Dict[str, Any]) -> None:
         """
@@ -540,7 +540,7 @@ class DNAEngine:
         
         # Save memory
         self.config.save_dna_memory(self.dna_memory)
-        logger.info(f"🧠 Regime saved to memory: {regime_name}")
+        logger.info(f" Regime saved to memory: {regime_name}")
     
     def get_dna_summary(self) -> Dict[str, Any]:
         """
@@ -555,3 +555,7 @@ class DNAEngine:
             "active_strategy": self.current_dna.get("strategy_params", {}).get("active_strategy", "unknown"),
             "last_updated": self.current_dna.get("market_regime", {}).get("last_updated", "never")
         }
+
+
+
+

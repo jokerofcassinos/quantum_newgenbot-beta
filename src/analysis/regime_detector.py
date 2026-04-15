@@ -40,7 +40,7 @@ class RegimeDetector:
         self.adx_period = adx_period
         self.volatility_lookback = volatility_lookback
         
-        logger.info("🔍 RegimeDetector initialized")
+        logger.info(" RegimeDetector initialized")
         logger.info(f"   Hurst lookback: {hurst_lookback}")
         logger.info(f"   ADX period: {adx_period}")
         logger.info(f"   Volatility lookback: {volatility_lookback}")
@@ -237,3 +237,7 @@ class RegimeDetector:
             'confidence': 0.3,
             'regime_name': 'unknown_neutral_normal',
         }
+
+
+
+

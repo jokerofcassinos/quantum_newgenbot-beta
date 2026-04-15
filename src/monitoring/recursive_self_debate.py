@@ -35,7 +35,7 @@ class RecursiveSelfDebate:
         """
         self.min_debate_confidence = min_debate_confidence
         
-        logger.info("🧠 RecursiveSelfDebate initialized")
+        logger.info(" RecursiveSelfDebate initialized")
         logger.info(f"   Min debate confidence: {min_debate_confidence}")
 
     def debate(
@@ -90,7 +90,7 @@ class RecursiveSelfDebate:
             # Opposing case is significantly stronger - flip signal
             final_signal = 'SELL' if original_signal == 'BUY' else 'BUY'
             debate_confidence = 1.0 - debate_confidence
-            logger.info(f"🔄 Signal flipped: {original_signal} → {final_signal}")
+            logger.info(f" Signal flipped: {original_signal}  {final_signal}")
         
         # Final approval
         approved = debate_confidence >= self.min_debate_confidence
@@ -186,3 +186,7 @@ class RecursiveSelfDebate:
             })
         
         return arguments
+
+
+
+

@@ -355,3 +355,6 @@ Se aumentar risk para 1.0% (ainda seguro):
 **Próximo marco: Strategy Engine → Bot operacional**
 
 **Qwen Code, CEO** 🚀
+
+
+

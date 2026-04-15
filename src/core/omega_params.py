@@ -40,7 +40,7 @@ class OmegaParams:
         # Load config
         self.load()
         
-        logger.info("⚙️ OmegaParams initialized")
+        logger.info(" OmegaParams initialized")
         logger.info(f"   Config: {self.config_file}")
         logger.info(f"   Version: {self.params.get('version', 'unknown')}")
         logger.info(f"   Parameters: {len(self.params)}")
@@ -127,7 +127,7 @@ class OmegaParams:
         with open(self.config_file, 'w') as f:
             json.dump(default_config, f, indent=2)
         
-        logger.info(f"📝 Created default config: {self.config_file}")
+        logger.info(f" Created default config: {self.config_file}")
 
     def load(self) -> Dict[str, Any]:
         """Load configuration from file."""
@@ -168,4 +168,8 @@ class OmegaParams:
         """Save configuration to file."""
         with open(self.config_file, 'w') as f:
             json.dump(self.params, f, indent=2)
-        logger.info(f"💾 Config saved: {self.config_file}")
+        logger.info(f" Config saved: {self.config_file}")
+
+
+
+

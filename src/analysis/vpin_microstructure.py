@@ -39,7 +39,7 @@ class VPINMicrostructure:
         self.tick_buffer: List[Dict[str, float]] = []
         self.vpin_history: List[float] = []
         
-        logger.info("📊 VPINMicrostructure initialized")
+        logger.info(" VPINMicrostructure initialized")
         logger.info(f"   Bucket size: {bucket_size} ticks")
         logger.info(f"   Num buckets: {num_buckets}")
 
@@ -205,3 +205,7 @@ class VPINMicrostructure:
         vpin = abs(total_buy - total_sell) / total_volume
         
         return vpin
+
+
+
+

@@ -47,7 +47,7 @@ class Orchestrator:
         self.running = False
         
         # Initialize ALL modules
-        logger.info("🔧 Initializing all modules...")
+        logger.info(" Initializing all modules...")
         
         # Core
         self.dna_engine = DNAEngine(config=config)
@@ -72,12 +72,12 @@ class Orchestrator:
         self.trades_approved = 0
         self.trades_rejected = 0
         
-        logger.info("✅ All modules initialized")
+        logger.info(" All modules initialized")
     
     async def run(self):
         """Main execution flow"""
         logger.info("="*80)
-        logger.info("🚀 FOREX QUANTUM BOT - STARTING COMPLETE SYSTEM")
+        logger.info(" FOREX QUANTUM BOT - STARTING COMPLETE SYSTEM")
         logger.info("="*80)
         
         try:
@@ -91,23 +91,23 @@ class Orchestrator:
             await self._phase3_trading_loop()
             
         except KeyboardInterrupt:
-            logger.warning("⚠️ Manual interruption detected")
+            logger.warning(" Manual interruption detected")
             await self.shutdown()
         except Exception as e:
-            logger.error(f"💀 Critical error: {e}", exc_info=True)
+            logger.error(f" Critical error: {e}", exc_info=True)
             await self.emergency_shutdown()
     
     async def _phase1_connect(self):
         """Phase 1: MT5 Connection"""
         logger.info("\n" + "="*80)
-        logger.info("📡 PHASE 1: MT5 CONNECTION")
+        logger.info(" PHASE 1: MT5 CONNECTION")
         logger.info("="*80)
         
         # Connect to MT5
         self.is_connected = await self.mt5_connector.connect()
         
         if not self.is_connected:
-            logger.error("❌ Failed to connect to MT5 - aborting")
+            logger.error(" Failed to connect to MT5 - aborting")
             raise Exception("MT5 connection failed")
         
         # Get account info
@@ -116,15 +116,15 @@ class Orchestrator:
             self.initial_balance = account.get("balance", 0)
             self.current_balance = self.initial_balance
             
-            logger.info(f"✅ Connected to account: {account.get('login')}")
-            logger.info(f"💵 Balance: ${self.initial_balance:,.2f}")
-            logger.info(f"📊 Equity: ${account.get('equity', 0):,.2f}")
-            logger.info(f"📈 Leverage: 1:{account.get('leverage', 1)}")
+            logger.info(f" Connected to account: {account.get('login')}")
+            logger.info(f" Balance: ${self.initial_balance:,.2f}")
+            logger.info(f" Equity: ${account.get('equity', 0):,.2f}")
+            logger.info(f" Leverage: 1:{account.get('leverage', 1)}")
     
     async def _phase2_initialize(self):
         """Phase 2: System Initialization"""
         logger.info("\n" + "="*80)
-        logger.info("⚙️ PHASE 2: SYSTEM INITIALIZATION")
+        logger.info(" PHASE 2: SYSTEM INITIALIZATION")
         logger.info("="*80)
         
         # Load and validate DNA
@@ -142,12 +142,12 @@ class Orchestrator:
         self.strategy = BTCUSDScalpingStrategy(dna_params=self.dna)
         
         # Log configuration
-        logger.info("✅ DNA loaded and validated")
-        logger.info("✅ Risk manager initialized")
-        logger.info("✅ Strategy initialized")
+        logger.info(" DNA loaded and validated")
+        logger.info(" Risk manager initialized")
+        logger.info(" Strategy initialized")
         
         # Print commission info
-        logger.info("\n💰 FTMO Commission Structure:")
+        logger.info("\n FTMO Commission Structure:")
         logger.info(f"   Commission: $45/lot/side")
         logger.info(f"   Spread: ~100 points ($1.00)")
         logger.info(f"   Total costs per trade (0.10 lots): ~$19")
@@ -155,7 +155,7 @@ class Orchestrator:
     async def _phase3_trading_loop(self):
         """Phase 3: Main Trading Loop"""
         logger.info("\n" + "="*80)
-        logger.info("🔄 PHASE 3: TRADING LOOP")
+        logger.info(" PHASE 3: TRADING LOOP")
         logger.info("="*80)
         
         loop_count = 0
@@ -168,39 +168,39 @@ class Orchestrator:
             
             try:
                 logger.info(f"\n{'='*60}")
-                logger.info(f"📊 LOOP #{loop_count}")
+                logger.info(f" LOOP #{loop_count}")
                 logger.info(f"{'='*60}")
                 
                 # Check MT5 health
                 if not await self.mt5_connector.check_health():
-                    logger.error("❌ MT5 connection lost - attempting reconnect")
+                    logger.error(" MT5 connection lost - attempting reconnect")
                     await self.mt5_connector.connect()
                     continue
                 
                 # Get current market data
-                logger.info("📊 Fetching market data...")
+                logger.info(" Fetching market data...")
                 candles = await self.market_data.get_candles(
                     timeframe="M5",
                     count=100
                 )
                 
                 if candles is None or len(candles) == 0:
-                    logger.warning("⚠️ No market data available - skipping loop")
+                    logger.warning(" No market data available - skipping loop")
                     await asyncio.sleep(5)
                     continue
                 
                 # Get current price
                 current_price = await self.market_data.get_current_price()
                 if current_price:
-                    logger.info(f"💰 Current BTCUSD: ${current_price['bid']:.2f} / ${current_price['ask']:.2f}")
+                    logger.info(f" Current BTCUSD: ${current_price['bid']:.2f} / ${current_price['ask']:.2f}")
                 
                 # DNA adaptation check
                 if loop_count % dna_check_interval == 0:
-                    logger.info("🧬 Running DNA adaptation...")
+                    logger.info(" Running DNA adaptation...")
                     await self.dna_engine.adapt()
                 
                 # Generate signal
-                logger.info("📈 Analyzing market...")
+                logger.info(" Analyzing market...")
                 signal = await self.strategy.generate_signal(
                     candles=candles,
                     market_data=current_price or {},
@@ -208,11 +208,11 @@ class Orchestrator:
                 )
                 
                 if signal is None:
-                    logger.info("ℹ️ No signal generated - continuing")
+                    logger.info(" No signal generated - continuing")
                     await asyncio.sleep(5)
                     continue
                 
-                logger.info(f"✅ Signal: {signal.direction} @ ${signal.entry_price:.2f}")
+                logger.info(f" Signal: {signal.direction} @ ${signal.entry_price:.2f}")
                 logger.info(f"   SL: ${signal.stop_loss:.2f} | TP: ${signal.take_profit:.2f}")
                 logger.info(f"   R:R: 1:{signal.risk_reward_ratio:.2f} | Confidence: {signal.confidence:.2f}")
                 
@@ -225,11 +225,11 @@ class Orchestrator:
                     spread_points=100
                 )
                 
-                logger.info(f"💰 Trade costs: ${costs['total_costs']:.2f}")
-                logger.info(f"📊 Net R:R: 1:{costs['net_rr']:.2f}")
+                logger.info(f" Trade costs: ${costs['total_costs']:.2f}")
+                logger.info(f" Net R:R: 1:{costs['net_rr']:.2f}")
                 
                 # Validate risk
-                logger.info("🛡️ Validating risk...")
+                logger.info(" Validating risk...")
                 risk_amount = abs(signal.entry_price - signal.stop_loss) * 0.10  # Placeholder
                 reward_amount = abs(signal.take_profit - signal.entry_price) * 0.10
                 
@@ -240,7 +240,7 @@ class Orchestrator:
                 )
                 
                 if not validation["approved"]:
-                    logger.warning(f"❌ Trade rejected by risk manager:")
+                    logger.warning(f" Trade rejected by risk manager:")
                     for reason in validation["reasons"]:
                         logger.warning(f"   - {reason}")
                     self.trades_rejected += 1
@@ -250,12 +250,12 @@ class Orchestrator:
                 # Check if should stop trading
                 should_stop, stop_reason = await self.risk_manager.should_stop_trading(self.current_balance)
                 if should_stop:
-                    logger.warning(f"🛑 Trading halted: {stop_reason}")
+                    logger.warning(f" Trading halted: {stop_reason}")
                     await asyncio.sleep(60)  # Wait 1 minute before checking again
                     continue
                 
                 # EXECUTE TRADE (commented out for safety - enable when ready)
-                # logger.info("📝 Executing trade...")
+                # logger.info(" Executing trade...")
                 # lot_size = await self.risk_manager.calculate_position_size(
                 #     capital=self.current_balance,
                 #     stop_distance_points=abs(signal.entry_price - signal.stop_loss) / 0.01,
@@ -271,12 +271,12 @@ class Orchestrator:
                 # )
                 #
                 # if result and result["success"]:
-                #     logger.info(f"✅ Trade executed: {result['ticket']}")
+                #     logger.info(f" Trade executed: {result['ticket']}")
                 #     self.trades_executed += 1
                 # else:
-                #     logger.error("❌ Trade execution failed")
+                #     logger.error(" Trade execution failed")
                 
-                logger.info("⚠️ TRADE EXECUTION DISABLED (safety mode)")
+                logger.info(" TRADE EXECUTION DISABLED (safety mode)")
                 logger.info("   Enable in code when ready for live trading")
                 self.trades_approved += 1
                 
@@ -290,16 +290,16 @@ class Orchestrator:
                 await asyncio.sleep(5)
                 
             except asyncio.CancelledError:
-                logger.info("⚠️ Trading loop cancelled")
+                logger.info(" Trading loop cancelled")
                 break
             except Exception as e:
-                logger.error(f"❌ Error in trading loop: {e}", exc_info=True)
+                logger.error(f" Error in trading loop: {e}", exc_info=True)
                 await asyncio.sleep(10)  # Wait before retry
     
     async def shutdown(self):
         """Graceful shutdown"""
         logger.info("\n" + "="*80)
-        logger.info("🛑 INITIATING GRACEFUL SHUTDOWN")
+        logger.info(" INITIATING GRACEFUL SHUTDOWN")
         logger.info("="*80)
         
         self.running = False
@@ -311,7 +311,7 @@ class Orchestrator:
         
         # Print summary
         logger.info("\n" + "="*80)
-        logger.info("📊 SESSION SUMMARY")
+        logger.info(" SESSION SUMMARY")
         logger.info("="*80)
         logger.info(f"Initial Balance: ${self.initial_balance:,.2f}")
         logger.info(f"Current Balance: ${self.current_balance:,.2f}")
@@ -322,12 +322,12 @@ class Orchestrator:
         logger.info(f"Trades Executed: {self.trades_executed}")
         logger.info("="*80)
         
-        logger.info("✅ Graceful shutdown complete")
+        logger.info(" Graceful shutdown complete")
     
     async def emergency_shutdown(self):
         """Emergency shutdown"""
         logger.critical("\n" + "="*80)
-        logger.critical("🚨 EMERGENCY SHUTDOWN INITIATED")
+        logger.critical(" EMERGENCY SHUTDOWN INITIATED")
         logger.critical("="*80)
         
         self.running = False
@@ -337,4 +337,8 @@ class Orchestrator:
             await self.mt5_connector.close_all_positions()
             await self.mt5_connector.disconnect()
         
-        logger.critical("💀 Emergency shutdown complete")
+        logger.critical(" Emergency shutdown complete")
+
+
+
+

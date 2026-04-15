@@ -1,21 +1,21 @@
 """
-Live Trading Logger - Sistema de logs com 5 handlers simultâneos
+Live Trading Logger - Sistema de logs com 5 handlers simultneos
 
-Este módulo implementa um sistema de logging ultra-detalhado com 5 handlers
-simultâneos para garantir visibilidade completa de todos os sistemas em tempo real.
+Este mdulo implementa um sistema de logging ultra-detalhado com 5 handlers
+simultneos para garantir visibilidade completa de todos os sistemas em tempo real.
 
 Handlers:
-1. Console - Output colorido por nível no terminal
+1. Console - Output colorido por nvel no terminal
 2. File - Arquivo rotativo (10MB max, 10 backups)
 3. Audit - Buffer circular para compliance e auditoria
-4. Memory - In-memory para acesso rápido pelo dashboard
+4. Memory - In-memory para acesso rpido pelo dashboard
 5. Socket - Envia para dashboard externo (opcional)
 
-Herança do projeto legacy DubaiMatrixASI:
-- logger.py: 5 handlers simultâneos
+Herana do projeto legacy DubaiMatrixASI:
+- logger.py: 5 handlers simultneos
 - Rotating files com 10MB max
 - Buffer circular para auditoria
-- Formatação colorida por nível
+- Formatao colorida por nvel
 - Logs estruturados por sistema
 """
 
@@ -61,10 +61,10 @@ class ColorFormatter(logging.Formatter):
 
 class SystemLogger:
     """
-    Logger para um sistema específico
+    Logger para um sistema especfico
     
-    Cada sistema (MT5Bridge, DataEngine, NeuralChain, etc) tem seu próprio logger
-    com nome identificável para fácil filtragem.
+    Cada sistema (MT5Bridge, DataEngine, NeuralChain, etc) tem seu prprio logger
+    com nome identificvel para fcil filtragem.
     """
     
     def __init__(self, name: str):
@@ -97,17 +97,17 @@ class SystemLogger:
         self.logger.critical(message, extra=extra)
     
     def trade(self, message: str, trade_data: Dict):
-        """Log específico para trades"""
+        """Log especfico para trades"""
         trade_json = json.dumps(trade_data, default=str)
         self.info(f"[TRADE] {message} | Data: {trade_json}")
     
     def signal(self, message: str, signal_data: Dict):
-        """Log específico para sinais de trading"""
+        """Log especfico para sinais de trading"""
         signal_json = json.dumps(signal_data, default=str)
         self.info(f"[SIGNAL] {message} | Data: {signal_json}")
     
     def performance(self, message: str, perf_data: Dict):
-        """Log específico para métricas de performance"""
+        """Log especfico para mtricas de performance"""
         perf_json = json.dumps(perf_data, default=str)
         self.info(f"[PERF] {message} | Data: {perf_json}")
 
@@ -116,11 +116,11 @@ class LiveTradingLoggerManager:
     """
     Gerenciador central de logs para live trading
     
-    Configura e gerencia todos os 5 handlers simultâneos:
-    1. Console (colorido por nível)
+    Configura e gerencia todos os 5 handlers simultneos:
+    1. Console (colorido por nvel)
     2. File (rotating, 10MB max)
     3. Audit (circular buffer para compliance)
-    4. Memory (in-memory para acesso rápido)
+    4. Memory (in-memory para acesso rpido)
     5. Socket (dashboard externo - opcional)
     """
     
@@ -136,13 +136,13 @@ class LiveTradingLoggerManager:
         return cls._instance
     
     def __init__(self):
-        # Evitar reinicialização
+        # Evitar reinicializao
         if hasattr(self, '_initialized') and self._initialized:
             return
         
         self._initialized = True
         
-        # Configuração
+        # Configurao
         self.log_level = logging.DEBUG
         self.log_dir = "logs"
         self.max_bytes = 10 * 1024 * 1024  # 10MB
@@ -157,11 +157,11 @@ class LiveTradingLoggerManager:
         self.memory_handler = None
         self.socket_handler = None
         
-        # Memory buffer para acesso rápido
+        # Memory buffer para acesso rpido
         self.memory_buffer = deque(maxlen=self.memory_buffer_size)
         self.memory_buffer_lock = threading.Lock()
         
-        # Estatísticas
+        # Estatsticas
         self.log_counts = {
             logging.DEBUG: 0,
             logging.INFO: 0,
@@ -171,7 +171,7 @@ class LiveTradingLoggerManager:
         }
         self.counts_lock = threading.Lock()
         
-        # Criar diretório de logs
+        # Criar diretrio de logs
         os.makedirs(self.log_dir, exist_ok=True)
         
         # Configurar logger principal
@@ -197,12 +197,14 @@ class LiveTradingLoggerManager:
         self._setup_memory_handler()
         
         # Handler 5: Socket (dashboard externo - opcional)
-        # self._setup_socket_handler()  # Desabilitado por padrão
+        # self._setup_socket_handler()  # Desabilitado por padro
     
     def _setup_console_handler(self):
         """Configura handler de console com cores"""
         self.console_handler = logging.StreamHandler(sys.stdout)
-        self.console_handler.setLevel(logging.INFO)
+        # Forar UTF-8 para evitar problemas com caracteres especiais (emojis)
+        self.console_handler.stream = open(sys.stdout.fileno(), mode='w', encoding='utf-8', buffering=1)
+        self.console_handler.setLevel(logging.DEBUG)
         self.console_handler.setFormatter(ColorFormatter())
         self.root_logger.addHandler(self.console_handler)
     
@@ -260,7 +262,7 @@ class LiveTradingLoggerManager:
         self.root_logger.addHandler(self.audit_handler)
     
     def _setup_memory_handler(self):
-        """Configura handler in-memory para acesso rápido"""
+        """Configura handler in-memory para acesso rpido"""
         # Usar classe customizada para buffer circular
         self.memory_handler = CircularMemoryHandler(self.memory_buffer_size)
         self.memory_handler.setLevel(logging.DEBUG)
@@ -268,12 +270,12 @@ class LiveTradingLoggerManager:
     
     def _setup_socket_handler(self, host: str = "localhost", port: int = 9020):
         """Configura handler de socket para dashboard externo (opcional)"""
-        # Implementação futura: enviar logs para dashboard web
+        # Implementao futura: enviar logs para dashboard web
         pass
     
     def get_logger(self, name: str) -> SystemLogger:
         """
-        Obtém logger para um sistema específico
+        Obtm logger para um sistema especfico
         
         Args:
             name: Nome do sistema (ex: "MT5Bridge", "DataEngine", "NeuralChain")
@@ -285,11 +287,11 @@ class LiveTradingLoggerManager:
     
     def get_recent_logs(self, n: int = 100, level: Optional[int] = None) -> list:
         """
-        Obtém logs recentes do buffer de memória
+        Obtm logs recentes do buffer de memria
         
         Args:
-            n: Número de logs a retornar
-            level: Filtrar por nível (opcional)
+            n: Nmero de logs a retornar
+            level: Filtrar por nvel (opcional)
         
         Returns:
             Lista de registros de log
@@ -297,15 +299,15 @@ class LiveTradingLoggerManager:
         with self.memory_buffer_lock:
             logs = list(self.memory_handler.buffer)
         
-        # Filtrar por nível se especificado
+        # Filtrar por nvel se especificado
         if level is not None:
             logs = [log for log in logs if log.levelno >= level]
         
-        # Retornar últimos n
+        # Retornar ltimos n
         return logs[-n:]
     
     def get_stats(self) -> dict:
-        """Retorna estatísticas de logging"""
+        """Retorna estatsticas de logging"""
         with self.counts_lock:
             return {
                 "counts": self.log_counts.copy(),
@@ -314,13 +316,13 @@ class LiveTradingLoggerManager:
             }
     
     def increment_count(self, level: int):
-        """Incrementa contador de logs por nível"""
+        """Incrementa contador de logs por nvel"""
         with self.counts_lock:
             if level in self.log_counts:
                 self.log_counts[level] += 1
     
     def flush(self):
-        """Força flush de todos os handlers"""
+        """Fora flush de todos os handlers"""
         if self.audit_handler:
             self.audit_handler.flush()
         
@@ -344,7 +346,7 @@ class LiveTradingLoggerManager:
 
 
 class CircularMemoryHandler(logging.Handler):
-    """Handler de memória com buffer circular"""
+    """Handler de memria com buffer circular"""
     
     def __init__(self, capacity: int = 5000):
         super().__init__()
@@ -370,21 +372,25 @@ class CircularMemoryHandler(logging.Handler):
         super().close()
 
 
-# Instância global singleton
+# Instncia global singleton
 logger_manager = LiveTradingLoggerManager()
 
 
-# Funções de conveniência
+# Funes de convenincia
 def get_logger(name: str) -> SystemLogger:
-    """Obtém logger para um sistema"""
+    """Obtm logger para um sistema"""
     return logger_manager.get_logger(name)
 
 
 def get_recent_logs(n: int = 100, level: Optional[int] = None) -> list:
-    """Obtém logs recentes"""
+    """Obtm logs recentes"""
     return logger_manager.get_recent_logs(n, level)
 
 
 def get_logger_stats() -> dict:
-    """Obtém estatísticas de logging"""
+    """Obtm estatsticas de logging"""
     return logger_manager.get_stats()
+
+
+
+

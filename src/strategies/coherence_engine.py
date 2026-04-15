@@ -50,7 +50,7 @@ class CoherenceEngine:
         self.dna_params = dna_params
         self.coherence_history: List[float] = []
         
-        logger.info("🔬 Coherence Engine initialized")
+        logger.info(" Coherence Engine initialized")
     
     def analyze(self, orchestration_result: Any, candles: pd.DataFrame,
                regime: str, profile: Any, risk_context: Dict[str, Any]) -> CoherenceResult:
@@ -291,3 +291,7 @@ class CoherenceEngine:
         if not self.coherence_history:
             return 0.5
         return np.mean(self.coherence_history)
+
+
+
+

@@ -34,11 +34,11 @@ def setup_logging():
 def main():
     """Main entry point"""
     logger.info("="*80)
-    logger.info("🚀 FOREX QUANTUM BOT - INICIALIZANDO")
+    logger.info(" FOREX QUANTUM BOT - INICIALIZANDO")
     logger.info("="*80)
-    logger.info("💰 Capital FTMO Demo: $100,000 USD")
-    logger.info("📊 Símbolo: BTCUSD")
-    logger.info("🧬 DNA Engine: ATIVO (Zero Hardcoded Params)")
+    logger.info(" Capital FTMO Demo: $100,000 USD")
+    logger.info(" Smbolo: BTCUSD")
+    logger.info(" DNA Engine: ATIVO (Zero Hardcoded Params)")
     logger.info("="*80)
     
     # Setup logging
@@ -49,11 +49,11 @@ def main():
     
     # Load DNA
     dna = config.load_dna()
-    logger.info(f"🧬 DNA carregado: {config.dna_file_path}")
+    logger.info(f" DNA carregado: {config.dna_file_path}")
     
     # Load absolute limits
     limits = config.load_absolute_limits()
-    logger.info(f"🛡️ Limites absolutos carregados: {config.absolute_limits_path}")
+    logger.info(f" Limites absolutos carregados: {config.absolute_limits_path}")
     
     # Initialize orchestrator
     orchestrator = Orchestrator(config=config, dna=dna)
@@ -62,12 +62,16 @@ def main():
     try:
         asyncio.run(orchestrator.run())
     except KeyboardInterrupt:
-        logger.warning("⚠️ Interrupção manual detectada")
+        logger.warning(" Interrupo manual detectada")
         orchestrator.shutdown()
     except Exception as e:
-        logger.error(f"💀 Erro fatal: {e}", exc_info=True)
+        logger.error(f" Erro fatal: {e}", exc_info=True)
         orchestrator.emergency_shutdown()
 
 
 if __name__ == "__main__":
     main()
+
+
+
+

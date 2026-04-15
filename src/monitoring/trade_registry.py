@@ -45,7 +45,7 @@ class TradeRegistry:
         self.trades: List[Dict[str, Any]] = []
         self.trade_counter = 0
         
-        logger.info("📋 TradeRegistry initialized")
+        logger.info(" TradeRegistry initialized")
         logger.info(f"   Session: {self.session_id}")
         logger.info(f"   Audit dir: {self.session_dir}")
 
@@ -58,7 +58,7 @@ class TradeRegistry:
         for old_session in sessions[:-3]:  # Keep last 3
             import shutil
             shutil.rmtree(old_session, ignore_errors=True)
-            logger.info(f"🗑️ Cleaned old session: {old_session.name}")
+            logger.info(f" Cleaned old session: {old_session.name}")
 
     def record_entry(self, trade_data: Dict[str, Any]) -> int:
         """
@@ -135,3 +135,7 @@ class TradeRegistry:
             'avg_win': sum(t.get('net_pnl', 0) for t in wins) / max(1, len(wins)),
             'avg_loss': sum(t.get('net_pnl', 0) for t in losses) / max(1, len(losses)),
         }
+
+
+
+

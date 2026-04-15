@@ -31,7 +31,7 @@ class DNAOrderManagerIntegration:
         self.dna_params = dna_params
         self.order_manager = SmartOrderManager(dna_params=dna_params)
         
-        logger.info("🧬 DNA-Order Manager Integration initialized")
+        logger.info(" DNA-Order Manager Integration initialized")
     
     def adjust_profit_profiles(self, performance_data: Dict[str, Any]) -> None:
         """
@@ -40,7 +40,7 @@ class DNAOrderManagerIntegration:
         Args:
             performance_data: Historical performance by target level
         """
-        logger.info("🧬 Adjusting profit profiles based on performance...")
+        logger.info(" Adjusting profit profiles based on performance...")
         
         for target in ProfitTarget:
             target_key = f"target_{int(target.value * 100)}"
@@ -55,12 +55,12 @@ class DNAOrderManagerIntegration:
                 if win_rate > 0.7:
                     # High win rate - can afford tighter SL
                     profile.sl_distance_points *= 0.9
-                    logger.info(f"   📊 {target.value*100:.0f}%: High WR ({win_rate:.1%}) → Tightening SL")
+                    logger.info(f"    {target.value*100:.0f}%: High WR ({win_rate:.1%})  Tightening SL")
                 
                 elif win_rate < 0.4:
                     # Low win rate - need wider SL
                     profile.sl_distance_points *= 1.1
-                    logger.info(f"   📊 {target.value*100:.0f}%: Low WR ({win_rate:.1%}) → Widening SL")
+                    logger.info(f"    {target.value*100:.0f}%: Low WR ({win_rate:.1%})  Widening SL")
                 
                 # Adjust velocity threshold based on average velocity at target
                 avg_velocity = perf.get('avg_velocity', 1.0)
@@ -72,7 +72,7 @@ class DNAOrderManagerIntegration:
                 
                 profile.dna_adjusted = True
         
-        logger.info("✅ Profit profiles adjusted by DNA")
+        logger.info(" Profit profiles adjusted by DNA")
     
     def adjust_tp_settings(self, market_regime: str) -> None:
         """
@@ -114,7 +114,7 @@ class DNAOrderManagerIntegration:
             adjustment = regime_adjustments[market_regime]
             settings.update(adjustment)
             
-            logger.info(f"🧬 TP settings adjusted for regime: {market_regime}")
+            logger.info(f" TP settings adjusted for regime: {market_regime}")
             logger.info(f"   Gravity: {settings['gravity_weight']:.2f}")
             logger.info(f"   Velocity: {settings['velocity_weight']:.2f}")
             logger.info(f"   Oscillation: {settings['oscillation_weight']:.2f}")
@@ -137,3 +137,7 @@ class DNAOrderManagerIntegration:
             'tp_settings': self.order_manager.tp_adjustment_settings,
             'profit_profiles': profiles_summary,
         }
+
+
+
+

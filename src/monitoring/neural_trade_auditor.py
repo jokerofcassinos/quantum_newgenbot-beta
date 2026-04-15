@@ -17,11 +17,11 @@ Captures COMPLETE neural state at moment of each trade:
 
 Structure:
 data/
-└── trade-audits/
-    └── 2026-04-10/
-        ├── trade_1000.json
-        ├── trade_1001.json
-        └── trade_1002.json
+ trade-audits/
+     2026-04-10/
+         trade_1000.json
+         trade_1001.json
+         trade_1002.json
 """
 
 import json
@@ -313,7 +313,7 @@ class NeuralTradeAuditor:
         # Active audits (pending exit)
         self.active_audits: Dict[int, TradeAuditLog] = {}
         
-        logger.info(f"🔬 Neural Trade Auditor initialized at {self.base_path}")
+        logger.info(f" Neural Trade Auditor initialized at {self.base_path}")
     
     def capture_entry_state(
         self,
@@ -437,7 +437,7 @@ class NeuralTradeAuditor:
         # Save to file
         self._save_audit(audit)
         
-        logger.info(f"🔬 Entry audit captured for trade #{ticket}")
+        logger.info(f" Entry audit captured for trade #{ticket}")
         logger.info(f"   Regime: {regime_audit.regime_type} ({regime_audit.regime_confidence:.2f})")
         logger.info(f"   Session: {regime_audit.session}")
         logger.info(f"   Momentum: velocity={momentum_audit.velocity:.4f}")
@@ -460,7 +460,7 @@ class NeuralTradeAuditor:
         Capture trade exit and analyze outcome
         """
         if ticket not in self.active_audits:
-            logger.warning(f"⚠️ No active audit for trade #{ticket}")
+            logger.warning(f" No active audit for trade #{ticket}")
             return None
         
         audit = self.active_audits[ticket]
@@ -484,7 +484,7 @@ class NeuralTradeAuditor:
         # Remove from active
         del self.active_audits[ticket]
         
-        logger.info(f"✅ Exit audit captured for trade #{ticket}")
+        logger.info(f" Exit audit captured for trade #{ticket}")
         logger.info(f"   PnL: ${net_pnl:+,.2f}")
         logger.info(f"   Reason: {exit_reason}")
         logger.info(f"   Error: {'YES - ' + audit.error_type if audit.was_error else 'NO'}")
@@ -645,3 +645,7 @@ class NeuralTradeAuditor:
                     logger.error(f"Error loading {trade_file}: {e}")
         
         return audits
+
+
+
+

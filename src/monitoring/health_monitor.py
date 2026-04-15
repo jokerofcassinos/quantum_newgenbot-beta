@@ -66,7 +66,7 @@ class HealthMonitor:
         self.start_time = time.time()
         self.last_check_time = None
         
-        logger.info("🏥 Health Monitor initialized")
+        logger.info(" Health Monitor initialized")
     
     def check_health(self) -> HealthStatus:
         """
@@ -142,7 +142,7 @@ class HealthMonitor:
             
         except Exception as e:
             status.issues.append(f"CRITICAL: Resource check failed: {e}")
-            logger.error(f"❌ Resource check error: {e}")
+            logger.error(f" Resource check error: {e}")
     
     def _check_components(self, status: HealthStatus):
         """Check all system components"""
@@ -177,7 +177,7 @@ class HealthMonitor:
                 
             except Exception as e:
                 status.issues.append(f"CRITICAL: {component_name} check failed: {e}")
-                logger.error(f"❌ Component check error ({component_name}): {e}")
+                logger.error(f" Component check error ({component_name}): {e}")
     
     def _check_performance(self, status: HealthStatus):
         """Check performance metrics"""
@@ -274,3 +274,7 @@ class HealthMonitor:
         ]
         
         return history
+
+
+
+

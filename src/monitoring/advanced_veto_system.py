@@ -82,7 +82,7 @@ class AdvancedVetoSystem:
         # Margin tracking
         self.current_margin_state = None
         
-        logger.info("🛡️ Advanced Veto System initialized")
+        logger.info(" Advanced Veto System initialized")
         logger.info(f"   Top/Bottom Detection: Active")
         logger.info(f"   Black Swan Detection: Active")
         logger.info(f"   Order Protection: Active")
@@ -605,3 +605,7 @@ class AdvancedVetoSystem:
     def remove_active_order(self, ticket: int):
         """Remove completed order"""
         self.active_orders = [o for o in self.active_orders if o['ticket'] != ticket]
+
+
+
+

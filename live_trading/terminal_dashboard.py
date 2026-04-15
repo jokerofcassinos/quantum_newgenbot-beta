@@ -1,18 +1,18 @@
 """
 Terminal Dashboard - Mostra logs de TODOS os sistemas em tempo real
 
-Este módulo cria um dashboard em tempo real no terminal que mostra:
-- Status de conexão MT5
-- Métricas de performance (PnL, drawdown, win rate)
+Este mdulo cria um dashboard em tempo real no terminal que mostra:
+- Status de conexo MT5
+- Mtricas de performance (PnL, drawdown, win rate)
 - Logs de cada sistema (1 por 1)
 - Estado do mercado (regime, indicadores)
-- Estatísticas de trading
+- Estatsticas de trading
 - Alertas de erros e anomalias
 
-Herança do projeto legacy DubaiMatrixASI:
+Herana do projeto legacy DubaiMatrixASI:
 - Terminal output com logs de todos os sistemas
-- Dashboard com métricas de performance
-- Status de conexão em tempo real
+- Dashboard com mtricas de performance
+- Status de conexo em tempo real
 - Alertas visuais
 """
 
@@ -52,10 +52,10 @@ class TerminalDashboard:
     
     Mostra:
     - Header com status geral
-    - Seção MT5 Bridge
-    - Seção Data Engine
+    - Seo MT5 Bridge
+    - Seo Data Engine
     - Logs de cada sistema (rolling)
-    - Métricas de performance
+    - Mtricas de performance
     - Alertas
     """
     
@@ -67,7 +67,7 @@ class TerminalDashboard:
         self.running = False
         self.refresh_interval = 1.0  # Atualizar a cada 1 segundo
         
-        # Thread de atualização
+        # Thread de atualizao
         self.refresh_thread: Optional[threading.Thread] = None
         
         # Dados para display
@@ -76,7 +76,7 @@ class TerminalDashboard:
         self.trading_stats = {}
         self.system_status = {}
         
-        # Estatísticas de logs
+        # Estatsticas de logs
         self.last_log_count = 0
         
         # Clear screen
@@ -112,7 +112,7 @@ class TerminalDashboard:
         self.indicators = indicators
     
     def update_trading_stats(self, stats: Dict):
-        """Atualiza estatísticas de trading"""
+        """Atualiza estatsticas de trading"""
         self.trading_stats = stats
     
     def update_system_status(self, system: str, status: str):
@@ -147,7 +147,7 @@ class TerminalDashboard:
         # Market State
         self._render_market_state()
         
-        # System Logs (últimos logs de cada sistema)
+        # System Logs (ltimos logs de cada sistema)
         self._render_system_logs()
         
         # Statistics
@@ -181,7 +181,7 @@ class TerminalDashboard:
             is_connected = self.bridge.is_connected()
             
             # Connection status
-            status_icon = "✅ CONNECTED" if is_connected else "❌ DISCONNECTED"
+            status_icon = " CONNECTED" if is_connected else " DISCONNECTED"
             print(f"{Colors.CYAN}Status:{Colors.RESET} {status_icon}")
             
             # Latency
@@ -242,12 +242,12 @@ class TerminalDashboard:
             
             # Regime
             regime_icons = {
-                "trending_up": "📈 TRENDING UP",
-                "trending_down": "📉 TRENDING DOWN",
-                "ranging": "➡️ RANGING",
-                "volatile": "⚡ VOLATILE"
+                "trending_up": " TRENDING UP",
+                "trending_down": " TRENDING DOWN",
+                "ranging": " RANGING",
+                "volatile": " VOLATILE"
             }
-            regime_display = regime_icons.get(ms.regime, f"❓ {ms.regime.upper()}")
+            regime_display = regime_icons.get(ms.regime, f" {ms.regime.upper()}")
             print(f"{Colors.CYAN}Regime:{Colors.RESET} {regime_display} (Strength: {ms.trend_strength:.2f})")
             
             # Volatility regime
@@ -291,7 +291,7 @@ class TerminalDashboard:
                 levelname = log.levelname if hasattr(log, 'levelname') else "INFO"
                 message = log.getMessage() if hasattr(log, 'getMessage') else str(log)
                 
-                # Colorir por nível
+                # Colorir por nvel
                 level_colors = {
                     "DEBUG": Colors.CYAN,
                     "INFO": Colors.GREEN,
@@ -313,7 +313,7 @@ class TerminalDashboard:
             print(f"{Colors.YELLOW}No logs yet...{Colors.RESET}")
     
     def _render_statistics(self):
-        """Renderiza estatísticas gerais"""
+        """Renderiza estatsticas gerais"""
         width = 100
         
         print("\n" + "=" * width)
@@ -336,7 +336,7 @@ class TerminalDashboard:
         if self.system_status:
             print(f"\n{Colors.CYAN}System Status:{Colors.RESET}")
             for system, status in self.system_status.items():
-                status_icon = "✅" if status == "OK" else "❌" if status == "ERROR" else "⏳"
+                status_icon = "" if status == "OK" else "" if status == "ERROR" else ""
                 print(f"  {status_icon} {system}: {status}")
     
     def _render_footer(self):
@@ -351,7 +351,7 @@ class TerminalDashboard:
 class SimpleTerminalOutput:
     """
     Output simplificado para terminal (sem refresh completo)
-    Útil para mostrar status em tempo real sem limpar a tela
+    til para mostrar status em tempo real sem limpar a tela
     """
     
     def __init__(self):
@@ -363,13 +363,13 @@ class SimpleTerminalOutput:
         timestamp = datetime.now().strftime('%H:%M:%S')
         
         status_icons = {
-            "OK": "✅",
-            "ERROR": "❌",
-            "WARNING": "⚠️",
-            "INFO": "ℹ️",
-            "RUNNING": "🔄"
+            "OK": "",
+            "ERROR": "",
+            "WARNING": "",
+            "INFO": "",
+            "RUNNING": ""
         }
-        icon = status_icons.get(status, "•")
+        icon = status_icons.get(status, "")
         
         print(f"[{timestamp}] {icon} {system}: {message}")
     
@@ -404,3 +404,7 @@ class SimpleTerminalOutput:
             print(f"  RSI: {ind.rsi:.2f}")
             print(f"  EMA: 9={ind.ema9:.2f}, 21={ind.ema21:.2f}, 50={ind.ema50:.2f}, 200={ind.ema200:.2f}")
             print(f"  MACD: {ind.macd:.5f} / Signal: {ind.macd_signal:.5f}")
+
+
+
+

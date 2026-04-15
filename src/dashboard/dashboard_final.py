@@ -181,7 +181,7 @@ async def dashboard():
 </head>
 <body>
     <div class="header">
-        <h1>🚀 FOREX QUANTUM BOT</h1>
+        <h1> FOREX QUANTUM BOT</h1>
         <p>Neural Trading System Dashboard</p>
     </div>
     
@@ -214,12 +214,12 @@ async def dashboard():
         </div>
         
         <div class="chart-container">
-            <h2>📈 Equity Curve</h2>
+            <h2> Equity Curve</h2>
             <div id="equity-chart" style="height: 400px;"></div>
         </div>
         
         <div class="chart-container">
-            <h2>📊 Trade History</h2>
+            <h2> Trade History</h2>
             <div class="trade-history" id="trade-history">
                 <div class="trade-item" style="color: #94a3b8;">
                     <span>No trades yet</span>
@@ -337,10 +337,14 @@ if __name__ == "__main__":
     import uvicorn
     
     print("\n" + "="*80)
-    print("🖥️ FOREX QUANTUM BOT - WEB DASHBOARD")
+    print(" FOREX QUANTUM BOT - WEB DASHBOARD")
     print("="*80)
-    print("\n🌐 Opening dashboard at: http://localhost:8000")
-    print("💡 Connect the bot to send real-time data via WebSocket")
+    print("\n Opening dashboard at: http://localhost:8000")
+    print(" Connect the bot to send real-time data via WebSocket")
     print("="*80 + "\n")
     
     uvicorn.run(app, host="0.0.0.0", port=8000, log_level="info")
+
+
+
+

@@ -298,3 +298,6 @@ Com 0.5% risco/trade:
 **Versão:** 1.0.0  
 **Status:** Pronto para criação  
 **Prioridade:** 🔴 CRÍTICA (criar primeiro)
+
+
+

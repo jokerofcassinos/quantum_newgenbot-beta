@@ -73,7 +73,7 @@ class AntiMetralhadora:
         self.current_session: str = 'unknown'
         self.last_reset_date: Optional[datetime.date] = None
         
-        logger.info("🛡️ Anti-Metralhadora initialized")
+        logger.info(" Anti-Metralhadora initialized")
         logger.info(f"   Min interval: {min_interval_minutes} min")
         logger.info(f"   Max trades/day: {max_trades_per_day}")
         logger.info(f"   Min quality: {min_quality_score}")
@@ -191,20 +191,20 @@ class AntiMetralhadora:
         if result == 'loss':
             self.consecutive_losses += 1
             self.last_loss_time = current_time
-            logger.warning(f"⚠️ Loss recorded. Consecutive losses: {self.consecutive_losses}")
+            logger.warning(f" Loss recorded. Consecutive losses: {self.consecutive_losses}")
             
             if self.consecutive_losses >= self.max_consecutive_losses:
-                logger.warning(f"🛑 Loss cooldown activated: {self.loss_cooldown_minutes} min cooldown")
+                logger.warning(f" Loss cooldown activated: {self.loss_cooldown_minutes} min cooldown")
         else:
             self.consecutive_losses = 0
-            logger.info(f"✅ Win recorded. Consecutive losses reset.")
+            logger.info(f" Win recorded. Consecutive losses reset.")
 
     def _check_daily_reset(self, current_time: datetime) -> None:
         """Reset daily counters if new day."""
         current_date = current_time.date()
         
         if self.last_reset_date is None or current_date != self.last_reset_date:
-            logger.info(f"🔄 Daily reset: Resetting trade counters")
+            logger.info(f" Daily reset: Resetting trade counters")
             self.trade_count_today = 0
             self.trade_count_per_session = {
                 'asian': 0,
@@ -244,4 +244,8 @@ class AntiMetralhadora:
             'weekend': 0,
         }
         self.last_reset_date = None
-        logger.info("🔄 Anti-Metralhadora state reset")
+        logger.info(" Anti-Metralhadora state reset")
+
+
+
+

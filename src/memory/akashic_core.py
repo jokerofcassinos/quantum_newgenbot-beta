@@ -55,7 +55,7 @@ class AkashicCore:
             'regime': self._random_vector(vector_dim),
         }
         
-        logger.info("📚 AkashicCore initialized")
+        logger.info(" AkashicCore initialized")
         logger.info(f"   Vector dim: {vector_dim}")
         logger.info(f"   Memory capacity: {memory_capacity}")
         logger.info(f"   Similarity threshold: {similarity_threshold}")
@@ -224,3 +224,7 @@ class AkashicCore:
             'capacity': self.memory_capacity,
             'utilization': len(self.memory) / self.memory_capacity,
         }
+
+
+
+

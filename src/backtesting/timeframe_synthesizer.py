@@ -73,7 +73,7 @@ class TimeframeSynthesizer:
         """
         bars_per_parent = self.BARS_PER_TIMEFRAME[f'M1_from_{source_timeframe}']
         
-        logger.info(f"🔬 Synthesizing M1 from {source_timeframe} "
+        logger.info(f" Synthesizing M1 from {source_timeframe} "
                    f"({bars_per_parent} M1 bars per parent)")
         
         all_m1 = []
@@ -89,7 +89,7 @@ class TimeframeSynthesizer:
         m1_df['time'] = pd.to_datetime(m1_df['time'])
         m1_df = m1_df.sort_values('time').reset_index(drop=True)
         
-        logger.info(f"✅ Synthesized {len(m1_df)} M1 candles from "
+        logger.info(f" Synthesized {len(m1_df)} M1 candles from "
                    f"{len(candles_higher)} {source_timeframe} candles")
         
         return m1_df
@@ -273,18 +273,18 @@ class TimeframeSynthesizer:
         result = {}
         
         # M1 from M5
-        logger.info("🔬 Synthesizing M1 from M5...")
+        logger.info(" Synthesizing M1 from M5...")
         result['M1'] = self.synthesize_m1_from_higher_tf(m5_candles, 'M5')
         
         # M5 (already have)
         result['M5'] = m5_candles
         
         # M15 from M5 (aggregate)
-        logger.info("🔬 Aggregating M15 from M5...")
+        logger.info(" Aggregating M15 from M5...")
         result['M15'] = self._aggregate_timeframe(m5_candles, 'M15')
         
         # H1 from M5
-        logger.info("🔬 Aggregating H1 from M5...")
+        logger.info(" Aggregating H1 from M5...")
         result['H1'] = self._aggregate_timeframe(m5_candles, 'H1')
         
         # H4 (if provided or from H1)
@@ -293,7 +293,7 @@ class TimeframeSynthesizer:
         elif 'H1' in result:
             result['H4'] = self._aggregate_timeframe(result['H1'], 'H4')
         
-        logger.info(f"✅ Timeframe synthesis complete:")
+        logger.info(f" Timeframe synthesis complete:")
         for tf, df in result.items():
             logger.info(f"   {tf}: {len(df)} candles")
         
@@ -305,9 +305,9 @@ class TimeframeSynthesizer:
         """
         Aggregate candles to higher timeframe
         
-        M5 → M15: 3 bars per candle
-        M5 → H1: 12 bars per candle
-        M5 → H4: 72 bars per candle
+        M5  M15: 3 bars per candle
+        M5  H1: 12 bars per candle
+        M5  H4: 72 bars per candle
         """
         bars_per_candle = {
             'M15': 3,
@@ -339,3 +339,7 @@ class TimeframeSynthesizer:
             aggregated.append(agg_candle)
         
         return pd.DataFrame(aggregated)
+
+
+
+

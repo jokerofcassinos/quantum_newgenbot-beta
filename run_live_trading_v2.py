@@ -1,14 +1,14 @@
 """
 Run Live Trading V2 - Entry Point Principal para Live Trading
 
-Este é o ponto de entrada principal para o sistema de live trading completo.
-Integra todos os módulos da FASE 0 e FASE 1:
+Este  o ponto de entrada principal para o sistema de live trading completo.
+Integra todos os mdulos da FASE 0 e FASE 1:
 - MT5 Bridge (TCP Socket)
 - Data Engine (Background worker)
 - Logger (5 handlers)
 - Terminal Dashboard
 
-FASE 2 irá adicionar:
+FASE 2 ir adicionar:
 - Neural Chain (cadeia neural completa)
 - RegimeDetector
 - NeuralSwarm (140+ agentes)
@@ -29,7 +29,7 @@ import logging
 from datetime import datetime
 from typing import Optional
 
-# Configurar logging padrão do Python ANTES de importar outros módulos
+# Configurar logging padro do Python ANTES de importar outros mdulos
 logging.basicConfig(
     level=logging.DEBUG,
     format='%(asctime)s.%(msecs)03d | %(name)-15s | %(levelname)-8s | %(message)s',
@@ -55,7 +55,7 @@ class LiveTradingSystem:
     """
     Sistema principal de live trading
     
-    Orquestra todos os módulos:
+    Orquestra todos os mdulos:
     - MT5 Bridge
     - Data Engine
     - Neural Chain (FASE 2)
@@ -64,7 +64,7 @@ class LiveTradingSystem:
     """
     
     def __init__(self, config: Optional[dict] = None):
-        # Configuração
+        # Configurao
         self.config = config or self._load_default_config()
         
         # Logger
@@ -81,7 +81,7 @@ class LiveTradingSystem:
         self.running = False
         self.start_time = None
         
-        # Estatísticas
+        # Estatsticas
         self.stats = {
             "ticks_processed": 0,
             "trades_executed": 0,
@@ -94,7 +94,7 @@ class LiveTradingSystem:
         signal.signal(signal.SIGTERM, self._signal_handler)
     
     def _load_default_config(self) -> dict:
-        """Carrega configuração padrão"""
+        """Carrega configurao padro"""
         return {
             "socket": {
                 "host": "127.0.0.1",
@@ -140,7 +140,7 @@ class LiveTradingSystem:
             self.logger.info("[LIVE] Step 3: Starting Terminal Dashboard...")
             self._start_dashboard()
             
-            # 4. Setup completo (FASE 2 adicionará neural chain aqui)
+            # 4. Setup completo (FASE 2 adicionar neural chain aqui)
             self.logger.info("[LIVE] Step 4: Setting up neural chain (FASE 2)...")
             self._setup_neural_chain()
             
@@ -149,7 +149,7 @@ class LiveTradingSystem:
             self.start_time = datetime.now()
             
             self.logger.info("=" * 80)
-            self.logger.info("✅ LIVE TRADING SYSTEM STARTED SUCCESSFULLY")
+            self.logger.info(" LIVE TRADING SYSTEM STARTED SUCCESSFULLY")
             self.logger.info("=" * 80)
             self.logger.info(f"Symbol: {self.config['mt5']['symbol']}")
             self.logger.info(f"Socket: {self.config['socket']['host']}:{self.config['socket']['port']}")
@@ -191,24 +191,24 @@ class LiveTradingSystem:
             self.logger.info("[LIVE] Stopping MT5 bridge...")
             self.bridge.stop()
         
-        # Estatísticas finais
+        # Estatsticas finais
         self._print_final_stats()
         
         self.logger.info("=" * 80)
-        self.logger.info("✅ LIVE TRADING SYSTEM STOPPED")
+        self.logger.info("[STOPPED] LIVE TRADING SYSTEM STOPPED")
         self.logger.info("=" * 80)
     
     def _start_mt5_bridge(self):
-        """Inicia MT5 Bridge - APENAS criar, NÃO startar ainda"""
+        """Inicia MT5 Bridge - APENAS criar, NO startar ainda"""
         socket_config = self.config['socket']
 
-        # Criar bridge sem iniciar (callbacks serão registrados antes do start)
+        # Criar bridge sem iniciar (callbacks sero registrados antes do start)
         self.bridge = MT5Bridge(
             host=socket_config['host'],
             port=socket_config['port']
         )
 
-        self.logger.info("[LIVE] ✅ MT5 Bridge created")
+        self.logger.info("[LIVE]  MT5 Bridge created")
     
     def _start_data_engine(self):
         """Inicia Data Engine - registrar TODOS callbacks ANTES de start"""
@@ -239,11 +239,11 @@ class LiveTradingSystem:
         self.bridge.on_error(self._on_mt5_error)
         # =====================================================
 
-        # AGORA sim, iniciar bridge (todos callbacks já registrados)
+        # AGORA sim, iniciar bridge (todos callbacks j registrados)
         self.bridge.start()
         self.data_engine.start()
 
-        self.logger.info("[LIVE] ✅ Data Engine started")
+        self.logger.info("[LIVE]  Data Engine started")
     
     def _start_dashboard(self):
         """Inicia Dashboard"""
@@ -254,7 +254,7 @@ class LiveTradingSystem:
         self.dashboard = TerminalDashboard(bridge=self.bridge)
         self.dashboard.start()
         
-        self.logger.info("[LIVE] ✅ Terminal Dashboard started")
+        self.logger.info("[LIVE]  Terminal Dashboard started")
     
     def _setup_neural_chain(self):
         """Setup da cadeia neural completa + Trade Executor"""
@@ -268,7 +268,7 @@ class LiveTradingSystem:
             initial_capital=initial_capital
         )
         
-        self.logger.info("[LIVE] ✅ Live Neural Chain initialized")
+        self.logger.info("[LIVE]  Live Neural Chain initialized")
         self.logger.info("[LIVE]   Modules loaded: 33+")
         self.logger.info("[LIVE]   Strategies: 13")
         self.logger.info("[LIVE]   Veto systems: 10+")
@@ -295,7 +295,7 @@ class LiveTradingSystem:
         # Iniciar trade executor
         self.trade_executor.start()
         
-        self.logger.info("[LIVE] ✅ Trade Executor initialized")
+        self.logger.info("[LIVE]  Trade Executor initialized")
     
     def _main_loop(self):
         """Loop principal do sistema"""
@@ -308,7 +308,7 @@ class LiveTradingSystem:
                     # Sistema rodando normalmente
                     time.sleep(1)
                 else:
-                    # Aguardando conexão
+                    # Aguardando conexo
                     self.logger.debug("[LIVE] Waiting for MT5 connection...")
                     time.sleep(2)
                 
@@ -326,7 +326,7 @@ class LiveTradingSystem:
             self.stop()
     
     def _check_system_health(self):
-        """Verifica saúde do sistema"""
+        """Verifica sade do sistema"""
         # Verificar bridge
         if self.bridge:
             stats = self.bridge.get_stats()
@@ -335,7 +335,7 @@ class LiveTradingSystem:
             if stats['errors'] > 10:
                 self.logger.warning(f"[LIVE] High error count: {stats['errors']}")
             
-            # Verificar latência
+            # Verificar latncia
             if stats['avg_latency_ms'] > 100:
                 self.logger.warning(f"[LIVE] High latency: {stats['avg_latency_ms']:.2f}ms")
         
@@ -371,31 +371,31 @@ class LiveTradingSystem:
         self.logger.debug(f"[LIVE] Account updated: balance={account.balance:.2f}")
     
     def _on_position_received(self, position):
-        """Callback quando recebe dados de posição"""
+        """Callback quando recebe dados de posio"""
         self.logger.debug(f"[LIVE] Position updated: ticket={position.ticket}")
     
     def _on_mt5_connected(self):
         """Callback quando MT5 conecta"""
-        self.logger.info("[LIVE] ✅ MT5 CONNECTED - Data flow starting")
+        self.logger.info("[LIVE]  MT5 CONNECTED - Data flow starting")
     
     def _on_mt5_disconnected(self):
         """Callback quando MT5 desconecta"""
-        self.logger.warning("[LIVE] ⚠️ MT5 DISCONNECTED - Attempting reconnection...")
+        self.logger.warning("[LIVE]  MT5 DISCONNECTED - Attempting reconnection...")
     
     def _on_mt5_error(self, error: str):
         """Callback quando recebe erro do MT5"""
-        self.logger.error(f"[LIVE] ❌ MT5 Error: {error}")
+        self.logger.error(f"[LIVE]  MT5 Error: {error}")
         self.stats['errors'] += 1
     
     def _on_indicators_ready(self, indicators: IndicatorData):
-        """Callback quando indicadores estão prontos"""
+        """Callback quando indicadores esto prontos"""
         self.logger.debug(f"[LIVE] Indicators ready: RSI={indicators.rsi:.2f} ATR={indicators.atr:.5f}")
         
         # Atualizar dashboard
         if self.dashboard:
             self.dashboard.update_indicators(indicators)
         
-        # Processar através da neural chain
+        # Processar atravs da neural chain
         if self.neural_chain and self.data_engine:
             tick = self.bridge.get_latest_tick()
             market_state = self.data_engine.get_market_state()
@@ -404,26 +404,26 @@ class LiveTradingSystem:
                 # Atualizar neural chain com dados frescos
                 self.neural_chain.update_market_data(tick, indicators)
                 
-                # Processar através da cadeia neural
+                # Processar atravs da cadeia neural
                 signal = self.neural_chain.process_tick(tick, indicators, market_state)
                 
                 if signal:
-                    self.logger.info(f"[LIVE] 🎯 NEURAL CHAIN SIGNAL: {signal.direction} {signal.symbol} @ {signal.entry_price:.2f} (conf={signal.confidence:.2f})")
+                    self.logger.info(f"[LIVE]  NEURAL CHAIN SIGNAL: {signal.direction} {signal.symbol} @ {signal.entry_price:.2f} (conf={signal.confidence:.2f})")
                     
                     # Executar trade!
                     if self.trade_executor:
                         order_ticket = self.trade_executor.execute_signal(signal)
                         
                         if order_ticket:
-                            self.logger.info(f"[LIVE] ✅ Trade executed: Order #{order_ticket}")
+                            self.logger.info(f"[LIVE]  Trade executed: Order #{order_ticket}")
                         else:
-                            self.logger.warning(f"[LIVE] ⚠️ Trade execution failed or rejected")
+                            self.logger.warning(f"[LIVE]  Trade execution failed or rejected")
                     
-                    # Atualizar estatísticas
+                    # Atualizar estatsticas
                     self.stats['trades_executed'] = self.neural_chain.stats['trades_executed']
     
     def _on_market_state_updated(self, market_state: MarketState):
-        """Callback quando estado do mercado é atualizado"""
+        """Callback quando estado do mercado  atualizado"""
         self.logger.debug(f"[LIVE] Market state updated: regime={market_state.regime}")
         
         # Atualizar dashboard
@@ -432,11 +432,11 @@ class LiveTradingSystem:
     
     def _on_regime_change(self, regime: str):
         """Callback quando regime muda"""
-        self.logger.info(f"[LIVE] 🔄 Regime changed to: {regime.upper()}")
+        self.logger.info(f"[LIVE]  Regime changed to: {regime.upper()}")
     
     def _on_order_executed(self, position: Position):
-        """Callback quando ordem é executada"""
-        self.logger.info(f"[LIVE] 🎯 ORDER EXECUTED: {position.direction} {position.volume} {position.symbol} @ {position.entry_price:.2f}")
+        """Callback quando ordem  executada"""
+        self.logger.info(f"[LIVE]  ORDER EXECUTED: {position.direction} {position.volume} {position.symbol} @ {position.entry_price:.2f}")
         self.logger.info(f"[LIVE]    SL: {position.stop_loss:.2f} | TP: {position.take_profit:.2f}")
         
         # Atualizar dashboard
@@ -444,8 +444,8 @@ class LiveTradingSystem:
             self.dashboard.update_system_status("Trade Executor", "OK")
     
     def _on_position_closed(self, position: Position):
-        """Callback quando posição é fechada"""
-        self.logger.info(f"[LIVE] 📊 POSITION CLOSED: Ticket {position.ticket} | PnL: ${position.net_pnl:.2f} | Reason: {position.close_reason}")
+        """Callback quando posio  fechada"""
+        self.logger.info(f"[LIVE]  POSITION CLOSED: Ticket {position.ticket} | PnL: ${position.net_pnl:.2f} | Reason: {position.close_reason}")
         
         # Atualizar dashboard
         if self.dashboard:
@@ -460,7 +460,7 @@ class LiveTradingSystem:
         self.stop()
     
     def _print_final_stats(self):
-        """Imprime estatísticas finais"""
+        """Imprime estatsticas finais"""
         if not self.start_time:
             return
         
@@ -574,3 +574,8 @@ def main():
 
 if __name__ == "__main__":
     main()
+
+
+
+
+

@@ -1,7 +1,7 @@
 """
 Socket Bridge Configuration
 
-Configuração para comunicação TCP Socket entre MT5 e Python
+Configurao para comunicao TCP Socket entre MT5 e Python
 """
 
 SOCKET_CONFIG = {
@@ -46,3 +46,7 @@ POSITION_MANAGEMENT = {
     "use_breakeven": True,
     "breakeven_min_profit_usd": 100.0
 }
+
+
+
+

@@ -245,3 +245,6 @@ Se tiver dúvidas, consulte:
 - `docs/final-report.md` - Relatório completo do projeto
 - `docs/memory-dictionary.md` - Dicionário de conceitos
 - `docs/dna-engine.md` - Documentação do DNA adaptativo
+
+
+

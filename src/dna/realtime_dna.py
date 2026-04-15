@@ -70,7 +70,7 @@ class RealTimeDNAEngine:
             'execution_params.trailing_stop_multiplier': (1.0, 3.0),
         }
         
-        logger.info("🧬 Real-Time DNA Engine initialized")
+        logger.info(" Real-Time DNA Engine initialized")
         logger.info(f"   Adaptation Speed: {self.adaptation_speed}")
         logger.info(f"   Max Mutations/Bar: {self.max_mutation_per_bar}")
     
@@ -141,9 +141,9 @@ class RealTimeDNAEngine:
         
         if mutations:
             self.last_mutation_time = datetime.now(timezone.utc).isoformat()
-            logger.info(f"🧬 DNA Transmutated: {len(mutations)} mutations")
+            logger.info(f" DNA Transmutated: {len(mutations)} mutations")
             for m in mutations:
-                logger.info(f"   {m.parameter}: {m.old_value:.3f} → {m.new_value:.3f} ({m.reason})")
+                logger.info(f"   {m.parameter}: {m.old_value:.3f}  {m.new_value:.3f} ({m.reason})")
         
         return mutations
     
@@ -418,3 +418,7 @@ class RealTimeDNAEngine:
                 'trailing_multiplier': self.dna.get('execution_params', {}).get('trailing_stop_multiplier', 1.5),
             },
         }
+
+
+
+

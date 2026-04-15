@@ -48,7 +48,7 @@ class ProfitErosionTiers:
         else:
             self.tiers = tiers
         
-        logger.info("🛡️ ProfitErosionTiers initialized")
+        logger.info(" ProfitErosionTiers initialized")
         for threshold, retrace in self.tiers:
             logger.info(f"   ${threshold:>8.0f}: {retrace*100:.0f}% max retrace")
 
@@ -110,3 +110,7 @@ class ProfitErosionTiers:
             'max_retrace_pct': max_retrace,
             'description': f"${threshold:.0f}+ tier: {max_retrace*100:.0f}% max retrace",
         }
+
+
+
+

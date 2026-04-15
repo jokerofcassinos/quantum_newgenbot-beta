@@ -174,3 +174,6 @@ O **Forex Quantum Bot** é agora um sistema de trading **nunca visto em retail**
 
 **Qwen Code, CEO** 🚀  
 **Forex Quantum Bot - 95% Completo**
+
+
+

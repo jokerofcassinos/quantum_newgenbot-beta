@@ -170,7 +170,7 @@ class SmartOrderManager:
             'volume_weight': 0.20,
         }
         
-        logger.info("🎯 Smart Order Manager initialized")
+        logger.info(" Smart Order Manager initialized")
     
     def _initialize_profit_profiles(self) -> Dict[ProfitTarget, ProfitProfile]:
         """Initialize profit profiles (DNA will adjust these)"""
@@ -272,7 +272,7 @@ class SmartOrderManager:
         
         self.positions[ticket] = state
         
-        logger.info(f"🎯 Position #{ticket} registered for smart management")
+        logger.info(f" Position #{ticket} registered for smart management")
         logger.info(f"   Entry: ${position_data['entry_price']:,.2f}")
         logger.info(f"   SL: ${position_data['stop_loss']:,.2f}")
         logger.info(f"   TP: ${position_data['take_profit']:,.2f}")
@@ -544,7 +544,7 @@ class SmartOrderManager:
         
         state.dynamic_sl.profit_locked = 0.0  # Breakeven = no profit/loss
         
-        logger.info(f"🛡️ Breakeven SL activated for #{state.ticket}")
+        logger.info(f" Breakeven SL activated for #{state.ticket}")
         logger.info(f"   New SL: ${state.dynamic_sl.current_sl:,.2f}")
     
     def _apply_profile_sl_behavior(self, state: PositionState, profile: ProfitProfile, momentum: MarketMomentum):
@@ -614,7 +614,7 @@ class SmartOrderManager:
                (state.direction == 'SELL' and state.current_price <= target_price):
                 state.targets_reached.append(target)
                 new_targets.append(target)
-                logger.info(f"🎯 Target {target.value*100:.0f}% reached for #{state.ticket}")
+                logger.info(f" Target {target.value*100:.0f}% reached for #{state.ticket}")
         
         return new_targets
     
@@ -728,7 +728,7 @@ class SmartOrderManager:
             'final_difficulty': state.virtual_tp.difficulty.value,
         }
         
-        logger.info(f"✅ Position #{ticket} closed")
+        logger.info(f" Position #{ticket} closed")
         logger.info(f"   PnL: ${state.current_pnl:+,.2f}")
         logger.info(f"   Reason: {reason}")
         logger.info(f"   Progress to TP: {state.progress_to_tp*100:.1f}%")
@@ -747,3 +747,7 @@ class SmartOrderManager:
             'total_pnl': sum(s.current_pnl for s in self.positions.values()),
             'targets_reached_total': sum(len(s.targets_reached) for s in self.positions.values()),
         }
+
+
+
+

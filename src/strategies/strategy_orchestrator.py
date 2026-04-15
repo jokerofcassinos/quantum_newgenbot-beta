@@ -67,16 +67,13 @@ class StrategyOrchestrator:
     
     def __init__(self, dna_params: Dict[str, Any]):
         self.dna_params = dna_params
-
-        # Initialize ALL 12 Strategies (5 original + 7 new)
+        # Estratégias instanciadas sem parâmetros extras
         self.strategies = {
-            # Original 5
             "liquidity": LiquidityStrategy(),
             "thermodynamic": ThermodynamicStrategy(),
             "physics": PhysicsStrategy(),
             "order_block": OrderBlockStrategy(),
             "fvg": FVGStrategy(),
-            # New 7 Execution Agents
             "msnr": MSNRStrategy(dna_params),
             "msnr_alchemist": MSNRAlchemistStrategy(dna_params),
             "ifvg": IFVGStrategy(dna_params),
@@ -84,6 +81,9 @@ class StrategyOrchestrator:
             "supply_demand": SupplyDemandStrategy(dna_params),
             "fibonacci": FibonacciStrategy(dna_params),
             "iceberg": IcebergStrategy(dna_params),
+        }
+        self.regime_weights = {
+            "ranging": {k: 1.0/12 for k in self.strategies.keys()}
         }
         
         # Strategy weights per regime (DNA-adjustable)
@@ -141,7 +141,7 @@ class StrategyOrchestrator:
         # Strategy performance tracking
         self.strategy_performance = {name: {"trades": 0, "wins": 0} for name in self.strategies}
         
-        logger.info("🎭 Strategy Orchestrator initialized")
+        logger.info(" Strategy Orchestrator initialized")
         logger.info(f"   12 Strategies: Liquidity, Thermodynamic, Physics, Order Block, FVG")
         logger.info(f"   + MSNR, MSNR Alchemist, IFVG, OrderFlow, Supply/Demand, Fib, Iceberg")
     
@@ -285,7 +285,7 @@ class StrategyOrchestrator:
             individual_votes=individual_votes,
         )
         
-        logger.info(f"🎭 Orchestration Result: {final_direction}")
+        logger.info(f" Orchestration Result: {final_direction}")
         logger.info(f"   Consensus: {weighted_consensus:+.2f}")
         logger.info(f"   Coherence: {coherence:.2f}")
         logger.info(f"   Buy: {total_buy:.2f} | Sell: {total_sell:.2f} | Neutral: {total_neutral:.2f}")
@@ -302,3 +302,7 @@ class StrategyOrchestrator:
     def get_strategy_weights_for_regime(self, regime: str) -> Dict[str, float]:
         """Get current strategy weights for regime"""
         return self.regime_weights.get(regime, {})
+
+
+
+

@@ -56,7 +56,7 @@ class DashboardApp:
         
         self._setup_routes()
         
-        logger.info("🖥️ Dashboard App initialized")
+        logger.info(" Dashboard App initialized")
     
     def _setup_routes(self):
         """Setup all routes"""
@@ -191,7 +191,7 @@ class DashboardApp:
 </head>
 <body>
     <div class="header">
-        <h1>🚀 FOREX QUANTUM BOT</h1>
+        <h1> FOREX QUANTUM BOT</h1>
         <p>Real-Time Dashboard</p>
     </div>
     
@@ -271,3 +271,7 @@ class DashboardApp:
 </body>
 </html>
 """
+
+
+
+

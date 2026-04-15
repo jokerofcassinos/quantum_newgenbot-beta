@@ -188,3 +188,6 @@ forex-project2k26/
 **Última atualização:** 10 de Abril de 2026  
 **Versão do documento:** 1.0.0  
 **Próxima revisão:** Conforme desenvolvimento
+
+
+

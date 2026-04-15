@@ -33,7 +33,7 @@ class KinematicsPhaseSpace:
         """
         self.lookback = lookback
         
-        logger.info("🎯 KinematicsPhaseSpace initialized")
+        logger.info(" KinematicsPhaseSpace initialized")
         logger.info(f"   Lookback: {lookback}")
 
     def calculate_kinematics(
@@ -172,3 +172,7 @@ class KinematicsPhaseSpace:
                 return 0.4
             else:
                 return 0.2
+
+
+
+

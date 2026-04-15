@@ -81,10 +81,10 @@ import MetaTrader5 as mt5
 
 def fetch_mt5_data(days: int = 180) -> pd.DataFrame:
     """Fetch REAL historical BTCUSD data from MT5"""
-    logger.info(f"🔄 Connecting to MT5 to fetch {days} days of BTCUSD data...")
+    logger.info(f" Connecting to MT5 to fetch {days} days of BTCUSD data...")
     
     if not mt5.initialize():
-        logger.error(f"❌ MT5 Initialization failed. Error code: {mt5.last_error()}")
+        logger.error(f" MT5 Initialization failed. Error code: {mt5.last_error()}")
         sys.exit(1)
         
     bars_per_day = 288
@@ -94,7 +94,7 @@ def fetch_mt5_data(days: int = 180) -> pd.DataFrame:
     rates = mt5.copy_rates_from_pos("BTCUSD", mt5.TIMEFRAME_M5, 0, total_bars)
     
     if rates is None or len(rates) == 0:
-        logger.error(f"❌ Failed to get data from MT5. Error: {mt5.last_error()}")
+        logger.error(f" Failed to get data from MT5. Error: {mt5.last_error()}")
         sys.exit(1)
         
     # Convert to DataFrame
@@ -112,7 +112,7 @@ def fetch_mt5_data(days: int = 180) -> pd.DataFrame:
     # Drop unseen columns like spread, real_volume if not needed
     df = df[['time', 'open', 'high', 'low', 'close', 'volume']]
     
-    logger.info(f"✅ Fetched {len(df)} REAL M5 candles from MT5")
+    logger.info(f" Fetched {len(df)} REAL M5 candles from MT5")
     logger.info(f"   Date Range: {df['time'].iloc[0]} to {df['time'].iloc[-1]}")
     logger.info(f"   Price Range: ${df['low'].min():,.0f} -> ${df['high'].max():,.0f}")
     
@@ -270,11 +270,11 @@ class CompleteBacktestEngineV2:
             'total_trailing_stops_hit': 0,
         }
 
-        # ═══════════════════════════════════════════════════════════════
+        # 
         # PRE-COMPUTE ALL INDICATORS (Phase 4 Performance Optimization)
-        # This eliminates O(N²) recalculation inside the hot loop.
-        # ═══════════════════════════════════════════════════════════════
-        logger.info("⚡ Pre-computing indicators...")
+        # This eliminates O(N) recalculation inside the hot loop.
+        # 
+        logger.info(" Pre-computing indicators...")
         close = candles['close'].values.astype(np.float64)
         high = candles['high'].values.astype(np.float64)
         low = candles['low'].values.astype(np.float64)
@@ -332,13 +332,13 @@ class CompleteBacktestEngineV2:
         self._volume = volume
         self._times = candles['time'].values
 
-        # ═══════════════════════════════════════════════════════════════
+        # 
         # PRE-COMPUTE MULTI-TIMEFRAME INDICATORS FOR QUALITY FILTERS
-        # ═══════════════════════════════════════════════════════════════
-        logger.info("⚡ Computing multi-timeframe trend filters...")
+        # 
+        logger.info(" Computing multi-timeframe trend filters...")
         
-        # H1-equivalent EMAs (using M5 bars: H1 EMA 50 ≈ M5 EMA 600, H1 EMA 200 ≈ M5 EMA 2400)
-        # Using shorter equivalents for 180-day window: EMA 120 ≈ H1 EMA 10, EMA 288 ≈ H1 EMA 24
+        # H1-equivalent EMAs (using M5 bars: H1 EMA 50  M5 EMA 600, H1 EMA 200  M5 EMA 2400)
+        # Using shorter equivalents for 180-day window: EMA 120  H1 EMA 10, EMA 288  H1 EMA 24
         self._ema_h1_fast = _ema_vec(close, 120)   # ~H1 EMA 10
         self._ema_h1_slow = _ema_vec(close, 288)   # ~H1 EMA 24
         
@@ -346,9 +346,9 @@ class CompleteBacktestEngineV2:
         self._vol_avg_20 = np.convolve(volume, np.ones(20) / 20, mode='full')[:n]
         self._vol_avg_20[:19] = volume[:19]
         
-        logger.info(f"⚡ Multi-timeframe filters ready: {n} candles")
+        logger.info(f" Multi-timeframe filters ready: {n} candles")
 
-        logger.info(f"⚡ Pre-computation complete: {n} candles")
+        logger.info(f" Pre-computation complete: {n} candles")
         logger.info("Complete Backtest Engine V2 initialized")
         logger.info(f"  12 Strategies + Session Profiles + Advanced Veto v2")
         logger.info(f"  SL Cap: 300 points MAX | Risk: {risk_percent}%")
@@ -371,7 +371,7 @@ class CompleteBacktestEngineV2:
         t0 = _time.perf_counter()
 
         for i in range(warmup, total):
-            # ── Hot path: use pre-computed NumPy arrays instead of DataFrame ──
+            #  Hot path: use pre-computed NumPy arrays instead of DataFrame 
             cur_close = self._close[i]
             cur_high = self._high[i]
             cur_low = self._low[i]
@@ -411,11 +411,11 @@ class CompleteBacktestEngineV2:
                             session=session,
                         )
                     else:
-                        # ═══════════════════════════════════════════════════════════════
+                        # 
                         # GHOST AUDIT #1: Confidence Inversion (ADJUSTED - less aggressive)
                         # Ghost audit found: 0.4-0.5 confidence outperforms 0.6-0.7
                         # ADJUSTMENT: Reduced BUY penalty from -0.10 to -0.03
-                        # ═══════════════════════════════════════════════════════════════
+                        # 
                         original_confidence = signal.get('confidence', 0.5)
                         
                         # Invert confidence: boost medium, slightly reduce high
@@ -430,11 +430,11 @@ class CompleteBacktestEngineV2:
                         else:
                             signal['confidence_inverted'] = False
 
-                        # ═══════════════════════════════════════════════════════════════
+                        # 
                         # GHOST AUDIT #2: SELL vs BUY Asymmetry (ADJUSTED - less aggressive)
                         # Ghost audit found: SELL outperforms BUY significantly
                         # ADJUSTMENT: Reduced BUY penalty from -0.05 to -0.02
-                        # ═══════════════════════════════════════════════════════════════
+                        # 
                         direction = signal.get('direction', '')
                         if direction == 'SELL':
                             # SELL gets confidence boost (better performance)
@@ -477,12 +477,12 @@ class CompleteBacktestEngineV2:
                                     self.ghost_audit.create_ghost(signal=signal, veto_reason=f"anti_metralhadora:{reason}", bar_index=i, cur_time=cur_time, session=session)
                                     continue  # Skip this trade (overtrading prevention)
 
-                                # ═══════════════════════════════════════════════════════════════
+                                # 
                                 # GHOST AUDIT INSIGHT: Filters are too strict on SELL trades
                                 # Ghost audit found: We vetoed $82K in profitable SELL trades!
                                 # But our BUY vetos are GOOD - avoided $148K in losses
                                 # So we relax vetos ONLY for SELL, keep BUY vetos strict
-                                # ═══════════════════════════════════════════════════════════════
+                                # 
                                 
                                 # COMPREHENSIVE ANALYSIS FIX: Removed weekday destructive hours veto
                                 # Analysis showed this veto was rejecting +80 trades worth +$10,000
@@ -719,7 +719,7 @@ class CompleteBacktestEngineV2:
                     )
                     pos['remaining_volume'] = pos['volume']
                     pos['original_stop'] = pos['stop_loss']  # Save original SL for fallback
-                    logger.info(f"🎯 Smart TP targets created for trade #{pos['ticket']}")
+                    logger.info(f" Smart TP targets created for trade #{pos['ticket']}")
                 
                 # Check Smart TP targets
                 atr_current = self._atr[i]
@@ -788,7 +788,7 @@ class CompleteBacktestEngineV2:
                 )
 
                 if should_exit and floor_allowed_erosion and pos['peak_pnl'] > 30:
-                    logger.info(f"🛡️ Profit erosion triggered: {erosion_reason}")
+                    logger.info(f" Profit erosion triggered: {erosion_reason}")
                     position_closed = True
                     realized_pnl = pos['targets']['total_realized_pnl'] + current_unrealized_pnl
                 
@@ -931,7 +931,7 @@ class CompleteBacktestEngineV2:
             self._close_position_fast({'reason': 'End', 'type': 'manual'}, len(self.candles) - 1)
 
         elapsed = _time.perf_counter() - t0
-        logger.info(f"\n⚡ Backtest complete in {elapsed:.1f}s ({(total - warmup) / max(elapsed, 0.001):.0f} candles/sec)")
+        logger.info(f"\n Backtest complete in {elapsed:.1f}s ({(total - warmup) / max(elapsed, 0.001):.0f} candles/sec)")
 
         # Pattern analysis
         logger.info("Running pattern analysis...")
@@ -939,27 +939,27 @@ class CompleteBacktestEngineV2:
         analysis = analyzer.analyze_all()
         # DISABLED: Auto-generating veto rules creates bad feedback loop (BUG #2 fix)
         # analyzer.save_veto_rules()
-        logger.info("⚠️ Veto rules auto-generation DISABLED to prevent feedback loop")
+        logger.info(" Veto rules auto-generation DISABLED to prevent feedback loop")
         
-        # ═══════════════════════════════════════════════════════════════
+        # 
         # INTELLIGENT LOSS ANALYSIS (SCALPER MODE)
-        # ═══════════════════════════════════════════════════════════════
+        # 
         self._print_intelligent_loss_analysis()
 
         return self._results(analysis)
 
-    # ═══════════════════════════════════════════════════════════════
-    # FAST METHODS — Phase 4 Performance (use pre-computed arrays)
-    # ═══════════════════════════════════════════════════════════════
+    # 
+    # FAST METHODS  Phase 4 Performance (use pre-computed arrays)
+    # 
 
     def _print_intelligent_loss_analysis(self):
         """Print comprehensive intelligent loss analysis for scalper optimization"""
         logger.info("\n" + "="*80)
-        logger.info("🔬 INTELLIGENT LOSS ANALYSIS (SCALPER MODE)")
+        logger.info(" INTELLIGENT LOSS ANALYSIS (SCALPER MODE)")
         logger.info("="*80)
         
         # 1. Loss reasons breakdown
-        logger.info("\n📊 LOSS REASONS BREAKDOWN:")
+        logger.info("\n LOSS REASONS BREAKDOWN:")
         total_losses = self.losing_trades
         for reason, count in self.loss_patterns['by_reason'].items():
             if count > 0:
@@ -967,26 +967,26 @@ class CompleteBacktestEngineV2:
                 logger.info(f"   {reason}: {count} ({pct:.1f}%)")
         
         # 2. Trailing stop effectiveness
-        logger.info(f"\n🎯 TRAILING STOP ANALYSIS:")
+        logger.info(f"\n TRAILING STOP ANALYSIS:")
         logger.info(f"   Trailing stops hit: {self.loss_patterns['total_trailing_stops_hit']}")
         logger.info(f"   Regular SL hits: {self.loss_patterns['by_reason'].get('SL hit', 0)}")
         if self.loss_patterns['total_trailing_stops_hit'] > 0:
-            logger.info(f"   → Trailing stop CONVERTED some losses (would have been worse without)")
+            logger.info(f"    Trailing stop CONVERTED some losses (would have been worse without)")
         
         # 3. Average win vs loss
-        logger.info(f"\n💰 WIN/LOSS STATISTICS:")
+        logger.info(f"\n WIN/LOSS STATISTICS:")
         logger.info(f"   Avg Win: ${self.loss_patterns['avg_win_size']:.2f}")
         logger.info(f"   Avg Loss: ${self.loss_patterns['avg_loss_size']:.2f}")
         if self.loss_patterns['avg_loss_size'] > 0:
             ratio = self.loss_patterns['avg_win_size'] / self.loss_patterns['avg_loss_size']
             logger.info(f"   Win/Loss Ratio: {ratio:.2f}:1")
             if ratio < 1.0:
-                logger.warning(f"   ⚠️ Avg win is SMALLER than avg loss - need to improve TP distance or trailing")
+                logger.warning(f"    Avg win is SMALLER than avg loss - need to improve TP distance or trailing")
             else:
-                logger.info(f"   ✅ Good: wins are larger than losses")
+                logger.info(f"    Good: wins are larger than losses")
         
         # 4. Strategy performance
-        logger.info(f"\n📈 STRATEGY PERFORMANCE (Top/Bottom 3):")
+        logger.info(f"\n STRATEGY PERFORMANCE (Top/Bottom 3):")
         strat_perf = [(name, data['total_pnl'], data['trades']) for name, data in self.strategy_results.items() if data['trades'] > 0]
         strat_perf.sort(key=lambda x: x[1], reverse=True)
         
@@ -994,22 +994,22 @@ class CompleteBacktestEngineV2:
             logger.info(f"   TOP 3 (Most Profitable):")
             for name, pnl, trades in strat_perf[:3]:
                 wr = (self.strategy_results[name]['wins'] / max(1, trades)) * 100
-                logger.info(f"   ✅ {name}: ${pnl:+.2f} ({trades} trades, {wr:.1f}% WR)")
+                logger.info(f"    {name}: ${pnl:+.2f} ({trades} trades, {wr:.1f}% WR)")
             
             logger.info(f"   BOTTOM 3 (Most Losing):")
             for name, pnl, trades in strat_perf[-3:]:
                 wr = (self.strategy_results[name]['wins'] / max(1, trades)) * 100
-                logger.info(f"   ❌ {name}: ${pnl:+.2f} ({trades} trades, {wr:.1f}% WR)")
+                logger.info(f"    {name}: ${pnl:+.2f} ({trades} trades, {wr:.1f}% WR)")
         
         # 5. Time-based patterns
-        logger.info(f"\n⏰ TIME-BASED PATTERNS:")
+        logger.info(f"\n TIME-BASED PATTERNS:")
         if self.loss_patterns['by_session']:
             logger.info(f"   By Session:")
             for session, losses in self.loss_patterns['by_session'].items():
                 logger.info(f"   {session}: {losses} losses")
         
         # 6. Recommendations
-        logger.info(f"\n🎯 RECOMMENDATIONS:")
+        logger.info(f"\n RECOMMENDATIONS:")
         if self.loss_patterns['avg_win_size'] < self.loss_patterns['avg_loss_size']:
             logger.info(f"   1. Increase TP distance or improve trailing to boost avg win size")
         if self.loss_patterns['total_trailing_stops_hit'] > 0:
@@ -1111,7 +1111,7 @@ class CompleteBacktestEngineV2:
                 votes['strategy_votes']['order_block'] = {'vote': 'NEUTRAL', 'confidence': 0.5}
                 votes['neutral_votes'] += 1
 
-        # Strategy 6: FVG (Fair Value Gap) — lightweight scan
+        # Strategy 6: FVG (Fair Value Gap)  lightweight scan
         fvg_vote = 'NEUTRAL'
         if idx >= 8:
             for j in range(max(0, idx - 8), idx - 1):
@@ -1345,9 +1345,9 @@ class CompleteBacktestEngineV2:
         direction = signal['direction']
 
         # RSI extremes - Balanced thresholds (not too strict, not too loose)
-        if direction == 'BUY' and rsi > 72:  # Balanced: was 75→65, now 72
+        if direction == 'BUY' and rsi > 72:  # Balanced: was 7565, now 72
             vetoes.append({'rule': 'RSI Overbought', 'severity': 'major', 'reason': f'BUY vetoed - RSI {rsi:.1f} > 72'})
-        elif direction == 'SELL' and rsi < 28:  # Balanced: was 25→35, now 28
+        elif direction == 'SELL' and rsi < 28:  # Balanced: was 2535, now 28
             vetoes.append({'rule': 'RSI Oversold', 'severity': 'major', 'reason': f'SELL vetoed - RSI {rsi:.1f} < 28'})
 
         # RSI divergence
@@ -1377,7 +1377,7 @@ class CompleteBacktestEngineV2:
         }
 
     def _open_position_fast(self, signal: dict, bar_idx: int):
-        """Open position — lightweight version for backtesting"""
+        """Open position  lightweight version for backtesting"""
         # Fixed: corrected spread cost calculation (was 100 * volume, now spread_dollars * volume)
         spread_dollars = 1.0  # Typical BTCUSD spread ~$1
         costs = signal['volume'] * 45.0 * 2 + spread_dollars * signal['volume']
@@ -1405,7 +1405,7 @@ class CompleteBacktestEngineV2:
             'session': session,  # Track session for Anti-Metralhadora
         }
 
-        # Lightweight audit — buffer in memory
+        # Lightweight audit  buffer in memory
         ema_50 = self._ema50[bar_idx]
         price = self._close[bar_idx]
         regime = "ranging" if abs(ema_50 - price) / price < 0.005 else "trending_bullish" if price > ema_50 else "trending_bearish"
@@ -1484,7 +1484,7 @@ class CompleteBacktestEngineV2:
         self.total_trades += 1
 
     def _close_position_fast(self, action: dict, bar_idx: int):
-        """Close position — lightweight version for backtesting"""
+        """Close position  lightweight version for backtesting"""
         if not self.current_position:
             return
 
@@ -1604,7 +1604,7 @@ def main():
         print(f"  FTMO: {'PASS' if f.get('overall_pass') else 'FAIL'}")
         print(f"  Commissions: ${c.get('total_commissions', 0):,.2f}")
         
-        print(f"\n🛡️ VETO SYSTEM:")
+        print(f"\n VETO SYSTEM:")
         print(f"   Signals Generated: {s.get('total_signals', 0)}")
         print(f"   Trades Executed: {s.get('total_trades', 0)}")
         print(f"   Trades Vetoed: {s.get('total_vetoes', 0)}")
@@ -1612,9 +1612,13 @@ def main():
         print(f"   Veto Rate: {s.get('veto_rate', 0):.1f}%")
 
         # Ghost Audit Analysis
-        print(f"\n👻 GHOST AUDIT ANALYSIS:")
+        print(f"\n GHOST AUDIT ANALYSIS:")
         bt.ghost_audit.print_analysis()
 
 
 if __name__ == "__main__":
     main()
+
+
+
+

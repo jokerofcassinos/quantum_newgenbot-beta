@@ -55,7 +55,7 @@ class RiskQuantumEngine:
         self.dd_protection_threshold = dd_protection_threshold
         self.max_dd_limit = max_dd_limit
         
-        logger.info("⚛️ RiskQuantumEngine initialized")
+        logger.info(" RiskQuantumEngine initialized")
         logger.info(f"   Kelly fraction: {kelly_fraction}")
         logger.info(f"   Max position: {max_position_size} lots")
         logger.info(f"   Base risk: {base_risk_percent}%")
@@ -184,9 +184,9 @@ class RiskQuantumEngine:
         factors = calculation['factors']
         
         if not calculation['approved']:
-            return f"🛑 TRADE REJECTED: {calculation['reason']}"
+            return f" TRADE REJECTED: {calculation['reason']}"
         
-        rec = f"📊 Position Size: {size:.3f} lots ({risk:.2f}% risk)\n"
+        rec = f" Position Size: {size:.3f} lots ({risk:.2f}% risk)\n"
         rec += f"   Kelly: {factors['kelly']:.2f}%\n"
         rec += f"   Volatility: {factors['volatility']:.2f}x\n"
         rec += f"   Confidence: {factors['confidence']:.2f}x\n"
@@ -194,3 +194,7 @@ class RiskQuantumEngine:
         rec += f"   Correlation: {factors['correlation']:.2f}x"
         
         return rec
+
+
+
+

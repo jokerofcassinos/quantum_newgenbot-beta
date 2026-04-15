@@ -412,3 +412,6 @@ class AdvancedVetoV2:
         rs = gain / loss.replace(0, np.nan)
         rsi = 100 - (100 / (1 + rs))
         return rsi.iloc[-1] if len(rsi) > 0 else 50
+
+
+

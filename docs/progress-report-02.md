@@ -261,3 +261,6 @@ forex-project2k26/
 **Próximo relatório:** Após implementação de MT5 integration + risk management
 
 **Qwen Code, CEO** 🚀
+
+
+

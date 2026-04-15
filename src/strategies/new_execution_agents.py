@@ -36,7 +36,7 @@ class MSNRStrategy(BaseStrategy):
         super().__init__("MSNR", dna_params)
         self.name = "MSNR"
     
-    def analyze(self, candles: pd.DataFrame, current_price: float) -> Optional[TradingSignal]:
+    def analyze(self, candles: pd.DataFrame, current_price: float, indicators: Dict = None) -> Optional[TradingSignal]:
         if len(candles) < 50:
             return None
         
@@ -162,7 +162,7 @@ class MSNRAlchemistStrategy(BaseStrategy):
         super().__init__("MSNR_Alchemist", dna_params)
         self.name = "MSNR_Alchemist"
     
-    def analyze(self, candles: pd.DataFrame, current_price: float) -> Optional[TradingSignal]:
+    def analyze(self, candles: pd.DataFrame, current_price: float, indicators: Dict = None) -> Optional[TradingSignal]:
         if len(candles) < 50:
             return None
         
@@ -228,7 +228,7 @@ class IFVGStrategy(BaseStrategy):
         super().__init__("IFVG", dna_params)
         self.name = "IFVG"
     
-    def analyze(self, candles: pd.DataFrame, current_price: float) -> Optional[TradingSignal]:
+    def analyze(self, candles: pd.DataFrame, current_price: float, indicators: Dict = None) -> Optional[TradingSignal]:
         if len(candles) < 30:
             return None
         
@@ -299,7 +299,7 @@ class OrderFlowStrategy(BaseStrategy):
         super().__init__("OrderFlow", dna_params)
         self.name = "OrderFlow"
     
-    def analyze(self, candles: pd.DataFrame, current_price: float) -> Optional[TradingSignal]:
+    def analyze(self, candles: pd.DataFrame, current_price: float, indicators: Dict = None) -> Optional[TradingSignal]:
         if len(candles) < 30:
             return None
         
@@ -367,7 +367,7 @@ class SupplyDemandStrategy(BaseStrategy):
         super().__init__("SupplyDemand", dna_params)
         self.name = "SupplyDemand"
     
-    def analyze(self, candles: pd.DataFrame, current_price: float) -> Optional[TradingSignal]:
+    def analyze(self, candles: pd.DataFrame, current_price: float, indicators: Dict = None) -> Optional[TradingSignal]:
         if len(candles) < 50:
             return None
         
@@ -455,7 +455,7 @@ class FibonacciStrategy(BaseStrategy):
         super().__init__("Fibonacci", dna_params)
         self.name = "Fibonacci"
     
-    def analyze(self, candles: pd.DataFrame, current_price: float) -> Optional[TradingSignal]:
+    def analyze(self, candles: pd.DataFrame, current_price: float, indicators: Dict = None) -> Optional[TradingSignal]:
         if len(candles) < 50:
             return None
         
@@ -519,7 +519,7 @@ class IcebergStrategy(BaseStrategy):
         super().__init__("Iceberg", dna_params)
         self.name = "Iceberg"
     
-    def analyze(self, candles: pd.DataFrame, current_price: float) -> Optional[TradingSignal]:
+    def analyze(self, candles: pd.DataFrame, current_price: float, indicators: Dict = None) -> Optional[TradingSignal]:
         if len(candles) < 30:
             return None
         
@@ -553,3 +553,6 @@ class IcebergStrategy(BaseStrategy):
             )
         
         return None
+
+
+

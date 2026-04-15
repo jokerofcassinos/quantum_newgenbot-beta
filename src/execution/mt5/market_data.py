@@ -38,7 +38,7 @@ class MarketDataFetcher:
         self.symbol = "BTCUSD"
         self.last_price_data = None
         
-        logger.info("📊 Market Data Fetcher initialized")
+        logger.info(" Market Data Fetcher initialized")
     
     async def get_current_price(self) -> Optional[Dict[str, Any]]:
         """
@@ -50,7 +50,7 @@ class MarketDataFetcher:
         try:
             tick = mt5.symbol_info_tick(self.symbol)
             if tick is None:
-                logger.error("❌ Failed to get current price")
+                logger.error(" Failed to get current price")
                 return None
             
             return {
@@ -64,7 +64,7 @@ class MarketDataFetcher:
                 "flags": tick.flags
             }
         except Exception as e:
-            logger.error(f"❌ Error getting current price: {e}")
+            logger.error(f" Error getting current price: {e}")
             return None
     
     async def get_candles(self, 
@@ -97,7 +97,7 @@ class MarketDataFetcher:
             }
             
             if timeframe not in tf_map:
-                logger.error(f"❌ Invalid timeframe: {timeframe}")
+                logger.error(f" Invalid timeframe: {timeframe}")
                 return None
             
             tf = tf_map[timeframe]
@@ -109,7 +109,7 @@ class MarketDataFetcher:
                 rates = mt5.copy_rates_from_pos(self.symbol, tf, 0, count)
             
             if rates is None or len(rates) == 0:
-                logger.error(f"❌ No candle data retrieved for {timeframe}")
+                logger.error(f" No candle data retrieved for {timeframe}")
                 return None
             
             # Convert to DataFrame
@@ -125,7 +125,7 @@ class MarketDataFetcher:
                 'tick_volume': 'volume'
             })
             
-            logger.info(f"📊 Retrieved {len(df)} {timeframe} candles")
+            logger.info(f" Retrieved {len(df)} {timeframe} candles")
             logger.info(f"   Range: {df['time'].iloc[0]} to {df['time'].iloc[-1]}")
             logger.info(f"   Price range: ${df['low'].min():.2f} - ${df['high'].max():.2f}")
             
@@ -133,7 +133,7 @@ class MarketDataFetcher:
             return df
             
         except Exception as e:
-            logger.error(f"❌ Error getting candles: {e}", exc_info=True)
+            logger.error(f" Error getting candles: {e}", exc_info=True)
             return None
     
     async def get_multi_timeframe_analysis(self) -> Optional[Dict[str, Any]]:
@@ -198,11 +198,11 @@ class MarketDataFetcher:
                     "candle_count": len(candles)
                 }
             
-            logger.info(f"📊 Multi-timeframe analysis complete: {len(analysis)} timeframes")
+            logger.info(f" Multi-timeframe analysis complete: {len(analysis)} timeframes")
             return analysis
             
         except Exception as e:
-            logger.error(f"❌ Error in multi-timeframe analysis: {e}", exc_info=True)
+            logger.error(f" Error in multi-timeframe analysis: {e}", exc_info=True)
             return None
     
     async def calculate_spread_stats(self, samples: int = 100) -> Dict[str, Any]:
@@ -238,7 +238,7 @@ class MarketDataFetcher:
                 "samples": len(spreads)
             }
         except Exception as e:
-            logger.error(f"❌ Error calculating spread stats: {e}")
+            logger.error(f" Error calculating spread stats: {e}")
             return {}
     
     async def get_market_hours_analysis(self) -> Dict[str, Any]:
@@ -289,7 +289,7 @@ class MarketDataFetcher:
                 "analysis_period": f"{candles['time'].iloc[0]} to {candles['time'].iloc[-1]}"
             }
         except Exception as e:
-            logger.error(f"❌ Error in market hours analysis: {e}")
+            logger.error(f" Error in market hours analysis: {e}")
             return {}
     
     async def detect_price_patterns(self, candles: pd.DataFrame) -> List[Dict[str, Any]]:
@@ -358,12 +358,12 @@ class MarketDataFetcher:
                     })
             
             if patterns:
-                logger.info(f"🔍 Detected {len(patterns)} pattern(s)")
+                logger.info(f" Detected {len(patterns)} pattern(s)")
             
             return patterns
             
         except Exception as e:
-            logger.error(f"❌ Error detecting patterns: {e}")
+            logger.error(f" Error detecting patterns: {e}")
             return []
     
     async def get_orderbook_depth(self) -> Optional[Dict[str, Any]]:
@@ -378,7 +378,7 @@ class MarketDataFetcher:
             book = mt5.market_book_get(self.symbol)
             
             if book is None:
-                logger.info("ℹ️ Order book not available")
+                logger.info(" Order book not available")
                 return None
             
             # Parse order book
@@ -405,5 +405,9 @@ class MarketDataFetcher:
                 "total_volume": sum(b['volume'] for b in bids) + sum(a['volume'] for a in asks)
             }
         except Exception as e:
-            logger.error(f"❌ Error getting order book: {e}")
+            logger.error(f" Error getting order book: {e}")
             return None
+
+
+
+

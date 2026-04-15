@@ -569,3 +569,5 @@ Priority queue (harvest=0 > strike=2) with background worker thread is good engi
 | Concept | Source | How to Adapt |
 |---|---|---|
 | **Fractal
+
+

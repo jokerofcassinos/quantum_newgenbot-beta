@@ -36,7 +36,7 @@ class MultiTimeframeAlignment:
         self.timeframes = timeframes or ['M5', 'M15', 'H1', 'H4']
         self.min_aligned = min_aligned_timeframes
         
-        logger.info("📊 MultiTimeframeAlignment initialized")
+        logger.info(" MultiTimeframeAlignment initialized")
         logger.info(f"   Timeframes: {self.timeframes}")
         logger.info(f"   Min aligned: {min_aligned_timeframes}")
 
@@ -124,3 +124,7 @@ class MultiTimeframeAlignment:
             return True, f"{analysis['alignment_count']}/{analysis['total_timeframes']} timeframes aligned"
         else:
             return False, f"Only {analysis['alignment_count']}/{analysis['total_timeframes']} timeframes aligned (need {self.min_aligned})"
+
+
+
+

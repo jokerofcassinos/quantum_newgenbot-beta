@@ -22,7 +22,7 @@ class FTMOCommissionCalculator:
     COMMISSION_PER_LOT_PER_SIDE = 45.00  # FTMO: $45 per 1.0 lot per side
     
     def __init__(self):
-        logger.info("💰 FTMO Commission Calculator initialized (BTCUSD)")
+        logger.info(" FTMO Commission Calculator initialized (BTCUSD)")
     
     def calculate_commission(self, volume: float) -> Dict[str, float]:
         """
@@ -140,27 +140,31 @@ class FTMOCommissionCalculator:
     def print_analysis(self, analysis: Dict[str, Any]):
         """Print formatted analysis"""
         print("\n" + "="*80)
-        print(f"📊 TRADE ANALYSIS - {analysis['volume']:.2f} lots")
+        print(f" TRADE ANALYSIS - {analysis['volume']:.2f} lots")
         print("="*80)
         
-        print(f"\n💰 Entry: ${analysis['entry']:.2f}")
-        print(f"🛑 Stop Loss: ${analysis['stop_loss']:.2f} ({analysis['stop_distance_points']:.0f} points)")
-        print(f"🎯 Take Profit: ${analysis['take_profit']:.2f} ({analysis['tp_distance_points']:.0f} points)")
+        print(f"\n Entry: ${analysis['entry']:.2f}")
+        print(f" Stop Loss: ${analysis['stop_loss']:.2f} ({analysis['stop_distance_points']:.0f} points)")
+        print(f" Take Profit: ${analysis['take_profit']:.2f} ({analysis['tp_distance_points']:.0f} points)")
         
-        print(f"\n💵 GROSS PROFIT: ${analysis['gross_profit']:.2f}")
-        print(f"💵 GROSS LOSS: ${analysis['gross_loss']:.2f}")
-        print(f"📊 GROSS R:R: 1:{analysis['gross_rr']:.2f}")
+        print(f"\n GROSS PROFIT: ${analysis['gross_profit']:.2f}")
+        print(f" GROSS LOSS: ${analysis['gross_loss']:.2f}")
+        print(f" GROSS R:R: 1:{analysis['gross_rr']:.2f}")
         
-        print(f"\n💸 COMMISSION: ${analysis['commission_total']:.2f}")
-        print(f"💸 SPREAD COST: ${analysis['spread_cost']:.2f}")
-        print(f"💸 TOTAL COSTS: ${analysis['total_costs']:.2f}")
+        print(f"\n COMMISSION: ${analysis['commission_total']:.2f}")
+        print(f" SPREAD COST: ${analysis['spread_cost']:.2f}")
+        print(f" TOTAL COSTS: ${analysis['total_costs']:.2f}")
         
-        print(f"\n✅ NET PROFIT: ${analysis['net_profit']:.2f}")
-        print(f"❌ NET LOSS: ${analysis['net_loss']:.2f}")
-        print(f"📊 NET R:R: 1:{analysis['net_rr']:.2f}")
+        print(f"\n NET PROFIT: ${analysis['net_profit']:.2f}")
+        print(f" NET LOSS: ${analysis['net_loss']:.2f}")
+        print(f" NET R:R: 1:{analysis['net_rr']:.2f}")
         
-        print(f"\n⚠️ Break-even: {analysis['break_even_points']:.0f} points (${analysis['break_even_dollars']:.2f})")
-        print(f"⚠️ Costs eat {analysis['costs_eat_profit_percent']:.1f}% of profit")
-        print(f"⚠️ Commission is {analysis['commission_dominance']:.1f}% of total costs")
+        print(f"\n Break-even: {analysis['break_even_points']:.0f} points (${analysis['break_even_dollars']:.2f})")
+        print(f" Costs eat {analysis['costs_eat_profit_percent']:.1f}% of profit")
+        print(f" Commission is {analysis['commission_dominance']:.1f}% of total costs")
         
         print("\n" + "="*80)
+
+
+
+

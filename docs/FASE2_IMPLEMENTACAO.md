@@ -313,3 +313,6 @@ Agora o live trading tem:
 **Implementado por:** Qwen Code - Forex Quantum Bot Team
 **Data:** 13 de abril de 2026
 **Versão:** 3.0.0
+
+
+

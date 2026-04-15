@@ -5,10 +5,10 @@ CEO: Qwen Code | Created: 2026-04-10
 Before ANY trade executes, it must pass through the Veto Chain:
 1. Load veto rules from pattern analysis
 2. Check trade against ALL rules
-3. If ANY lethal rule triggers → REJECT
-4. If ANY major rule triggers → REJECT
-5. If multiple minor rules trigger → REJECT
-6. If passes all → APPROVE
+3. If ANY lethal rule triggers  REJECT
+4. If ANY major rule triggers  REJECT
+5. If multiple minor rules trigger  REJECT
+6. If passes all  APPROVE
 
 This is the FINAL gatekeeper before trade execution.
 """
@@ -50,7 +50,7 @@ class VetoOrchestrator:
         # Load rules
         self._load_rules()
         
-        logger.info(f"🛡️ Veto Orchestrator initialized")
+        logger.info(f" Veto Orchestrator initialized")
         logger.info(f"   Rules loaded: {len(self.veto_rules.get('rules', []))}")
         logger.info(f"   Lethal rules: {sum(1 for r in self.veto_rules.get('rules', []) if r.get('severity') == 'lethal')}")
         logger.info(f"   Major rules: {sum(1 for r in self.veto_rules.get('rules', []) if r.get('severity') == 'major')}")
@@ -60,9 +60,9 @@ class VetoOrchestrator:
         if self.veto_rules_path.exists():
             with open(self.veto_rules_path, 'r') as f:
                 self.veto_rules = json.load(f)
-            logger.info(f"✅ Loaded {len(self.veto_rules.get('rules', []))} veto rules")
+            logger.info(f" Loaded {len(self.veto_rules.get('rules', []))} veto rules")
         else:
-            logger.warning(f"⚠️ No veto rules found at {self.veto_rules_path}")
+            logger.warning(f" No veto rules found at {self.veto_rules_path}")
             logger.warning(f"   Run pattern analysis first to generate rules")
     
     def reload_rules(self):
@@ -139,7 +139,7 @@ class VetoOrchestrator:
             "reason": veto_reason,
         })
         
-        logger.warning(f"🚫 TRADE VETOED: {veto_reason}")
+        logger.warning(f" TRADE VETOED: {veto_reason}")
         logger.warning(f"   Rule: {veto_rule.get('name')}")
         logger.warning(f"   Confidence: {veto_rule.get('confidence'):.2f}")
         logger.warning(f"   Total vetoes: {self.total_vetoes}/{self.total_checks}")
@@ -205,3 +205,7 @@ class VetoOrchestrator:
             "major_rules": sum(1 for r in self.veto_rules.get("rules", []) if r.get("severity") == "major"),
             "minor_rules": sum(1 for r in self.veto_rules.get("rules", []) if r.get("severity") == "minor"),
         }
+
+
+
+

@@ -73,3 +73,6 @@ Este diretório contém **definições de agentes** que você pode criar individ
 ---
 
 **Última atualização:** 10 de Abril de 2026
+
+
+

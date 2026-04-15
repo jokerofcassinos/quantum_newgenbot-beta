@@ -1,12 +1,12 @@
 """
-Data Engine - Background worker para extração contínua de dados do MT5
+Data Engine - Background worker para extrao contnua de dados do MT5
 
-Este módulo processa dados recebidos do MT5 em background, calcula indicadores
-em streaming e mantém buffers atualizados para a cadeia neural.
+Este mdulo processa dados recebidos do MT5 em background, calcula indicadores
+em streaming e mantm buffers atualizados para a cadeia neural.
 
-Herança do projeto legacy DubaiMatrixASI:
-- data_engine.py: Background worker para processamento contínuo
-- Cálculo incremental de indicadores (só atualiza último valor)
+Herana do projeto legacy DubaiMatrixASI:
+- data_engine.py: Background worker para processamento contnuo
+- Clculo incremental de indicadores (s atualiza ltimo valor)
 - Buffers circulares para auditoria
 - Fallback para MT5 API se socket falhar
 """
@@ -67,14 +67,14 @@ class IncrementalIndicatorCalculator:
     """
     Calculadora incremental de indicadores
     
-    Ao invés de recalcular tudo a cada tick, atualiza apenas o último valor.
-    Isso reduz drasticamente a latência.
+    Ao invs de recalcular tudo a cada tick, atualiza apenas o ltimo valor.
+    Isso reduz drasticamente a latncia.
     """
     
     def __init__(self, buffer_size: int = 500):
         self.buffer_size = buffer_size
         
-        # Buffers de preços
+        # Buffers de preos
         self.prices = deque(maxlen=buffer_size)
         self.highs = deque(maxlen=buffer_size)
         self.lows = deque(maxlen=buffer_size)
@@ -136,12 +136,12 @@ class IncrementalIndicatorCalculator:
         if len(self.prices) < period:
             return self.prices[-1] if self.prices else 0.0
         
-        # Se é o primeiro cálculo ou não tem valor armazenado
+        # Se  o primeiro clculo ou no tem valor armazenado
         if period not in self.ema_values:
-            # Calcular SMA como inicialização
+            # Calcular SMA como inicializao
             ema = sum(list(self.prices)[-period:]) / period
         else:
-            # Cálculo incremental
+            # Clculo incremental
             multiplier = 2 / (period + 1)
             ema = (self.prices[-1] - self.ema_values[period]) * multiplier + self.ema_values[period]
         
@@ -166,7 +166,7 @@ class IncrementalIndicatorCalculator:
         
         # ATR incremental (Wilder's smoothing)
         if self.atr_value == 0.0:
-            # Primeiro cálculo: média simples
+            # Primeiro clculo: mdia simples
             tr_values = []
             for i in range(1, min(period, len(self.highs))):
                 high = self.highs[-i]
@@ -187,7 +187,7 @@ class IncrementalIndicatorCalculator:
         if len(self.prices) < period + 1:
             return 50.0  # Neutro
         
-        # Calcular mudanças de preço
+        # Calcular mudanas de preo
         gains = []
         losses = []
         
@@ -280,14 +280,14 @@ class IncrementalIndicatorCalculator:
         if not self.prices or not self.volumes:
             return 0.0
         
-        # Reset no início de nova sessão (simplificado: a cada 24h)
+        # Reset no incio de nova sesso (simplificado: a cada 24h)
         now = datetime.now()
         if self.vwap_session_start is None or (now - self.vwap_session_start).days > 0:
             self.vwap_cumulative_pv = 0.0
             self.vwap_cumulative_v = 0.0
             self.vwap_session_start = now
         
-        # Atualizar com último tick
+        # Atualizar com ltimo tick
         price = self.prices[-1]
         volume = self.volumes[-1]
         
@@ -338,18 +338,18 @@ class IncrementalIndicatorCalculator:
 
 class DataEngine:
     """
-    Background worker para processamento contínuo de dados
+    Background worker para processamento contnuo de dados
     
-    Este módulo:
+    Este mdulo:
     1. Recebe ticks do MT5 Bridge
     2. Calcula indicadores em streaming
     3. Detecta regime de mercado
-    4. Mantém buffers atualizados
+    4. Mantm buffers atualizados
     5. Fornece dados para a cadeia neural
     
-    Herança do legacy:
+    Herana do legacy:
     - Background worker pattern
-    - Processamento contínuo em thread separada
+    - Processamento contnuo em thread separada
     - Buffers circulares para auditoria
     - Fallback para MT5 API
     """
@@ -372,7 +372,7 @@ class DataEngine:
         # Estado atual do mercado
         self.market_state = MarketState(timestamp=datetime.now(), symbol=symbol)
         
-        # Buffers para histórico
+        # Buffers para histrico
         self.indicators_history = deque(maxlen=500)
         self.market_state_history = deque(maxlen=500)
         self.ticks_processed = 0
@@ -432,25 +432,25 @@ class DataEngine:
         self.logger.info("[DATA_ENGINE] Data engine stopped")
     
     def _on_tick_received(self, tick: TickData):
-        """Callback quando recebe tick do MT5"""
+        """Callback quando recebe tick do MT5 - Dispara processamento imediato"""
         try:
             self.ticks_processed += 1
+            
+            # Atualizar estado de mercado
+            self.market_state.timestamp = tick.timestamp
+            self.market_state.indicators.atr = tick.atr
+            self.market_state.indicators.rsi = tick.rsi
+            self.market_state.indicators.ema9 = tick.ema9
+            self.market_state.indicators.ema21 = tick.ema21
+            self.market_state.indicators.ema50 = tick.ema50
+            self.market_state.indicators.ema200 = tick.ema200
+            
+            # Disparar callback para a Neural Chain imediatamente
+            if self._on_indicators_ready:
+                self._on_indicators_ready(self.market_state.indicators)
+                
             if self.ticks_processed % 10 == 0:
-                self.logger.info(f"[DATA_ENGINE] Tick #{self.ticks_processed} received: {tick.symbol} bid={tick.bid:.2f}")
-            
-            # Atualizar calculadora
-            self.calculator.update(tick)
-            
-            # Atualizar estado básico
-            self.market_state.timestamp = datetime.now()
-            self.market_state.symbol = tick.symbol
-            self.market_state.bid = tick.bid
-            self.market_state.ask = tick.ask
-            self.market_state.price = (tick.bid + tick.ask) / 2
-            self.market_state.spread = tick.spread
-            self.market_state.volume = tick.volume
-            
-            self.ticks_processed += 1
+                self.logger.debug(f"[DATA_ENGINE] Tick #{self.ticks_processed} processed (RSI: {tick.rsi:.2f})")
             
         except Exception as e:
             self.logger.error(f"[DATA_ENGINE] Error processing tick: {e}")
@@ -461,56 +461,49 @@ class DataEngine:
         self.logger.debug(f"[DATA_ENGINE] Account updated: balance={account.balance:.2f}")
     
     def _on_position_received(self, position: PositionData):
-        """Callback quando recebe dados de posição"""
+        """Callback quando recebe dados de posio"""
         self.logger.debug(f"[DATA_ENGINE] Position updated: ticket={position.ticket}")
     
     def _on_mt5_connected(self):
-        """Callback quando MT5 conecta"""
-        self.logger.info("[DATA_ENGINE] MT5 connected, data flow starting")
+        """Callback de conexão - Warm-up de histórico (temporariamente desativado para testes)"""
+        self.logger.info("[DATA_ENGINE] MT5 connected. (History request skipped for stability test)")
+        # self.bridge.request_history(self.symbol, "M5", 200)
+        # self.bridge.request_history(self.symbol, "M15", 100)
+        # self.bridge.request_history(self.symbol, "H1", 50)
     
     def _on_mt5_disconnected(self):
         """Callback quando MT5 desconecta"""
         self.logger.warning("[DATA_ENGINE] MT5 disconnected")
     
     def _processing_loop(self):
-        """Loop principal de processamento em background"""
+        """Loop principal de processamento em background com telemetria"""
         self.logger.info("[DATA_ENGINE] Processing loop started")
         
         while self._running:
             try:
-                # Processar apenas se tiver dados
                 if len(self.calculator.prices) >= 2:
-                    # Calcular indicadores
                     indicators = self.calculator.calculate_all()
                     
-                    # Detectar regime
                     regime = self._detect_regime(indicators)
                     
-                    # Atualizar estado do mercado
                     self.market_state.indicators = indicators
                     self.market_state.regime = regime[0]
                     self.market_state.trend_strength = regime[1]
                     self.market_state.volatility_regime = regime[2]
                     
-                    # Armazenar no histórico
                     self.indicators_history.append(indicators)
                     self.market_state_history.append(self.market_state)
                     
-                    # Callbacks
+                    # Log de Telemetria de Ciclo
+                    self.logger.debug(f"[DATA_ENGINE] CICLO: Regime={regime[0]} | ATR={indicators.atr:.2f} | RSI={indicators.rsi:.2f}")
+
                     if self._on_indicators_ready:
                         self._on_indicators_ready(indicators)
-
-                    if self._on_market_state_updated:
-                        self._on_market_state_updated(self.market_state)
                 
-                # Dormir para não sobrecarregar CPU
-                # Processar a cada ~100ms (10x por segundo)
-                time.sleep(0.1)
+                time.sleep(0.5) # Ajustado para 500ms para evitar sobrecarga de log
                 
             except Exception as e:
                 self.logger.error(f"[DATA_ENGINE] Processing error: {e}")
-                self.logger.error(traceback.format_exc())
-                self.errors += 1
                 time.sleep(1)
         
         self.logger.info("[DATA_ENGINE] Processing loop stopped")
@@ -522,19 +515,19 @@ class DataEngine:
         Returns:
             (regime, trend_strength, volatility_regime)
         """
-        # Tendência baseada em EMAs
+        # Tendncia baseada em EMAs
         ema9 = indicators.ema9
         ema21 = indicators.ema21
         ema50 = indicators.ema50
         ema200 = indicators.ema200
         
-        # Força da tendência
+        # Fora da tendncia
         if ema9 > 0 and ema21 > 0 and ema50 > 0:
             trend_strength = min(1.0, (ema9 - ema21) / ema21 + (ema21 - ema50) / ema50)
         else:
             trend_strength = 0.0
         
-        # Regime de tendência
+        # Regime de tendncia
         if ema9 > ema21 > ema50 and ema50 > ema200:
             regime = "trending_up"
             trend_strength = min(1.0, trend_strength)
@@ -569,11 +562,11 @@ class DataEngine:
         return self.market_state
     
     def get_indicators_history(self, n: int = 100) -> list:
-        """Retorna histórico de indicadores"""
+        """Retorna histrico de indicadores"""
         return list(self.indicators_history)[-n:]
     
     def get_stats(self) -> dict:
-        """Retorna estatísticas do data engine"""
+        """Retorna estatsticas do data engine"""
         return {
             "ticks_processed": self.ticks_processed,
             "errors": self.errors,
@@ -601,15 +594,6 @@ class DataEngine:
         if on_regime_change:
             self._on_regime_change = on_regime_change
 
-    # Callback registration methods (chainable)
-    def on_indicators_ready(self, callback):
-        self._on_indicators_ready = callback
-        return self
 
-    def on_market_state_updated(self, callback):
-        self._on_market_state_updated = callback
-        return self
 
-    def on_regime_change(self, callback):
-        self._on_regime_change = callback
-        return self
+

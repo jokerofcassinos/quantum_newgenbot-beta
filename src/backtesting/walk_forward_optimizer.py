@@ -39,7 +39,7 @@ class WalkForwardOptimizer:
         self.config_manager = config_manager
         self.optimization_history: List[Dict[str, Any]] = []
         
-        logger.info("🔬 Walk-Forward Optimizer initialized")
+        logger.info(" Walk-Forward Optimizer initialized")
     
     def optimize(self, 
                 candles: pd.DataFrame,
@@ -61,7 +61,7 @@ class WalkForwardOptimizer:
             dict: Optimization results
         """
         logger.info("="*80)
-        logger.info("🔬 STARTING WALK-FORWARD OPTIMIZATION")
+        logger.info(" STARTING WALK-FORWARD OPTIMIZATION")
         logger.info("="*80)
         logger.info(f"   Total candles: {len(candles)}")
         logger.info(f"   Train window: {train_days} days")
@@ -92,25 +92,25 @@ class WalkForwardOptimizer:
             test_end = test_start + test_bars
             
             if test_end > len(candles):
-                logger.warning(f"   ⚠️ Split {split+1}: Not enough data, skipping")
+                logger.warning(f"    Split {split+1}: Not enough data, skipping")
                 break
             
             logger.info(f"\n{'='*60}")
-            logger.info(f"📊 SPLIT {split+1}/{n_splits}")
+            logger.info(f" SPLIT {split+1}/{n_splits}")
             logger.info(f"{'='*60}")
-            logger.info(f"   Train: bars {train_start}-{train_end} ({candles.iloc[train_start]['time']} → {candles.iloc[train_end-1]['time']})")
-            logger.info(f"   Test:  bars {test_start}-{test_end} ({candles.iloc[test_start]['time']} → {candles.iloc[test_end-1]['time']})")
+            logger.info(f"   Train: bars {train_start}-{train_end} ({candles.iloc[train_start]['time']}  {candles.iloc[train_end-1]['time']})")
+            logger.info(f"   Test:  bars {test_start}-{test_end} ({candles.iloc[test_start]['time']}  {candles.iloc[test_end-1]['time']})")
             
             # Split data
             train_data = candles.iloc[train_start:train_end].copy()
             test_data = candles.iloc[test_start:test_end].copy()
             
             # Optimize on training data
-            logger.info(f"\n🔍 Optimizing on training data ({len(train_data)} bars)...")
+            logger.info(f"\n Optimizing on training data ({len(train_data)} bars)...")
             best_params = self._optimize_window(train_data, n_trials)
             
             # Validate on test data (out-of-sample)
-            logger.info(f"\n✅ Validating on test data ({len(test_data)} bars)...")
+            logger.info(f"\n Validating on test data ({len(test_data)} bars)...")
             test_result = self._evaluate_params(test_data, best_params)
             
             # Evaluate on training data (in-sample)
@@ -121,7 +121,7 @@ class WalkForwardOptimizer:
             all_results['out_of_sample'].append(test_result)
             all_results['parameters'].append(best_params)
             
-            logger.info(f"\n📊 Split {split+1} Results:")
+            logger.info(f"\n Split {split+1} Results:")
             logger.info(f"   In-Sample:  Net PnL=${train_result['net_pnl']:+,.2f} | WR={train_result['win_rate']*100:.1f}% | PF={train_result['profit_factor']:.2f}")
             logger.info(f"   Out-of-Sample: Net PnL=${test_result['net_pnl']:+,.2f} | WR={test_result['win_rate']*100:.1f}% | PF={test_result['profit_factor']:.2f}")
         
@@ -132,7 +132,7 @@ class WalkForwardOptimizer:
         best_params = self._find_robust_parameters(all_results)
         
         logger.info(f"\n{'='*80}")
-        logger.info("🏆 WALK-FORWARD OPTIMIZATION COMPLETE")
+        logger.info(" WALK-FORWARD OPTIMIZATION COMPLETE")
         logger.info(f"{'='*80}")
         logger.info(f"   Average In-Sample PnL: ${summary['avg_in_sample_pnl']:+,.2f}")
         logger.info(f"   Average Out-of-Sample PnL: ${summary['avg_out_of_sample_pnl']:+,.2f}")
@@ -181,7 +181,7 @@ class WalkForwardOptimizer:
         # Run optimization
         study.optimize(objective, n_trials=n_trials, show_progress_bar=False)
         
-        logger.info(f"   ✅ Optimization complete: Best score = {study.best_value:+,.2f}")
+        logger.info(f"    Optimization complete: Best score = {study.best_value:+,.2f}")
         
         return study.best_params
     
@@ -265,4 +265,8 @@ class WalkForwardOptimizer:
         
         # Save updated DNA
         self.config_manager.save_dna(dna)
-        logger.info("🧬 DNA updated with optimized parameters")
+        logger.info(" DNA updated with optimized parameters")
+
+
+
+

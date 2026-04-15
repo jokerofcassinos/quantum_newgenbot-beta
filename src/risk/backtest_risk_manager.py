@@ -29,7 +29,7 @@ class BacktestRiskManager:
         self.daily_loss_limit = initial_capital * 0.05  # 5% of initial
         self.total_loss_limit = initial_capital * 0.10  # 10% of initial
 
-        logger.info(f"🛡️ Backtest Risk Manager initialized")
+        logger.info(f" Backtest Risk Manager initialized")
         logger.info(f"   Initial Capital: ${initial_capital:,.2f}")
         logger.info(f"   Daily Loss Limit: ${self.daily_loss_limit:,.2f} (5%)")
         logger.info(f"   Total Loss Limit: ${self.total_loss_limit:,.2f} (10%)")
@@ -65,12 +65,12 @@ class BacktestRiskManager:
 
         # 4. Warning for consecutive losses
         if self.consecutive_losses >= 3:
-            result['warnings'].append(f"⚠️ {self.consecutive_losses} consecutive losses - risk is elevated")
+            result['warnings'].append(f" {self.consecutive_losses} consecutive losses - risk is elevated")
 
         # 5. Warning if approaching daily limit
         daily_used_pct = (current_daily_loss / self.daily_loss_limit) * 100
         if daily_used_pct > 60:
-            result['warnings'].append(f"⚠️ Daily loss at {daily_used_pct:.1f}% of limit")
+            result['warnings'].append(f" Daily loss at {daily_used_pct:.1f}% of limit")
 
         return result
 
@@ -122,3 +122,7 @@ class BacktestRiskManager:
             'consecutive_wins': self.consecutive_wins,
             'should_stop': self.should_stop_trading()[0]
         }
+
+
+
+

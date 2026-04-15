@@ -2399,3 +2399,6 @@ Health:  PING -> PONG|OK\n
 ---
 
 *Documento gerado em 2026-04-13. Analise baseada em 4 arquivos .mq5 totais identificados no projeto atual e legacy.*
+
+
+

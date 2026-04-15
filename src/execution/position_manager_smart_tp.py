@@ -4,10 +4,10 @@ Source: DubaiMatrixASI (salvaged and improved)
 Created: 2026-04-11
 
 Splits positions into multiple chunks with different TP levels:
-- 30% → TP1 at 1:1 R:R (quick profit)
-- 30% → TP2 at 1:2 R:R (medium target)
-- 20% → TP3 at 1:3 R:R (runner)
-- 20% → Trailing stop (let it run)
+- 30%  TP1 at 1:1 R:R (quick profit)
+- 30%  TP2 at 1:2 R:R (medium target)
+- 20%  TP3 at 1:3 R:R (runner)
+- 20%  Trailing stop (let it run)
 
 As each TP hits:
 - Lock in profit for that portion
@@ -53,7 +53,7 @@ class PositionManagerSmartTP:
         # Validate portions sum to 1.0
         total = tp1_portion + tp2_portion + tp3_portion + trailing_portion
         if abs(total - 1.0) > 0.01:
-            logger.warning(f"⚠️ Smart TP portions sum to {total:.2f}, normalizing to 1.0")
+            logger.warning(f" Smart TP portions sum to {total:.2f}, normalizing to 1.0")
             scale = 1.0 / total
             tp1_portion *= scale
             tp2_portion *= scale
@@ -69,7 +69,7 @@ class PositionManagerSmartTP:
         self.trailing_portion = trailing_portion
         self.trailing_atr_multiplier = trailing_atr_multiplier
         
-        logger.info("🎯 PositionManager Smart TP initialized")
+        logger.info(" PositionManager Smart TP initialized")
         logger.info(f"   TP1: {tp1_portion*100:.0f}% @ {tp1_rr}:1 R:R")
         logger.info(f"   TP2: {tp2_portion*100:.0f}% @ {tp2_rr}:1 R:R")
         logger.info(f"   TP3: {tp3_portion*100:.0f}% @ {tp3_rr}:1 R:R")
@@ -234,7 +234,7 @@ class PositionManagerSmartTP:
                     total_realized_pnl += target_pnl
                     closed_targets.append(target)
                     
-                    logger.info(f"🎯 {target['name']} hit: +${target_pnl:.2f} ({target['portion']*100:.0f}% position)")
+                    logger.info(f" {target['name']} hit: +${target_pnl:.2f} ({target['portion']*100:.0f}% position)")
             
             # Check trailing stop hit
             elif target['name'] == 'TRAILING':
@@ -261,7 +261,7 @@ class PositionManagerSmartTP:
                     total_realized_pnl += target_pnl
                     closed_targets.append(target)
                     
-                    logger.info(f"🛑 Trailing stop hit: ${target_pnl:+.2f} ({target['portion']*100:.0f}% position)")
+                    logger.info(f" Trailing stop hit: ${target_pnl:+.2f} ({target['portion']*100:.0f}% position)")
         
         # Update remaining portion
         closed_portion = sum(t['portion'] for t in position_targets['targets'] if t['closed'])
@@ -276,7 +276,7 @@ class PositionManagerSmartTP:
             position_targets['breakeven_active'] = True
             # Update trailing stop to breakeven
             trailing_target['trailing_stop'] = entry_price
-            logger.info(f"🔒 SL moved to breakeven")
+            logger.info(f" SL moved to breakeven")
         
         return position_closed, total_realized_pnl, closed_targets
 
@@ -302,3 +302,7 @@ class PositionManagerSmartTP:
                 for t in open_targets
             ],
         }
+
+
+
+

@@ -36,7 +36,7 @@ class OrderManager:
         self.default_deviation = 20  # points
         self.default_magic = 20260410
         
-        logger.info("📝 Order Manager initialized")
+        logger.info(" Order Manager initialized")
     
     async def execute_market_order(self,
                                    order_type: str,
@@ -63,7 +63,7 @@ class OrderManager:
             # Get current price
             tick = mt5.symbol_info_tick(self.symbol)
             if tick is None:
-                logger.error("❌ Failed to get current price")
+                logger.error(" Failed to get current price")
                 return None
             
             # Determine price and order type
@@ -74,13 +74,13 @@ class OrderManager:
                 price = tick.bid
                 mt5_order_type = mt5.ORDER_TYPE_SELL
             else:
-                logger.error(f"❌ Invalid order type: {order_type}")
+                logger.error(f" Invalid order type: {order_type}")
                 return None
             
             # Get symbol info for point calculation
             symbol_info = mt5.symbol_info(self.symbol)
             if symbol_info is None:
-                logger.error("❌ Failed to get symbol info")
+                logger.error(" Failed to get symbol info")
                 return None
             
             point = symbol_info.point
@@ -107,7 +107,7 @@ class OrderManager:
             if comment:
                 request["comment"] = comment
             
-            logger.info(f"📝 Executing {order_type}: {volume} lots @ ${price:.2f}")
+            logger.info(f" Executing {order_type}: {volume} lots @ ${price:.2f}")
             if sl:
                 logger.info(f"   SL: ${sl:.2f}")
             if tp:
@@ -117,12 +117,12 @@ class OrderManager:
             result = mt5.order_send(request)
             
             if result is None:
-                logger.error("❌ Order send returned None")
+                logger.error(" Order send returned None")
                 return None
             
             # Check result
             if result.retcode == mt5.TRADE_RETCODE_DONE:
-                logger.info(f"✅ Order executed successfully")
+                logger.info(f" Order executed successfully")
                 logger.info(f"   Ticket: {result.order}")
                 logger.info(f"   Deal: {result.deal}")
                 logger.info(f"   Price: ${result.price:.2f}")
@@ -141,7 +141,7 @@ class OrderManager:
                     "time": datetime.now(timezone.utc)
                 }
             else:
-                logger.error(f"❌ Order failed: {result.retcode} - {result.comment}")
+                logger.error(f" Order failed: {result.retcode} - {result.comment}")
                 return {
                     "success": False,
                     "retcode": result.retcode,
@@ -150,7 +150,7 @@ class OrderManager:
                 }
                 
         except Exception as e:
-            logger.error(f"❌ Error executing market order: {e}", exc_info=True)
+            logger.error(f" Error executing market order: {e}", exc_info=True)
             return None
     
     async def place_pending_order(self,
@@ -188,7 +188,7 @@ class OrderManager:
             }
             
             if order_type not in type_map:
-                logger.error(f"❌ Invalid pending order type: {order_type}")
+                logger.error(f" Invalid pending order type: {order_type}")
                 return None
             
             mt5_order_type = type_map[order_type]
@@ -215,13 +215,13 @@ class OrderManager:
             if comment:
                 request["comment"] = comment
             
-            logger.info(f"📝 Placing {order_type}: {volume} lots @ ${entry_price:.2f}")
+            logger.info(f" Placing {order_type}: {volume} lots @ ${entry_price:.2f}")
             
             # Send order
             result = mt5.order_send(request)
             
             if result and result.retcode == mt5.TRADE_RETCODE_DONE:
-                logger.info(f"✅ Pending order placed: Ticket {result.order}")
+                logger.info(f" Pending order placed: Ticket {result.order}")
                 return {
                     "success": True,
                     "ticket": result.order,
@@ -230,11 +230,11 @@ class OrderManager:
                     "volume": volume
                 }
             else:
-                logger.error(f"❌ Pending order failed: {result.comment if result else 'Unknown'}")
+                logger.error(f" Pending order failed: {result.comment if result else 'Unknown'}")
                 return None
                 
         except Exception as e:
-            logger.error(f"❌ Error placing pending order: {e}")
+            logger.error(f" Error placing pending order: {e}")
             return None
     
     async def modify_position(self,
@@ -256,7 +256,7 @@ class OrderManager:
             # Get position
             positions = mt5.positions_get(ticket=ticket)
             if positions is None or len(positions) == 0:
-                logger.error(f"❌ Position {ticket} not found")
+                logger.error(f" Position {ticket} not found")
                 return False
             
             position = positions[0]
@@ -274,7 +274,7 @@ class OrderManager:
                 "position": ticket,
             }
             
-            logger.info(f"📝 Modifying position {ticket}")
+            logger.info(f" Modifying position {ticket}")
             if sl:
                 logger.info(f"   New SL: ${sl:.2f}")
             if tp:
@@ -284,14 +284,14 @@ class OrderManager:
             result = mt5.order_send(request)
             
             if result and result.retcode == mt5.TRADE_RETCODE_DONE:
-                logger.info(f"✅ Position {ticket} modified successfully")
+                logger.info(f" Position {ticket} modified successfully")
                 return True
             else:
-                logger.error(f"❌ Failed to modify position: {result.comment if result else 'Unknown'}")
+                logger.error(f" Failed to modify position: {result.comment if result else 'Unknown'}")
                 return False
                 
         except Exception as e:
-            logger.error(f"❌ Error modifying position: {e}")
+            logger.error(f" Error modifying position: {e}")
             return False
     
     async def close_position(self,
@@ -313,7 +313,7 @@ class OrderManager:
             # Get position
             positions = mt5.positions_get(ticket=ticket)
             if positions is None or len(positions) == 0:
-                logger.error(f"❌ Position {ticket} not found")
+                logger.error(f" Position {ticket} not found")
                 return False
             
             position = positions[0]
@@ -322,7 +322,7 @@ class OrderManager:
             # Get current price
             tick = mt5.symbol_info_tick(self.symbol)
             if tick is None:
-                logger.error("❌ Failed to get current price")
+                logger.error(" Failed to get current price")
                 return False
             
             # Determine close order type and price
@@ -347,21 +347,21 @@ class OrderManager:
                 "comment": comment if comment else "Manual close",
             }
             
-            logger.info(f"📝 Closing position {ticket}: {close_volume} lots @ ${close_price:.2f}")
+            logger.info(f" Closing position {ticket}: {close_volume} lots @ ${close_price:.2f}")
             
             # Send request
             result = mt5.order_send(request)
             
             if result and result.retcode == mt5.TRADE_RETCODE_DONE:
-                logger.info(f"✅ Position {ticket} closed successfully")
+                logger.info(f" Position {ticket} closed successfully")
                 logger.info(f"   P&L: ${position.profit:.2f}")
                 return True
             else:
-                logger.error(f"❌ Failed to close position: {result.comment if result else 'Unknown'}")
+                logger.error(f" Failed to close position: {result.comment if result else 'Unknown'}")
                 return False
                 
         except Exception as e:
-            logger.error(f"❌ Error closing position: {e}", exc_info=True)
+            logger.error(f" Error closing position: {e}", exc_info=True)
             return False
     
     async def close_partial_position(self,
@@ -390,13 +390,13 @@ class OrderManager:
             # Validate volume
             symbol_info = mt5.symbol_info(self.symbol)
             if close_volume < symbol_info.volume_min:
-                logger.warning(f"⚠️ Close volume too small: {close_volume}")
+                logger.warning(f" Close volume too small: {close_volume}")
                 return False
             
             return await self.close_position(ticket, close_volume, comment)
             
         except Exception as e:
-            logger.error(f"❌ Error in partial close: {e}")
+            logger.error(f" Error in partial close: {e}")
             return False
     
     async def get_trade_history(self, 
@@ -445,11 +445,11 @@ class OrderManager:
                     "time_close": datetime.fromtimestamp(order.time_done)
                 })
             
-            logger.info(f"📊 Retrieved {len(result)} historical orders")
+            logger.info(f" Retrieved {len(result)} historical orders")
             return result
             
         except Exception as e:
-            logger.error(f"❌ Error getting trade history: {e}")
+            logger.error(f" Error getting trade history: {e}")
             return []
     
     async def calculate_position_size(self,
@@ -471,7 +471,7 @@ class OrderManager:
             # Get symbol info
             symbol_info = mt5.symbol_info(self.symbol)
             if symbol_info is None:
-                logger.error("❌ Failed to get symbol info")
+                logger.error(" Failed to get symbol info")
                 return 0.0
             
             # Calculate lot size
@@ -480,7 +480,7 @@ class OrderManager:
             tick_size = symbol_info.trade_tick_size
             
             if tick_value == 0 or tick_size == 0:
-                logger.error("❌ Invalid tick value or size")
+                logger.error(" Invalid tick value or size")
                 return 0.0
             
             # Raw calculation
@@ -494,7 +494,7 @@ class OrderManager:
             adjusted_lot = max(adjusted_lot, symbol_info.volume_min)
             adjusted_lot = min(adjusted_lot, symbol_info.volume_max)
             
-            logger.info(f"📊 Position size calculation:")
+            logger.info(f" Position size calculation:")
             logger.info(f"   Risk: ${risk_amount:.2f}")
             logger.info(f"   Stop distance: {stop_distance} points")
             logger.info(f"   Raw lot: {raw_lot:.4f}")
@@ -503,5 +503,9 @@ class OrderManager:
             return adjusted_lot
             
         except Exception as e:
-            logger.error(f"❌ Error calculating position size: {e}")
+            logger.error(f" Error calculating position size: {e}")
             return 0.0
+
+
+
+

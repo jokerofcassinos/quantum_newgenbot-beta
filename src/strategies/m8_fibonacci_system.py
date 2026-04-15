@@ -33,7 +33,7 @@ class M8FibonacciSystem:
         self.phi = phi
         self.phi_levels = [0.236, 0.382, 0.500, 0.618, 0.786, 1.0, 1.618, 2.618]
         
-        logger.info("🌀 M8FibonacciSystem initialized")
+        logger.info(" M8FibonacciSystem initialized")
         logger.info(f"   Phi: {phi:.6f}")
         logger.info(f"   Levels: {self.phi_levels}")
 
@@ -212,3 +212,7 @@ class M8FibonacciSystem:
         for price in data[1:]:
             ema = alpha * price + (1 - alpha) * ema
         return ema
+
+
+
+

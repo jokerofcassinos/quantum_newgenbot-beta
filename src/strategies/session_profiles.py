@@ -229,3 +229,6 @@ def apply_session_veto(session_profile: SessionProfile, signal: Dict[str, Any]) 
     result['adjusted_volume'] = adjusted_volume
     
     return result
+
+
+

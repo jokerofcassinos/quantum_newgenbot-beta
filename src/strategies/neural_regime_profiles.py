@@ -125,7 +125,7 @@ class NeuralRegimeProfiler:
         # Profile selection history
         self.selection_history: List[Dict[str, Any]] = []
         
-        logger.info("🧠 Neural Regime Profiler initialized")
+        logger.info(" Neural Regime Profiler initialized")
         logger.info(f"   5 Profiles: Aggressive, Momentum, Mean Reversion, Defensive, Scalper")
     
     def _create_aggressive_profile(self) -> NeuralProfile:
@@ -339,7 +339,7 @@ class NeuralRegimeProfiler:
         self.active_profile = best_profile
         self.current_regime = regime_analysis['regime']
         
-        logger.info(f"🧠 Profile Selected: {best_profile_type.value.upper()}")
+        logger.info(f" Profile Selected: {best_profile_type.value.upper()}")
         logger.info(f"   Regime: {regime_analysis['regime']}")
         logger.info(f"   Confidence: {best_profile.confidence:.2f}")
         logger.info(f"   Volatility: {volatility_analysis['atr_percentile']:.1f}%")
@@ -438,7 +438,7 @@ class NeuralRegimeProfiler:
         elif 17 <= hour < 22:
             session = "ny"
         else:
-            session = "late_ny"  # 22-23 UTC — BTCUSD trades 24/7, no 'weekend' concept
+            session = "late_ny"  # 22-23 UTC  BTCUSD trades 24/7, no 'weekend' concept
         
         return {
             'current_session': session,
@@ -542,7 +542,7 @@ class NeuralRegimeProfiler:
         profile.mutation_count += 1
         profile.last_mutation_time = datetime.now(timezone.utc).isoformat()
         
-        logger.debug(f"🧬 Profile {profile.name.value} adapted: risk={profile.risk_per_trade:.2f}%, conf_thresh={profile.confidence_threshold:.2f}")
+        logger.debug(f" Profile {profile.name.value} adapted: risk={profile.risk_per_trade:.2f}%, conf_thresh={profile.confidence_threshold:.2f}")
     
     def get_profile_state(self) -> Dict[str, Any]:
         """Get current profile state for reporting"""
@@ -559,3 +559,7 @@ class NeuralRegimeProfiler:
                 for name, prof in self.profiles.items()
             },
         }
+
+
+
+

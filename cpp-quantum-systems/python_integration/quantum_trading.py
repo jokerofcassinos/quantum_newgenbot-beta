@@ -78,7 +78,7 @@ class QuantumTradingSystems:
         # Load C++ libraries
         self._load_libraries()
         
-        logger.info("🧬 Quantum Trading Systems Python wrapper initialized")
+        logger.info(" Quantum Trading Systems Python wrapper initialized")
     
     def _load_libraries(self):
         """Load C++ shared libraries"""
@@ -90,13 +90,13 @@ class QuantumTradingSystems:
             
             # For now, use subprocess to run tests and parse output
             # In production, would use pybind11 or ctypes with .dll
-            logger.info(f"📂 C++ build path: {self.cpp_build_path}")
-            logger.info(f"   Monte Carlo lib: {'✅' if os.path.exists(mc_path) else '❌'}")
-            logger.info(f"   Quantum lib: {'✅' if os.path.exists(q_path) else '❌'}")
-            logger.info(f"   Test exe: {'✅' if os.path.exists(test_exe) else '❌'}")
+            logger.info(f" C++ build path: {self.cpp_build_path}")
+            logger.info(f"   Monte Carlo lib: {'' if os.path.exists(mc_path) else ''}")
+            logger.info(f"   Quantum lib: {'' if os.path.exists(q_path) else ''}")
+            logger.info(f"   Test exe: {'' if os.path.exists(test_exe) else ''}")
             
         except Exception as e:
-            logger.error(f"❌ Failed to load C++ libraries: {e}")
+            logger.error(f" Failed to load C++ libraries: {e}")
             raise
     
     def run_monte_carlo(self, spot_price: float = 73000.0, volatility: float = 0.65,
@@ -116,7 +116,7 @@ class QuantumTradingSystems:
         # For now, run Python-based Monte Carlo that mimics C++ implementation
         # In production, this would call C++ directly via pybind11
         
-        logger.info(f"🎲 Running Monte Carlo: {num_paths:,} paths, {num_steps} steps")
+        logger.info(f" Running Monte Carlo: {num_paths:,} paths, {num_steps} steps")
         logger.info(f"   Spot: ${spot_price:,.2f} | Vol: {volatility*100:.1f}%")
         
         # Simulate C++ Monte Carlo results (Python approximation)
@@ -171,7 +171,7 @@ class QuantumTradingSystems:
             probability_loss_greater_than_5pct=prob_loss_5pct,
         )
         
-        logger.info(f"✅ Monte Carlo complete:")
+        logger.info(f" Monte Carlo complete:")
         logger.info(f"   Mean: ${result.mean_price:,.2f}")
         logger.info(f"   Std Dev: ${result.std_dev:,.2f}")
         logger.info(f"   VaR 95%: ${result.var_95:,.2f}")
@@ -193,7 +193,7 @@ class QuantumTradingSystems:
         Returns:
             QuantumPrediction with price forecast
         """
-        logger.info(f"🔮 Running Quantum Prediction: {num_dimensions} dimensions, {time_horizon} days")
+        logger.info(f" Running Quantum Prediction: {num_dimensions} dimensions, {time_horizon} days")
         logger.info(f"   Spot: ${spot_price:,.2f} | Vol: {volatility*100:.1f}%")
         
         # Quantum superposition of price states (Python approximation)
@@ -260,7 +260,7 @@ class QuantumTradingSystems:
             regime_probabilities=regime_probs.tolist(),
         )
         
-        logger.info(f"✅ Quantum prediction complete:")
+        logger.info(f" Quantum prediction complete:")
         logger.info(f"   Predicted: ${prediction.predicted_price:,.2f}")
         logger.info(f"   Uncertainty: ${prediction.uncertainty:,.2f}")
         logger.info(f"   95% CI: [${prediction.confidence_interval_95_lower:,.2f}, ${prediction.confidence_interval_95_upper:,.2f}]")
@@ -346,7 +346,7 @@ class QuantumTradingSystems:
             Dict with all analysis results
         """
         logger.info("\n" + "="*80)
-        logger.info("🧬 RUNNING COMPLETE QUANTUM ANALYSIS")
+        logger.info(" RUNNING COMPLETE QUANTUM ANALYSIS")
         logger.info("="*80)
         
         # 1. Monte Carlo
@@ -427,7 +427,7 @@ if __name__ == "__main__":
     from src.core.config_manager import ConfigManager
     
     print("\n" + "="*80)
-    print("🧬 QUANTUM TRADING SYSTEMS - PYTHON INTEGRATION TEST")
+    print(" QUANTUM TRADING SYSTEMS - PYTHON INTEGRATION TEST")
     print("="*80 + "\n")
     
     # Initialize
@@ -437,26 +437,30 @@ if __name__ == "__main__":
     results = qts.run_complete_analysis(spot_price=73000.0, volatility=0.65)
     
     print("\n" + "="*80)
-    print("📊 ANALYSIS RESULTS")
+    print(" ANALYSIS RESULTS")
     print("="*80)
-    print(f"\n💰 Monte Carlo:")
+    print(f"\n Monte Carlo:")
     print(f"   Mean: ${results['monte_carlo']['mean_price']:,.2f}")
     print(f"   VaR 95%: ${results['monte_carlo']['var_95']:,.2f}")
     print(f"   Prob Profit: {results['monte_carlo']['probability_profit']*100:.1f}%")
     
-    print(f"\n🔮 Quantum Prediction:")
+    print(f"\n Quantum Prediction:")
     print(f"   Predicted: ${results['quantum_prediction']['predicted_price']:,.2f}")
     print(f"   Uncertainty: ${results['quantum_prediction']['uncertainty']:,.2f}")
     print(f"   Quantum Advantage: {results['quantum_prediction']['quantum_advantage']*100:.1f}%")
     
-    print(f"\n📏 Market Measurement:")
+    print(f"\n Market Measurement:")
     print(f"   Collapsed: ${results['market_measurement']['collapsed_price']:,.2f}")
     print(f"   Interpretation: {results['market_measurement']['interpretation']}")
     
-    print(f"\n🕳️ Tunneling:")
+    print(f"\n Tunneling:")
     print(f"   Up 5%: {results['tunneling']['up_5pct']*100:.2f}%")
     print(f"   Down 5%: {results['tunneling']['down_5pct']*100:.2f}%")
     
-    print(f"\n🎯 VERDICT:")
+    print(f"\n VERDICT:")
     print(f"   {results['verdict']}")
     print("="*80 + "\n")
+
+
+
+

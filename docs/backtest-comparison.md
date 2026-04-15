@@ -91,3 +91,6 @@ O **Smart Order Manager é uma ferramenta poderosa** mas:
 ---
 
 **Conclusão:** O Smart Order Manager é sofisticado e funcional, mas precisa de calibração fina para o tipo de mercado que opera. A proteção de lucro funciona perfeitamente - o problema é a seleção de trades!
+
+
+

@@ -4,9 +4,9 @@ Source: Custom (based on forensic analysis recommendations)
 Created: 2026-04-12
 
 Calculates expected value BEFORE entering each trade:
-expectancy = (win_rate × avg_win) - (loss_rate × avg_loss)
+expectancy = (win_rate  avg_win) - (loss_rate  avg_loss)
 
-Only enters trades where expectancy > commission_cost × safety_margin
+Only enters trades where expectancy > commission_cost  safety_margin
 
 This ensures every trade has positive mathematical expectation
 after accounting for all costs.
@@ -37,7 +37,7 @@ class ExpectancyEngine:
             commission_per_lot_per_side: Commission cost per lot per side ($45 FTMO)
             spread_cost_per_lot: Estimated spread cost per lot ($1 BTCUSD)
             slippage_estimate_per_trade: Estimated slippage per trade ($0.50)
-            min_expectancy_multiple: Minimum expectancy must be this × total_cost
+            min_expectancy_multiple: Minimum expectancy must be this  total_cost
         """
         self.commission_per_lot_per_side = commission_per_lot_per_side
         self.spread_cost_per_lot = spread_cost_per_lot
@@ -49,7 +49,7 @@ class ExpectancyEngine:
         self.winning_trades = []
         self.losing_trades = []
         
-        logger.info("📈 ExpectancyEngine initialized")
+        logger.info(" ExpectancyEngine initialized")
         logger.info(f"   Commission/lot/side: ${commission_per_lot_per_side:.2f}")
         logger.info(f"   Min expectancy multiple: {min_expectancy_multiple}x")
 
@@ -180,3 +180,7 @@ class ExpectancyEngine:
             'winning_trades': len(self.winning_trades),
             'losing_trades': len(self.losing_trades),
         }
+
+
+
+

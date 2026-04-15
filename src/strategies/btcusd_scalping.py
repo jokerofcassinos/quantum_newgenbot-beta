@@ -43,7 +43,7 @@ class BTCUSDScalpingStrategy(BaseStrategy):
             "rsi": 0.10
         })
         
-        logger.info(f"🚀 {self.name} initialized with DNA params")
+        logger.info(f" {self.name} initialized with DNA params")
     
     async def generate_signal(self,
                              candles: pd.DataFrame,
@@ -64,7 +64,7 @@ class BTCUSDScalpingStrategy(BaseStrategy):
         """
         try:
             if len(candles) < 50:
-                logger.warning("⚠️ Not enough candles for analysis")
+                logger.warning(" Not enough candles for analysis")
                 return None
             
             self.signals_generated += 1
@@ -96,7 +96,7 @@ class BTCUSDScalpingStrategy(BaseStrategy):
             elif total_score < -0.70:
                 direction = "SELL"
             else:
-                logger.info(f"📊 Score {total_score:.2f} - No clear signal")
+                logger.info(f" Score {total_score:.2f} - No clear signal")
                 self.signals_rejected += 1
                 return None
             
@@ -155,19 +155,19 @@ class BTCUSDScalpingStrategy(BaseStrategy):
             # Validate signal
             is_valid, reason = self.validate_signal(signal)
             if not is_valid:
-                logger.warning(f"❌ Signal rejected: {reason}")
+                logger.warning(f" Signal rejected: {reason}")
                 self.signals_rejected += 1
                 return None
             
             self.signals_approved += 1
-            logger.info(f"✅ Signal generated: {direction} @ ${entry_price:.2f}")
+            logger.info(f" Signal generated: {direction} @ ${entry_price:.2f}")
             logger.info(f"   SL: ${stop_loss:.2f} | TP: ${take_profit:.2f}")
             logger.info(f"   R:R: {rr_ratio:.2f} | Confidence: {confidence:.2f}")
             
             return signal
             
         except Exception as e:
-            logger.error(f"❌ Error generating signal: {e}", exc_info=True)
+            logger.error(f" Error generating signal: {e}", exc_info=True)
             return None
     
     def _calculate_indicators(self, candles: pd.DataFrame, 
@@ -334,3 +334,7 @@ class BTCUSDScalpingStrategy(BaseStrategy):
         
         rationale = "; ".join(parts) if parts else "Mixed signals, moderate confidence"
         return rationale
+
+
+
+

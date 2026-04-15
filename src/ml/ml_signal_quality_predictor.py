@@ -54,7 +54,7 @@ class MLSignalQualityPredictor:
         # Load historical data
         self.historical_trades = self._load_trade_audits()
         
-        logger.info("🤖 MLSignalQualityPredictor initialized")
+        logger.info(" MLSignalQualityPredictor initialized")
         logger.info(f"   Audit dir: {audit_dir}")
         logger.info(f"   Model type: {model_type}")
         logger.info(f"   Historical trades loaded: {len(self.historical_trades)}")
@@ -68,7 +68,7 @@ class MLSignalQualityPredictor:
         trades = []
         
         if not self.audit_dir.exists():
-            logger.warning(f"⚠️ Audit directory not found: {self.audit_dir}")
+            logger.warning(f" Audit directory not found: {self.audit_dir}")
             return trades
         
         # Load all JSON files recursively
@@ -79,9 +79,9 @@ class MLSignalQualityPredictor:
                     if 'net_pnl' in trade_data or 'gross_pnl' in trade_data:
                         trades.append(trade_data)
             except Exception as e:
-                logger.warning(f"⚠️ Failed to load {json_file}: {e}")
+                logger.warning(f" Failed to load {json_file}: {e}")
         
-        logger.info(f"📂 Loaded {len(trades)} trade audits from {self.audit_dir}")
+        logger.info(f" Loaded {len(trades)} trade audits from {self.audit_dir}")
         return trades
 
     def _extract_features(self, trade: Dict[str, Any]) -> Dict[str, float]:
@@ -147,7 +147,7 @@ class MLSignalQualityPredictor:
     def _train_model(self):
         """Train prediction model on historical data."""
         if len(self.historical_trades) < self.min_trades:
-            logger.warning(f"⚠️ Not enough data to train model ({len(self.historical_trades)} < {self.min_trades})")
+            logger.warning(f" Not enough data to train model ({len(self.historical_trades)} < {self.min_trades})")
             return
         
         # Prepare training data
@@ -203,7 +203,7 @@ class MLSignalQualityPredictor:
         }
         
         self.is_trained = True
-        logger.info(f"✅ Model trained on {len(X)} trades")
+        logger.info(f" Model trained on {len(X)} trades")
         logger.info(f"   Win rate: {self.training_data['win_rate']*100:.1f}%")
         logger.info(f"   Wins: {win_count}, Losses: {loss_count}")
 
@@ -280,3 +280,7 @@ class MLSignalQualityPredictor:
             'model_type': self.model_type,
             'historical_trades_loaded': len(self.historical_trades),
         }
+
+
+
+

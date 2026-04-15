@@ -43,7 +43,7 @@ class RiskManager:
         self.consecutive_wins = 0
         self.trades_today = 0
         
-        logger.info("🛡️ Risk Manager initialized")
+        logger.info(" Risk Manager initialized")
     
     async def initialize(self, current_balance: float):
         """
@@ -56,7 +56,7 @@ class RiskManager:
         self.total_pnl = 0.0
         self.daily_pnl = 0.0
         
-        logger.info(f"💰 Risk Manager initialized with ${current_balance:.2f}")
+        logger.info(f" Risk Manager initialized with ${current_balance:.2f}")
         logger.info(f"   Daily loss limit: ${current_balance * 0.05:.2f} (5%)")
         logger.info(f"   Total loss limit: ${current_balance * 0.10:.2f} (10%)")
     
@@ -128,7 +128,7 @@ class RiskManager:
             # 6. Check consecutive losses
             if self.consecutive_losses >= 3:
                 validation["warnings"].append(
-                    f"⚠️ {self.consecutive_losses} consecutive losses - consider reducing risk"
+                    f" {self.consecutive_losses} consecutive losses - consider reducing risk"
                 )
             
             # 7. Check exposure
@@ -138,15 +138,15 @@ class RiskManager:
             validation["approved"] = len(validation["reasons"]) == 0
             
             if validation["approved"]:
-                logger.info(f"✅ Trade validated: Risk ${risk_amount:.2f} ({risk_percent:.2f}%), "
+                logger.info(f" Trade validated: Risk ${risk_amount:.2f} ({risk_percent:.2f}%), "
                           f"Reward ${reward_amount:.2f}, R:R {validation['details'].get('rr_ratio', 0):.2f}")
             else:
-                logger.warning(f"❌ Trade rejected: {'; '.join(validation['reasons'])}")
+                logger.warning(f" Trade rejected: {'; '.join(validation['reasons'])}")
             
             return validation
             
         except Exception as e:
-            logger.error(f"❌ Error validating trade: {e}")
+            logger.error(f" Error validating trade: {e}")
             return {
                 "approved": False,
                 "reasons": [f"Validation error: {str(e)}"],
@@ -177,7 +177,7 @@ class RiskManager:
             if self.consecutive_losses > 0:
                 reduction_factor = 0.75 ** self.consecutive_losses
                 risk_percent *= reduction_factor
-                logger.info(f"⚠️ Risk reduced by {reduction_factor:.2f}x due to "
+                logger.info(f" Risk reduced by {reduction_factor:.2f}x due to "
                           f"{self.consecutive_losses} consecutive losses")
             
             # Calculate risk amount
@@ -189,7 +189,7 @@ class RiskManager:
             # Round to reasonable precision
             lot_size = round(lot_size, 2)
             
-            logger.info(f"📊 Position size calculated:")
+            logger.info(f" Position size calculated:")
             logger.info(f"   Capital: ${capital:.2f}")
             logger.info(f"   Risk %: {risk_percent:.2f}%")
             logger.info(f"   Risk amount: ${risk_amount:.2f}")
@@ -200,7 +200,7 @@ class RiskManager:
             return lot_size
             
         except Exception as e:
-            logger.error(f"❌ Error calculating position size: {e}")
+            logger.error(f" Error calculating position size: {e}")
             return 0.0
     
     async def update_daily_pnl(self, pnl: float):
@@ -222,7 +222,7 @@ class RiskManager:
             self.consecutive_wins = 0
         
         # Log status
-        logger.info(f"📊 Daily P&L: ${self.daily_pnl:+.2f} | "
+        logger.info(f" Daily P&L: ${self.daily_pnl:+.2f} | "
                    f"Total P&L: ${self.total_pnl:+.2f} | "
                    f"Trades: {self.trades_today}")
     
@@ -256,12 +256,12 @@ class RiskManager:
         if daily_loss >= daily_limit:
             compliance["daily_loss_ok"] = False
             compliance["critical_alerts"].append(
-                f"🚨 DAILY LOSS LIMIT REACHED: ${daily_loss:.2f} / ${daily_limit:.2f} "
+                f" DAILY LOSS LIMIT REACHED: ${daily_loss:.2f} / ${daily_limit:.2f} "
                 f"({daily_used_percent:.1f}%)"
             )
         elif daily_used_percent > 80:
             compliance["warnings"].append(
-                f"⚠️ Daily loss at {daily_used_percent:.1f}% of limit"
+                f" Daily loss at {daily_used_percent:.1f}% of limit"
             )
         
         # 2. Total loss check (10%)
@@ -276,12 +276,12 @@ class RiskManager:
         if total_loss >= total_limit:
             compliance["total_loss_ok"] = False
             compliance["critical_alerts"].append(
-                f"💀 TOTAL LOSS LIMIT REACHED: ${total_loss:.2f} / ${total_limit:.2f} "
+                f" TOTAL LOSS LIMIT REACHED: ${total_loss:.2f} / ${total_limit:.2f} "
                 f"({total_used_percent:.1f}%)"
             )
         elif total_used_percent > 80:
             compliance["warnings"].append(
-                f"⚠️ Total loss at {total_used_percent:.1f}% of limit"
+                f" Total loss at {total_used_percent:.1f}% of limit"
             )
         
         # 3. Consistency rule (no single day > 30% of total profit)
@@ -290,7 +290,7 @@ class RiskManager:
             if consistency_percent > 30:
                 compliance["consistency_ok"] = False
                 compliance["warnings"].append(
-                    f"⚠️ Today's profit is {consistency_percent:.1f}% of total "
+                    f" Today's profit is {consistency_percent:.1f}% of total "
                     f"(max 30% for FTMO consistency)"
                 )
         
@@ -318,22 +318,22 @@ class RiskManager:
         if drawdown_percent >= 9:
             levels["status"] = "critical"
             levels["action_required"] = "STOP_ALL_TRADING"
-            levels["alerts"].append("⛔ DANGER: 9% drawdown - $100 from FTMO failure")
+            levels["alerts"].append(" DANGER: 9% drawdown - $100 from FTMO failure")
         
         elif drawdown_percent >= 7:
             levels["status"] = "emergency"
             levels["action_required"] = "STOP_24H"
-            levels["alerts"].append("🛑 EMERGENCY: 7% drawdown - Stop for 24h")
+            levels["alerts"].append(" EMERGENCY: 7% drawdown - Stop for 24h")
         
         elif drawdown_percent >= 5:
             levels["status"] = "critical_warning"
             levels["action_required"] = "STOP_2H"
-            levels["alerts"].append("🚨 CRITICAL: 5% drawdown - Stop for 2 hours")
+            levels["alerts"].append(" CRITICAL: 5% drawdown - Stop for 2 hours")
         
         elif drawdown_percent >= 3:
             levels["status"] = "warning"
             levels["action_required"] = "REDUCE_RISK"
-            levels["alerts"].append("⚠️ WARNING: 3% drawdown - Reduce risk to 0.5%")
+            levels["alerts"].append(" WARNING: 3% drawdown - Reduce risk to 0.5%")
         
         return levels
     
@@ -397,4 +397,8 @@ class RiskManager:
         self.daily_start_balance = new_balance
         self.daily_pnl = 0.0
         self.trades_today = 0
-        logger.info(f"🔄 Daily tracking reset - New balance: ${new_balance:.2f}")
+        logger.info(f" Daily tracking reset - New balance: ${new_balance:.2f}")
+
+
+
+

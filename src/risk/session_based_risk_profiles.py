@@ -59,7 +59,7 @@ class SessionBasedRiskProfiles:
             },
         }
         
-        logger.info("🕐 SessionBasedRiskProfiles initialized")
+        logger.info(" SessionBasedRiskProfiles initialized")
         for session, profile in self.session_profiles.items():
             logger.info(f"   {session}: risk={profile['risk_multiplier']}x, max_trades={profile['max_trades_per_session']}")
 
@@ -99,3 +99,7 @@ class SessionBasedRiskProfiles:
             'min_confidence': profile['min_confidence'],
             'session': session,
         }
+
+
+
+

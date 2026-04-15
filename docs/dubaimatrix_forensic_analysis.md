@@ -477,3 +477,5 @@ Sentiment (Fear & Greed), on-chain pressure, macro bias, whale tracking
 - **Spread Impact Veto**: Blocks if spread would consume too much of TP
 
 ### Layer
+
+

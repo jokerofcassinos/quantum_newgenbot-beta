@@ -491,3 +491,6 @@ if 10 <= hour_utc <= 16:
 *Bad veto reasons (>50% WR): 44 (all low-sample RSI outliers)*
 *Good veto reasons (<40% WR): 144*
 *Analysis timestamp: 2026-04-12*
+
+
+

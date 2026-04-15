@@ -40,7 +40,7 @@ class ExecutionValidator:
         self.max_volatility_multiplier = max_volatility_multiplier
         self.min_margin_level = min_margin_level
         
-        logger.info("✅ ExecutionValidator initialized")
+        logger.info(" ExecutionValidator initialized")
         logger.info(f"   Max spread: {max_spread_points} points")
         logger.info(f"   Max volatility: {max_volatility_multiplier}x average")
         logger.info(f"   Min margin: {min_margin_level}%")
@@ -84,3 +84,7 @@ class ExecutionValidator:
             return False, f"Margin too low: {margin_level:.0f}% < {self.min_margin_level}%"
         
         return True, "Execution approved"
+
+
+
+

@@ -43,7 +43,7 @@ class MT5Connector:
         self.password = None
         self.server = None
         
-        logger.info("🔌 MT5 Connector initialized")
+        logger.info(" MT5 Connector initialized")
     
     async def connect(self, login: Optional[str] = None, 
                      password: Optional[str] = None, 
@@ -60,12 +60,12 @@ class MT5Connector:
             bool: True if successful, False otherwise
         """
         try:
-            logger.info("🔌 Connecting to MT5...")
+            logger.info(" Connecting to MT5...")
             
             # Initialize MT5
             if not mt5.initialize():
                 error = mt5.last_error()
-                logger.error(f"❌ MT5 initialization failed: {error}")
+                logger.error(f" MT5 initialization failed: {error}")
                 return False
             
             # If credentials provided, login
@@ -75,34 +75,34 @@ class MT5Connector:
                 self.server = server
                 
                 if mt5.login(login, password, server):
-                    logger.info(f"✅ Logged in to MT5: Account {login}")
+                    logger.info(f" Logged in to MT5: Account {login}")
                 else:
                     error = mt5.last_error()
-                    logger.error(f"❌ MT5 login failed: {error}")
+                    logger.error(f" MT5 login failed: {error}")
                     return False
             else:
                 # Use current MT5 terminal login
-                logger.info("ℹ️ Using current MT5 terminal credentials")
+                logger.info(" Using current MT5 terminal credentials")
             
             # Get account info
             self.account_info = await self.get_account_info()
             if not self.account_info:
-                logger.error("❌ Failed to retrieve account info")
+                logger.error(" Failed to retrieve account info")
                 return False
             
-            logger.info(f"💰 Account: {self.account_info.get('login')}")
-            logger.info(f"💵 Balance: ${self.account_info.get('balance', 0):.2f}")
-            logger.info(f"📊 Equity: ${self.account_info.get('equity', 0):.2f}")
-            logger.info(f"📈 Leverage: 1:{self.account_info.get('leverage', 1)}")
+            logger.info(f" Account: {self.account_info.get('login')}")
+            logger.info(f" Balance: ${self.account_info.get('balance', 0):.2f}")
+            logger.info(f" Equity: ${self.account_info.get('equity', 0):.2f}")
+            logger.info(f" Leverage: 1:{self.account_info.get('leverage', 1)}")
             
             # Validate BTCUSD symbol
             if not await self.validate_symbol("BTCUSD"):
-                logger.error("❌ BTCUSD symbol not available on this account")
+                logger.error(" BTCUSD symbol not available on this account")
                 return False
             
             # Get symbol info
             self.symbol_info = await self.get_symbol_info("BTCUSD")
-            logger.info(f"📊 BTCUSD Info:")
+            logger.info(f" BTCUSD Info:")
             logger.info(f"   Spread: {self.symbol_info.get('spread', 0)} points")
             logger.info(f"   Point value: ${self.symbol_info.get('point_value', 0):.4f}")
             logger.info(f"   Min lot: {self.symbol_info.get('volume_min', 0)}")
@@ -112,28 +112,28 @@ class MT5Connector:
             self.connected = True
             self.last_health_check = datetime.now(timezone.utc)
             
-            logger.info("✅ MT5 Connection established successfully")
+            logger.info(" MT5 Connection established successfully")
             return True
             
         except Exception as e:
-            logger.error(f"❌ MT5 connection error: {e}", exc_info=True)
+            logger.error(f" MT5 connection error: {e}", exc_info=True)
             self.connected = False
             return False
     
     async def disconnect(self):
         """Gracefully disconnect from MT5"""
         if self.connected:
-            logger.info("🔌 Disconnecting from MT5...")
+            logger.info(" Disconnecting from MT5...")
             
             # Close all positions if any
             positions = await self.get_positions()
             if positions:
-                logger.warning(f"⚠️ Closing {len(positions)} open position(s)")
+                logger.warning(f" Closing {len(positions)} open position(s)")
                 await self.close_all_positions()
             
             mt5.shutdown()
             self.connected = False
-            logger.info("✅ Disconnected from MT5")
+            logger.info(" Disconnected from MT5")
     
     async def validate_symbol(self, symbol: str) -> bool:
         """
@@ -148,31 +148,31 @@ class MT5Connector:
         try:
             # Enable symbol if needed
             if not mt5.symbol_select(symbol, True):
-                logger.error(f"❌ Failed to select symbol {symbol}")
+                logger.error(f" Failed to select symbol {symbol}")
                 return False
             
             # Get symbol info
             symbol_info = mt5.symbol_info(symbol)
             if symbol_info is None:
-                logger.error(f"❌ Symbol {symbol} not found")
+                logger.error(f" Symbol {symbol} not found")
                 return False
             
             # Check if symbol is visible
             if not symbol_info.visible:
-                logger.warning(f"⚠️ Symbol {symbol} not visible, enabling...")
+                logger.warning(f" Symbol {symbol} not visible, enabling...")
                 if not mt5.symbol_select(symbol, True):
                     return False
             
             # Check if trading is allowed
             if symbol_info.trade_mode == mt5.SYMBOL_TRADE_MODE_DISABLED:
-                logger.error(f"❌ Trading disabled for {symbol}")
+                logger.error(f" Trading disabled for {symbol}")
                 return False
             
-            logger.info(f"✅ Symbol {symbol} validated")
+            logger.info(f" Symbol {symbol} validated")
             return True
             
         except Exception as e:
-            logger.error(f"❌ Symbol validation error: {e}")
+            logger.error(f" Symbol validation error: {e}")
             return False
     
     async def get_account_info(self) -> Optional[Dict[str, Any]]:
@@ -201,7 +201,7 @@ class MT5Connector:
                 "trade_mode": account.trade_mode
             }
         except Exception as e:
-            logger.error(f"❌ Error getting account info: {e}")
+            logger.error(f" Error getting account info: {e}")
             return None
     
     async def get_symbol_info(self, symbol: str) -> Optional[Dict[str, Any]]:
@@ -245,7 +245,7 @@ class MT5Connector:
                 "last": info.last
             }
         except Exception as e:
-            logger.error(f"❌ Error getting symbol info: {e}")
+            logger.error(f" Error getting symbol info: {e}")
             return None
     
     async def get_positions(self, symbol: Optional[str] = None) -> List[Dict[str, Any]]:
@@ -289,7 +289,7 @@ class MT5Connector:
             return result
             
         except Exception as e:
-            logger.error(f"❌ Error getting positions: {e}")
+            logger.error(f" Error getting positions: {e}")
             return []
     
     async def check_health(self) -> bool:
@@ -306,14 +306,14 @@ class MT5Connector:
             # Try to get server time
             server_time = mt5.symbol_info_tick("BTCUSD")
             if server_time is None:
-                logger.warning("⚠️ MT5 health check failed")
+                logger.warning(" MT5 health check failed")
                 return False
             
             self.last_health_check = datetime.now(timezone.utc)
             return True
             
         except Exception as e:
-            logger.error(f"❌ Health check error: {e}")
+            logger.error(f" Health check error: {e}")
             return False
     
     async def close_all_positions(self, symbol: Optional[str] = "BTCUSD") -> bool:
@@ -330,7 +330,7 @@ class MT5Connector:
             positions = await self.get_positions(symbol)
             
             if not positions:
-                logger.info("ℹ️ No positions to close")
+                logger.info(" No positions to close")
                 return True
             
             success_count = 0
@@ -354,16 +354,16 @@ class MT5Connector:
                 result = mt5.order_send(close_request)
                 
                 if result and result.retcode == mt5.TRADE_RETCODE_DONE:
-                    logger.info(f"✅ Closed position {pos['ticket']}")
+                    logger.info(f" Closed position {pos['ticket']}")
                     success_count += 1
                 else:
-                    logger.error(f"❌ Failed to close position {pos['ticket']}: {result}")
+                    logger.error(f" Failed to close position {pos['ticket']}: {result}")
             
-            logger.info(f"✅ Closed {success_count}/{len(positions)} positions")
+            logger.info(f" Closed {success_count}/{len(positions)} positions")
             return success_count == len(positions)
             
         except Exception as e:
-            logger.error(f"❌ Error closing positions: {e}")
+            logger.error(f" Error closing positions: {e}")
             return False
     
     def get_connection_status(self) -> Dict[str, Any]:
@@ -381,3 +381,7 @@ class MT5Connector:
             "last_health_check": self.last_health_check,
             "positions_open": len(self.account_info) if self.account_info else 0
         }
+
+
+
+

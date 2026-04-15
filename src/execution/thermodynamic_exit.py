@@ -50,7 +50,7 @@ class ThermodynamicExit:
         self.entropy_lookback = entropy_lookback
         self.exhaustion_sensitivity = exhaustion_sensitivity
         
-        logger.info("🌡️ ThermodynamicExit initialized (5-sensor system)")
+        logger.info(" ThermodynamicExit initialized (5-sensor system)")
         logger.info(f"   PVD threshold: {velocity_decay_threshold}")
         logger.info(f"   MCE lookback: {micro_ceiling_lookback}")
         logger.info(f"   ATC factor: {tp_contraction_factor}")
@@ -231,3 +231,7 @@ class ThermodynamicExit:
                 return entry_price - contraction
         
         return original_tp
+
+
+
+

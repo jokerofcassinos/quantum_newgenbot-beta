@@ -1,15 +1,15 @@
 """
 Live Trading System - Forex Quantum Bot V3
 
-Sistema de live trading com cadeia neural completa, comunicação TCP Socket HFT
+Sistema de live trading com cadeia neural completa, comunicao TCP Socket HFT
 e logs ultra-detalhados em tempo real.
 
-Módulos:
-- mt5_bridge: TCP Socket bridge para comunicação com MT5
-- data_engine: Background worker para extração contínua de dados
-- logger: Sistema de logs com 5 handlers simultâneos
-- neural_chain: Cadeia neural completa (33+ módulos)
-- trade_executor: Execução real de trades no MT5
+Mdulos:
+- mt5_bridge: TCP Socket bridge para comunicao com MT5
+- data_engine: Background worker para extrao contnua de dados
+- logger: Sistema de logs com 5 handlers simultneos
+- neural_chain: Cadeia neural completa (33+ mdulos)
+- trade_executor: Execuo real de trades no MT5
 - run_live_trading_v2: Entry point principal
 """
 
@@ -27,3 +27,7 @@ from live_trading.trade_executor import TradeExecutor, Position, Order, OrderSta
 
 __version__ = "3.0.0"
 __author__ = "Forex Quantum Bot - Qwen Code"
+
+
+
+

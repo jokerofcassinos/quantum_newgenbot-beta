@@ -201,3 +201,6 @@ python main.py
 **Qwen Code, CEO** 🚀  
 **Forex Quantum Bot - 85% Completo**  
 **Relatório Final - 10 de Abril de 2026**
+
+
+

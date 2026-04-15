@@ -161,3 +161,6 @@ At $6.50/trade average commission:
 *Total Session Time: ~4 hours*  
 *Total Improvement: From -11.49% to -4.54% (60% better)*  
 *Distance to +$5K: Need +$9,538 improvement*
+
+
+

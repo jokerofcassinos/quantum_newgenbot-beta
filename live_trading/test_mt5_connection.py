@@ -1,14 +1,14 @@
 """
-Teste de Comunicação MT5 <-> Python
+Teste de Comunicao MT5 <-> Python
 
-Este script testa a comunicação TCP Socket entre o EA no MT5 e o Python.
+Este script testa a comunicao TCP Socket entre o EA no MT5 e o Python.
 Pode ser executado de duas formas:
 
-1. Simulação (sem MT5): Testa o servidor socket com dados simulados
+1. Simulao (sem MT5): Testa o servidor socket com dados simulados
 2. Real (com MT5): Testa com EA real rodando no MT5
 
 Uso:
-    python test_mt5_connection.py --mode=simulated    # Simulação
+    python test_mt5_connection.py --mode=simulated    # Simulao
     python test_mt5_connection.py --mode=real         # Real (requer MT5)
 """
 
@@ -28,7 +28,7 @@ import logging
 
 
 def setup_basic_logging():
-    """Configura logging básico para o teste"""
+    """Configura logging bsico para o teste"""
     logging.basicConfig(
         level=logging.INFO,
         format='%(asctime)s | %(name)-15s | %(levelname)-8s | %(message)s',
@@ -39,7 +39,7 @@ def setup_basic_logging():
 def test_simulated():
     """Teste com dados simulados (sem MT5)"""
     print("=" * 80)
-    print("TESTE SIMULADO - Comunicação MT5 <-> Python")
+    print("TESTE SIMULADO - Comunicao MT5 <-> Python")
     print("=" * 80)
     print()
     
@@ -51,16 +51,16 @@ def test_simulated():
     
     # Registrar callbacks
     def on_tick(tick):
-        logger.info(f"✅ Tick recebido: {tick.symbol} bid={tick.bid:.2f} ask={tick.ask:.2f}")
+        logger.info(f" Tick recebido: {tick.symbol} bid={tick.bid:.2f} ask={tick.ask:.2f}")
     
     def on_connected():
-        logger.info("✅ MT5 conectado!")
+        logger.info(" MT5 conectado!")
     
     def on_disconnected():
-        logger.warning("⚠️ MT5 desconectado")
+        logger.warning(" MT5 desconectado")
     
     def on_error(error):
-        logger.error(f"❌ Erro: {error}")
+        logger.error(f" Erro: {error}")
     
     bridge.register_callbacks(
         on_tick=on_tick,
@@ -73,8 +73,8 @@ def test_simulated():
     logger.info("Iniciando TCP socket server...")
     bridge.start()
     
-    # Simular conexão MT5 (client socket)
-    logger.info("Simulando conexão MT5...")
+    # Simular conexo MT5 (client socket)
+    logger.info("Simulando conexo MT5...")
     
     try:
         import socket
@@ -116,10 +116,10 @@ def test_simulated():
             
             time.sleep(0.5)
         
-        # Verificar estatísticas
+        # Verificar estatsticas
         time.sleep(1)
         stats = bridge.get_stats()
-        logger.info(f"Estatísticas: {stats}")
+        logger.info(f"Estatsticas: {stats}")
         
         # Testar envio de sinal
         logger.info("Testando envio de sinal BUY...")
@@ -130,11 +130,11 @@ def test_simulated():
         client.close()
         logger.info("Client socket fechado")
         
-        # Aguardar reconexão
+        # Aguardar reconexo
         time.sleep(2)
         
         # Reconectar
-        logger.info("Testando reconexão...")
+        logger.info("Testando reconexo...")
         client2 = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
         client2.connect(("127.0.0.1", 5555))
         client2.settimeout(2)
@@ -145,7 +145,7 @@ def test_simulated():
         time.sleep(0.5)
         try:
             ack2 = client2.recv(1024).decode()
-            logger.info(f"Reconexão OK: {ack2}")
+            logger.info(f"Reconexo OK: {ack2}")
         except:
             pass
         
@@ -171,13 +171,13 @@ def test_simulated():
     print(f"Ticks recebidos: {stats['ticks_received']}")
     print(f"Sinais enviados: {stats['signals_sent']}")
     print(f"Erros: {stats['errors']}")
-    print(f"Reconexões: {stats['reconnections']}")
-    print(f"Latência média: {stats['avg_latency_ms']:.2f}ms")
+    print(f"Reconexes: {stats['reconnections']}")
+    print(f"Latncia mdia: {stats['avg_latency_ms']:.2f}ms")
     
     if stats['ticks_received'] > 0 and stats['errors'] == 0:
-        print("\n✅ TESTE PASSOU COM SUCESSO!")
+        print("\n TESTE PASSOU COM SUCESSO!")
     else:
-        print("\n⚠️ TESTE COM PROBLEMAS - Verificar logs")
+        print("\n TESTE COM PROBLEMAS - Verificar logs")
     
     print("=" * 80)
 
@@ -185,13 +185,13 @@ def test_simulated():
 def test_real():
     """Teste real com MT5 (requer EA rodando)"""
     print("=" * 80)
-    print("TESTE REAL - Comunicação MT5 <-> Python")
+    print("TESTE REAL - Comunicao MT5 <-> Python")
     print("=" * 80)
     print()
-    print("⚠️ Certifique-se que:")
-    print("1. MetaTrader 5 está aberto")
-    print("2. ForexQuantumBot_EA_V3.mq5 está compilado e rodando")
-    print("3. EA está configurado com Socket Host: 127.0.0.1, Port: 5555")
+    print(" Certifique-se que:")
+    print("1. MetaTrader 5 est aberto")
+    print("2. ForexQuantumBot_EA_V3.mq5 est compilado e rodando")
+    print("3. EA est configurado com Socket Host: 127.0.0.1, Port: 5555")
     print()
     
     resposta = input("Continuar? (s/n): ")
@@ -220,16 +220,16 @@ def test_real():
         elapsed = (datetime.now() - start_time).total_seconds()
         ticks_per_sec = tick_count / elapsed if elapsed > 0 else 0
         
-        logger.info(f"✅ Tick #{tick_count}: {tick.symbol} bid={tick.bid:.2f} ask={tick.ask:.2f} spread={tick.spread:.2f} ({ticks_per_sec:.1f} ticks/s)")
+        logger.info(f" Tick #{tick_count}: {tick.symbol} bid={tick.bid:.2f} ask={tick.ask:.2f} spread={tick.spread:.2f} ({ticks_per_sec:.1f} ticks/s)")
     
     def on_connected():
-        logger.info("✅ MT5 CONECTADO!")
+        logger.info(" MT5 CONECTADO!")
     
     def on_disconnected():
-        logger.warning("⚠️ MT5 DESCONECTADO")
+        logger.warning(" MT5 DESCONECTADO")
     
     def on_error(error):
-        logger.error(f"❌ Erro: {error}")
+        logger.error(f" Erro: {error}")
     
     bridge.register_callbacks(
         on_tick=on_tick,
@@ -242,9 +242,9 @@ def test_real():
     logger.info("Iniciando TCP socket server...")
     bridge.start()
     
-    # Aguardar conexão do MT5
+    # Aguardar conexo do MT5
     print()
-    print("Aguardando conexão do MT5...")
+    print("Aguardando conexo do MT5...")
     print("O EA deve conectar automaticamente quando iniciar")
     print()
     
@@ -256,31 +256,31 @@ def test_real():
         print(f"\rAguardando... {elapsed:.0f}s / {timeout}s", end="", flush=True)
         
         if elapsed >= timeout:
-            print("\n\n⚠️ Timeout: MT5 não conectou dentro do tempo limite")
+            print("\n\n Timeout: MT5 no conectou dentro do tempo limite")
             print("\nVerifique:")
-            print("1. MT5 está rodando?")
-            print("2. EA está anexado ao gráfico?")
-            print("3. EA está configurado com host=127.0.0.1, port=5555?")
-            print("4. Firewall não está bloqueando a porta 5555?")
+            print("1. MT5 est rodando?")
+            print("2. EA est anexado ao grfico?")
+            print("3. EA est configurado com host=127.0.0.1, port=5555?")
+            print("4. Firewall no est bloqueando a porta 5555?")
             bridge.stop()
             return
         
         time.sleep(1)
     
-    print("\n\n✅ MT5 Conectado!")
+    print("\n\n MT5 Conectado!")
     
     # Rodar por 60 segundos
     print()
-    print("Monitorando comunicação por 60 segundos...")
+    print("Monitorando comunicao por 60 segundos...")
     print("Pressione Ctrl+C para parar")
     print()
     
     try:
         time.sleep(60)
     except KeyboardInterrupt:
-        print("\nTeste interrompido pelo usuário")
+        print("\nTeste interrompido pelo usurio")
     
-    # Estatísticas
+    # Estatsticas
     stats = bridge.get_stats()
     
     print()
@@ -291,17 +291,17 @@ def test_real():
     print(f"Ticks recebidos: {stats['ticks_received']}")
     print(f"Sinais enviados: {stats['signals_sent']}")
     print(f"Erros: {stats['errors']}")
-    print(f"Reconexões: {stats['reconnections']}")
-    print(f"Latência média: {stats['avg_latency_ms']:.2f}ms")
+    print(f"Reconexes: {stats['reconnections']}")
+    print(f"Latncia mdia: {stats['avg_latency_ms']:.2f}ms")
     
     ticks_per_sec = stats['ticks_received'] / stats.get('uptime_seconds', 1)
     print(f"Ticks por segundo: {ticks_per_sec:.1f}")
     
     if stats['ticks_received'] > 0 and stats['errors'] < 5:
-        print("\n✅ TESTE REAL PASSOU COM SUCESSO!")
-        print("O sistema está pronto para live trading!")
+        print("\n TESTE REAL PASSOU COM SUCESSO!")
+        print("O sistema est pronto para live trading!")
     else:
-        print("\n⚠️ TESTE COM PROBLEMAS")
+        print("\n TESTE COM PROBLEMAS")
         print("Verifique os logs em logs/live_trading.log")
     
     print("=" * 80)
@@ -311,7 +311,7 @@ def test_real():
 
 
 def main():
-    parser = argparse.ArgumentParser(description="Teste de comunicação MT5 <-> Python")
+    parser = argparse.ArgumentParser(description="Teste de comunicao MT5 <-> Python")
     parser.add_argument("--mode", choices=["simulated", "real"], default="simulated",
                        help="Modo de teste: simulated (sem MT5) ou real (com MT5)")
     
@@ -327,3 +327,7 @@ def main():
 
 if __name__ == "__main__":
     main()
+
+
+
+

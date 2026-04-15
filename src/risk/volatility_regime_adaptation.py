@@ -43,7 +43,7 @@ class VolatilityRegimeAdaptation:
         self.extreme_vol_threshold = extreme_vol_threshold
         self.lookback = lookback
         
-        logger.info("🌊 VolatilityRegimeAdaptation initialized")
+        logger.info(" VolatilityRegimeAdaptation initialized")
         logger.info(f"   Low vol: < {low_vol_threshold*100:.1f}%")
         logger.info(f"   High vol: > {high_vol_threshold*100:.1f}%")
         logger.info(f"   Extreme vol: > {extreme_vol_threshold*100:.1f}%")
@@ -134,3 +134,7 @@ class VolatilityRegimeAdaptation:
             return False, f"Extreme volatility ({classification['volatility']*100:.2f}%) - trading paused"
         else:
             return True, f"Volatility {regime} ({classification['volatility']*100:.2f}%) - trading allowed"
+
+
+
+

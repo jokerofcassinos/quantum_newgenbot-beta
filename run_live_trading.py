@@ -738,13 +738,13 @@ class LiveTradingEngine:
             if vol_zscore > 1.5 and price_direction > 0:
                 votes['strategy_votes']['order_flow'] = {
                     'vote': 'BUY', 'confidence': 0.55 + min(vol_zscore * 0.05, 0.15),
-                    'reason': f"High vol spike ({vol_zscore:.1f}σ) + bullish tick"
+                    'reason': f"High vol spike ({vol_zscore:.1f}) + bullish tick"
                 }
                 votes['buy_votes'] += 1
             elif vol_zscore > 1.5 and price_direction < 0:
                 votes['strategy_votes']['order_flow'] = {
                     'vote': 'SELL', 'confidence': 0.55 + min(vol_zscore * 0.05, 0.15),
-                    'reason': f"High vol spike ({vol_zscore:.1f}σ) + bearish tick"
+                    'reason': f"High vol spike ({vol_zscore:.1f}) + bearish tick"
                 }
                 votes['sell_votes'] += 1
             else:
@@ -1841,3 +1841,7 @@ if __name__ == "__main__":
             max_positions=1,
         )
         engine.run()
+
+
+
+

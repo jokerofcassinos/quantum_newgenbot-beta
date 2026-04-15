@@ -45,7 +45,7 @@ class CommissionFloor:
         # Minimum profit threshold (commission + safety margin)
         self.min_profit_per_lot = self.round_trip_per_lot * (1 + safety_margin_percent)
         
-        logger.info("💰 CommissionFloor initialized")
+        logger.info(" CommissionFloor initialized")
         logger.info(f"   Commission/lot/side: ${commission_per_lot_per_side:.2f}")
         logger.info(f"   Spread/lot: ${spread_cost_per_lot:.2f}")
         logger.info(f"   Round-trip cost/lot: ${self.round_trip_per_lot:.2f}")
@@ -114,3 +114,7 @@ class CommissionFloor:
             'covered': covered,
             'coverage_percent': (current_pnl / max(0.01, min_profit)) * 100,
         }
+
+
+
+

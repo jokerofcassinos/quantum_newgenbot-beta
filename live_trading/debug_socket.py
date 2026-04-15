@@ -1,7 +1,7 @@
 """
-Debug Socket Test - Teste simplificado para debugar comunicação TCP
+Debug Socket Test - Teste simplificado para debugar comunicao TCP
 
-Este script cria um servidor socket mínimo e mostra exatamente o que acontece
+Este script cria um servidor socket mnimo e mostra exatamente o que acontece
 quando o MT5 conecta.
 """
 
@@ -97,3 +97,7 @@ def main():
 
 if __name__ == "__main__":
     main()
+
+
+
+

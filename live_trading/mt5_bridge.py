@@ -1,13 +1,13 @@
 """
-MT5 Bridge - TCP Socket Server para comunicação com MetaTrader 5
+MT5 Bridge - TCP Socket Server para comunicao com MetaTrader 5
 
 Baseado na arquitetura legacy DubaiMatrixASI que FUNCIONA:
-- Server socket non-blocking desde o início
+- Server socket non-blocking desde o incio
 - TCP_NODELAY aplicado IMEDIATAMENTE no accept
-- Handshake não-bloqueante (ou sem handshake formal)
+- Handshake no-bloqueante (ou sem handshake formal)
 - Receive loop com polling simples (BlockingIOError + sleep 100us)
 - Buffer de 32KB
-- Thread lifecycle correto na reconexão
+- Thread lifecycle correto na reconexo
 """
 
 import socket
@@ -136,13 +136,13 @@ class MT5Bridge:
         self.heartbeat_thread = None
 
         # Callbacks
-        self.on_tick_callback = None
-        self.on_bar_callback = None
-        self.on_account_callback = None
-        self.on_position_callback = None
-        self.on_error_callback = None
-        self.on_connected_callback = None
-        self.on_disconnected_callback = None
+        self.on_tick_callbacks = []
+        self.on_bar_callbacks = []
+        self.on_account_callbacks = []
+        self.on_position_callbacks = []
+        self.on_error_callbacks = []
+        self.on_connected_callbacks = []
+        self.on_disconnected_callbacks = []
 
         # Dados
         self.ticks_buffer = CircularBuffer(10000)
@@ -166,35 +166,63 @@ class MT5Bridge:
         }
 
     def on_tick(self, callback):
-        self.on_tick_callback = callback
+        if callback not in self.on_tick_callbacks:
+            self.on_tick_callbacks.append(callback)
         return self
 
     def on_bar(self, callback):
-        self.on_bar_callback = callback
+        if callback not in self.on_bar_callbacks:
+            self.on_bar_callbacks.append(callback)
         return self
 
     def on_account(self, callback):
-        self.on_account_callback = callback
+        if callback not in self.on_account_callbacks:
+            self.on_account_callbacks.append(callback)
         return self
 
     def on_position(self, callback):
-        self.on_position_callback = callback
+        if callback not in self.on_position_callbacks:
+            self.on_position_callbacks.append(callback)
         return self
 
     def on_error(self, callback):
-        self.on_error_callback = callback
+        if callback not in self.on_error_callbacks:
+            self.on_error_callbacks.append(callback)
         return self
 
     def on_connected(self, callback):
-        self.on_connected_callback = callback
+        if callback not in self.on_connected_callbacks:
+            self.on_connected_callbacks.append(callback)
         return self
 
     def on_disconnected(self, callback):
-        self.on_disconnected_callback = callback
+        if callback not in self.on_disconnected_callbacks:
+            self.on_disconnected_callbacks.append(callback)
+        return self
+
+    def register_callbacks(self, **kwargs):
+        """
+        Registra mltiplos callbacks usando argumentos nomeados.
+        Ex: register_callbacks(on_tick=my_func, on_bar=my_other_func)
+        """
+        if 'on_tick' in kwargs:
+            self.on_tick(kwargs['on_tick'])
+        if 'on_bar' in kwargs:
+            self.on_bar(kwargs['on_bar'])
+        if 'on_account' in kwargs:
+            self.on_account(kwargs['on_account'])
+        if 'on_position' in kwargs:
+            self.on_position(kwargs['on_position'])
+        if 'on_error' in kwargs:
+            self.on_error(kwargs['on_error'])
+        if 'on_connected' in kwargs:
+            self.on_connected(kwargs['on_connected'])
+        if 'on_disconnected' in kwargs:
+            self.on_disconnected(kwargs['on_disconnected'])
         return self
 
     def start(self):
-        """Inicia servidor TCP - Estilo legacy: non-blocking desde início"""
+        """Inicia servidor TCP - Estilo legacy: non-blocking desde incio"""
         self.logger.info(f"[MT5_BRIDGE] Starting TCP socket server on {self.host}:{self.port}")
 
         self.server_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
@@ -240,15 +268,15 @@ class MT5Bridge:
 
     def _accept_loop(self):
         """
-        Loop de aceitação - Estilo legacy bridge.py:
-        - Só aceita se NÃO houver conexão ativa
-        - Se já existe conexão, apenas dorme
+        Loop de aceitao - Estilo legacy bridge.py:
+        - S aceita se NO houver conexo ativa
+        - Se j existe conexo, apenas dorme
         - Configura socket IMEDIATAMENTE no accept
         """
         while self._accept_running:
             try:
                 if self.client_socket is None:
-                    # Tentar aceitar nova conexão
+                    # Tentar aceitar nova conexo
                     try:
                         client_sock, addr = self.server_socket.accept()
 
@@ -279,10 +307,10 @@ class MT5Bridge:
                         self.heartbeat_thread.start()
 
                         # Callbacks
-                        if self.on_connected_callback:
-                            self.on_connected_callback()
+                        for cb in self.on_connected_callbacks:
+                            cb()
 
-                        # Handshake não-bloqueante
+                        # Handshake no-bloqueante
                         self._handle_handshake()
 
                     except BlockingIOError:
@@ -292,7 +320,7 @@ class MT5Bridge:
                         self.stats["errors"] += 1
                         time.sleep(1)
                 else:
-                    # Já conectado - esperar
+                    # J conectado - esperar
                     time.sleep(1)
 
             except Exception as e:
@@ -300,51 +328,65 @@ class MT5Bridge:
                 self.stats["errors"] += 1
                 time.sleep(1)
 
-    # ========== HANDSHAKE (Não-bloqueante) ==========
+    # ========== HANDSHAKE (No-bloqueante) ==========
 
     def _handle_handshake(self):
         """
-        Handshake não-bloqueante - legado não tem handshake formal.
-        Apenas verifica se MT5 enviou HANDSHAKE nos primeiros dados.
+        Handshake robusto: tenta ler dados iniciais. Se encontrar HANDSHAKE, processa.
+        Se não encontrar, assume conexão legacy e processa o buffer como dados normais.
         """
         try:
-            # Tentar ler handshake sem bloquear
-            # MT5 pode enviar HANDSHAKE + dados juntos
+            # Aumentar timeout para MT5 ser lento na inicialização
             import select
-            readable, _, _ = select.select([self.client_socket], [], [], 2.0)
+            readable, _, _ = select.select([self.client_socket], [], [], 5.0)
 
             if readable:
-                data = self.client_socket.recv(4096)
+                try:
+                    data = self.client_socket.recv(4096)
+                except BlockingIOError:
+                    return True
+                except OSError as e:
+                    if getattr(e, 'winerror', None) == 10035 or e.errno == 10035:
+                        return True
+                    raise
+                
                 if data:
                     text = data.decode('utf-8', errors='ignore')
+                    self.logger.debug(f"[MT5_BRIDGE] Initial data received: {text[:50]}...")
+                    
                     if 'HANDSHAKE' in text:
-                        self.logger.info(f"[MT5_BRIDGE] Handshake received: {text[:100]}")
-
+                        self.logger.info("[MT5_BRIDGE] Handshake received")
                         # Enviar ack
                         ack = "HANDSHAKE_OK|ForexQuantumBot_Python|v3.00|20260413\n"
                         try:
                             self.client_socket.send(ack.encode('utf-8'))
-                        except:
-                            pass
+                        except Exception as e:
+                            self.logger.error(f"[MT5_BRIDGE] Failed to send handshake ack: {e}")
 
-                        # Processar qualquer dado extra após handshake
+                        # Processar dados após handshake
                         if '\n' in text:
                             lines = text.split('\n')
-                            for line in lines[1:]:  # Pular linha do handshake
+                            for line in lines[1:]:
                                 line = line.strip()
                                 if line:
                                     self._process_message(line)
-
-                        self.logger.info("[MT5_BRIDGE] Handshake OK sent")
-                        return True
-
-            # Se não recebeu handshake, continuar mesmo assim (legacy não exige)
-            self.logger.info("[MT5_BRIDGE] No handshake detected, proceeding anyway (legacy mode)")
-            return True
+                    else:
+                        # Sem handshake, trata como dados normais
+                        self.logger.info("[MT5_BRIDGE] No handshake, treating as normal data stream")
+                        if '\n' in text:
+                            for line in text.split('\n'):
+                                if line.strip(): self._process_message(line.strip())
+                        else:
+                            # Se não há \n, empurra para o buffer de processamento (implementar lógica se necessário)
+                            pass
+            
+            return True # Conexão mantida independente do handshake
 
         except Exception as e:
             self.logger.warning(f"[MT5_BRIDGE] Handshake error: {e}")
-            return True  # Continuar mesmo com erro
+            # Em caso de erro crítico no handshake, desconectar
+            self._handle_disconnect()
+            return False
 
     # ========== RECEIVE LOOP (Estilo legacy) ==========
 
@@ -354,7 +396,7 @@ class MT5Bridge:
         - Polling com BlockingIOError
         - Sleep de 100us quando sem dados
         - Buffer de 32KB
-        - Logging mínimo no caminho crítico
+        - Logging mnimo no caminho crtico
         """
         buffer = ""
 
@@ -366,18 +408,18 @@ class MT5Bridge:
                     time.sleep(0.0001)  # 100 MICROSEGUNDOS como legacy!
                     continue
                 except Exception:
-                    # Socket error - conexão fechada
+                    # Socket error - conexo fechada
                     break
 
                 if not data:
-                    # MT5 fechou a conexão
+                    # MT5 fechou a conexo
                     self.logger.warning("[MT5_BRIDGE] Connection closed by MT5")
                     break
 
                 # Decodificar
                 buffer += data.decode('utf-8', errors='ignore')
 
-                # Limitar tamanho do buffer (segurança)
+                # Limitar tamanho do buffer (segurana)
                 if len(buffer) > 1_000_000:
                     self.logger.error("[MT5_BRIDGE] Buffer overflow, clearing")
                     buffer = ""
@@ -402,7 +444,7 @@ class MT5Bridge:
     # ========== HEARTBEAT ==========
 
     def _heartbeat_loop(self):
-        """Monitora heartbeat do MT5 - NÃO envia (legacy não envia)"""
+        """Monitora heartbeat do MT5 - NO envia (legacy no envia)"""
         while self._running and self.state == ConnectionState.CONNECTED:
             try:
                 # Verificar se MT5 ainda envia heartbeat
@@ -469,13 +511,14 @@ class MT5Bridge:
             self.stats["last_tick_time"] = datetime.now()
 
             if self.stats["ticks_received"] % 5 == 0:
-                self.logger.info(f"[MT5_BRIDGE] Tick #{self.stats['ticks_received']} processed: {tick.symbol} bid={tick.bid:.2f}")
+                self.logger.debug(f"[MT5_BRIDGE] Tick #{self.stats['ticks_received']} processed: {tick.symbol} bid={tick.bid:.2f}")
 
-            if self.on_tick_callback:
-                self.on_tick_callback(tick)
+            if self.on_tick_callbacks:
+                for cb in self.on_tick_callbacks:
+                    cb(tick)
             else:
                 if self.stats["ticks_received"] % 5 == 0:
-                    self.logger.warning("[MT5_BRIDGE] on_tick_callback is None!")
+                    self.logger.warning("[MT5_BRIDGE] No callbacks registered for on_tick!")
 
         except Exception as e:
             self.stats["errors"] += 1
@@ -495,8 +538,8 @@ class MT5Bridge:
             self.bars_buffer.add(bar)
             self.stats["bars_received"] += 1
 
-            if self.on_bar_callback:
-                self.on_bar_callback(bar)
+            for cb in self.on_bar_callbacks:
+                cb(bar)
         except Exception as e:
             self.stats["errors"] += 1
 
@@ -512,8 +555,8 @@ class MT5Bridge:
                 profit=float(parts[6]) if len(parts) > 6 else 0.0,
             )
             self.account_buffer.add(account)
-            if self.on_account_callback:
-                self.on_account_callback(account)
+            for cb in self.on_account_callbacks:
+                cb(account)
         except Exception as e:
             self.stats["errors"] += 1
 
@@ -542,8 +585,8 @@ class MT5Bridge:
                 self.positions_buffer.add(position)
                 idx += 12
 
-            if self.on_position_callback:
-                self.on_position_callback(position)
+            for cb in self.on_position_callbacks:
+                cb(position)
         except Exception as e:
             self.stats["errors"] += 1
 
@@ -552,15 +595,16 @@ class MT5Bridge:
 
     def _process_mt5_error(self, parts: list):
         self.stats["errors"] += 1
-        if self.on_error_callback:
-            self.on_error_callback(parts[2] if len(parts) > 2 else "Unknown MT5 error")
+        error_msg = parts[2] if len(parts) > 2 else "Unknown MT5 error"
+        for cb in self.on_error_callbacks:
+            cb(error_msg)
 
     # ========== DISCONNECT ==========
 
     def _handle_disconnect(self):
         """
         Disconnect simples - Estilo legacy:
-        Apenas limpa referência, accept thread cuida da reconexão.
+        Apenas limpa referncia, accept thread cuida da reconexo.
         """
         old_state = self.state
         self.state = ConnectionState.DISCONNECTED
@@ -575,8 +619,8 @@ class MT5Bridge:
 
         if old_state == ConnectionState.CONNECTED:
             self.logger.info("[MT5_BRIDGE] Disconnected, accept thread will handle reconnect")
-            if self.on_disconnected_callback:
-                self.on_disconnected_callback()
+            for cb in self.on_disconnected_callbacks:
+                cb()
 
     # ========== UTILS ==========
 
@@ -589,6 +633,16 @@ class MT5Bridge:
 
     def is_connected(self) -> bool:
         return self.state == ConnectionState.CONNECTED and self.client_socket is not None
+
+    def request_history(self, symbol: str, timeframe: str, count: int):
+        """Solicita histórico de candles ao MT5"""
+        if self.client_socket and self.state == ConnectionState.CONNECTED:
+            try:
+                cmd = f"HISTORY|{symbol}|{timeframe}|{count}\n"
+                self.client_socket.send(cmd.encode('utf-8'))
+                self.logger.info(f"[MT5_BRIDGE] Requested history: {symbol} {timeframe} ({count} bars)")
+            except Exception as e:
+                self.logger.error(f"[MT5_BRIDGE] Request history error: {e}")
 
     def send_signal(self, signal: str):
         """Envia sinal para MT5"""
@@ -606,3 +660,7 @@ class MT5Bridge:
         if ticks:
             return ticks[-1]
         return None
+
+
+
+

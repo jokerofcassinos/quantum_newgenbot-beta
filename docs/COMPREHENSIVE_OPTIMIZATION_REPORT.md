@@ -581,3 +581,5 @@ The ghost audits show that MANY vetoed trades would have been WINS:
 ## 12. CONCLUSION
 
 The system has a solid foundation with positive expectancy (55.7% WR at 1:3 R:R). The primary obstacles
+
+

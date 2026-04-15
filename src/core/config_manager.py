@@ -23,20 +23,20 @@ class ConfigManager:
         self.absolute_limits_path = self.dna_path / "absolute_limits.json"
         self.dna_memory_path = self.dna_path / "dna_memory.json"
         
-        logger.debug(f"📂 ConfigManager initialized at: {self.config_path}")
+        logger.debug(f" ConfigManager initialized at: {self.config_path}")
     
     def load_json(self, file_path: Path) -> Dict[str, Any]:
         """Load JSON configuration file"""
         try:
             with open(file_path, 'r', encoding='utf-8') as f:
                 data = json.load(f)
-            logger.info(f"✅ Config loaded: {file_path.name}")
+            logger.info(f" Config loaded: {file_path.name}")
             return data
         except FileNotFoundError:
-            logger.error(f"❌ Config file not found: {file_path}")
+            logger.error(f" Config file not found: {file_path}")
             raise
         except json.JSONDecodeError as e:
-            logger.error(f"❌ Invalid JSON in {file_path}: {e}")
+            logger.error(f" Invalid JSON in {file_path}: {e}")
             raise
     
     def save_json(self, file_path: Path, data: Dict[str, Any]) -> None:
@@ -44,9 +44,9 @@ class ConfigManager:
         try:
             with open(file_path, 'w', encoding='utf-8') as f:
                 json.dump(data, f, indent=2, ensure_ascii=False)
-            logger.info(f"💾 Config saved: {file_path.name}")
+            logger.info(f" Config saved: {file_path.name}")
         except Exception as e:
-            logger.error(f"❌ Failed to save {file_path}: {e}")
+            logger.error(f" Failed to save {file_path}: {e}")
             raise
     
     def load_dna(self) -> Dict[str, Any]:
@@ -56,7 +56,7 @@ class ConfigManager:
     def save_dna(self, dna: Dict[str, Any]) -> None:
         """Save updated DNA configuration"""
         self.save_json(self.dna_file_path, dna)
-        logger.info("🧬 DNA saved successfully")
+        logger.info(" DNA saved successfully")
     
     def load_absolute_limits(self) -> Dict[str, Any]:
         """Load absolute safety limits (non-modifiable by DNA engine)"""
@@ -67,7 +67,7 @@ class ConfigManager:
         if self.dna_memory_path.exists():
             return self.load_json(self.dna_memory_path)
         else:
-            logger.info("📝 DNA memory file not found — initializing empty memory")
+            logger.info(" DNA memory file not found  initializing empty memory")
             return {"regimes": {}, "version": "1.0"}
     
     def save_dna_memory(self, memory: Dict[str, Any]) -> None:
@@ -86,7 +86,7 @@ class ConfigManager:
             if isinstance(value, dict) and key in value:
                 value = value[key]
             else:
-                logger.warning(f"⚠️ Parameter not found: {param_path}")
+                logger.warning(f" Parameter not found: {param_path}")
                 return None
         
         return value
@@ -139,12 +139,12 @@ class ConfigManager:
             violations.append(f"Min R:R {dna_rr} below minimum {min_rr}")
         
         if violations:
-            logger.error("🛡️ DNA VALIDATION FAILED:")
+            logger.error(" DNA VALIDATION FAILED:")
             for violation in violations:
-                logger.error(f"   ❌ {violation}")
+                logger.error(f"    {violation}")
             return False
         
-        logger.info("✅ DNA validation passed - All within safety limits")
+        logger.info(" DNA validation passed - All within safety limits")
         return True
     
     def get_telegram_config(self) -> Dict[str, str]:
@@ -153,7 +153,7 @@ class ConfigManager:
         if telegram_path.exists():
             return self.load_json(telegram_path)
         else:
-            logger.warning("⚠️ Telegram config not found - notifications disabled")
+            logger.warning(" Telegram config not found - notifications disabled")
             return {}
     
     def get_trading_params(self) -> Dict[str, Any]:
@@ -162,3 +162,7 @@ class ConfigManager:
         if trading_path.exists():
             return self.load_json(trading_path)
         return {}
+
+
+
+

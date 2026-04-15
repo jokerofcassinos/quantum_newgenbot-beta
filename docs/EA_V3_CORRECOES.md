@@ -35,3 +35,6 @@ double margin_level = AccountInfoDouble(ACCOUNT_MARGIN_LEVEL);
 2. Abrir ForexQuantumBot_EA_V3.mq5
 3. Compilar (F7)
 4. Deve mostrar: 0 errors, 0 warnings
+
+
+

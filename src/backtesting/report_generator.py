@@ -381,7 +381,7 @@ class ReportGenerator:
     <!-- Hero Section -->
     <section class="hero">
         <div class="hero-content">
-            <h1>🚀 FOREX QUANTUM BOT</h1>
+            <h1> FOREX QUANTUM BOT</h1>
             <p>Backtest Report | BTCUSD | FTMO Demo $100K</p>
             <p style="font-size: 0.9rem; margin-top: 0.5rem; opacity: 0.8;">
                 Generated: {datetime.now().strftime("%Y-%m-%d %H:%M:%S")}
@@ -391,7 +391,7 @@ class ReportGenerator:
     
     <div class="container">
         <!-- Key Metrics -->
-        <div class="section-title"><span>📊</span> Key Performance Metrics</div>
+        <div class="section-title"><span></span> Key Performance Metrics</div>
         <div class="metrics-grid">
             <div class="metric-box">
                 <div class="metric-value {'positive' if summary.get('net_profit', 0) >= 0 else 'negative'}">
@@ -438,7 +438,7 @@ class ReportGenerator:
         
         <!-- Costs Breakdown -->
         <div class="glass-card scroll-reveal">
-            <div class="section-title"><span>💸</span> Realistic Costs Breakdown</div>
+            <div class="section-title"><span></span> Realistic Costs Breakdown</div>
             <p style="color: var(--text-secondary); margin-bottom: 1rem;">
                 FTMO commissions ($45/lot/side) + Spread + Slippage
             </p>
@@ -479,12 +479,12 @@ class ReportGenerator:
         
         <!-- FTMO Compliance -->
         <div class="glass-card scroll-reveal">
-            <div class="section-title"><span>🎯</span> FTMO Challenge Compliance</div>
+            <div class="section-title"><span></span> FTMO Challenge Compliance</div>
             
             <div class="ftmo-grid">
                 <div class="ftmo-item">
                     <span class="badge {'badge-success' if ftmo.get('daily_loss_limit_pass') else 'badge-danger'}">
-                        {'✓' if ftmo.get('daily_loss_limit_pass') else '✗'}
+                        {'' if ftmo.get('daily_loss_limit_pass') else ''}
                     </span>
                     <div>
                         <div style="font-weight: 600;">Daily Loss Limit</div>
@@ -496,7 +496,7 @@ class ReportGenerator:
                 
                 <div class="ftmo-item">
                     <span class="badge {'badge-success' if ftmo.get('total_drawdown_pass') else 'badge-danger'}">
-                        {'✓' if ftmo.get('total_drawdown_pass') else '✗'}
+                        {'' if ftmo.get('total_drawdown_pass') else ''}
                     </span>
                     <div>
                         <div style="font-weight: 600;">Total Drawdown</div>
@@ -508,7 +508,7 @@ class ReportGenerator:
                 
                 <div class="ftmo-item">
                     <span class="badge {'badge-success' if ftmo.get('min_trading_days_pass') else 'badge-danger'}">
-                        {'✓' if ftmo.get('min_trading_days_pass') else '✗'}
+                        {'' if ftmo.get('min_trading_days_pass') else ''}
                     </span>
                     <div>
                         <div style="font-weight: 600;">Min Trading Days</div>
@@ -520,7 +520,7 @@ class ReportGenerator:
                 
                 <div class="ftmo-item">
                     <span class="badge {'badge-success' if ftmo.get('consistency_rule_pass') else 'badge-danger'}">
-                        {'✓' if ftmo.get('consistency_rule_pass') else '✗'}
+                        {'' if ftmo.get('consistency_rule_pass') else ''}
                     </span>
                     <div>
                         <div style="font-weight: 600;">Consistency Rule</div>
@@ -533,7 +533,7 @@ class ReportGenerator:
             
             <div style="margin-top: 1.5rem; padding: 1rem; background: {'rgba(16, 185, 129, 0.1)' if ftmo.get('overall_pass') else 'rgba(239, 68, 68, 0.1)'}; border-radius: 8px; text-align: center;">
                 <div style="font-size: 2rem; margin-bottom: 0.5rem;">
-                    {'✅' if ftmo.get('overall_pass') else '❌'}
+                    {'' if ftmo.get('overall_pass') else ''}
                 </div>
                 <div style="font-size: 1.25rem; font-weight: 700;">
                     {'WOULD PASS FTMO CHALLENGE' if ftmo.get('overall_pass') else 'WOULD NOT PASS'}
@@ -543,19 +543,19 @@ class ReportGenerator:
         
         <!-- Equity Curve Chart -->
         <div class="glass-card scroll-reveal">
-            <div class="section-title"><span>📈</span> Equity Curve</div>
+            <div class="section-title"><span></span> Equity Curve</div>
             <div id="equity-chart" class="chart-container"></div>
         </div>
         
         <!-- Drawdown Chart -->
         <div class="glass-card scroll-reveal">
-            <div class="section-title"><span>📉</span> Drawdown</div>
+            <div class="section-title"><span></span> Drawdown</div>
             <div id="drawdown-chart" class="chart-container"></div>
         </div>
         
         <!-- Monthly Returns -->
         <div class="glass-card scroll-reveal">
-            <div class="section-title"><span>📅</span> Strategy Statistics</div>
+            <div class="section-title"><span></span> Strategy Statistics</div>
             
             <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 1rem;">
                 <div>
@@ -711,3 +711,7 @@ class ReportGenerator:
     </script>
 </body>
 </html>"""
+
+
+
+

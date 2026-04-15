@@ -1,17 +1,17 @@
 """
-Position Manager Avançado - Gerenciamento completo de posições
+Position Manager Avanado - Gerenciamento completo de posies
 
-Este módulo implementa gerenciamento avançado de posições:
-1. Breakeven automático baseado em lucro
-2. Trailing stop dinâmico baseado em ATR
+Este mdulo implementa gerenciamento avanado de posies:
+1. Breakeven automtico baseado em lucro
+2. Trailing stop dinmico baseado em ATR
 3. Partial exit (fechar 50% no TP1, restante trailing)
-4. Consulta de histórico do MT5 para detectar fechamentos
-5. Cálculo preciso de PnL com comissões e swap
-6. Time-based exits (fechar após X tempo se não foi no TP)
+4. Consulta de histrico do MT5 para detectar fechamentos
+5. Clculo preciso de PnL com comisses e swap
+6. Time-based exits (fechar aps X tempo se no foi no TP)
 
-Integração:
-- Trade Executor usa este módulo para gerenciar posições abertas
-- Neural chain fornece parâmetros de gestão
+Integrao:
+- Trade Executor usa este mdulo para gerenciar posies abertas
+- Neural chain fornece parmetros de gesto
 - MT5 Bridge fornece dados de mercado
 """
 
@@ -32,7 +32,7 @@ from live_trading.logger import get_logger
 
 
 class ExitReason(Enum):
-    """Razão de saída de uma posição"""
+    """Razo de sada de uma posio"""
     TAKE_PROFIT = "take_profit"
     STOP_LOSS = "stop_loss"
     TRAILING_STOP = "trailing_stop"
@@ -45,7 +45,7 @@ class ExitReason(Enum):
 
 @dataclass
 class PartialExit:
-    """Saída parcial de uma posição"""
+    """Sada parcial de uma posio"""
     timestamp: datetime
     volume: float
     price: float
@@ -56,7 +56,7 @@ class PartialExit:
 
 @dataclass
 class TrailingStopUpdate:
-    """Atualização de trailing stop"""
+    """Atualizao de trailing stop"""
     timestamp: datetime
     price: float
     new_sl: float
@@ -66,12 +66,12 @@ class TrailingStopUpdate:
 
 class AdvancedPositionManager:
     """
-    Gerenciador avançado de posições
+    Gerenciador avanado de posies
     
     Funcionalidades:
-    - Breakeven automático
-    - Trailing stop dinâmico (ATR-based)
-    - Partial exits multi-nível
+    - Breakeven automtico
+    - Trailing stop dinmico (ATR-based)
+    - Partial exits multi-nvel
     - Time-based exits
     - Emergency closes
     - PnL calculation preciso
@@ -89,10 +89,10 @@ class AdvancedPositionManager:
         self.bridge = bridge
         self.logger = get_logger("AdvPositionManager")
         
-        # Configurações de breakeven
+        # Configuraes de breakeven
         self.breakeven_min_profit = breakeven_min_profit
         
-        # Configurações de trailing
+        # Configuraes de trailing
         self.trailing_atr_multiplier = trailing_atr_multiplier
         self.trailing_activation_percent = trailing_activation_percent
         
@@ -119,11 +119,11 @@ class AdvancedPositionManager:
     
     def check_and_manage_position(self, position) -> Optional[Dict]:
         """
-        Verifica e gerencia posição aberta
+        Verifica e gerencia posio aberta
         
         Returns:
-            Dict com ação se necessário (modify, partial_close, close)
-            None se não precisa de ação
+            Dict com ao se necessrio (modify, partial_close, close)
+            None se no precisa de ao
         """
         with self.lock:
             actions = []
@@ -148,17 +148,17 @@ class AdvancedPositionManager:
             if time_action:
                 actions.append(time_action)
             
-            # Retornar primeira ação (prioridade: breakeven > trailing > partial > time)
+            # Retornar primeira ao (prioridade: breakeven > trailing > partial > time)
             return actions[0] if actions else None
     
     def _check_breakeven(self, position) -> Optional[Dict]:
         """
         Verifica se deve aplicar breakeven
         
-        Critérios:
+        Critrios:
         - Lucro atual >= breakeven_min_profit
-        - Breakeven ainda não foi aplicado
-        - Posição não está em trailing
+        - Breakeven ainda no foi aplicado
+        - Posio no est em trailing
         """
         if position.breakeven_applied or position.trailing_applied:
             return None
@@ -167,9 +167,9 @@ class AdvancedPositionManager:
             return None
         
         # Aplicar breakeven
-        self.logger.info(f"[ADV_POS_MGR] 🛡️ Breakeven triggered: Position {position.ticket} | PnL: ${position.current_pnl:.2f}")
+        self.logger.info(f"[ADV_POS_MGR]  Breakeven triggered: Position {position.ticket} | PnL: ${position.current_pnl:.2f}")
         
-        # Mover SL para preço de entrada
+        # Mover SL para preo de entrada
         new_sl = position.entry_price
         
         action = {
@@ -189,9 +189,9 @@ class AdvancedPositionManager:
         """
         Verifica se deve aplicar trailing stop
         
-        Critérios:
-        - Preço moveu X% a favor (trailing_activation_percent)
-        - ATR disponível
+        Critrios:
+        - Preo moveu X% a favor (trailing_activation_percent)
+        - ATR disponvel
         - Novo SL > SL atual (para BUY) ou < SL atual (para SELL)
         """
         tick = self.bridge.get_latest_tick()
@@ -202,7 +202,7 @@ class AdvancedPositionManager:
         if atr <= 0:
             return None
         
-        # Calcular distância de trailing
+        # Calcular distncia de trailing
         trailing_distance = atr * self.trailing_atr_multiplier
         
         # Verificar se ativou trailing
@@ -214,13 +214,13 @@ class AdvancedPositionManager:
         # Calcular novo SL
         if position.direction == "BUY":
             new_sl = position.current_price - trailing_distance
-            # Só mover SL pra cima, nunca pra baixo
+            # S mover SL pra cima, nunca pra baixo
             if new_sl <= position.stop_loss and not position.trailing_applied:
                 return None
             new_sl = max(new_sl, position.stop_loss)
         else:
             new_sl = position.current_price + trailing_distance
-            # Só mover SL pra baixo, nunca pra cima
+            # S mover SL pra baixo, nunca pra cima
             if new_sl >= position.stop_loss and not position.trailing_applied:
                 return None
             new_sl = min(new_sl, position.stop_loss)
@@ -232,7 +232,7 @@ class AdvancedPositionManager:
             return None
         
         # Aplicar trailing
-        self.logger.info(f"[ADV_POS_MGR] 📈 Trailing stop updated: Position {position.ticket} | New SL: {new_sl:.2f} | ATR: {atr:.5f}")
+        self.logger.info(f"[ADV_POS_MGR]  Trailing stop updated: Position {position.ticket} | New SL: {new_sl:.2f} | ATR: {atr:.5f}")
         
         action = {
             "type": "modify",
@@ -246,7 +246,7 @@ class AdvancedPositionManager:
         position.state = position.state.__class__.TRAILING
         position.stop_loss = new_sl
         
-        # Registrar atualização
+        # Registrar atualizao
         update = TrailingStopUpdate(
             timestamp=datetime.now(),
             price=position.current_price,
@@ -265,9 +265,9 @@ class AdvancedPositionManager:
         """
         Verifica se deve fazer partial exit
         
-        Critérios:
-        - Preço atingiu nível de TP parcial
-        - Partial exit ainda não foi feito para este nível
+        Critrios:
+        - Preo atingiu nvel de TP parcial
+        - Partial exit ainda no foi feito para este nvel
         """
         if not self.partial_exit_levels:
             return None
@@ -277,18 +277,18 @@ class AdvancedPositionManager:
             portion = level["portion"]
             reason = level.get("reason", "TP")
             
-            # Calcular preço de TP parcial
+            # Calcular preo de TP parcial
             risk_distance = abs(position.entry_price - position.stop_loss)
             tp_price = position.entry_price + (risk_distance * tp_rr) if position.direction == "BUY" else position.entry_price - (risk_distance * tp_rr)
             
-            # Verificar se preço atingiu TP parcial
+            # Verificar se preo atingiu TP parcial
             hit_tp = (position.direction == "BUY" and position.current_price >= tp_price) or \
                      (position.direction == "SELL" and position.current_price <= tp_price)
             
             if not hit_tp:
                 continue
             
-            # Verificar se já fez partial exit para este nível
+            # Verificar se j fez partial exit para este nvel
             already_done = False
             if position.ticket in self.partial_exits:
                 for exit in self.partial_exits[position.ticket]:
@@ -302,7 +302,7 @@ class AdvancedPositionManager:
             # Calcular volume para partial exit
             exit_volume = position.volume * portion
             
-            self.logger.info(f"[ADV_POS_MGR] 💰 Partial exit triggered: Position {position.ticket} | {reason} | Volume: {exit_volume:.2f} | Price: {position.current_price:.2f}")
+            self.logger.info(f"[ADV_POS_MGR]  Partial exit triggered: Position {position.ticket} | {reason} | Volume: {exit_volume:.2f} | Price: {position.current_price:.2f}")
             
             action = {
                 "type": "partial_close",
@@ -340,9 +340,9 @@ class AdvancedPositionManager:
         """
         Verifica se deve fechar por tempo
         
-        Critérios:
-        - Posição aberta há mais de max_position_time_hours
-        - Ainda não foi fechada
+        Critrios:
+        - Posio aberta h mais de max_position_time_hours
+        - Ainda no foi fechada
         """
         position_age = (datetime.now() - position.open_time).total_seconds() / 3600
         
@@ -350,7 +350,7 @@ class AdvancedPositionManager:
             return None
         
         # Fechar por tempo
-        self.logger.warning(f"[ADV_POS_MGR] ⏰ Time exit triggered: Position {position.ticket} | Age: {position_age:.1f}h")
+        self.logger.warning(f"[ADV_POS_MGR]  Time exit triggered: Position {position.ticket} | Age: {position_age:.1f}h")
         
         action = {
             "type": "close",
@@ -370,7 +370,7 @@ class AdvancedPositionManager:
         swap: float = 0.0
     ) -> Tuple[float, float, float]:
         """
-        Calcula PnL preciso com comissões e swap
+        Calcula PnL preciso com comisses e swap
         
         Returns:
             (gross_pnl, net_pnl, total_costs)
@@ -381,7 +381,7 @@ class AdvancedPositionManager:
         else:
             gross_pnl = (entry_price - exit_price) * volume
         
-        # Comissões (entrada + saída)
+        # Comisses (entrada + sada)
         total_commission = commission * 2
         
         # Total costs
@@ -393,7 +393,7 @@ class AdvancedPositionManager:
         return gross_pnl, net_pnl, total_costs
     
     def get_position_summary(self, position) -> Dict:
-        """Retorna resumo detalhado da posição"""
+        """Retorna resumo detalhado da posio"""
         summary = {
             "ticket": position.ticket,
             "mt5_ticket": position.mt5_ticket,
@@ -430,8 +430,8 @@ class AdvancedPositionManager:
         return summary
     
     def emergency_close_all(self, positions: List, bridge: MT5Bridge) -> List[Dict]:
-        """Fecha todas as posições em emergência"""
-        self.logger.critical("[ADV_POS_MGR] 🚨 EMERGENCY CLOSE ALL triggered!")
+        """Fecha todas as posies em emergncia"""
+        self.logger.critical("[ADV_POS_MGR]  EMERGENCY CLOSE ALL triggered!")
         
         actions = []
         for position in positions:
@@ -445,3 +445,7 @@ class AdvancedPositionManager:
             self.logger.critical(f"[ADV_POS_MGR] Emergency closing: Position {position.ticket} | PnL: ${position.current_pnl:.2f}")
         
         return actions
+
+
+
+

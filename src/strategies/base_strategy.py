@@ -13,7 +13,7 @@ Handles:
 from abc import ABC, abstractmethod
 from typing import Optional, Dict, Any, List
 from datetime import datetime, timezone
-from dataclasses import dataclass
+from dataclasses import dataclass, field
 from loguru import logger
 
 import pandas as pd
@@ -33,9 +33,10 @@ class TradingSignal:
     confidence: float  # 0.0 to 1.0
     strategy_name: str
     timeframe: str
-    indicators: Dict[str, Any]
-    rationale: str
-    timestamp: datetime
+    strategy: str = "unknown"
+    indicators: Dict[str, Any] = field(default_factory=dict)
+    reasoning: str = ""
+    timestamp: datetime = field(default_factory=datetime.now)
     estimated_commission: float = 0.0
     estimated_spread_cost: float = 0.0
     net_expected_profit: float = 0.0
@@ -59,20 +60,18 @@ class BaseStrategy(ABC):
         self.signals_approved = 0
         self.signals_rejected = 0
         
-        logger.info(f"📊 Strategy '{name}' initialized")
+        logger.info(f" Strategy '{name}' initialized")
     
     @abstractmethod
-    async def generate_signal(self, 
-                             candles: pd.DataFrame,
-                             market_data: Dict[str, Any],
-                             dna_params: Dict[str, Any]) -> Optional[TradingSignal]:
+    def analyze(self, 
+               candles: pd.DataFrame,
+               current_price: float) -> Optional[TradingSignal]:
         """
         Generate trading signal based on market data
         
         Args:
             candles: Historical candle data
-            market_data: Current market conditions
-            dna_params: Dynamic DNA parameters
+            current_price: Current market price
         
         Returns:
             TradingSignal or None
@@ -305,3 +304,7 @@ class BaseStrategy(ABC):
             "signals_rejected": self.signals_rejected,
             "approval_rate": self.signals_approved / max(1, self.signals_generated)
         }
+
+
+
+

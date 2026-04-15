@@ -77,3 +77,6 @@
 - Python: HANDSHAKE_OK|ForexQuantumBot_Python|v3.00|date
 
 ## Próximo: FASE 0.6 - Testar comunicação
+
+
+

@@ -180,3 +180,6 @@
 *Report Generated: April 11, 2026*  
 *System Version: Backtest V2 (Optimized)*  
 *Backtest Data: 51,840 M5 candles (180 days real MT5 data)*
+
+
+

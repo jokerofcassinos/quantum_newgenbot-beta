@@ -316,3 +316,6 @@ Sem backtesting, você está operando no escuro. Com backtesting:
 
 **Qwen Code, CEO** 🚀  
 **Relatório #5 - Backtesting 95% completo**
+
+
+

@@ -1713,3 +1713,6 @@ EA envia RESULT -> Python atualiza trade_registry
 
 *Documento gerado em 13 de abril de 2026.*
 *Arquivo de saida: D:\forex-project2k26\docs\ANALISE_PROJETO_LEGACY.md*
+
+
+

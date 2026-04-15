@@ -44,7 +44,7 @@ class BlackSwanStressTest:
         self.jump_size = jump_size
         self.min_survival_rate = min_survival_rate
         
-        logger.info("🦢 BlackSwanStressTest initialized")
+        logger.info(" BlackSwanStressTest initialized")
         logger.info(f"   Simulations: {num_simulations}")
         logger.info(f"   Jump probability: {jump_probability*100:.0f}%")
         logger.info(f"   Jump size: {jump_size*100:.0f}%")
@@ -160,3 +160,7 @@ class BlackSwanStressTest:
             'max_drawdown': max_drawdown,
             'max_runup': max_runup,
         }
+
+
+
+

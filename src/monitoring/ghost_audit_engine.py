@@ -92,7 +92,7 @@ class GhostAuditEngine:
         self.ghost_losses = 0
         self.ghost_total_pnl = 0.0
         
-        logger.info("👻 GhostAuditEngine initialized")
+        logger.info(" GhostAuditEngine initialized")
         logger.info(f"   Audit dir: {self.session_dir}")
 
     def create_ghost(
@@ -134,8 +134,12 @@ class GhostAuditEngine:
             open_time=cur_time,
             session=session,
             confidence=signal.get('confidence', 0.5),
-            regime=signal.get('regime', {}).get('regime_name', 'unknown'),
+            regime=signal.get('regime') if isinstance(signal.get('regime'), dict) else {'regime_name': str(signal.get('regime', 'unknown'))},
         )
+        
+        # Correo ps-processamento para garantir que o regime seja o nome
+        ghost.regime = ghost.regime.get('regime_name', 'unknown') if isinstance(ghost.regime, dict) else ghost.regime
+
         
         self.ghost_positions.append(ghost)
         
@@ -342,7 +346,7 @@ class GhostAuditEngine:
         report = self.generate_report()
         
         logger.info("=" * 80)
-        logger.info("👻 GHOST AUDIT ANALYSIS")
+        logger.info(" GHOST AUDIT ANALYSIS")
         logger.info("=" * 80)
         logger.info(f"   Total Ghost Trades: {report['total_ghost_trades']}")
         logger.info(f"   Closed: {report['closed_ghosts']}")
@@ -353,14 +357,18 @@ class GhostAuditEngine:
         logger.info(f"   Good Vetos (would have lost): {report['good_vetos']}")
         logger.info("")
         
-        logger.info("📊 VETO REASON BREAKDOWN:")
+        logger.info(" VETO REASON BREAKDOWN:")
         for reason, stats in report.get('veto_reason_stats', {}).items():
             wr = stats['win_rate'] * 100
             logger.info(f"   {reason}:")
             logger.info(f"      Total: {stats['total']} | WR: {wr:.1f}% | PnL: ${stats['total_pnl']:.2f}")
             if wr > 50:
-                logger.warning(f"      ⚠️ BAD VETO: {wr:.0f}% of these would have WON! Consider relaxing this filter.")
+                logger.warning(f"       BAD VETO: {wr:.0f}% of these would have WON! Consider relaxing this filter.")
             else:
-                logger.info(f"      ✅ GOOD VETO: Only {wr:.0f}% would have won.")
+                logger.info(f"       GOOD VETO: Only {wr:.0f}% would have won.")
         
         logger.info("=" * 80)
+
+
+
+

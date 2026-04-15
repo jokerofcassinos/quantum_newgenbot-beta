@@ -40,7 +40,7 @@ class GreatFilter:
         self.max_spread_percent = max_spread_percent
         self.crash_threshold_percent = crash_threshold_percent
         
-        logger.info("🔍 GreatFilter initialized")
+        logger.info(" GreatFilter initialized")
         logger.info(f"   Min confidence: {min_confidence}")
         logger.info(f"   Max spread: {max_spread_percent}%")
         logger.info(f"   Crash threshold: {crash_threshold_percent}%")
@@ -81,3 +81,7 @@ class GreatFilter:
             return False, f"Crash phase detected: {price_change_5min:.1f}% move in 5min"
         
         return True, "Entry approved"
+
+
+
+
