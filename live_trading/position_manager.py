@@ -206,6 +206,9 @@ class AdvancedPositionManager:
         trailing_distance = atr * self.trailing_atr_multiplier
         
         # Verificar se ativou trailing
+        if position.entry_price <= 0 or position.volume <= 0:
+            return None
+            
         price_move_percent = abs(position.current_pnl / (position.entry_price * position.volume)) * 100
         
         if price_move_percent < self.trailing_activation_percent:

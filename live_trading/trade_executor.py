@@ -14,7 +14,7 @@ import sys
 import os
 import time
 import threading
-from typing import Optional, Dict, List
+from typing import Optional, Dict, List, Any
 from datetime import datetime
 from dataclasses import dataclass, field
 from enum import Enum
@@ -24,8 +24,8 @@ sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
 from live_trading.mt5_bridge import MT5Bridge, TickData
 from live_trading.neural_chain import LiveNeuralChain, LiveSignal
-from live_trading.logger import get_logger
 from live_trading.position_manager import AdvancedPositionManager
+from loguru import logger
 
 
 class OrderState(Enum):
@@ -97,20 +97,13 @@ class TradeExecutor:
     Executor de trades reais no MT5
     """
     
-    def __init__(
-        self,
-        bridge: MT5Bridge,
-        neural_chain: LiveNeuralChain,
-        symbol: str = "BTCUSD",
-        magic_number: int = 20260413,
-        auto_execute: bool = True
-    ):
+    def __init__(self, bridge: MT5Bridge, neural_chain: Any = None, symbol: str = "BTCUSD", magic_number: int = 20260413, auto_execute: bool = True):
         self.bridge = bridge
         self.neural_chain = neural_chain
         self.symbol = symbol
         self.magic_number = magic_number
         self.auto_execute = auto_execute
-        self.logger = get_logger("TradeExecutor")
+        self.logger = logger.bind(name="TradeExecutor")
         
         # State tracking
         self.orders: Dict[int, Order] = {}  # ticket  Order
@@ -291,6 +284,17 @@ class TradeExecutor:
             order = max(pending_orders, key=lambda o: o.timestamp)
             order.state = OrderState.EXECUTED
             order.mt5_ticket = mt5_ticket
+            
+            # MQL5 CTrade.ResultPrice() as vezes retorna 0.0 para ordens a mercado. Vamos usar o preço do sinal ou o preço do mercado atual.
+            if price <= 0.0:
+                tick = self.bridge.get_latest_tick()
+                if tick and tick.bid > 0 and tick.ask > 0:
+                    price = tick.ask if direction == "BUY" else tick.bid
+                    self.logger.info(f"[TRADE_EXEC] Corrigindo preço de execução MQL5 (0.0) para preço de mercado: {price:.2f}")
+                elif order.signal and order.signal.entry_price > 0:
+                    price = order.signal.entry_price
+                    self.logger.info(f"[TRADE_EXEC] Corrigindo preço de execução MQL5 (0.0) para preço do sinal: {price:.2f}")
+
             order.execution_price = price
             order.execution_time = datetime.now()
             
@@ -312,6 +316,35 @@ class TradeExecutor:
             if self._on_order_executed:
                 self._on_order_executed(position)
     
+    def _on_position_sync(self, mt5_ticket: int, symbol: str, direction: str, volume: float, price: float, sl: float, tp: float):
+        """Callback to sync existing positions on startup"""
+        with self.lock:
+            # Check if we already track this
+            if any(p.mt5_ticket == mt5_ticket for p in self.positions.values()):
+                return
+            
+            self.logger.info(f"[TRADE_EXEC] Sincronizando posição órfã do MT5: Ticket={mt5_ticket} {direction} {volume} {symbol} @ {price:.2f}")
+            
+            order_ticket = self.order_counter
+            self.order_counter += 1
+            
+            position = Position(
+                ticket=order_ticket,
+                mt5_ticket=mt5_ticket,
+                symbol=symbol,
+                direction=direction,
+                volume=volume,
+                entry_price=price,
+                stop_loss=sl,
+                take_profit=tp,
+                open_time=datetime.now()
+            )
+            self.positions[order_ticket] = position
+            self.stats['positions_open'] += 1
+            # Se for a primeira posição sincada, atualizar o last_trade_time para ativar o cooldown inicial
+            if self.stats['last_order_time'] is None:
+                self.stats['last_order_time'] = datetime.now()
+
     def _on_position_closed(self, mt5_ticket: int, close_price: float, close_reason: str, pnl: float):
         """Callback quando posio  fechada"""
         with self.lock:
@@ -363,6 +396,10 @@ class TradeExecutor:
                     success = self.bridge.send_signal(f"CLOSE|{action['ticket']}\n")
                     if success:
                         self.logger.info(f"[TRADE_EXEC]  Partial close: Ticket {position.ticket} | Reason: {action['reason']}")
+                elif action["type"] == "close":
+                    success = self.bridge.send_signal(f"CLOSE|{action['ticket']}\n")
+                    if success:
+                        self.logger.info(f"[TRADE_EXEC]  Full close initiated: Ticket {position.ticket} | Reason: {action['reason']}")
     
     def _update_positions(self):
         tick = self.bridge.get_latest_tick()

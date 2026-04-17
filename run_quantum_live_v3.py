@@ -10,18 +10,20 @@ to achieve exact 1:1 parity with the 103k PnL Backtest.
 import sys
 import os
 import time
-import logging
 from datetime import datetime
 
 # Setup path
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 
-from live_trading.logger import get_logger
+from loguru import logger
 from live_trading.mt5_bridge import MT5Bridge
 from src.risk.risk_quantum_engine import RiskQuantumEngine
+from src.risk.anti_metralhadora import AntiMetralhadora
 from live_v3.event_bus import EventBus, EventType, Event
 from live_v3.data_engine_v3 import DataEngineV3
 from live_v3.core_intelligence import CoreIntelligenceV3
+from live_trading.trade_executor import TradeExecutor
+from live_trading.neural_chain import LiveSignal
 
 # Basic configuration
 SYMBOL = "BTCUSD"
@@ -30,7 +32,7 @@ MAGIC_NUMBER = 20260414
 
 class QuantumLiveV3:
     def __init__(self):
-        self.logger = get_logger("QuantumLiveV3")
+        self.logger = logger.bind(name="QuantumLiveV3")
         self.logger.info("Initializing Quantum Live V3 Architecture...")
         
         # 1. Initialize Event Bus
@@ -45,9 +47,25 @@ class QuantumLiveV3:
         # 4. Initialize Core Intelligence (The 103k PnL Brain)
         self.core = CoreIntelligenceV3()
         self.risk_manager = RiskQuantumEngine()
+        self.anti_metralhadora = AntiMetralhadora()
         
-        # 5. Subscribe to events
+        # 5. Initialize Trade Executor for Smart TP / Trailing Stop management
+        self.trade_executor = TradeExecutor(
+            bridge=self.bridge,
+            neural_chain=None,  # We don't use the old NeuralChain anymore
+            symbol=SYMBOL,
+            magic_number=MAGIC_NUMBER,
+            auto_execute=True
+        )
+        
+        # Register Event Bus subscriptions
         self.event_bus.subscribe(EventType.MARKET_SNAPSHOT, self._on_market_snapshot)
+        
+        # Bridge callbacks
+        self.bridge.on_order_filled(self.trade_executor._on_order_filled)
+        self.bridge.on_position_closed(self.trade_executor._on_position_closed)
+        self.bridge.on_position_sync(self.trade_executor._on_position_sync)
+        self.bridge.on_connected(self._on_bridge_connected)
         
         # State
         self.running = False
@@ -55,7 +73,15 @@ class QuantumLiveV3:
         self.winning_trades = 0
         self.current_drawdown = 0.0
         self.total_cycles = 0
-        self.last_trade_time = None  # Controle de Cooldown
+
+    def _on_bridge_connected(self):
+        """Disparado quando a bridge conecta ao MT5."""
+        self.logger.info("[LIVE] Sincronizando estado com o MT5 (Memória de Elefante)...")
+        # Solicita ao EA MQL5 que envie as posições abertas
+        try:
+            self.bridge.client_socket.send("SYNC|ALL\n".encode('utf-8'))
+        except Exception as e:
+            self.logger.error(f"[LIVE] Erro ao enviar comando SYNC: {e}")
 
     def _on_market_snapshot(self, event: Event):
         """
@@ -67,12 +93,26 @@ class QuantumLiveV3:
         
         self.total_cycles += 1
         
-        # Anti-Metralhadora / Cooldown (Evita congelar o MT5)
-        if self.last_trade_time is not None:
-            elapsed = (datetime.now() - self.last_trade_time).total_seconds()
-            if elapsed < 300: # 5 minutos de cooldown após uma ordem
-                return # Ignora silenciosamente até o cooldown acabar
+        from datetime import timezone # Adicionando timezone se não existir, mas já deve ter ou importamos
         
+        # Anti-Metralhadora Real (Substitui o cooldown burro)
+        # O Anti-Metralhadora usa a confiança do sinal e a hora atual
+        # Como só temos a confiança APÓS o evaluate, fazemos um pré-check de tempo.
+        allowed, reason, _ = self.anti_metralhadora.should_allow_trade(
+            signal_quality=0.5, # Qualidade neutra para pré-check
+            current_session="ny", # Deve ser minúsculo para bater com o dicionário interno
+            current_time=datetime.now(timezone.utc)
+        )
+        if not allowed:
+            # Ignora silenciosamente até o cooldown acabar
+            return
+            
+        # Cooldown do Trade Executor (5 minutos silenciosos após uma ordem)
+        if self.trade_executor.stats['last_order_time'] is not None:
+            elapsed = (datetime.now() - self.trade_executor.stats['last_order_time']).total_seconds()
+            if elapsed < 300:
+                return # Silêncio absoluto durante o cooldown de 5 minutos
+            
         # Calculate dynamic metrics for Kelly Sizing
         win_rate = self.winning_trades / max(1, self.total_trades) if self.total_trades > 10 else 0.35
         avg_win_loss_ratio = 1.5 # Placeholder until we have closed trades
@@ -123,38 +163,39 @@ class QuantumLiveV3:
         print("="*80 + "\n")
 
     def _execute_signal(self, signal_dict):
-        """Sends the exact 7-part protocol command to MT5."""
-        
+        """Uses TradeExecutor to send and track the signal for Smart TP / Trailing."""
         direction = signal_dict['direction'] # "BUY" or "SELL"
-        vol = signal_dict['volume']
-        sl = signal_dict['stop_loss']
-        tp = signal_dict['take_profit']
-        timestamp_str = datetime.now().strftime("%Y%m%d%H%M%S")
         
-        # Ensure SL/TP are positive
-        sl = max(0.1, sl)
-        tp = max(0.1, tp)
+        live_signal = LiveSignal(
+            timestamp=datetime.now(),
+            symbol=SYMBOL,
+            direction=direction,
+            entry_price=signal_dict['entry_price'],
+            stop_loss=signal_dict['stop_loss'],
+            take_profit=signal_dict['take_profit'],
+            volume=signal_dict['volume'],
+            confidence=signal_dict['confidence'],
+            atr=signal_dict['atr']
+        )
         
-        # Protocolo Universal (V2 e V3): BUY|symbol|lot|sl|tp|magic|timestamp
-        command = f"{direction}|{SYMBOL}|{vol:.2f}|{sl:.2f}|{tp:.2f}|{MAGIC_NUMBER}|{timestamp_str}\n"
+        order_ticket = self.trade_executor.execute_signal(live_signal)
         
-        try:
-            self.bridge.send_signal(command)
-            self.logger.info(f"Signal successfully dispatched to bridge: {direction}")
+        if order_ticket:
             self.last_trade_time = datetime.now() # Atualizar controle de cooldown
-        except Exception as e:
-            self.logger.error(f"Failed to dispatch signal to bridge: {e}")
 
     def start(self):
         """Boot up the V3 Architecture."""
         self.logger.info("Starting Quantum Live V3...")
         self.running = True
         
-        # Start the socket server (runs in background thread)
+        # Start the socket server
         self.bridge.start()
         
         # Bind data engine to bridge
         self.data_engine.start()
+        
+        # Start Trade Executor (Monitor loop for trailing stops)
+        self.trade_executor.start()
         
         self.logger.info("System Online. Awaiting MT5 connection...")
         

@@ -312,6 +312,63 @@ void ProcessCommand(string cmd)
       
       ExecuteTrade(sym, dir, vol, sl, tp, magic);
    }
+   else if(action == "MODIFY")
+   {
+      if(count < 4) return;
+      ulong ticket = (ulong)StringToInteger(parts[1]);
+      double sl = StringToDouble(parts[2]);
+      double tp = StringToDouble(parts[3]);
+      
+      if(trade.PositionModify(ticket, sl, tp))
+      {
+         Print("SUCCESS: Modified position ", ticket, " SL:", sl, " TP:", tp);
+      }
+      else
+      {
+         Print("FAILED MODIFY: ", ticket, " Retcode ", trade.ResultRetcode());
+      }
+   }
+   else if(action == "CLOSE")
+   {
+      if(count < 2) return;
+      ulong ticket = (ulong)StringToInteger(parts[1]);
+      if(trade.PositionClose(ticket))
+      {
+         Print("SUCCESS: Closed position ", ticket);
+         // Enviar confirmação de volta para o Python
+         SocketSendString(StringFormat("POSITION_CLOSED|%I64u|%.5f|manual|%.2f\n", ticket, trade.ResultPrice(), 0.0));
+      }
+      else
+      {
+         Print("FAILED CLOSE: ", ticket, " Retcode ", trade.ResultRetcode());
+      }
+   }
+   else if(action == "SYNC")
+   {
+      Print("DEBUG: Processing SYNC request");
+      int total = PositionsTotal();
+      string sync_msg = "SYNC_POSITIONS|" + IntegerToString(total) + "\n";
+      SocketSendString(sync_msg);
+      
+      for(int i = 0; i < total; i++)
+      {
+         ulong ticket = PositionGetTicket(i);
+         if(ticket > 0)
+         {
+            string sym = PositionGetString(POSITION_SYMBOL);
+            long type = PositionGetInteger(POSITION_TYPE);
+            string dir = (type == POSITION_TYPE_BUY) ? "BUY" : "SELL";
+            double vol = PositionGetDouble(POSITION_VOLUME);
+            double open_price = PositionGetDouble(POSITION_PRICE_OPEN);
+            double sl = PositionGetDouble(POSITION_SL);
+            double tp = PositionGetDouble(POSITION_TP);
+            
+            string pos_msg = StringFormat("SYNC_POSITION|%s|%s|%s|%.2f|%.5f|%.5f|%.5f\n", 
+                                          IntegerToString(ticket), sym, dir, vol, open_price, sl, tp);
+            SocketSendString(pos_msg);
+         }
+      }
+   }
 }
 
 void ExecuteTrade(string sym, string dir, double vol, double sl, double tp, int magic)
