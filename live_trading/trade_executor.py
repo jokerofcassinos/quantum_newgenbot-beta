@@ -316,34 +316,70 @@ class TradeExecutor:
             if self._on_order_executed:
                 self._on_order_executed(position)
     
+    def _on_sync_start(self, total: int):
+        """Called when MT5 starts sending SYNC_POSITIONS"""
+        self.logger.debug(f"[TRADE_EXEC] Sync start with {total} positions expected.")
+        if not hasattr(self, '_last_synced_mt5_tickets'):
+            self._last_synced_mt5_tickets = set()
+        self._last_synced_mt5_tickets.clear()
+        self._sync_expected_total = total
+        self._sync_received_count = 0
+        
+        if total == 0:
+            self._evaluate_sync_closure()
+
     def _on_position_sync(self, mt5_ticket: int, symbol: str, direction: str, volume: float, price: float, sl: float, tp: float):
-        """Callback to sync existing positions on startup"""
+        """Callback to sync existing positions on startup and heartbeat"""
+        if not hasattr(self, '_last_synced_mt5_tickets'):
+            self._last_synced_mt5_tickets = set()
+        self._last_synced_mt5_tickets.add(mt5_ticket)
+        self._sync_received_count = getattr(self, '_sync_received_count', 0) + 1
+        
         with self.lock:
             # Check if we already track this
-            if any(p.mt5_ticket == mt5_ticket for p in self.positions.values()):
-                return
+            if not any(p.mt5_ticket == mt5_ticket for p in self.positions.values() if p.state in [PositionState.OPEN, PositionState.BREAKEVEN, PositionState.TRAILING]):
+                self.logger.info(f"[TRADE_EXEC] Sincronizando posição órfã do MT5: Ticket={mt5_ticket} {direction} {volume} {symbol} @ {price:.2f}")
+                order_ticket = self.order_counter
+                self.order_counter += 1
+                position = Position(
+                    ticket=order_ticket,
+                    mt5_ticket=mt5_ticket,
+                    symbol=symbol,
+                    direction=direction,
+                    volume=volume,
+                    entry_price=price,
+                    stop_loss=sl,
+                    take_profit=tp,
+                    open_time=datetime.now()
+                )
+                self.positions[order_ticket] = position
+                self.stats['positions_open'] += 1
+                # Se for a primeira posição sincada, atualizar o last_trade_time para ativar o cooldown inicial
+                if self.stats['last_order_time'] is None:
+                    self.stats['last_order_time'] = datetime.now()
+
+        if self._sync_received_count >= self._sync_expected_total:
+            self._evaluate_sync_closure()
             
-            self.logger.info(f"[TRADE_EXEC] Sincronizando posição órfã do MT5: Ticket={mt5_ticket} {direction} {volume} {symbol} @ {price:.2f}")
-            
-            order_ticket = self.order_counter
-            self.order_counter += 1
-            
-            position = Position(
-                ticket=order_ticket,
-                mt5_ticket=mt5_ticket,
-                symbol=symbol,
-                direction=direction,
-                volume=volume,
-                entry_price=price,
-                stop_loss=sl,
-                take_profit=tp,
-                open_time=datetime.now()
-            )
-            self.positions[order_ticket] = position
-            self.stats['positions_open'] += 1
-            # Se for a primeira posição sincada, atualizar o last_trade_time para ativar o cooldown inicial
-            if self.stats['last_order_time'] is None:
-                self.stats['last_order_time'] = datetime.now()
+    def _evaluate_sync_closure(self):
+        """Avalia se alguma posição que estava na memória do Python sumiu do MetaTrader (Atingiu SL/TP invisivelmente)."""
+        with self.lock:
+            open_positions = [p for p in self.positions.values() if p.state in [PositionState.OPEN, PositionState.BREAKEVEN, PositionState.TRAILING]]
+            now = datetime.now()
+            for p in open_positions:
+                if not p.mt5_ticket:
+                    continue # Se a ordem nasceu há milissegundos e ainda não tem ticket MT5
+                    
+                if p.mt5_ticket not in self._last_synced_mt5_tickets:
+                    self.logger.warning(f"[TRADE_EXEC] Auto-close detection: Position {p.ticket} (MT5 {p.mt5_ticket}) was closed on MT5 (SL/TP hit).")
+                    p.state = PositionState.CLOSED_TP if p.current_pnl > 0 else PositionState.CLOSED_SL
+                    p.close_time = now
+                    p.close_reason = "auto_sl_tp"
+                    p.net_pnl = p.current_pnl # Estimativa baseada no último tick
+                    self.stats['positions_closed'] += 1
+                    self.stats['positions_open'] = max(0, self.stats['positions_open'] - 1)
+                    self.stats['total_pnl'] += p.net_pnl
+                    self.stats['last_position_close_time'] = now
 
     def _on_position_closed(self, mt5_ticket: int, close_price: float, close_reason: str, pnl: float):
         """Callback quando posio  fechada"""
@@ -416,7 +452,40 @@ class TradeExecutor:
                 position.max_profit = max(position.max_profit, position.current_pnl)
                 position.max_drawdown = min(position.max_drawdown, position.current_pnl)
     
-    def _check_closed_positions(self): pass
+    def _check_closed_positions(self):
+        """Verifica se posições fecharam no MT5 por SL/TP sem avisar o Python enviando um ping de SYNC|ALL periodicamente."""
+        now = datetime.now()
+        # Inicializa variáveis de rastreamento se não existirem
+        if not hasattr(self, '_last_sync_request_time'):
+            self._last_sync_request_time = now
+            self._last_synced_mt5_tickets = set()
+            return
+
+        # Verifica a cada 10 segundos
+        if (now - self._last_sync_request_time).total_seconds() > 10:
+            with self.lock:
+                open_positions = [p for p in self.positions.values() if p.state in [PositionState.OPEN, PositionState.BREAKEVEN, PositionState.TRAILING]]
+                # Garantir que um sync ocorreu e completou
+                sync_completed = hasattr(self, '_sync_expected_total') and self._sync_expected_total >= 0 and len(self._last_synced_mt5_tickets) >= self._sync_expected_total
+                
+                if len(open_positions) > 0 and sync_completed:
+                    for p in open_positions:
+                        if p.mt5_ticket and p.mt5_ticket not in self._last_synced_mt5_tickets:
+                            self.logger.warning(f"[TRADE_EXEC] Auto-close detection: Position {p.ticket} (MT5 {p.mt5_ticket}) was closed on MT5 (SL/TP hit).")
+                            p.state = PositionState.CLOSED_TP if p.current_pnl > 0 else PositionState.CLOSED_SL
+                            p.close_time = now
+                            p.close_reason = "auto_sl_tp"
+                            p.net_pnl = p.current_pnl # Estimativa baseada no último tick
+                            self.stats['positions_closed'] += 1
+                            self.stats['positions_open'] = max(0, self.stats['positions_open'] - 1)
+                            self.stats['total_pnl'] += p.net_pnl
+                            self.stats['last_position_close_time'] = now
+
+            # Reset para a próxima rodada de sincronização
+            self._last_synced_mt5_tickets.clear()
+            self._sync_expected_total = -1 # Inválido até o próximo sync start
+            self._last_sync_request_time = now
+            self.bridge.send_signal("SYNC|ALL")
     
     def _on_tick_received(self, tick: TickData): pass
     

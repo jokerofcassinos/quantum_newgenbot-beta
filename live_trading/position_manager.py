@@ -169,8 +169,12 @@ class AdvancedPositionManager:
         # Aplicar breakeven
         self.logger.info(f"[ADV_POS_MGR]  Breakeven triggered: Position {position.ticket} | PnL: ${position.current_pnl:.2f}")
         
-        # Mover SL para preo de entrada
-        new_sl = position.entry_price
+        # Mover SL para preo de entrada + compensação da comissão (aprox 50/lote) e spread
+        offset = 55.0 / max(position.volume, 0.01)
+        if position.direction == "BUY":
+            new_sl = position.entry_price + offset
+        else:
+            new_sl = position.entry_price - offset
         
         action = {
             "type": "modify",

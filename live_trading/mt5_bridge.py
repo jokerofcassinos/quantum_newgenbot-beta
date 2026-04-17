@@ -146,6 +146,7 @@ class MT5Bridge:
         self.on_order_filled_callbacks = []
         self.on_position_closed_callbacks = []
         self.on_position_sync_callbacks = [] # AQUI
+        self.on_sync_start_callbacks = []
 
         # Dados
         self.ticks_buffer = CircularBuffer(10000)
@@ -216,6 +217,11 @@ class MT5Bridge:
     def on_position_sync(self, callback):
         if callback not in self.on_position_sync_callbacks:
             self.on_position_sync_callbacks.append(callback)
+        return self
+
+    def on_sync_start(self, callback):
+        if callback not in self.on_sync_start_callbacks:
+            self.on_sync_start_callbacks.append(callback)
         return self
 
     def register_callbacks(self, **kwargs):
@@ -506,7 +512,10 @@ class MT5Bridge:
             elif command == "HEARTBEAT":
                 self.stats["last_heartbeat"] = datetime.now()
             elif command == "SYNC_POSITIONS":
-                self.logger.info(f"[MT5_BRIDGE] Incoming sync for {parts[1]} positions")
+                count = int(parts[1]) if len(parts) > 1 else 0
+                self.logger.info(f"[MT5_BRIDGE] Incoming sync for {count} positions")
+                for cb in self.on_sync_start_callbacks:
+                    cb(count)
             elif command == "SYNC_POSITION":
                 self._process_sync_position(parts)
 
@@ -526,8 +535,8 @@ class MT5Bridge:
                 sl = float(parts[6])
                 tp = float(parts[7])
                 
-                # Aproveitamos o callback de order_filled para recriar o estado no TradeExecutor
-                for cb in self.on_order_filled_callbacks:
+                # Chama os callbacks registrados para on_position_sync
+                for cb in self.on_position_sync_callbacks:
                     cb(mt5_ticket, symbol, direction, volume, price, sl, tp)
         except Exception as e:
             self.logger.error(f"[MT5_BRIDGE] Error processing SYNC_POSITION: {e}")

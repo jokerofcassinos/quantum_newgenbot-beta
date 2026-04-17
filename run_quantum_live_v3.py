@@ -65,7 +65,11 @@ class QuantumLiveV3:
         self.bridge.on_order_filled(self.trade_executor._on_order_filled)
         self.bridge.on_position_closed(self.trade_executor._on_position_closed)
         self.bridge.on_position_sync(self.trade_executor._on_position_sync)
+        self.bridge.on_sync_start(self.trade_executor._on_sync_start)
         self.bridge.on_connected(self._on_bridge_connected)
+        
+        # Trade Executor callbacks to Orchestrator
+        self.trade_executor.on_position_closed(self._on_trade_closed)
         
         # State
         self.running = False
@@ -82,6 +86,30 @@ class QuantumLiveV3:
             self.bridge.client_socket.send("SYNC|ALL\n".encode('utf-8'))
         except Exception as e:
             self.logger.error(f"[LIVE] Erro ao enviar comando SYNC: {e}")
+
+    def _on_trade_closed(self, position):
+        """Disparado quando o TradeExecutor confirma que uma ordem foi fechada."""
+        self.total_trades += 1
+        from datetime import timezone
+        
+        # O pnl que vem do position.net_pnl muitas vezes é o gross PnL (sem comissão).
+        # Vamos deduzir a comissão (aprox $50 por lote completo) para saber o lucro real.
+        estimated_commission = 50.0 * position.volume
+        real_net_pnl = getattr(position, 'net_pnl', 0.0) - estimated_commission
+        
+        # Só consideramos win real se cobriu a comissão e deu lucro limpo
+        if real_net_pnl > 0:
+            self.winning_trades += 1
+            result = 'win'
+        else:
+            result = 'loss'
+            
+        self.anti_metralhadora.record_trade(
+            result=result,
+            current_session='ny',
+            current_time=datetime.now(timezone.utc)
+        )
+        self.logger.info(f"[LIVE] Ordem {position.ticket} contabilizada como {result.upper()} pelo Risk Engine (Real PnL: ${real_net_pnl:.2f}).")
 
     def _on_market_snapshot(self, event: Event):
         """
